@@ -1,1 +1,5 @@
-<p>header</p>
+<h1>Saint Andrew's</h1>
+<h2>Conservatory of Music</h2>
+{{ range .Site.Pages }}
+    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+{{ end }}

@@ -1,6 +1,9 @@
 ---
-draft: false
 title: Home
+weight: 10
+draft: false
 ---
 
-_index.md - from the content folder
+# The next generation of musicians.
+
+## Trained for the church, the community, and the world — for the glory of God.
