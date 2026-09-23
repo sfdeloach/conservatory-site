@@ -1,6 +1,7 @@
 ---
 title: Home
 weight: 10
+layout: home
 draft: false
 ---
 
