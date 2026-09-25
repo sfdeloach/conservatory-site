@@ -3,17 +3,9 @@
 <nav>
   {{- with .Site.Home }}
   <ul>
-    <li>
-      <a href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>
-        {{- .LinkTitle -}}
-      </a>
-    </li>
+    {{ partial "nav_item.html" . }}
     {{- range .Pages }}
-    <li>
-      <a href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>
-        {{- .LinkTitle -}}
-      </a>
-    </li>
+      {{ partial "nav_item.html" (dict "page" . "active" $) }}
     {{- end }}
   </ul>
   {{- end }}
