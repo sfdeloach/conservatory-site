@@ -1,24 +1,22 @@
-<h1>Saint Andrew's</h1>
+<h1>SAINT ANDREW'S</h1>
 <h2>Conservatory of Music</h2>
 <nav>
-  <table>
-    <tr>
-      <td>LinkTitle</td>
-      <td>Kind</td>
-    </tr>
-    {{ with .Site.Home }}
-      <tr>
-        <td><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></td>
-        <td>{{ .Kind }}</td>
-      </tr>
-      {{ range .Pages }}
-        <tr>
-          <td><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></td>
-          <td>{{ .Kind }}</td>
-        </tr>
-      {{ end }}
-    {{ end }}
-  </table>
+  {{- with .Site.Home }}
+  <ul>
+    <li>
+      <a href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>
+        {{- .LinkTitle -}}
+      </a>
+    </li>
+    {{- range .Pages }}
+    <li>
+      <a href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>
+        {{- .LinkTitle -}}
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
 </nav>
 
 <hr />
