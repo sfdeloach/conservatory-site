@@ -1,5 +1,5 @@
 ---
-title: Summer Music Academy
+title: Summer Academy
 weight: 50
 draft: false
 ---

@@ -1,14 +1,21 @@
-<h1>SAINT ANDREW'S</h1>
-<h2>Conservatory of Music</h2>
+<a href="{{ .Site.BaseURL }}">
+  <span>
+    {{ .Site.Title }}
+  </span>
+  <span>
+    {{ .Site.Param "subtitle" }}
+  </span>
+</a>
 <nav>
-  {{- with .Site.Home }}
   <ul>
-    {{ partial "nav_item.html" . }}
-    {{- range .Pages }}
-      {{ partial "nav_item.html" (dict "page" . "active" $) }}
+    {{- range .Site.Home.Pages }}
+    <li>
+      <a href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>
+        {{- .Title -}}
+      </a>
+    </li>
     {{- end }}
   </ul>
-  {{- end }}
 </nav>
 
 <hr />
