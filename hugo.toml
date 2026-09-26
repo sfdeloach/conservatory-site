@@ -1,6 +1,4 @@
 baseURL = 'https://saintandrewsconservatory.org/'
 locale = 'en-us'
-title = 'Saint Andrew’s'
-
-[params]
-  subtitle = 'Conservatory of Music'
+title = 'Saint Andrew’s Conservatory of Music'
+disableKinds = ['taxonomy', 'term']

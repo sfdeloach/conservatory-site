@@ -2,20 +2,15 @@
   <span>
     {{ .Site.Title }}
   </span>
-  <span>
-    {{ .Site.Param "subtitle" }}
-  </span>
 </a>
 <nav>
   <ul>
     {{- range .Site.Home.Pages }}
     <li>
-      <a href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>
+      <a href="{{ .RelPermalink }}" {{ if $.Eq . }} aria-current="page" {{ end }}>
         {{- .Title -}}
       </a>
     </li>
     {{- end }}
   </ul>
 </nav>
-
-<hr />

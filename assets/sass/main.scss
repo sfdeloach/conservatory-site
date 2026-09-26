@@ -1,0 +1,26 @@
+// Four steps, in this order:
+//
+// 1. Design tokens: a :root { } block of CSS custom properties for your colors, fonts, type scale,
+//    and spacing. This is where you get picky, and it's all in one place.
+// 2. Base styles: body text, headings, links, and line lengths, using only those tokens.
+// 3. Layout: header, nav, main content, footer, with Grid and Flexbox, working on phones first.
+// 4. Components: faculty cards, buttons, and so on, as the pages need them.
+
+// Watch: https://www.youtube.com/watch?v=Zz6eOVaaelI
+
+$colorPrimary: rgb(176, 32, 28);
+$colorText: #1fb31f;
+
+header,
+footer {
+  background: $colorPrimary;
+  display: flex;
+  justify-content: center;
+  ul {
+    list-style-type: none;
+    display: flex;
+    a {
+      text-decoration: none;
+    }
+  }
+}
