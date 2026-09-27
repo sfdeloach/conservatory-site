@@ -8,12 +8,75 @@
 
 // Watch: https://www.youtube.com/watch?v=Zz6eOVaaelI
 
-$colorPrimary: rgb(176, 32, 28);
-$colorText: #1fb31f;
+@use "sass:map";
 
+$color: (
+  "primary": #89191c,
+  "primary-light": #a82428,
+  "primary-dark": #6b1315,
+  "secondary": #b8860b,
+  "secondary-light": #d4a017,
+  "secondary-dark": #8a6400,
+  "background-main": #eee4d588,
+  "background-secondary": #c0bfb788,
+  "text": #4b4640,
+);
+
+$font: (
+  "sans": "Arial",
+  "serif": "Cambria",
+);
+
+$space: (
+  "xxs": 0.125rem,
+  "xs": 0.25rem,
+  "sm": 0.5rem,
+  "md": 1rem,
+  "lg": 2rem,
+  "xl": 4rem,
+  "xxl": 8rem,
+  "xxxl": 16rem,
+);
+
+$radius: (
+  "sm": 2px,
+  "md": 4px,
+  "lg": 8px,
+);
+
+$shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+/* Global box-sizing baseline */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Root-level typography and config */
+html {
+  font-size: 100%;
+  text-size-adjust: none;
+}
+
+/* Body content baseline */
+body {
+  margin: 0;
+  line-height: 1.5;
+  font-family: map.get($font, "sans");
+  background-color: map.get($color, "background-main");
+  background-image: linear-gradient(
+    to right,
+    map.get($color, "background-main"),
+    map.get($color, "background-secondary")
+  );
+  color: map.get($color, "text");
+}
+
+/* Body content baseline */
 header,
 footer {
-  background: $colorPrimary;
+  background: map.get($color, "primary");
   display: flex;
   justify-content: center;
   ul {
