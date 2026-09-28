@@ -18,58 +18,119 @@
   flex-wrap: wrap;
 }
 
-/* global box-sizing baseline ************************************************/
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 /* root-level typography and config ******************************************/
 html {
+  box-sizing: border-box;
   font-size: 100%;
   text-size-adjust: none;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
-  margin: 0 auto;
   min-height: 100vh;
+  margin: 0;
   font-family: map.get($font, "sans");
-  font-weight: 100;
   color: map.get($color, "text-dark");
-  word-break: normal;
+  line-height: 1.5;
 }
 
 /* base styles ***************************************************************/
-@function headings($from: 1, $to: 6) {
-  @if $from == $to {
-    @return "h#{$from}";
-  } @else {
-    @return "h#{$from}, " + headings($from + 1, $to);
-  }
-}
-
-#{headings()} {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block: 0;
   font-family: map.get($font, "serif");
   font-weight: 100;
-  text-wrap: balance;
   text-align: center;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: map.get($font-size, "xl");
+  color: map.get($color, "primary-dark");
+}
+
+h2 {
+  font-size: map.get($font-size, "lg");
+}
+
+h3 {
+  font-size: map.get($font-size, "md");
+  color: map.get($color, "primary-light");
 }
 
 p {
+  margin-block: 0;
   width: 100%;
   text-align: left;
+  text-wrap: pretty;
 }
 
+ol,
 ul {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
-a {
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
   text-decoration: none;
   color: map.get($color, "text-dark");
+  background: transparent;
+  outline: 0;
+  border: none;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+blockquote {
+  position: relative;
+  margin: 0 map.get($space, "sm");
+  padding: map.get($space, "lg");
+  border-radius: 0 map.get($space, "lg");
+  box-shadow: $shadow;
+  font-family: map.get($font, "serif");
+  letter-spacing: map.get($space, "nano");
+}
+
+blockquote::before {
+  content: "\201C";
+  position: absolute;
+  top: -1 * map.get($space, "lg");
+  left: map.get($space, "xs");
+  font-size: map.get($font-size, "xxxl");
+  line-height: 1;
+  color: map.get($color, "primary-opaque");
+}
+
+blockquote::after {
+  content: "\201D";
+  position: absolute;
+  bottom: -2.5 * map.get($space, "lg");
+  right: map.get($space, "xs");
+  font-size: map.get($font-size, "xxxl");
+  line-height: 1;
+  color: map.get($color, "primary-opaque");
 }
 
 /* layout ********************************************************************/
@@ -93,7 +154,7 @@ header {
 
 main {
   flex: 1;
-  margin-bottom: map.get($space, "xxl");
+  margin-bottom: map.get($space, "xxxl");
 }
 
 footer {
@@ -121,7 +182,7 @@ section {
   border: 1px solid map.get($color, "background-header");
   padding: map.get($space, "sm");
   box-shadow: $shadow;
-  border-radius: map.get($radius, "md");
+  border-radius: 0 map.get($space, "lg");
   .headshot {
     box-shadow: none;
     margin-bottom: 0;

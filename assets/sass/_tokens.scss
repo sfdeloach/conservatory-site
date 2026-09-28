@@ -8,9 +8,10 @@ $breakpoint: (
 
 $color: (
   "primary": rgb(170, 50, 38),
+  "primary-opaque": rgb(170, 50, 38, 0.25),
   "primary-light": rgb(192, 57, 43),
   "primary-dark": rgb(146, 43, 33),
-  "background-header": rgba(248, 250, 250, 0.95),
+  "background-header": rgba(250, 249, 248, 0.95),
   "background-main": rgba(248, 250, 250),
   "background-secondary": rgb(248, 248, 248),
   "background-footer": rgb(72, 48, 54),
@@ -25,7 +26,21 @@ $font: (
   "brand": "Incognito Pro",
 );
 
+$font-size: (
+  "xs": 0.5rem,
+  "sm": 0.75rem,
+  "std": 1rem,
+  "md": 1.25rem,
+  "lg": 1.5rem,
+  "xl": 2rem,
+  "xxl": 4rem,
+  "xxxl": 8rem,
+);
+
 $space: (
+  "nano": 0.015rem,
+  "micro": 0.03rem,
+  "xxxs": 0.0625rem,
   "xxs": 0.125rem,
   "xs": 0.25rem,
   "sm": 0.5rem,
@@ -33,7 +48,12 @@ $space: (
   "lg": 2rem,
   "xl": 4rem,
   "xxl": 8rem,
-  "xxxl": 16rem,
+  "xxxl": 12rem,
+  "hecto": 16rem,
+  "kilo": 24rem,
+  "mega": 36rem,
+  "giga": 48rem,
+  "tera": 60rem,
 );
 
 $radius: (
