@@ -6,84 +6,161 @@
 // 3. Layout: header, nav, main content, footer, with Grid and Flexbox, working on phones first.
 // 4. Components: faculty cards, buttons, and so on, as the pages need them.
 
-// Watch: https://www.youtube.com/watch?v=Zz6eOVaaelI
-
+@use "./fonts";
+@use "./tokens" as *;
 @use "sass:map";
 
-$color: (
-  "primary": #89191c,
-  "primary-light": #a82428,
-  "primary-dark": #6b1315,
-  "secondary": #b8860b,
-  "secondary-light": #d4a017,
-  "secondary-dark": #8a6400,
-  "background-main": #eee4d588,
-  "background-secondary": #c0bfb788,
-  "text": #4b4640,
-);
+@mixin flex($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+}
 
-$font: (
-  "sans": "Arial",
-  "serif": "Cambria",
-);
-
-$space: (
-  "xxs": 0.125rem,
-  "xs": 0.25rem,
-  "sm": 0.5rem,
-  "md": 1rem,
-  "lg": 2rem,
-  "xl": 4rem,
-  "xxl": 8rem,
-  "xxxl": 16rem,
-);
-
-$radius: (
-  "sm": 2px,
-  "md": 4px,
-  "lg": 8px,
-);
-
-$shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-/* Global box-sizing baseline */
+/* global box-sizing baseline ************************************************/
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Root-level typography and config */
+/* root-level typography and config ******************************************/
 html {
   font-size: 100%;
   text-size-adjust: none;
 }
 
-/* Body content baseline */
 body {
-  margin: 0;
-  line-height: 1.5;
+  margin: 0 auto;
+  min-height: 100vh;
   font-family: map.get($font, "sans");
-  background-color: map.get($color, "background-main");
-  background-image: linear-gradient(
-    to right,
-    map.get($color, "background-main"),
-    map.get($color, "background-secondary")
-  );
-  color: map.get($color, "text");
+  font-weight: 100;
+  color: map.get($color, "text-dark");
+  word-break: normal;
 }
 
-/* Body content baseline */
+/* base styles ***************************************************************/
+@function headings($from: 1, $to: 6) {
+  @if $from == $to {
+    @return "h#{$from}";
+  } @else {
+    @return "h#{$from}, " + headings($from + 1, $to);
+  }
+}
+
+#{headings()} {
+  font-family: map.get($font, "serif");
+  font-weight: 100;
+  text-wrap: balance;
+  text-align: center;
+}
+
+p {
+  width: 100%;
+  text-align: left;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: map.get($color, "text-dark");
+}
+
+/* layout ********************************************************************/
+body,
+main {
+  @include flex(column);
+}
+
+body {
+  align-items: stretch;
+}
+
 header,
 footer {
-  background: map.get($color, "primary");
-  display: flex;
-  justify-content: center;
-  ul {
-    list-style-type: none;
-    display: flex;
-    a {
-      text-decoration: none;
-    }
+  @include flex(row);
+}
+
+header {
+  background: map.get($color, "background-header");
+}
+
+main {
+  flex: 1;
+  margin-bottom: map.get($space, "xxl");
+}
+
+footer {
+  color: map.get($color, "text-light");
+  background: map.get($color, "background-footer");
+}
+
+/* spacing *******************************************************************/
+section {
+  margin-bottom: map.get($space, "lg");
+}
+
+/* components ****************************************************************/
+
+.staff-card-list {
+  @include flex(column);
+  gap: map.get($space, "md");
+  @media screen and (min-width: map.get($breakpoint, "sm")) {
+    @include flex(row);
+    gap: map.get($space, "lg");
+  }
+}
+
+.staff-card {
+  border: 1px solid map.get($color, "background-header");
+  padding: map.get($space, "sm");
+  box-shadow: $shadow;
+  border-radius: map.get($radius, "md");
+  .headshot {
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+  h3 {
+    color: map.get($color, "text-muted");
+  }
+}
+
+.headshot {
+  width: 340px;
+  height: 340px;
+  object-fit: cover;
+  box-shadow: $shadow;
+  border-radius: map.get($radius, "md");
+  margin-bottom: map.get($space, "lg");
+  filter: grayscale(50%);
+  @media screen and (min-width: map.get($breakpoint, "sm")) {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+.studio-list {
+  font-family: map.get($font, "serif");
+  font-size: 1.5rem;
+  color: map.get($color, "text-muted");
+  margin-bottom: map.get($space, "lg");
+}
+
+.btn {
+  margin: map.get($space, "lg");
+  border: 1px solid map.get($color, "background-footer");
+  padding: map.get($space, "md");
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: map.get($color, "text-light");
+    background-color: map.get($color, "background-footer");
+    transform: translateY(-1 * map.get($space, "xxs"));
   }
 }
