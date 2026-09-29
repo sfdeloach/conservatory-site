@@ -37,6 +37,12 @@ $font-size: (
   "xxxl": 8rem,
 );
 
+$shadow: (
+  "sm": 2px 2px 6px rgba(0, 0, 0, 0.2),
+  "md": 4px 4px 9px rgba(0, 0, 0, 0.2),
+  "lg": 6px 6px 12px rgba(0, 0, 0, 0.2),
+);
+
 $space: (
   "nano": 0.015rem,
   "micro": 0.03rem,
@@ -62,5 +68,3 @@ $radius: (
   "lg": 16px,
   "full": 256px,
 );
-
-$shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);

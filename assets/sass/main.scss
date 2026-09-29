@@ -1,8 +1,7 @@
 // Four steps, in this order:
 //
-// 1. Design tokens: a :root { } block of CSS custom properties for your colors, fonts, type scale,
-//    and spacing. This is where you get picky, and it's all in one place.
-// 2. Base styles: body text, headings, links, and line lengths, using only those tokens.
+// 1. Design tokens: define CSS custom properties for your colors, fonts, type scale, and spacing.
+// 2. Base styles: body text, headings, links, using only those tokens.
 // 3. Layout: header, nav, main content, footer, with Grid and Flexbox, working on phones first.
 // 4. Components: faculty cards, buttons, and so on, as the pages need them.
 
@@ -108,7 +107,7 @@ blockquote {
   margin: 0 map.get($space, "sm");
   padding: map.get($space, "lg");
   border-radius: 0 map.get($space, "lg");
-  box-shadow: $shadow;
+  box-shadow: map.get($shadow, "md");
   font-family: map.get($font, "serif");
   letter-spacing: map.get($space, "nano");
 }
@@ -136,11 +135,19 @@ blockquote::after {
 /* layout ********************************************************************/
 body,
 main {
-  @include flex(column);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 body {
   align-items: stretch;
+}
+
+main {
+  align-items: center;
+  flex: 1;
 }
 
 header,
@@ -150,11 +157,6 @@ footer {
 
 header {
   background: map.get($color, "background-header");
-}
-
-main {
-  flex: 1;
-  margin-bottom: map.get($space, "xxxl");
 }
 
 footer {
@@ -181,7 +183,7 @@ section {
 .staff-card {
   border: 1px solid map.get($color, "background-header");
   padding: map.get($space, "sm");
-  box-shadow: $shadow;
+  box-shadow: map.get($shadow, "sm");
   border-radius: 0 map.get($space, "lg");
   .headshot {
     box-shadow: none;
@@ -196,7 +198,7 @@ section {
   width: 340px;
   height: 340px;
   object-fit: cover;
-  box-shadow: $shadow;
+  box-shadow: map.get($shadow, "md");
   border-radius: map.get($radius, "md");
   margin-bottom: map.get($space, "lg");
   filter: grayscale(50%);
