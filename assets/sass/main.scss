@@ -9,14 +9,6 @@
 @use "./tokens" as *;
 @use "sass:map";
 
-@mixin flex($direction) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: $direction;
-  flex-wrap: wrap;
-}
-
 /* root-level typography and config ******************************************/
 html {
   box-sizing: border-box;
@@ -152,16 +144,32 @@ main {
 
 header,
 footer {
-  @include flex(row);
+  display: flex;
+  padding: 0 map.get($space, "sm");
 }
 
 header {
+  height: map.get($space, "xxl");
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  justify-content: space-between;
+  align-items: center;
   background: map.get($color, "background-header");
+  nav.inactive {
+    display: none; // default for mobile
+  }
 }
 
 footer {
+  min-height: map.get($space, "mega");
+  flex-direction: column;
+  justify-content: center;
   color: map.get($color, "text-light");
   background: map.get($color, "background-footer");
+  p {
+    text-align: center;
+  }
 }
 
 /* spacing *******************************************************************/
@@ -171,11 +179,33 @@ section {
 
 /* components ****************************************************************/
 
+.logo {
+  display: flex;
+  align-items: center;
+  p {
+    margin-left: map.get($space, "sm");
+    font-family: map.get($font, "brand");
+    font-size: map.get($font-size, "lg");
+    line-height: 1;
+  }
+  p:first-child {
+    margin-bottom: map.get($space, "xs");
+    color: map.get($color, "text-muted");
+    letter-spacing: map.get($space, "xxs");
+  }
+}
+
 .staff-card-list {
-  @include flex(column);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: map.get($space, "md");
   @media screen and (min-width: map.get($breakpoint, "sm")) {
-    @include flex(row);
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: map.get($space, "lg");
   }
 }
