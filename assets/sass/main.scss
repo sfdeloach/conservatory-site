@@ -102,6 +102,9 @@ blockquote {
   box-shadow: map.get($shadow, "md");
   font-family: map.get($font, "serif");
   letter-spacing: map.get($space, "nano");
+  strong {
+    letter-spacing: map.get($space, "xxxs");
+  }
 }
 
 blockquote::before {
@@ -158,6 +161,17 @@ header {
   background: map.get($color, "background-header");
   nav.inactive {
     display: none; // default for mobile
+  }
+}
+
+nav {
+  position: fixed;
+  top: map.get($space, "xxl");
+  z-index: 200;
+  background-color: pink;
+  ul {
+    display: flex;
+    flex-direction: column;
   }
 }
 
