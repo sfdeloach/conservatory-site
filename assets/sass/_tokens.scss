@@ -1,70 +1,100 @@
-$breakpoint: (
-  "sm": 640px,
-  "md": 768px,
-  "lg": 1024px,
-  "xl": 1280px,
-  "2xl": 1536px,
-);
+@use "sass:map";
 
-$color: (
-  "primary": rgb(170, 50, 38),
-  "primary-opaque": rgb(170, 50, 38, 0.25),
-  "primary-light": rgb(192, 57, 43),
-  "primary-dark": rgb(146, 43, 33),
-  "background-header": rgba(250, 249, 248, 0.95),
-  "background-main": rgba(248, 250, 250),
-  "background-secondary": rgb(248, 248, 248),
-  "background-footer": rgb(72, 48, 54),
-  "text-light": rgb(246, 246, 236),
-  "text-muted": rgb(192, 166, 164),
-  "text-dark": rgb(72, 48, 54),
-);
+@function breakpoint($key) {
+  $breakpoint: (
+    "sm": 640px,
+    "md": 768px,
+    "lg": 1024px,
+    "xl": 1280px,
+    "2xl": 1536px,
+  );
 
-$font: (
-  "sans": "Nunito",
-  "serif": "EB Garamond",
-  "brand": "Incognito Pro",
-);
+  @return map.get($breakpoint, $key);
+}
 
-$font-size: (
-  "xs": 0.5rem,
-  "sm": 0.75rem,
-  "std": 1rem,
-  "md": 1.25rem,
-  "lg": 1.5rem,
-  "xl": 2rem,
-  "xxl": 4rem,
-  "xxxl": 8rem,
-);
+@function color($key) {
+  $color: (
+    "primary": rgb(170, 50, 38),
+    "primary-opaque": rgb(170, 50, 38, 0.25),
+    "primary-light": rgb(192, 57, 43),
+    "primary-dark": rgb(146, 43, 33),
+    "background-header": rgba(250, 249, 248, 0.95),
+    "background-main": rgba(248, 250, 250),
+    "background-secondary": rgb(248, 248, 248),
+    "background-footer": rgb(72, 48, 54),
+    "text-light": rgb(246, 246, 236),
+    "text-muted": rgb(192, 166, 164),
+    "text-dark": rgb(72, 48, 54),
+  );
 
-$shadow: (
-  "sm": 2px 2px 6px rgba(0, 0, 0, 0.2),
-  "md": 4px 4px 9px rgba(0, 0, 0, 0.2),
-  "lg": 6px 6px 12px rgba(0, 0, 0, 0.2),
-);
+  @return map.get($color, $key);
+}
 
-$space: (
-  "nano": 0.015rem,
-  "micro": 0.03rem,
-  "xxxs": 0.0625rem,
-  "xxs": 0.125rem,
-  "xs": 0.25rem,
-  "sm": 0.5rem,
-  "md": 1rem,
-  "lg": 2rem,
-  "xl": 4rem,
-  "xxl": 6rem,
-  "xxxl": 10rem,
-  "hecto": 16rem,
-  "kilo": 24rem,
-  "mega": 36rem,
-  "giga": 48rem,
-  "tera": 60rem,
-);
+@function font($key) {
+  $font: (
+    "sans": "Nunito",
+    "serif": "EB Garamond",
+    "brand": "Incognito Pro",
+  );
 
-$radius: (
-  "sm": 4px,
-  "md": 8px,
-  "lg": 16px,
-  "full": 256px,
-);
+  @return map.get($font, $key);
+}
+
+@function font-size($key) {
+  $font-size: (
+    "xs": 0.5rem,
+    "sm": 0.75rem,
+    "std": 1rem,
+    "md": 1.25rem,
+    "lg": 1.5rem,
+    "xl": 2rem,
+    "xxl": 4rem,
+    "xxxl": 8rem,
+  );
+
+  @return map.get($font-size, $key);
+}
+
+@function shadow($key) {
+  $shadow: (
+    "sm": 2px 2px 6px rgba(0, 0, 0, 0.2),
+    "md": 4px 4px 9px rgba(0, 0, 0, 0.2),
+    "lg": 6px 6px 12px rgba(0, 0, 0, 0.2),
+  );
+
+  @return map.get($shadow, $key);
+}
+
+@function space($key) {
+  $space: (
+    "nano": 0.015rem,
+    "micro": 0.03rem,
+    "xxxs": 0.0625rem,
+    "xxs": 0.125rem,
+    "xs": 0.25rem,
+    "sm": 0.5rem,
+    "md": 1rem,
+    "lg": 2rem,
+    "xl": 4rem,
+    "xxl": 6rem,
+    "xxxl": 10rem,
+    "hecto": 16rem,
+    "kilo": 24rem,
+    "mega": 36rem,
+    "giga": 48rem,
+    "tera": 60rem,
+  );
+
+  @return map.get($space, $key);
+}
+
+@function radius($key) {
+  $radius: (
+    "sm": 4px,
+    "md": 8px,
+    "lg": 16px,
+    "full": 256px,
+  );
+  
+  @return map.get($radius, $key);
+}

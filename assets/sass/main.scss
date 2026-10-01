@@ -1,15 +1,26 @@
-// Four steps, in this order:
+// Site Style Sheet
 //
-// 1. Design tokens: define CSS custom properties for your colors, fonts, type scale, and spacing.
+// 0. Fonts: import custom fonts from project directory: sans, serif, and brand
+// 1. Design tokens: import colors, fonts, type scale, spacing, and other design tokens.
 // 2. Base styles: body text, headings, links, using only those tokens.
-// 3. Layout: header, nav, main content, footer, with Grid and Flexbox, working on phones first.
-// 4. Components: faculty cards, buttons, and so on, as the pages need them.
+// 3. Layout: header, nav, main content, footer, with Flexbox, working on phones first.
+// 4. Spacing: maximize whitespace, avoid elements that appear cramped and cluttered
+// 5. Components: faculty cards, buttons, and so on, as the pages need them.
+
+// Maintain the following order of properties:
+// 1. positioning
+// 2. display/layout
+// 3. dimensions
+// 4. spacing
+// 5. visual properties
+// 6. typography
+// 7. interaction/state
 
 @use "./fonts";
 @use "./tokens" as *;
-@use "sass:map";
 
 /* root-level typography and config ******************************************/
+
 html {
   box-sizing: border-box;
   font-size: 100%;
@@ -25,12 +36,13 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  font-family: map.get($font, "sans");
-  color: map.get($color, "text-dark");
+  font-family: font("sans");
+  color: color("text-dark");
   line-height: 1.5;
 }
 
-/* base styles ***************************************************************/
+/* base **********************************************************************/
+
 h1,
 h2,
 h3,
@@ -38,24 +50,24 @@ h4,
 h5,
 h6 {
   margin-block: 0;
-  font-family: map.get($font, "serif");
+  font-family: font("serif");
   font-weight: 100;
   text-align: center;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: map.get($font-size, "xl");
-  color: map.get($color, "primary-dark");
+  font-size: font-size("xl");
+  color: color("primary-dark");
 }
 
 h2 {
-  font-size: map.get($font-size, "lg");
+  font-size: font-size("lg");
 }
 
 h3 {
-  font-size: map.get($font-size, "md");
-  color: map.get($color, "primary-light");
+  font-size: font-size("md");
+  color: color("primary-light");
 }
 
 p {
@@ -72,16 +84,9 @@ ul {
   list-style: none;
 }
 
-a,
-a:link,
-a:visited,
-a:hover,
-a:active {
+a {
+  color: color("text-dark");
   text-decoration: none;
-  color: map.get($color, "text-dark");
-  background: transparent;
-  outline: 0;
-  border: none;
 }
 
 button {
@@ -94,71 +99,74 @@ button {
   cursor: pointer;
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid color("primary");
+  outline-offset: space("xs");
+}
+
 blockquote {
   position: relative;
-  margin: 0 map.get($space, "sm");
-  padding: map.get($space, "lg");
-  border-radius: 0 map.get($space, "lg");
-  box-shadow: map.get($shadow, "md");
-  font-family: map.get($font, "serif");
-  letter-spacing: map.get($space, "nano");
+  margin: 0 space("sm");
+  padding: space("lg");
+  border-radius: 0 space("lg");
+  box-shadow: shadow("md");
+  font-family: font("serif");
+  letter-spacing: space("nano");
+
   strong {
-    letter-spacing: map.get($space, "xxxs");
+    letter-spacing: space("xxxs");
   }
 }
 
 blockquote::before {
   content: "\201C";
   position: absolute;
-  top: -1 * map.get($space, "lg");
-  left: map.get($space, "xs");
-  font-size: map.get($font-size, "xxxl");
+  top: -1 * space("lg");
+  left: space("xs");
+  font-size: font-size("xxxl");
   line-height: 1;
-  color: map.get($color, "primary-opaque");
+  color: color("primary-opaque");
 }
 
 blockquote::after {
   content: "\201D";
   position: absolute;
-  bottom: -2.5 * map.get($space, "lg");
-  right: map.get($space, "xs");
-  font-size: map.get($font-size, "xxxl");
+  bottom: -2.5 * space("lg");
+  right: space("xs");
+  font-size: font-size("xxxl");
   line-height: 1;
-  color: map.get($color, "primary-opaque");
+  color: color("primary-opaque");
 }
 
 /* layout ********************************************************************/
-body,
-main {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
 
 body {
-  align-items: stretch;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-  align-items: center;
-  flex: 1;
-}
-
-header,
-footer {
   display: flex;
-  padding: 0 map.get($space, "sm");
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
-  height: map.get($space, "xxl");
   position: sticky;
   top: 0;
   z-index: 100;
-  justify-content: space-between;
+
+  display: flex;
   align-items: center;
-  background: map.get($color, "background-header");
+  justify-content: space-between;
+
+  height: space("xxl");
+  padding-inline: space("sm");
+
+  background: color("background-header");
+
   nav.inactive {
     display: none; // default for mobile
   }
@@ -166,9 +174,10 @@ header {
 
 nav {
   position: fixed;
-  top: map.get($space, "xxl");
+  top: space("xxl");
   z-index: 200;
-  background-color: pink;
+  background-color: color("background-secondary");
+
   ul {
     display: flex;
     flex-direction: column;
@@ -176,36 +185,43 @@ nav {
 }
 
 footer {
-  min-height: map.get($space, "mega");
+  display: flex;
+  padding-inline: space("sm");
+  min-height: space("mega");
   flex-direction: column;
   justify-content: center;
-  color: map.get($color, "text-light");
-  background: map.get($color, "background-footer");
+  color: color("text-light");
+  background: color("background-footer");
+
   p {
     text-align: center;
   }
 }
 
 /* spacing *******************************************************************/
-section {
-  margin-bottom: map.get($space, "lg");
-}
 
 /* components ****************************************************************/
 
 .logo {
   display: flex;
   align-items: center;
-  p {
-    margin-left: map.get($space, "sm");
-    font-family: map.get($font, "brand");
-    font-size: map.get($font-size, "lg");
-    line-height: 1;
-  }
-  p:first-child {
-    margin-bottom: map.get($space, "xs");
-    color: map.get($color, "text-muted");
-    letter-spacing: map.get($space, "xxs");
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: space("sm");
+
+    p {
+      margin-left: space("sm");
+      font-family: font("brand");
+      font-size: font-size("lg");
+      line-height: 1;
+    }
+
+    .logo-text__top {
+      color: color("text-muted");
+      letter-spacing: space("xxs");
+    }
   }
 }
 
@@ -214,27 +230,27 @@ section {
   justify-content: center;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: map.get($space, "md");
-  @media screen and (min-width: map.get($breakpoint, "sm")) {
-    display: flex;
-    justify-content: center;
+  gap: space("md");
+
+  @media (min-width: breakpoint("sm")) {
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: map.get($space, "lg");
+    gap: space("lg");
   }
 }
 
 .staff-card {
-  border: 1px solid map.get($color, "background-header");
-  padding: map.get($space, "sm");
-  box-shadow: map.get($shadow, "sm");
-  border-radius: 0 map.get($space, "lg");
+  border: 1px solid color("background-header");
+  padding: space("sm");
+  box-shadow: shadow("sm");
+  border-radius: 0 space("lg");
+
   .headshot {
     box-shadow: none;
     margin-bottom: 0;
   }
+
   h3 {
-    color: map.get($color, "text-muted");
+    color: color("text-muted");
   }
 }
 
@@ -242,32 +258,36 @@ section {
   width: 340px;
   height: 340px;
   object-fit: cover;
-  box-shadow: map.get($shadow, "md");
-  border-radius: map.get($radius, "md");
-  margin-bottom: map.get($space, "lg");
+  box-shadow: shadow("md");
+  border-radius: radius("md");
+  margin-bottom: space("lg");
   filter: grayscale(50%);
-  @media screen and (min-width: map.get($breakpoint, "sm")) {
+
+  @media (min-width: breakpoint("sm")) {
     width: 400px;
     height: 400px;
   }
 }
 
 .studio-list {
-  font-family: map.get($font, "serif");
+  font-family: font("serif");
   font-size: 1.5rem;
-  color: map.get($color, "text-muted");
-  margin-bottom: map.get($space, "lg");
+  color: color("text-muted");
+  margin-bottom: space("lg");
 }
 
 .btn {
-  margin: map.get($space, "lg");
-  border: 1px solid map.get($color, "background-footer");
-  padding: map.get($space, "md");
-  transition: all 0.3s ease;
+  margin: space("lg");
+  border: 1px solid color("background-footer");
+  padding: space("md");
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease;
 
   &:hover {
-    color: map.get($color, "text-light");
-    background-color: map.get($color, "background-footer");
-    transform: translateY(-1 * map.get($space, "xxs"));
+    color: color("text-light");
+    background-color: color("background-footer");
+    transform: translateY(-1 * space("xxs"));
   }
 }
