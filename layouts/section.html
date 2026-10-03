@@ -1,15 +1,15 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ .Content }}
-<ul class="staff-card-list">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  <ul class="staff-card-list">
     {{- range .Pages }}
-    <li class="staff-card">
+      <li class="staff-card">
         <a href="{{ .RelPermalink }}">
-            <h2>{{- .LinkTitle -}}</h2>
-            {{ partial "headshot.html" . }}
-            {{ partial "studios_text.html" . }}
+          <h2>{{- .LinkTitle -}}</h2>
+          {{ partial "headshot.html" . }}
+          {{ partial "studios_text.html" . }}
         </a>
-    </li>
+      </li>
     {{- end }}
-</ul>
+  </ul>
 {{ end }}

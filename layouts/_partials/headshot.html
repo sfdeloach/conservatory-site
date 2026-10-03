@@ -1,5 +1,11 @@
 {{- with .Resources.GetMatch "headshot.*" }}
   {{- with .Process "fill 400x400 Top webp q80" }}
-    <img class="headshot" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
+    <img
+      class="headshot"
+      src="{{ .RelPermalink }}"
+      width="{{ .Width }}"
+      height="{{ .Height }}"
+      alt=""
+    />
   {{- end }}
 {{- end }}

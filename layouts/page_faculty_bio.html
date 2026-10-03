@@ -3,7 +3,7 @@
   {{ partial "headshot.html" . }}
   {{ partial "studios_text.html" . }}
   <section>
-      {{ .Content }}
+    {{ .Content }}
   </section>
   {{- with .Parent }}
     <a class="btn" href="{{ .RelPermalink }}">Back to {{ .LinkTitle }}</a>
