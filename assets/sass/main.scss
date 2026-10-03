@@ -85,7 +85,7 @@ ul {
 }
 
 a {
-  color: color("text-dark");
+  color: color("primary");
   text-decoration: none;
 }
 
@@ -103,6 +103,18 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid color("primary");
   outline-offset: space("xs");
+}
+
+hr {
+  border: none;
+  height: 1px;
+  width: 50%;
+  background-image: linear-gradient(
+    to right,
+    color("background-main"),
+    color("primary-dark"),
+    color("background-main")
+  );
 }
 
 blockquote {
