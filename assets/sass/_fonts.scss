@@ -3,6 +3,7 @@
   src: url("/fonts/nunito/nunito-latin-400-normal.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -10,6 +11,7 @@
   src: url("/fonts/nunito/nunito-latin-700-normal.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -17,6 +19,7 @@
   src: url("/fonts/nunito/nunito-latin-400-italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -24,34 +27,43 @@
   src: url("/fonts/nunito/nunito-latin-700-italic.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "EB Garamond";
-  src: url("/fonts/eb-garamond/eb-garamond-latin-400-normal.woff2") format("woff2");
+  src: url("/fonts/eb-garamond/eb-garamond-latin-400-normal.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "EB Garamond";
-  src: url("/fonts/eb-garamond/eb-garamond-latin-700-normal.woff2") format("woff2");
+  src: url("/fonts/eb-garamond/eb-garamond-latin-700-normal.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "EB Garamond";
-  src: url("/fonts/eb-garamond/eb-garamond-latin-400-italic.woff2") format("woff2");
+  src: url("/fonts/eb-garamond/eb-garamond-latin-400-italic.woff2")
+    format("woff2");
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "EB Garamond";
-  src: url("/fonts/eb-garamond/eb-garamond-latin-700-italic.woff2") format("woff2");
+  src: url("/fonts/eb-garamond/eb-garamond-latin-700-italic.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -59,4 +71,5 @@
   src: url("/fonts/IncognitoPro/IncognitoPro.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }

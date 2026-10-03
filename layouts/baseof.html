@@ -5,26 +5,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ .Title }} | {{ .Site.Title }} {{ .Site.Param "subtitle" }}</title>
-  {{- with resources.Get "sass/main.scss" }}
-    {{- $opts := dict
-      "enableSourceMap" hugo.IsDevelopment
-      "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
-      "targetPath" "css/main.css"
-      "transpiler" "dartsass"
-    }}
-    {{- with . | css.Sass $opts }}
-      {{- if hugo.IsDevelopment }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}">
-      {{ else }}
-        {{ with . | fingerprint }}
-          <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-        {{ end -}}
-      {{ end -}}
-    {{ end -}}
-  {{ end -}}
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  {{- with resources.Get "sass/main.scss" }}
+  {{- $opts := dict
+  "enableSourceMap" hugo.IsDevelopment
+  "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+  "targetPath" "css/main.css"
+  "transpiler" "dartsass"
+  }}
+  {{- with . | css.Sass $opts }}
+  {{- if hugo.IsDevelopment }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{ else }}
+  {{ with . | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{ end -}}
+  {{ end -}}
+  {{ end -}}
+  {{ end -}}
+  <link rel="preload" href="/fonts/nunito/nunito-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   {{- with resources.Get "js/script.js" | minify | fingerprint -}}
-    <script type="module" src="{{ .RelPermalink }}"></script>
+  <script type="module" src="{{ .RelPermalink }}"></script>
   {{ end -}}
 </head>
 
