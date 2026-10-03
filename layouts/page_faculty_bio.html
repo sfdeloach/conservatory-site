@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <h1>{{- .Title }}{{ with .Params.postNominal }}, {{ . }}{{ end -}}</h1>
+  <h1>{{- .LinkTitle }}{{ with .Params.postNominal }}, {{ . }}{{ end -}}</h1>
   {{ partial "headshot.html" . }}
   {{ partial "studios_text.html" . }}
   <section>

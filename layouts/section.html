@@ -1,11 +1,11 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<h1>{{ .LinkTitle }}</h1>
 {{ .Content }}
 <ul class="staff-card-list">
     {{- range .Pages }}
     <li class="staff-card">
         <a href="{{ .RelPermalink }}">
-            <h2>{{- .Title -}}</h2>
+            <h2>{{- .LinkTitle -}}</h2>
             {{ partial "headshot.html" . }}
             {{ partial "studios_text.html" . }}
         </a>

@@ -1,22 +1,22 @@
-<a href="{{ .Site.BaseURL }}">
-  {{- partial "logo.html" (dict "height" "64px" "fill" "rgb(170, 50, 38)") }}
+<a href="{{ .Site.Home.RelPermalink }}">
+  {{- partial "logo.html" (dict "height" "64px" "fill" "currentColor") }}
 </a>
-<button id="nav-button">
-  <svg id="nav-button-menu" xmlns="http://www.w3.org/2000/svg" height="36px" width="36px" viewBox="0 -960 960 960"
-    fill="rgb(72, 48, 54)">
+<button id="nav-button" aria-label="Menu toggle" aria-expanded="false" aria-controls="header-menu">
+  <svg class="icon-menu" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="36px" width="36px"
+    viewBox="0 -960 960 960" fill="currentColor">
     <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
   </svg>
-  <svg id="nav-button-close" class="button-hide" xmlns="http://www.w3.org/2000/svg" height="36px" width="36px"
-    viewBox="0 -960 960 960" fill="rgb(72, 48, 54)">
+  <svg class="icon-close" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="36px" width="36px"
+    viewBox="0 -960 960 960" fill="currentColor">
     <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
   </svg>
 </button>
-<nav id="nav-menu" class="inactive">
+<nav id="header-menu">
   <ul>
     {{- range .Site.Home.Pages }}
     <li>
-      <a href="{{ .RelPermalink }}" {{ if $.Eq . }} aria-current="page" {{ end }}>
-        {{- .Title -}}
+      <a href="{{ .RelPermalink }}" {{ if $.Eq . }}aria-current="page"{{ end }}>
+        {{- .LinkTitle -}}
       </a>
     </li>
     {{- end }}

@@ -23,7 +23,7 @@
     "background-secondary": rgb(248, 248, 248),
     "background-footer": rgb(72, 48, 54),
     "text-light": rgb(246, 246, 236),
-    "text-muted": rgb(192, 166, 164),
+    "text-muted": rgb(138, 126, 126),
     "text-dark": rgb(72, 48, 54),
   );
 
@@ -95,6 +95,6 @@
     "lg": 16px,
     "full": 256px,
   );
-  
+
   @return map.get($radius, $key);
 }
