@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ .LinkTitle }} | {{ .Site.Title }} {{ .Site.Param "subtitle" }}</title>
+  <title>{{ .Title }} | {{ .Site.Title }} {{ .Site.Param "subtitle" }}</title>
   {{- with resources.Get "sass/main.scss" }}
     {{- $opts := dict
       "enableSourceMap" hugo.IsDevelopment
