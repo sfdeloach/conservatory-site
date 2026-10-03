@@ -156,7 +156,7 @@ main {
 header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
 
   display: flex;
   align-items: center;
@@ -167,20 +167,40 @@ header {
 
   background: color("background-header");
 
-  nav.inactive {
-    display: none; // default for mobile
+  .button-hide {
+    display: none;
+  }
+
+  .inactive {
+    transform: translateX(100vw);
+    opacity: 0%;
   }
 }
 
 nav {
   position: fixed;
   top: space("xxl");
-  z-index: 200;
-  background-color: color("background-secondary");
+  left: 0;
+  width: 100%;
+  height: calc(100vh - space("xxl"));
+  background-color: color("background-header");
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
 
   ul {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    row-gap: space("lg");
+    font-family: font("serif");
+    font-size: font-size("lg");
+
+    a:hover {
+      color: color("primary-light");
+    }
   }
 }
 

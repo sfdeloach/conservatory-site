@@ -7,7 +7,7 @@ draft: false
 
 ## Trained for the church, the community, and the world — for the glory of God.
 
-> **Message from the Dean**
+> **From the Dean**
 >
 > Welcome to Saint Andrew’s Conservatory of Music!
 >
