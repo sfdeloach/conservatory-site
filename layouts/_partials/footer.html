@@ -1,1 +1,26 @@
-<p>&copy; 2026 SAINT ANDREW'S CHAPEL</p>
+<nav id="footer-menu">
+  <ul>
+    {{- range .Site.Home.Pages }}
+      <li>
+        <a
+          href="{{ .RelPermalink }}"
+          {{ if $.Eq . }}aria-current="page"{{ end }}
+        >
+          {{- .LinkTitle -}}
+        </a>
+      </li>
+    {{- end }}
+  </ul>
+</nav>
+<a href="{{ .Site.Home.RelPermalink }}">
+  {{- partial "logo.html" (dict "height" "64px") }}
+</a>
+<p>5525 Wayside Drive<br />Sanford, Florida 32771</p>
+<p id="footer-contact-info">
+  <a href="tel:+14073281139">(407) 328-1139</a>
+</p>
+<p>
+  Saint Andrew&rsquo;s Conservatory of Music is a ministry of Saint Andrew's
+  Chapel — training musicians for the church, the community, and the world.
+</p>
+<p>SAINT ANDREW&rsquo;S Conservatory &copy;2026</p>

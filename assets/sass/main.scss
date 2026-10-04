@@ -85,7 +85,7 @@ ul {
 }
 
 a {
-  color: color("primary");
+  color: color("primary-light");
   text-decoration: none;
 }
 
@@ -175,7 +175,6 @@ header {
   justify-content: space-between;
 
   height: space("xxl");
-  padding-inline: space("sm");
 
   background: color("background-header");
 
@@ -200,23 +199,34 @@ header {
 
 footer {
   display: flex;
-  padding-inline: space("sm");
-  min-height: space("mega");
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   color: color("text-light");
+
+  height: space("giga");
+
   background: color("background-footer");
 
   p {
     text-align: center;
   }
+
+  p:last-child {
+    color: color("text-muted");
+  }
 }
 
 /* spacing *******************************************************************/
 
+header,
+main,
+footer {
+  padding-inline: space("sm");
+}
+
 /* components ****************************************************************/
 
-.logo {
+header .logo {
   display: flex;
   align-items: center;
 
@@ -269,7 +279,7 @@ footer {
     font-size: font-size("lg");
 
     a:hover {
-      color: color("primary-light");
+      color: color("primary-dark");
     }
   }
 }
@@ -338,5 +348,51 @@ footer {
     color: color("text-light");
     background-color: color("background-footer");
     transform: translateY(-1 * space("xxs"));
+  }
+}
+
+footer .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  svg {
+    color: color("text-light");
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: space("md");
+    color: color("text-light");
+
+    p {
+      margin-left: space("sm");
+      font-family: font("brand"), serif;
+      font-size: font-size("lg");
+      line-height: 1;
+    }
+
+    .logo-text__top {
+      letter-spacing: space("xxs");
+    }
+  }
+}
+
+#footer-menu {
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: font("serif"), serif;
+    font-size: font-size("md");
+
+    a {
+      color: color("text-light");
+    }
+
+    a:hover {
+      color: color("text-muted");
+    }
   }
 }
