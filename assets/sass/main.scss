@@ -299,8 +299,9 @@ footer .logo {
 
     &[aria-current="page"] {
       color: color("primary-dark");
-      border-bottom: 1px solid color("primary-opaque");
-      padding-bottom: space("xs");
+      text-decoration: underline;
+      text-underline-offset: space("sm");
+      text-decoration-thickness: space("xxxs");
     }
   }
 
