@@ -2,11 +2,11 @@
 
 @function breakpoint($key) {
   $breakpoint: (
-    "sm": 640px,
-    "md": 768px,
-    "lg": 1024px,
-    "xl": 1280px,
-    "2xl": 1536px,
+    "sm": 40em,
+    "md": 48em,
+    "lg": 64em,
+    "xl": 80em,
+    "2xl": 96em,
   );
 
   @return map.get($breakpoint, $key);
@@ -24,7 +24,7 @@
     "background-secondary": rgb(248, 248, 248),
     "background-footer": rgb(72, 48, 54),
     "text-dark": rgb(72, 48, 54),
-    "text-dark-muted": rgb(138, 126, 126),
+    "text-dark-muted": rgb(120, 110, 110),
     "text-light": rgb(246, 246, 236),
     "text-light-muted": rgb(194, 148, 148),
   );
