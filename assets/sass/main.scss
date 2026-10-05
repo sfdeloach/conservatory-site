@@ -226,6 +226,15 @@ footer {
   a:hover {
     color: color("primary-light");
   }
+
+  hr {
+    background-image: linear-gradient(
+      to right,
+      color("background-footer"),
+      color("text-light-muted"),
+      color("background-footer")
+    );
+  }
 }
 
 /* spacing *******************************************************************/
@@ -409,7 +418,7 @@ footer .logo {
   }
 }
 
-#footer-menu {
+.footer-menu {
   ul {
     display: flex;
     flex-direction: column;
@@ -430,5 +439,6 @@ footer .logo {
 .legal {
   display: flex;
   flex-direction: column;
+  align-items: center;
   color: color("text-light-muted");
 }

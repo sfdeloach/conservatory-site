@@ -1,6 +1,3 @@
-<nav id="footer-menu" aria-label="Footer">
-  {{- partial "site_nav_list.html" . }}
-</nav>
 <a href="{{ .Site.Home.RelPermalink }}">
   {{- partial "logo.html" (dict "height" "64px") }}
 </a>
@@ -18,12 +15,41 @@
     >
   </p>
 </address>
+<nav class="footer-menu" aria-label="Footer">
+  {{- partial "site_nav_list.html" . }}
+</nav>
 <p>
   Saint Andrew&rsquo;s Conservatory of Music is a ministry of Saint
   Andrew&rsquo;s Chapel — training musicians for the church, the community, and
   the world.
 </p>
-<p class="legal">
+<hr />
+<div class="legal">
+  <svg
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    height="36px"
+    viewBox="0 0 240 240"
+  >
+    <g fill="transparent" stroke="currentColor">
+      <g stroke-width="2">
+        <path
+          d="M60.721727,60.721727 A60,60 0 0,0 60.721727,179.278273
+        A60,60 0 0,0 179.278273,179.278273
+        A60,60 0 0,0 179.278273,60.721727
+        A60,60 0 0,0 60.721727,60.721727 z"
+        />
+      </g>
+      <g stroke-width="4">
+        <path
+          d="M170,170 A50,50 0 0,0 170,70
+        A50,50 0 0,0 70,70
+        A50,50 0 0,0 70,170
+        A50,50 0 0,0 170,170 z"
+        />
+      </g>
+    </g>
+  </svg>
+  <small>Soli Deo Gloria</small>
   <small>&copy;{{ now.Year }} {{ .Site.Title }}</small>
-  <span lang="la">Soli Deo Gloria</span>
-</p>
+</div>
