@@ -87,10 +87,7 @@ ul {
 a {
   color: color("primary-light");
   text-decoration: none;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition: color 0.5s ease;
-  }
+  transition: color 0.2s ease;
 }
 
 button {
@@ -285,7 +282,6 @@ footer .logo {
 }
 
 #header-menu {
-  top: space("xxl");
   background-color: color("background-header");
 
   ul {
@@ -303,11 +299,14 @@ footer .logo {
 
     &[aria-current="page"] {
       color: color("primary-dark");
+      border-bottom: 1px solid color("primary-opaque");
+      padding-bottom: space("xs");
     }
   }
 
   @media (width < breakpoint("lg")) {
     position: fixed;
+    top: space("xxl");
     bottom: 0;
     left: 0;
     width: 100%;
@@ -318,6 +317,13 @@ footer .logo {
       height: 100%;
       row-gap: space("lg");
       font-size: font-size("lg");
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        transform 0.5s ease,
+        opacity 0.5s ease,
+        visibility 0.5s ease;
     }
   }
 
@@ -332,13 +338,6 @@ footer .logo {
     ul {
       font-size: font-size("lg");
     }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition:
-      transform 0.5s ease,
-      opacity 0.5s ease,
-      visibility 0.5s ease;
   }
 }
 
