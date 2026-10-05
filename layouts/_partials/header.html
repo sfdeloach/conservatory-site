@@ -34,17 +34,6 @@
     />
   </svg>
 </button>
-<nav id="header-menu">
-  <ul>
-    {{- range .Site.Home.Pages }}
-      <li>
-        <a
-          href="{{ .RelPermalink }}"
-          {{ if $.Eq . }}aria-current="page"{{ end }}
-        >
-          {{- .LinkTitle -}}
-        </a>
-      </li>
-    {{- end }}
-  </ul>
+<nav id="header-menu" aria-label="Main">
+  {{- partial "site_nav_list.html" . }}
 </nav>

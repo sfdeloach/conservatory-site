@@ -18,7 +18,6 @@ const domain = "sachapel.com";
 const element = document.getElementById("footer-contact-info").innerHTML;
 document.getElementById("footer-contact-info").innerHTML =
   element +
-  "<br />" +
   '<a href="mailto:' +
   user +
   "@" +

@@ -2,3 +2,10 @@ baseURL = 'https://saintandrewsconservatory.org/'
 locale = 'en-us'
 title = 'Saint Andrew’s Conservatory of Music'
 disableKinds = ['taxonomy', 'term']
+
+[params]
+  [params.contact]
+  address = "5525 Wayside Drive"
+  cityStZip = "Sanford, Florida 32771"
+  phone = "+1 407-328-1139"
+  email = "mconservatory@sachapel.com"

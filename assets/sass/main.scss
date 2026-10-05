@@ -200,10 +200,9 @@ header {
 footer {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  padding-block: space("lg");
+  gap: space("lg");
   color: color("text-light");
-
-  height: space("giga");
 
   background: color("background-footer");
 
@@ -211,9 +210,17 @@ footer {
     text-align: center;
   }
 
-  p:last-child {
-    color: color("text-muted");
+  a {
+    color: color("primary-lighter");
   }
+
+  a:hover {
+    color: color("primary-light");
+  }
+}
+
+small {
+  color: color("text-light-muted");
 }
 
 /* spacing *******************************************************************/
@@ -226,9 +233,10 @@ footer {
 
 /* components ****************************************************************/
 
-header .logo {
+.logo {
   display: flex;
   align-items: center;
+  gap: space("sm");
 
   svg {
     color: color("primary");
@@ -240,15 +248,30 @@ header .logo {
     gap: space("sm");
 
     p {
-      margin-left: space("sm");
       font-family: font("brand"), serif;
       font-size: font-size("lg");
       line-height: 1;
     }
 
     .logo-text__top {
-      color: color("text-muted");
+      color: color("text-dark-muted");
       letter-spacing: space("xxs");
+    }
+  }
+}
+
+footer .logo {
+  flex-direction: column;
+
+  svg {
+    color: color("text-light");
+  }
+
+  .logo-text {
+    color: color("text-light-muted");
+
+    .logo-text__top {
+      color: color("text-light");
     }
   }
 }
@@ -309,7 +332,7 @@ header .logo {
   }
 
   h3 {
-    color: color("text-muted");
+    color: color("text-dark-muted");
   }
 }
 
@@ -331,7 +354,7 @@ header .logo {
 .studio-list {
   font-family: font("serif"), serif;
   font-size: 1.5rem;
-  color: color("text-muted");
+  color: color("text-dark-muted");
   margin-bottom: space("lg");
 }
 
@@ -351,34 +374,6 @@ header .logo {
   }
 }
 
-footer .logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  svg {
-    color: color("text-light");
-  }
-
-  .logo-text {
-    display: flex;
-    flex-direction: column;
-    margin-top: space("md");
-    color: color("text-light");
-
-    p {
-      margin-left: space("sm");
-      font-family: font("brand"), serif;
-      font-size: font-size("lg");
-      line-height: 1;
-    }
-
-    .logo-text__top {
-      letter-spacing: space("xxs");
-    }
-  }
-}
-
 #footer-menu {
   ul {
     display: flex;
@@ -392,7 +387,12 @@ footer .logo {
     }
 
     a:hover {
-      color: color("text-muted");
+      color: color("text-light-muted");
     }
   }
+}
+
+.legal {
+  display: flex;
+  flex-direction: column;
 }
