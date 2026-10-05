@@ -7,5 +7,6 @@ disableKinds = ['taxonomy', 'term']
   [params.contact]
   address = "5525 Wayside Drive"
   cityStZip = "Sanford, Florida 32771"
-  phone = "+1 407-328-1139"
+  phoneHref = "+14073281139"
+  phoneFormat = "(407) 328-1139"
   email = "mconservatory@sachapel.com"

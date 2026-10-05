@@ -219,10 +219,6 @@ footer {
   }
 }
 
-small {
-  color: color("text-light-muted");
-}
-
 /* spacing *******************************************************************/
 
 header,
@@ -395,4 +391,5 @@ footer .logo {
 .legal {
   display: flex;
   flex-direction: column;
+  color: color("text-light-muted");
 }

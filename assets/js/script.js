@@ -12,18 +12,3 @@ document.addEventListener("keydown", (event) => {
     navButton.setAttribute("aria-expanded", "false");
   }
 });
-
-const user = "mconservatory";
-const domain = "sachapel.com";
-const element = document.getElementById("footer-contact-info").innerHTML;
-document.getElementById("footer-contact-info").innerHTML =
-  element +
-  '<a href="mailto:' +
-  user +
-  "@" +
-  domain +
-  '">' +
-  user +
-  "@" +
-  domain +
-  "</a>";

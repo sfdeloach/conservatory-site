@@ -8,11 +8,15 @@
   <p>{{ .Site.Params.contact.address }}</p>
   <p>{{ .Site.Params.contact.cityStZip }}</p>
   <p>
-    <a href="tel:{{ .Site.Params.contact.phone | safeURL }}"
-      >{{ .Site.Params.contact.phone }}</a
+    <a href="tel:{{ .Site.Params.contact.phoneHref }}"
+      >{{ .Site.Params.contact.phoneFormat }}</a
     >
   </p>
-  <p id="footer-contact-info"></p>
+  <p>
+    <a href="mailto:{{ .Site.Params.contact.email }}" target="_blank"
+      >{{ .Site.Params.contact.email }}</a
+    >
+  </p>
 </address>
 <p>
   Saint Andrew&rsquo;s Conservatory of Music is a ministry of Saint
@@ -20,7 +24,6 @@
   the world.
 </p>
 <p class="legal">
-  <small>&copy;{{ now.Year }}</small>
-  <small>Saint Andrew&rsquo;s Conservatory</small>
-  <small>Soli Deo Gloria</small>
+  <small>&copy;{{ now.Year }} {{ .Site.Title }}</small>
+  <span lang="la">Soli Deo Gloria</span>
 </p>
