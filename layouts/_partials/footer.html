@@ -2,18 +2,24 @@
   {{- partial "logo.html" (dict "height" "64px") }}
 </a>
 <address>
-  <p>{{ .Site.Params.contact.address }}</p>
-  <p>{{ .Site.Params.contact.cityStZip }}</p>
-  <p>
-    <a href="tel:{{ .Site.Params.contact.phoneHref }}"
-      >{{ .Site.Params.contact.phoneFormat }}</a
-    >
-  </p>
-  <p>
-    <a href="mailto:{{ .Site.Params.contact.email }}" target="_blank"
-      >{{ .Site.Params.contact.email }}</a
-    >
-  </p>
+  <a
+    href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }}+,+{{ .Site.Params.contact.cityStZip }}"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <p>{{ .Site.Params.contact.address }}</p>
+    <p>{{ .Site.Params.contact.cityStZip }}</p>
+  </a>
+  <a href="tel:{{ .Site.Params.contact.phoneHref }}">
+    <p>
+      {{ .Site.Params.contact.phoneFormat }}
+    </p>
+  </a>
+  <a href="mailto:{{ .Site.Params.contact.email }}" target="_blank">
+    <p>
+      {{ .Site.Params.contact.email }}
+    </p>
+  </a>
 </address>
 <nav class="footer-menu" aria-label="Footer">
   {{- partial "site_nav_list.html" . }}
@@ -23,7 +29,6 @@
   Andrew&rsquo;s Chapel — training musicians for the church, the community, and
   the world.
 </p>
-<hr />
 <div class="legal">
   <svg
     aria-hidden="true"
