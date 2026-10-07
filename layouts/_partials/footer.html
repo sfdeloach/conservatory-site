@@ -1,7 +1,18 @@
-<a href="{{ .Site.Home.RelPermalink }}">
+<p class="footer-tagline">
+  Saint Andrew&rsquo;s Conservatory of Music is a ministry of Saint
+  Andrew&rsquo;s Chapel — training musicians for the church, the community, and
+  the world.
+</p>
+
+<a class="footer-logo" href="{{ .Site.Home.RelPermalink }}">
   {{- partial "logo.html" (dict "height" "64px") }}
 </a>
-<address>
+
+<nav class="footer-menu" aria-label="Footer">
+  {{- partial "site_nav_list.html" . }}
+</nav>
+
+<address class="footer-address">
   <a
     href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }}+,+{{ .Site.Params.contact.cityStZip }}"
     target="_blank"
@@ -21,15 +32,8 @@
     </p>
   </a>
 </address>
-<nav class="footer-menu" aria-label="Footer">
-  {{- partial "site_nav_list.html" . }}
-</nav>
-<p>
-  Saint Andrew&rsquo;s Conservatory of Music is a ministry of Saint
-  Andrew&rsquo;s Chapel — training musicians for the church, the community, and
-  the world.
-</p>
-<div class="legal">
+
+<div class="footer-legal">
   <svg
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
