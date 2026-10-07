@@ -213,7 +213,7 @@ header {
 footer {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr auto 1fr 1fr;
+  grid-template-rows: auto;
   row-gap: space("lg");
   align-items: center;
   padding-block: space("lg");
@@ -230,8 +230,8 @@ footer {
   }
 
   @media (width >= breakpoint("lg")) {
-    grid-template-columns: 2fr 2fr 2fr;
-    grid-template-rows: 1fr auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
   }
 }
 
