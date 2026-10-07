@@ -1,0 +1,162 @@
+@use "./tokens" as *;
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+
+  padding-inline: space("sm");
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  margin: 0;
+  color: color("text-dark");
+  font-family: font("sans"), sans-serif;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block: 0;
+  font-family: font("serif"), serif;
+  font-weight: 400;
+  text-align: center;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: font-size("xl");
+  color: color("primary-dark");
+}
+
+h2 {
+  font-size: font-size("lg");
+}
+
+h3 {
+  font-size: font-size("md");
+  color: color("primary-light");
+}
+
+p {
+  margin-block: 0;
+  width: 100%;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: color("primary-light");
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &.btn-outline {
+    margin: space("lg");
+    padding: space("md");
+    color: color("text-dark-muted");
+    border: 1px solid color("text-dark-muted");
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease,
+      transform 0.3s ease;
+
+    &:hover {
+      color: color("text-light-muted");
+      background-color: color("text-dark");
+      transform: translateY(-1 * space("xxs"));
+    }
+  }
+}
+
+button {
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid color("primary");
+  outline-offset: space("xs");
+}
+
+hr {
+  border: none;
+  height: 1px;
+  width: 50%;
+  background-image: linear-gradient(
+    to right,
+    color("background-main"),
+    color("primary-dark"),
+    color("background-main")
+  );
+}
+
+blockquote {
+  position: relative;
+  margin: 0 space("sm");
+  padding: space("lg");
+  border-radius: 0 space("lg");
+  box-shadow: shadow("md");
+  font-family: font("serif"), serif;
+  letter-spacing: space("nano");
+
+  strong {
+    letter-spacing: space("xxxs");
+  }
+}
+
+blockquote::before {
+  content: "\201C";
+  position: absolute;
+  top: -1 * space("lg");
+  left: space("xs");
+  font-size: font-size("xxxl");
+  line-height: 1;
+  color: color("primary-opaque");
+}
+
+blockquote::after {
+  content: "\201D";
+  position: absolute;
+  bottom: -2.5 * space("lg");
+  right: space("xs");
+  font-size: font-size("xxxl");
+  line-height: 1;
+  color: color("primary-opaque");
+}
+
+address {
+  font-style: normal;
+}

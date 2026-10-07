@@ -1,0 +1,29 @@
+@use "./tokens" as *;
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: space("sm");
+
+  svg {
+    color: color("primary");
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: space("sm");
+
+    p {
+      font-family: font("brand"), serif;
+      font-size: font-size("lg");
+      line-height: 1;
+    }
+
+    .logo-text__top {
+      color: color("text-dark-muted");
+      letter-spacing: space("xxs");
+    }
+  }
+}

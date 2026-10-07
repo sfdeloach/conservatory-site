@@ -1,0 +1,127 @@
+@use "./tokens" as *;
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "tagline" "logo" "address" "menu" "legal";
+  gap: space("lg");
+
+  align-items: center;
+  justify-content: center;
+  padding: space("lg") space("sm");
+  color: color("text-light");
+
+  background: color("background-footer");
+
+  a {
+    color: color("text-light");
+  }
+
+  a:hover {
+    color: color("text-light-muted");
+  }
+
+  @media (width >= breakpoint("lg")) {
+    grid-template-columns: 3fr 4fr 3fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "tagline logo menu"
+      "address legal menu";
+
+    padding-inline: max(space("xl"), 5vw);
+  }
+}
+
+.footer-tagline {
+  grid-area: tagline;
+
+  margin: 0 auto;
+  max-width: space("kilo");
+  text-align: center;
+
+  @media (width >= breakpoint("lg")) {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+.footer-logo {
+  grid-area: logo;
+
+  .logo {
+    flex-direction: column;
+
+    svg {
+      color: color("text-light");
+    }
+
+    .logo-text {
+      color: color("text-light-muted");
+
+      p {
+        text-align: center;
+      }
+
+      .logo-text__top {
+        color: color("text-light");
+      }
+    }
+  }
+}
+
+.footer-menu {
+  grid-area: menu;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: font("serif"), serif;
+    font-size: font-size("md");
+
+    a {
+      color: color("text-light");
+    }
+
+    a:hover {
+      color: color("text-light-muted");
+    }
+  }
+
+  @media (width >= breakpoint("lg")) {
+    ul {
+      align-items: end;
+    }
+  }
+}
+
+.footer-address {
+  grid-area: address;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    text-align: center;
+  }
+
+  @media (width >= breakpoint("lg")) {
+    align-items: start;
+
+    p {
+      text-align: left;
+    }
+  }
+}
+
+.footer-legal {
+  grid-area: legal;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: color("text-light-muted");
+}

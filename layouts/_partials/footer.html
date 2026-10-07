@@ -8,30 +8,30 @@
   {{- partial "logo.html" (dict "height" "64px") }}
 </a>
 
+<address class="footer-address">
+  <a
+  href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }} {{ .Site.Params.contact.cityStZip }}"
+  target="_blank"
+  rel="noopener noreferrer"
+  >
+  <p>{{ .Site.Params.contact.address }}</p>
+  <p>{{ .Site.Params.contact.cityStZip }}</p>
+</a>
+<a href="tel:{{ .Site.Params.contact.phoneHref }}">
+  <p>
+    {{ .Site.Params.contact.phoneFormat }}
+  </p>
+</a>
+<a href="mailto:{{ .Site.Params.contact.email }}" target="_blank">
+  <p>
+    {{ .Site.Params.contact.email }}
+  </p>
+</a>
+</address>
+
 <nav class="footer-menu" aria-label="Footer">
   {{- partial "site_nav_list.html" . }}
 </nav>
-
-<address class="footer-address">
-  <a
-    href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }}+,+{{ .Site.Params.contact.cityStZip }}"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <p>{{ .Site.Params.contact.address }}</p>
-    <p>{{ .Site.Params.contact.cityStZip }}</p>
-  </a>
-  <a href="tel:{{ .Site.Params.contact.phoneHref }}">
-    <p>
-      {{ .Site.Params.contact.phoneFormat }}
-    </p>
-  </a>
-  <a href="mailto:{{ .Site.Params.contact.email }}" target="_blank">
-    <p>
-      {{ .Site.Params.contact.email }}
-    </p>
-  </a>
-</address>
 
 <div class="footer-legal">
   <svg
@@ -59,6 +59,6 @@
       </g>
     </g>
   </svg>
-  <small>Soli Deo Gloria</small>
+  <span lang="la">Soli Deo Gloria</span>
   <small>&copy;{{ now.Year }} {{ .Site.Title }}</small>
 </div>
