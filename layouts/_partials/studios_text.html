@@ -1,4 +1,4 @@
-{{- with .Params.studios }}
-  {{- $studios := apply . "strings.FirstUpper" "." }}
+{{- with .Params.studios -}}
+  {{- $studios := apply . "strings.FirstUpper" "." -}}
   <div class="studio-list">{{- delimit $studios ", " " and " -}}</div>
-{{- end }}
+{{- end -}}

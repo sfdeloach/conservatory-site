@@ -6,27 +6,27 @@
   </p>
 </div>
 
-<a class="footer-logo" href="{{ .Site.Home.RelPermalink }}">
-  {{- partial "logo.html" (dict "height" "64px" "classes" "logo logo--stacked logo--inverse") }}
+<a class="footer-logo" href="{{- .Site.Home.RelPermalink -}}">
+  {{- partial "logo.html" (dict "height" "64px" "classes" "logo logo--stacked logo--inverse") -}}
 </a>
 
 <address class="footer-address">
   <a
-    href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }} {{ .Site.Params.contact.cityStZip }}"
+    href="https://www.google.com/maps/search/?api=1&query={{- .Site.Params.contact.address -}} {{- .Site.Params.contact.cityStZip -}}"
     target="_blank"
     rel="noopener noreferrer"
   >
-    <p>{{ .Site.Params.contact.address }}</p>
-    <p>{{ .Site.Params.contact.cityStZip }}</p>
+    <p>{{- .Site.Params.contact.address -}}</p>
+    <p>{{- .Site.Params.contact.cityStZip -}}</p>
   </a>
-  <a href="tel:{{ .Site.Params.contact.phoneHref }}">
+  <a href="tel:{{- .Site.Params.contact.phoneHref -}}">
     <p>
-      {{ .Site.Params.contact.phoneFormat }}
+      {{- .Site.Params.contact.phoneFormat -}}
     </p>
   </a>
-  <a href="mailto:{{ .Site.Params.contact.email }}" target="_blank">
+  <a href="mailto:{{- .Site.Params.contact.email -}}" target="_blank">
     <p>
-      {{ .Site.Params.contact.email }}
+      {{- .Site.Params.contact.email -}}
     </p>
   </a>
 </address>
@@ -34,7 +34,7 @@
 <div class="footer-menu">
   <h2>Explore & Enroll</h2>
   <nav aria-label="Footer">
-    {{- partial "site_nav_list.html" . }}
+    {{- partial "site_nav_list.html" . -}}
   </nav>
 </div>
 
@@ -65,5 +65,5 @@
     </g>
   </svg>
   <span lang="la">Soli Deo Gloria</span>
-  <small>&copy;{{ now.Year }} {{ .Site.Title }}</small>
+  <small>&copy;{{- now.Year -}} {{- .Site.Title -}}</small>
 </div>

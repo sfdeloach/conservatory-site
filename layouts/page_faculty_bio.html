@@ -1,13 +1,13 @@
-{{ define "main" }}
-  {{ partial "headshot.html" . }}
-  <h1>{{- .Title }}{{ with .Params.postNominal }}, {{ . }}{{ end -}}</h1>
-  {{ partial "studios_text.html" . }}
+{{- define "main" -}}
+  {{- partial "headshot.html" . -}}
+  <h1>{{- .Title -}}{{- with .Params.postNominal -}}, {{- . -}}{{- end -}}</h1>
+  {{- partial "studios_text.html" . -}}
   <section>
-    {{ .Content }}
+    {{- .Content -}}
   </section>
-  {{- with .Parent }}
-    <a class="btn-outline" href="{{ .RelPermalink }}"
-      >Back to {{ .LinkTitle }}</a
+  {{- with .Parent -}}
+    <a class="btn-outline" href="{{- .RelPermalink -}}"
+      >Back to {{- .LinkTitle -}}</a
     >
-  {{- end }}
-{{- end }}
+  {{- end -}}
+{{- end -}}

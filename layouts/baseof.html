@@ -3,30 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ if not .IsHome }}{{ .Title }} |{{ end }} {{ .Site.Title }}</title>
+    <title>{{- if not .IsHome -}}{{- .Title -}} |{{- end -}} {{- .Site.Title -}}</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-    {{- with resources.Get "sass/main.scss" }}
+    {{- with resources.Get "sass/main.scss" -}}
       {{- $opts := dict
         "enableSourceMap" hugo.IsDevelopment
         "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
         "targetPath" "css/main.css"
         "transpiler" "dartsass"
-      }}
-      {{- with . | css.Sass $opts }}
-        {{- if hugo.IsDevelopment }}
-          <link rel="stylesheet" href="{{ .RelPermalink }}" />
-        {{ else }}
-          {{ with . | fingerprint }}
+      -}}
+      {{- with . | css.Sass $opts -}}
+        {{- if hugo.IsDevelopment -}}
+          <link rel="stylesheet" href="{{- .RelPermalink -}}" />
+        {{- else -}}
+          {{- with . | fingerprint -}}
             <link
               rel="stylesheet"
-              href="{{ .RelPermalink }}"
-              integrity="{{ .Data.Integrity }}"
+              href="{{- .RelPermalink -}}"
+              integrity="{{- .Data.Integrity -}}"
               crossorigin="anonymous"
             />
-          {{ end -}}
-        {{ end -}}
-      {{ end -}}
-    {{ end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
     <link
       rel="preload"
       href="/fonts/nunito/nunito-latin-400-normal.woff2"
@@ -35,18 +35,18 @@
       crossorigin
     />
     {{- with resources.Get "js/script.js" | minify | fingerprint -}}
-      <script type="module" src="{{ .RelPermalink }}"></script>
-    {{ end -}}
+      <script type="module" src="{{- .RelPermalink -}}"></script>
+    {{- end -}}
   </head>
 
   <body>
-    <header>{{ partial "header.html" . }}</header>
+    <header>{{- partial "header.html" . -}}</header>
     <main>
-      {{ block "main" . }}
+      {{- block "main" . -}}
         This will be replaced with content from the corresponding "define"
         action found in the template to which this _base_ template is applied.
-      {{ end }}
+      {{- end -}}
     </main>
-    <footer>{{ partial "footer.html" . }}</footer>
+    <footer>{{- partial "footer.html" . -}}</footer>
   </body>
 </html>

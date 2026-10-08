@@ -1,12 +1,12 @@
 <ul>
-  {{- range .Site.Home.Pages }}
+  {{- range .Site.Home.Pages -}}
     <li>
       <a
-        href="{{ .RelPermalink }}"
-        {{ if $.Eq . }}aria-current="page"{{ end }}
+        href="{{- .RelPermalink -}}"
+        {{- if $.Eq . -}}aria-current="page"{{- end -}}
       >
         {{- .LinkTitle -}}
       </a>
     </li>
-  {{- end }}
+  {{- end -}}
 </ul>

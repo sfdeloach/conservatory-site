@@ -1,5 +1,5 @@
-<a href="{{ .Site.Home.RelPermalink }}">
-  {{- partial "logo.html" (dict "height" "64px" "classes" "logo") }}
+<a href="{{- .Site.Home.RelPermalink -}}">
+  {{- partial "logo.html" (dict "height" "64px" "classes" "logo") -}}
 </a>
 <button
   id="nav-button"
@@ -35,5 +35,5 @@
   </svg>
 </button>
 <nav id="header-menu" aria-label="Main">
-  {{- partial "site_nav_list.html" . }}
+  {{- partial "site_nav_list.html" . -}}
 </nav>
