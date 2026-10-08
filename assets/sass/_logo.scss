@@ -27,3 +27,27 @@
     }
   }
 }
+
+.logo--stacked {
+  flex-direction: column;
+
+  .logo-text {
+    p {
+      text-align: center;
+    }
+  }
+}
+
+.logo--inverse {
+  svg {
+    color: color("text-light");
+  }
+
+  .logo-text {
+    color: color("text-light-muted");
+
+    .logo-text__top {
+      color: color("text-light");
+    }
+  }
+}

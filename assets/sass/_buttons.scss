@@ -1,0 +1,18 @@
+@use "./tokens" as *;
+
+.btn-outline {
+  margin: space("lg");
+  padding: space("md");
+  color: color("text-dark-muted");
+  border: 1px solid color("text-dark-muted");
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease;
+
+  &:hover {
+    color: color("text-light-muted");
+    background-color: color("text-dark");
+    transform: translateY(-1 * space("xxs"));
+  }
+}

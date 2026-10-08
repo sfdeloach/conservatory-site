@@ -2,13 +2,11 @@
 
 footer {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
   grid-template-areas: "tagline" "logo" "address" "menu" "legal";
   gap: space("xl");
   align-items: center;
-  justify-content: center;
   padding-block: space("xl");
+  padding-inline: max(space("md"), (100% - space("exa")) / 2);
   color: color("text-light");
   background: color("background-footer");
 
@@ -22,11 +20,9 @@ footer {
 
   @media (width >= breakpoint("lg")) {
     grid-template-columns: 3fr 4fr 3fr;
-    grid-template-rows: auto;
     grid-template-areas:
       "tagline logo menu"
       "address legal menu";
-    padding-inline: max(space("xl"), 5vw);
   }
 }
 
@@ -37,6 +33,8 @@ footer {
 
   p {
     max-width: space("hecto");
+    color: color("text-light-muted");
+    font-family: font("serif"), serif;
     text-align: center;
   }
 
@@ -52,43 +50,18 @@ footer {
 
 .footer-logo {
   grid-area: logo;
-
-  .logo {
-    flex-direction: column;
-
-    svg {
-      color: color("text-light");
-    }
-
-    .logo-text {
-      color: color("text-light-muted");
-
-      p {
-        text-align: center;
-      }
-
-      .logo-text__top {
-        color: color("text-light");
-      }
-    }
-  }
 }
 
 .footer-menu {
   grid-area: menu;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  column-gap: space("lg");
 
-  p {
-    font-family: font("serif");
-    font-size: font-size("md");
+  h2 {
+    color: color("text-light-muted");
+    font-size: font-size("lg");
     text-align: center;
-    text-decoration: underline;
-    text-decoration-color: color("text-light-muted");
-    text-decoration-thickness: space("nano");
-    text-underline-offset: space("sm");
   }
 
   ul {
@@ -107,20 +80,18 @@ footer {
   }
 
   @media (width >= breakpoint("lg")) {
-    align-items: start;
-    height: stretch;
-
-    p {
+    h2 {
       text-align: left;
     }
 
     nav {
-      height: stretch;
+      flex: 1;
+      align-self: stretch;
+      display: flex;
 
       ul {
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: start;
-        height: inherit;
       }
     }
   }
@@ -150,5 +121,9 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: color("text-light-muted");
+  color: color("text-light");
+
+  small {
+    color: color("text-light-muted");
+  }
 }

@@ -1,11 +1,13 @@
 {{ define "main" }}
-  <h1>{{- .Title }}{{ with .Params.postNominal }}, {{ . }}{{ end -}}</h1>
   {{ partial "headshot.html" . }}
+  <h1>{{- .Title }}{{ with .Params.postNominal }}, {{ . }}{{ end -}}</h1>
   {{ partial "studios_text.html" . }}
   <section>
     {{ .Content }}
   </section>
   {{- with .Parent }}
-    <a class="btn-outline" href="{{ .RelPermalink }}">Back to {{ .LinkTitle }}</a>
+    <a class="btn-outline" href="{{ .RelPermalink }}"
+      >Back to {{ .LinkTitle }}</a
+    >
   {{- end }}
 {{- end }}

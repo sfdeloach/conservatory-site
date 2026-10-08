@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   gap: space("md");
 
-  @media (min-width: breakpoint("sm")) {
+  @media (width >= breakpoint("sm")) {
     flex-direction: row;
     gap: space("lg");
   }
@@ -16,8 +16,15 @@
 .staff-card {
   border: 1px solid color("background-header");
   padding: space("sm");
-  box-shadow: shadow("sm");
-  border-radius: 0 space("lg");
+  border-radius: radius("full") radius("full") 0 0;
+  transition:
+    box-shadow 0.5s ease,
+    transform 0.5s ease;
+
+  &:hover {
+    box-shadow: shadow("sm");
+    transform: translateY(-1 * space("xxs"));
+  }
 
   .headshot {
     box-shadow: none;
@@ -30,23 +37,20 @@
 }
 
 .headshot {
-  width: 340px;
-  height: 340px;
+  width: min(100%, 320px);
+  height: auto;
+  aspect-ratio: 1;
   object-fit: cover;
   box-shadow: shadow("md");
-  border-radius: radius("md");
+  border-radius: radius("full") radius("full") 0 0;
   margin-bottom: space("lg");
   filter: grayscale(50%);
-
-  @media (min-width: breakpoint("sm")) {
-    width: 400px;
-    height: 400px;
-  }
 }
 
 .studio-list {
-  font-family: font("serif"), serif;
-  font-size: 1.5rem;
-  color: color("text-dark-muted");
   margin-bottom: space("lg");
+  color: color("text-dark-muted");
+  font-family: font("serif"), serif;
+  font-size: font-size("lg");
+  text-align: center;
 }

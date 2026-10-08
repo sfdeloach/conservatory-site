@@ -85,6 +85,8 @@
     "mega": 32rem,
     "giga": 48rem,
     "tera": 64rem,
+    "peta": 72rem,
+    "exa": 84rem,
   );
 
   @return map.get($space, $key);

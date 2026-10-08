@@ -5,8 +5,8 @@
     {{- range .Pages }}
       <li class="staff-card">
         <a href="{{ .RelPermalink }}">
-          <h2>{{- .LinkTitle -}}</h2>
           {{ partial "headshot.html" . }}
+          <h2>{{- .LinkTitle -}}</h2>
           {{ partial "studios_text.html" . }}
         </a>
       </li>

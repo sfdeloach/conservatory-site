@@ -7,7 +7,7 @@
 </div>
 
 <a class="footer-logo" href="{{ .Site.Home.RelPermalink }}">
-  {{- partial "logo.html" (dict "height" "64px") }}
+  {{- partial "logo.html" (dict "height" "64px" "classes" "logo logo--stacked logo--inverse") }}
 </a>
 
 <address class="footer-address">
@@ -32,7 +32,7 @@
 </address>
 
 <div class="footer-menu">
-  <p>Explore & Enroll</p>
+  <h2>Explore & Enroll</h2>
   <nav aria-label="Footer">
     {{- partial "site_nav_list.html" . }}
   </nav>
