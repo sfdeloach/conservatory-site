@@ -69,22 +69,22 @@
 
 @function space($key) {
   $space: (
-    "nano": 0.015rem,
-    "micro": 0.03rem,
-    "xxxs": 0.0625rem,
-    "xxs": 0.125rem,
-    "xs": 0.25rem,
-    "sm": 0.5rem,
+    "nano": calc(1rem / 64),
+    "micro": calc(1rem / 32),
+    "xxxs": calc(1rem / 16),
+    "xxs": calc(1rem / 8),
+    "xs": calc(1rem / 4),
+    "sm": calc(1rem / 2),
     "md": 1rem,
     "lg": 2rem,
     "xl": 4rem,
-    "xxl": 6rem,
-    "xxxl": 10rem,
+    "xxl": 8rem,
+    "xxxl": 12rem,
     "hecto": 16rem,
     "kilo": 24rem,
-    "mega": 36rem,
+    "mega": 32rem,
     "giga": 48rem,
-    "tera": 60rem,
+    "tera": 64rem,
   );
 
   @return map.get($space, $key);
@@ -92,10 +92,10 @@
 
 @function radius($key) {
   $radius: (
-    "sm": 4px,
-    "md": 8px,
-    "lg": 16px,
-    "full": 256px,
+    "sm": 0.25rem,
+    "md": 0.5rem,
+    "lg": 1rem,
+    "full": 64rem,
   );
 
   @return map.get($radius, $key);

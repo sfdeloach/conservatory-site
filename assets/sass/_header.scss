@@ -4,14 +4,11 @@ header {
   position: sticky;
   top: 0;
   z-index: 200;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   min-height: space("xxl");
   padding-inline: space("sm");
-
   background: color("background-header");
 
   #nav-button {
@@ -69,6 +66,7 @@ header {
     bottom: 0;
     left: 0;
     width: 100%;
+    background: color("background-header");
 
     ul {
       flex-direction: column;

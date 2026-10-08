@@ -5,13 +5,11 @@ footer {
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-template-areas: "tagline" "logo" "address" "menu" "legal";
-  gap: space("lg");
-
+  gap: space("xl");
   align-items: center;
   justify-content: center;
-  padding: space("lg") space("sm");
+  padding-block: space("xl");
   color: color("text-light");
-
   background: color("background-footer");
 
   a {
@@ -28,21 +26,27 @@ footer {
     grid-template-areas:
       "tagline logo menu"
       "address legal menu";
-
     padding-inline: max(space("xl"), 5vw);
   }
 }
 
 .footer-tagline {
   grid-area: tagline;
+  display: flex;
+  justify-content: center;
 
-  margin: 0 auto;
-  max-width: space("kilo");
-  text-align: center;
+  p {
+    max-width: space("hecto");
+    text-align: center;
+  }
 
   @media (width >= breakpoint("lg")) {
-    max-width: none;
-    text-align: left;
+    justify-content: end;
+
+    p {
+      max-width: space("kilo");
+      text-align: right;
+    }
   }
 }
 
@@ -72,13 +76,26 @@ footer {
 
 .footer-menu {
   grid-area: menu;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  column-gap: space("lg");
+
+  p {
+    font-family: font("serif");
+    font-size: font-size("md");
+    text-align: center;
+    text-decoration: underline;
+    text-decoration-color: color("text-light-muted");
+    text-decoration-thickness: space("nano");
+    text-underline-offset: space("sm");
+  }
 
   ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: font("serif"), serif;
-    font-size: font-size("md");
+    font-size: font-size("std");
 
     a {
       color: color("text-light");
@@ -90,15 +107,27 @@ footer {
   }
 
   @media (width >= breakpoint("lg")) {
-    ul {
-      align-items: end;
+    align-items: start;
+    height: stretch;
+
+    p {
+      text-align: left;
+    }
+
+    nav {
+      height: stretch;
+
+      ul {
+        justify-content: space-evenly;
+        align-items: start;
+        height: inherit;
+      }
     }
   }
 }
 
 .footer-address {
   grid-area: address;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,20 +137,18 @@ footer {
   }
 
   @media (width >= breakpoint("lg")) {
-    align-items: start;
+    align-items: end;
 
     p {
-      text-align: left;
+      text-align: right;
     }
   }
 }
 
 .footer-legal {
   grid-area: legal;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   color: color("text-light-muted");
 }

@@ -12,15 +12,6 @@ html {
   box-sizing: inherit;
 }
 
-main {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-
-  padding-inline: space("sm");
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -29,6 +20,14 @@ body {
   color: color("text-dark");
   font-family: font("sans"), sans-serif;
   line-height: 1.5;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: space("sm");
 }
 
 h1,
