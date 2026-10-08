@@ -12,7 +12,7 @@
 
 <address class="footer-address">
   <a
-    href="https://www.google.com/maps/search/?api=1&query={{- .Site.Params.contact.address -}} {{- .Site.Params.contact.cityStZip -}}"
+    href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }}%2c%20{{ .Site.Params.contact.cityStZip }}"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -32,8 +32,8 @@
 </address>
 
 <div class="footer-menu">
-  <h2 id="footer-menu">Explore & Enroll</h2>
-  <nav aria-labelledby="footer-menu">
+  <h2 id="footer-menu-heading">Explore & Enroll</h2>
+  <nav aria-labelledby="footer-menu-heading">
     {{- partial "site_nav_list.html" . -}}
   </nav>
 </div>
@@ -65,5 +65,5 @@
     </g>
   </svg>
   <span lang="la">Soli Deo Gloria</span>
-  <small>&copy;{{- now.Year -}} {{- .Site.Title -}}</small>
+  <small>&copy;{{- now.Year }} {{ .Site.Title -}}</small>
 </div>

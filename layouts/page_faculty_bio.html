@@ -1,7 +1,7 @@
 {{- define "main" -}}
   {{- partial "headshot.html" (dict "context" .) -}}
   <h1>
-    {{- .Title -}}{{- with .Params.postNominal -}}, {{- . -}}{{- end -}}
+    {{- .Title -}}{{- with .Params.postNominal -}}, {{ . -}}{{- end -}}
   </h1>
   {{- partial "studios_text.html" . -}}
   <section>
@@ -9,7 +9,7 @@
   </section>
   {{- with .Parent -}}
     <a class="btn-outline" href="{{- .RelPermalink -}}"
-      >Back to {{- .LinkTitle -}}</a
+      >Back to {{ .LinkTitle -}}</a
     >
   {{- end -}}
 {{- end -}}

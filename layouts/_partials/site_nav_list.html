@@ -2,7 +2,7 @@
   {{- range .Site.Home.Pages -}}
     <li>
       <a
-        href="{{- .RelPermalink -}}"
+        href="{{ .RelPermalink }}"
         {{- if $.Eq . -}}aria-current="page"{{- end -}}
       >
         {{- .LinkTitle -}}

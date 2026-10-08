@@ -7,27 +7,23 @@
         {{- $spec := printf "fill %dx%d Top webp q80" . . -}}
         {{- $img := $src.Process $spec -}}
         {{- $images = $images | append $img -}}
-        {{- $srcSet = $srcSet | append (printf "%s %dx" $img.RelPermalink (div . 320)) -}}
+        {{- $srcSet = $srcSet | append (printf "%s %gx" $img.RelPermalink (div . (float 320))) -}}
       {{- end -}}
     {{- end -}}
 
     {{- with $images -}}
-      {{- $url := index . 0 -}}
+      {{- $fallback := index . 0 }}
       <img
         class="headshot"
-        src="{{ $url.RelPermalink }}"
+        src="{{ $fallback.RelPermalink }}"
         srcset="{{ delimit $srcSet `, ` }}"
-        width="{{ $url.Width }}"
-        height="{{ $url.Height }}"
-        decoding="async"
-        loading="{{ if $.isLazyLoaded }}
-          lazy
-        {{ else }}
-          eager
-        {{ end }}"
         alt=""
+        width="{{ $fallback.Width }}"
+        height="{{ $fallback.Height }}"
+        decoding="async"
+        {{- with $.isLazyLoaded }}loading="lazy"{{ end }}
       />
     {{- end -}}
 
   {{- end -}}
-{{- end -}}
+{{- end }}
