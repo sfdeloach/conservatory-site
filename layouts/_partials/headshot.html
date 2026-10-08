@@ -1,23 +1,33 @@
-{{- $src := .Resources.GetMatch "headshot.*" -}}
-{{- $widths := slice 320 640 -}}
-{{- $headshotSet := slice -}}
+{{- with .context -}}
+  {{- with $src := .Resources.GetMatch "headshot.*" -}}
+    {{- $srcSet := slice -}}
+    {{- $images := slice -}}
+    {{- range (slice 320 640) -}}
+      {{- if le . (math.Min $src.Width $src.Height) -}}
+        {{- $spec := printf "fill %dx%d Top webp q80" . . -}}
+        {{- $img := $src.Process $spec -}}
+        {{- $images = $images | append $img -}}
+        {{- $srcSet = $srcSet | append (printf "%s %dx" $img.RelPermalink (div . 320)) -}}
+      {{- end -}}
+    {{- end -}}
 
-{{- range $widths -}}
-  {{- if le . $src.Width -}}
-    {{ $w := printf "fill %dx%d Top webp q80" . . }}
-    {{ $url := ($src.Process $w).RelPermalink | safeURL }}
-    {{ $headshotSet = $headshotSet | append (printf "%s %dw" $url .) }}
-  {{- end -}}
-{{- end -}}
+    {{- with $images -}}
+      {{- $url := index . 0 -}}
+      <img
+        class="headshot"
+        src="{{ $url.RelPermalink }}"
+        srcset="{{ delimit $srcSet `, ` }}"
+        width="{{ $url.Width }}"
+        height="{{ $url.Height }}"
+        decoding="async"
+        loading="{{ if $.isLazyLoaded }}
+          lazy
+        {{ else }}
+          eager
+        {{ end }}"
+        alt=""
+      />
+    {{- end -}}
 
-{{- with .Resources.GetMatch "headshot.*" -}}
-  {{- with .Process "fill 320x320 Top webp q80" -}}
-    <img
-      class="headshot"
-      src="{{- .RelPermalink -}}"
-      width="{{- .Width -}}"
-      height="{{- .Height -}}"
-      alt=""
-    />
   {{- end -}}
 {{- end -}}
