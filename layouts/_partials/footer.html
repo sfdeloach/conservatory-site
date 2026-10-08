@@ -12,7 +12,10 @@
 
 <address class="footer-address">
   <a
-    href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.contact.address }}%2c%20{{ .Site.Params.contact.cityStZip }}"
+    href="https://www.google.com/maps/search/?api=1&query=
+    {{- with .Site.Params.contact -}}
+      {{ printf `%s, %s` .address .cityStZip -}}
+    {{ end }}"
     target="_blank"
     rel="noopener noreferrer"
   >

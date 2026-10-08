@@ -21,7 +21,7 @@
         width="{{ $fallback.Width }}"
         height="{{ $fallback.Height }}"
         decoding="async"
-        {{- with $.isLazyLoaded }}loading="lazy"{{ end }}
+        {{ with $.isLazyLoaded }}loading="lazy"{{ end -}}
       />
     {{- end -}}
 

@@ -2,10 +2,10 @@
   {{- range .Site.Home.Pages -}}
     <li>
       <a
+        {{ if $.Eq . }}aria-current="page"{{- end }}
         href="{{ .RelPermalink }}"
-        {{- if $.Eq . -}}aria-current="page"{{- end -}}
       >
-        {{- .LinkTitle -}}
+        {{- .LinkTitle }}
       </a>
     </li>
   {{- end -}}
