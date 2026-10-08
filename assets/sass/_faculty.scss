@@ -17,13 +17,17 @@
   border: 1px solid color("background-header");
   padding: space("sm");
   border-radius: radius("full") radius("full") 0 0;
-  transition:
-    box-shadow 0.5s ease,
-    transform 0.5s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     box-shadow: shadow("sm");
     transform: translateY(-1 * space("xxs"));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
   }
 
   .headshot {

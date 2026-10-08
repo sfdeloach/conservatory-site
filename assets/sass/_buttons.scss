@@ -1,7 +1,7 @@
 @use "./tokens" as *;
 
 .btn-outline {
-  margin: space("lg");
+  display: inline-block;
   padding: space("md");
   color: color("text-dark-muted");
   border: 1px solid color("text-dark-muted");
@@ -10,7 +10,8 @@
     background-color 0.3s ease,
     transform 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: color("text-light-muted");
     background-color: color("text-dark");
     transform: translateY(-1 * space("xxs"));

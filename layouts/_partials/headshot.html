@@ -1,3 +1,15 @@
+{{- $src := .Resources.GetMatch "headshot.*" -}}
+{{- $widths := slice 320 640 -}}
+{{- $headshotSet := slice -}}
+
+{{- range $widths -}}
+  {{- if le . $src.Width -}}
+    {{ $w := printf "fill %dx%d Top webp q80" . . }}
+    {{ $url := ($src.Process $w).RelPermalink | safeURL }}
+    {{ $headshotSet = $headshotSet | append (printf "%s %dw" $url .) }}
+  {{- end -}}
+{{- end -}}
+
 {{- with .Resources.GetMatch "headshot.*" -}}
   {{- with .Process "fill 320x320 Top webp q80" -}}
     <img
