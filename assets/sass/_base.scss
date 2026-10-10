@@ -27,7 +27,8 @@ main {
   flex: 1;
   flex-direction: column;
   align-items: center;
-  padding-inline: space("sm");
+  padding-block: space("xl");
+  padding-inline: max(space("md"), (100% - space("exa")) / 2);
 }
 
 h1,
@@ -54,7 +55,7 @@ h2 {
 
 h3 {
   font-size: font-size("md");
-  color: color("primary-light");
+  color: color("primary-dark");
 }
 
 p {
