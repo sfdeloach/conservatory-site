@@ -20,8 +20,8 @@
     "primary-lighter": rgb(255, 118, 104),
     "primary-dark": rgb(146, 43, 33),
     "background-header": rgba(250, 245, 240, 0.95),
-    "background-main": rgba(248, 250, 250),
-    "background-secondary": rgb(248, 248, 248),
+    "background-main": rgba(255, 250, 245),
+    "background-secondary": rgb(240, 235, 230),
     "background-footer": rgb(72, 48, 54),
     "text-dark": rgb(72, 48, 54),
     "text-dark-muted": rgb(120, 110, 110),
@@ -87,6 +87,10 @@
     "tera": 64rem,
     "peta": 72rem,
     "exa": 84rem,
+    "zetta": 96rem,
+    "yotta": 108rem,
+    "ronna": 120rem,
+    "quetta": 132rem,
   );
 
   @return map.get($space, $key);

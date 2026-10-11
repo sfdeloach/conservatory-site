@@ -27,8 +27,6 @@ main {
   flex: 1;
   flex-direction: column;
   align-items: center;
-  padding-block: space("xl");
-  padding-inline: max(space("md"), (100% - space("exa")) / 2);
 }
 
 h1,

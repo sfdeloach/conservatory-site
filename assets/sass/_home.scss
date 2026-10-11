@@ -1,15 +1,51 @@
 @use "./tokens" as *;
 
 .home {
-  h1 {
-    font-size: font-size("xxl");
-  }
-
-  h2 {
-    font-size: font-size("xl");
-  }
-
   h3 {
     font-size: font-size("xl");
+  }
+
+  .hero {
+    display: grid;
+    grid-template-areas: "title" "subtitle" "image";
+    gap: space("lg");
+    align-items: center;
+    justify-items: center;
+    margin-bottom: space("xl");
+    padding-block: space("xl");
+    padding-inline: max(space("md"), (100% - space("tera")) / 2);
+    background: linear-gradient(
+      45deg,
+      color("background-secondary"),
+      color("background-main")
+    );
+
+    h1 {
+      grid-area: title;
+      font-size: clamp(font-size("xl"), font-size("xxl"), font-size("xxxl"));
+    }
+
+    h2 {
+      grid-area: subtitle;
+      font-size: clamp(font-size("lg"), font-size("xl"), font-size("xxl"));
+    }
+
+    .hero-image {
+      grid-area: image;
+      max-width: 100%;
+      border-radius: radius("full") radius("full") 0 0;
+    }
+
+    @media (width >= breakpoint("lg")) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "title image"
+        "subtitle image";
+
+      h1,
+      h2 {
+        text-align: left;
+      }
+    }
   }
 }

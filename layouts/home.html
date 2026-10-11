@@ -1,5 +1,10 @@
 {{- define "main" }}
   <div class="home">
+    <div class="hero">
+      <h1>{{ .Params.heroTitle }}</h1>
+      <h2>{{ .Params.heroSubtitle }}</h2>
+      {{ partial "hero_image.html" . }}
+    </div>
     {{ .Content }}
   </div>
 {{ end -}}
