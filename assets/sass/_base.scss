@@ -104,6 +104,11 @@ button:focus-visible {
   outline-offset: space("xs");
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 hr {
   border: none;
   height: 1px;

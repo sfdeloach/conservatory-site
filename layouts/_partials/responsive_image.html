@@ -5,7 +5,9 @@
 
   context
   resource (file name of image, colocated with content)
-  sizes
+  sizes (https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes)
+  aspectRatio (optional, if not specified, image is resized, 4:3 = 1.333, 2:3 = 0.667)
+  widths (slice of widths to process)
   cssClass
   cropAnchor
   altText (optional)
@@ -17,9 +19,15 @@
   {{- with $src := .Resources.GetMatch $.resource }}
     {{- $srcSet := slice }}
     {{- $images := slice }}
-    {{- range (slice 320 480 640 768 1366 1920) }}
-      {{- if le . (math.Min $src.Width $src.Height) }}
-        {{- $spec := printf "resize %dx %s webp q80" . $.cropAnchor }}
+    {{/*- range (slice 320 480 640 768 1366 1920) */}}
+    {{- range $.widths }}
+      {{- if le . $src.Width }}
+        {{- $spec := "" }}
+        {{- if $.aspectRatio }}
+          {{- $spec = printf "fill %dx%g %s webp q80" . (math.Round (div . (float $.aspectRatio))) $.cropAnchor }}
+        {{- else }}
+          {{- $spec = printf "resize %dx webp q80" . }}
+        {{ end -}}
         {{- $img := $src.Process $spec -}}
         {{- $images = $images | append $img -}}
         {{- $srcSet = $srcSet | append (printf "%s %dw" $img.RelPermalink .) -}}
@@ -33,7 +41,7 @@
         src="{{ $fallback.RelPermalink }}"
         srcset="{{ delimit $srcSet `, ` }}"
         sizes="{{ $.sizes }}"
-        {{ with $.altText }}alt="{{ . }}"{{ end -}}
+        alt="{{ $.altText }}"
         width="{{ $fallback.Width }}"
         height="{{ $fallback.Height }}"
         decoding="async"

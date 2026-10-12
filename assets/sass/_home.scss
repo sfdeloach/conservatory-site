@@ -65,7 +65,7 @@
 
       .hero-image {
         grid-area: image;
-        max-width: 100%;
+        width: min(100%, 420px);
         border-radius: radius("full") radius("full") 0 0;
       }
 
