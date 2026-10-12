@@ -1,0 +1,46 @@
+<!--
+
+This partial requires a dictionary to be passed to it that defines. All fields
+are required unless noted:
+
+context
+resource (file name of image, colocated with content)
+sizes
+cssClass
+cropAnchor
+altText (optional)
+isLazyLoaded (optional, defaults to 'eager')
+hasFetchPriority (optional, defaults to 'auto')
+
+-->
+
+{{- with .context }}
+  {{- with $src := .Resources.GetMatch $.resource }}
+    {{- $srcSet := slice }}
+    {{- $images := slice }}
+    {{- range (slice 320 480 640 768 1366 1920) }}
+      {{- if le . (math.Min $src.Width $src.Height) }}
+        {{- $spec := printf "resize %dx %s webp q80" . $.cropAnchor }}
+        {{- $img := $src.Process $spec -}}
+        {{- $images = $images | append $img -}}
+        {{- $srcSet = $srcSet | append (printf "%s %dw" $img.RelPermalink .) -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{- with $images -}}
+      {{- $fallback := index . 0 }}
+      <img
+        class="{{ $.cssClass }}"
+        src="{{ $fallback.RelPermalink }}"
+        srcset="{{ delimit $srcSet `, ` }}"
+        sizes="{{ $.sizes }}"
+        {{ with $.altText }}alt="{{ . }}"{{ end -}}
+        width="{{ $fallback.Width }}"
+        height="{{ $fallback.Height }}"
+        decoding="async"
+        {{ with $.isLazyLoaded }}loading="lazy"{{ end -}}
+        {{ with $.hasFetchPriority }}fetchpriority="high"{{ end -}}
+      />
+    {{ end -}}
+  {{ end -}}
+{{ end -}}

@@ -1,14 +1,30 @@
 @use "./tokens" as *;
 
-.btn-outline {
+.btn {
   display: inline-block;
   padding: space("md");
-  color: color("text-dark-muted");
-  border: 1px solid color("text-dark-muted");
   transition:
     color 0.3s ease,
     background-color 0.3s ease,
     transform 0.3s ease;
+}
+
+.btn-primary {
+  color: color("text-light");
+  background-color: color("primary");
+  border: 1px solid color("primary-dark");
+
+  &:hover,
+  &:focus-visible {
+    color: color("text-light");
+    background-color: color("primary-light");
+    transform: translateY(-1 * space("xxs"));
+  }
+}
+
+.btn-outline {
+  color: color("text-dark-muted");
+  border: 1px solid color("text-dark-muted");
 
   &:hover,
   &:focus-visible {

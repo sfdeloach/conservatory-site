@@ -5,7 +5,16 @@
     {{- range .Pages -}}
       <li class="staff-card">
         <a href="{{- .RelPermalink -}}">
-          {{- partial "headshot.html" (dict "context" . "isLazyLoaded" true) -}}
+          {{ partial "responsive_image.html"
+            (dict
+            "context" .
+            "resource" "headshot.*"
+            "sizes" "(min-width: 480px) 50vw, 100vw"
+            "cssClass" "headshot"
+            "cropAnchor" "Top"
+            "isLazyLoaded" true
+            )
+          }}
           <h2>{{- .LinkTitle -}}</h2>
           {{- partial "studios_text.html" . -}}
         </a>

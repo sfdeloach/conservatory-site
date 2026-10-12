@@ -23,10 +23,20 @@ body {
 }
 
 main {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns:
+    [full-start] 1fr
+    [content-start] min(100ch, 100% - space("md")) [content-end]
+    1fr [full-end];
+  justify-items: center;
+
+  & > * {
+    grid-column: content;
+  }
+
+  p {
+    margin-bottom: space("md");
+  }
 }
 
 h1,
@@ -44,16 +54,15 @@ h6 {
 
 h1 {
   font-size: font-size("xl");
-  color: color("primary-dark");
 }
 
 h2 {
   font-size: font-size("lg");
+  color: color("primary-dark");
 }
 
 h3 {
   font-size: font-size("md");
-  color: color("primary-dark");
 }
 
 p {

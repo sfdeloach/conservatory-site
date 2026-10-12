@@ -1,33 +1,63 @@
 @use "./tokens" as *;
 
 .home {
+  display: grid;
+  grid-column: full;
+  grid-template-columns: subgrid;
+  grid-template-areas: "hero" "stats" "study-areas" "welcome" "faculty" "summer-academy" "ready";
+
+  & > * {
+    grid-column: content;
+    margin-bottom: space("xl");
+  }
+
   h3 {
     font-size: font-size("xl");
   }
 
   .hero {
     display: grid;
-    grid-template-areas: "title" "subtitle" "image";
-    gap: space("lg");
-    align-items: center;
+    grid-column: full;
+    grid-template-areas: "text" "image";
     justify-items: center;
-    margin-bottom: space("xl");
+    align-items: center;
+    gap: space("lg");
     padding-block: space("xl");
-    padding-inline: max(space("md"), (100% - space("tera")) / 2);
     background: linear-gradient(
-      45deg,
+      135deg,
       color("background-secondary"),
       color("background-main")
     );
 
-    h1 {
-      grid-area: title;
-      font-size: clamp(font-size("xl"), font-size("xxl"), font-size("xxxl"));
-    }
+    .hero-text {
+      grid-area: text;
+      display: grid;
+      justify-items: center;
+      gap: space("md");
 
-    h2 {
-      grid-area: subtitle;
-      font-size: clamp(font-size("lg"), font-size("xl"), font-size("xxl"));
+      h1 {
+        font-size: clamp(
+          font-size("lg"),
+          font-size("display") + font-size("xl"),
+          font-size("xxl")
+        );
+      }
+
+      p {
+        color: color("text-dark-muted");
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      .hero-subtitle {
+        color: color("primary-dark");
+        font-family: font("serif"), serif;
+        font-size: clamp(
+          font-size("md"),
+          font-size("display") + font-size("lg"),
+          font-size("xl")
+        );
+      }
     }
 
     .hero-image {
@@ -38,13 +68,16 @@
 
     @media (width >= breakpoint("lg")) {
       grid-template-columns: 1fr 1fr;
-      grid-template-areas:
-        "title image"
-        "subtitle image";
+      grid-template-areas: "text image";
+      justify-items: start;
 
-      h1,
-      h2 {
-        text-align: left;
+      .hero-text {
+        justify-items: end;
+
+        h1,
+        p {
+          text-align: right;
+        }
       }
     }
   }

@@ -1,10 +1,68 @@
 {{- define "main" }}
   <div class="home">
     <div class="hero">
-      <h1>{{ .Params.heroTitle }}</h1>
-      <h2>{{ .Params.heroSubtitle }}</h2>
-      {{ partial "hero_image.html" . }}
+      <div class="hero-text">
+        <p>{{ .Params.hero.eyebrow }}</p>
+        <h1>{{ .Params.hero.title }}</h1>
+        <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
+        <div>
+          <a href="" class="btn btn-primary">Register Now</a>
+          <a href="" class="btn btn-outline">Meet Our Faculty</a>
+        </div>
+      </div>
+      {{ partial "responsive_image.html"
+        (dict
+        "context" .
+        "resource" "heroImage.jpg"
+        "sizes" "(min-width: 480px) 50vw, 100vw"
+        "cssClass" "hero-image"
+        "cropAnchor" "Center"
+        "altText" "A closeup of a violin during a concert"
+        "hasFetchPriority" true
+        )
+      }}
     </div>
-    {{ .Content }}
+    <div class="story">
+      <p>{{ .Params.story.eyebrow }}</p>
+      <h1>{{ .Params.story.title }}</h1>
+      <p>{{ .Params.story.article }}</p>
+      {{ range .Params.story.stats }}
+        <p>
+          {{ .heading }}:
+          {{ .value }}
+        </p>
+      {{ end }}
+    </div>
+    <div class="study-areas">
+      <p>{{ .Params.studyAreas.eyebrow }}</p>
+      <h1>{{ .Params.studyAreas.title }}</h1>
+      <!-- TODO: Loop through areas of study -->
+      <a href="" class="btn btn-primary">Explore Areas of Study</a>
+    </div>
+    <div class="welcome">
+      <p>{{ .Params.welcome.eyebrow }}</p>
+      <h1>{{ .Params.welcome.title }}</h1>
+      {{ .Content }}
+      <a href="" class="btn btn-primary">Contact Us</a>
+    </div>
+    <div class="faculty">
+      <p>{{ .Params.faculty.eyebrow }}</p>
+      <h1>{{ .Params.faculty.title }}</h1>
+      <p>{{ .Params.faculty.article }}</p>
+      <a href="" class="btn btn-primary">Meet the Faculty</a>
+    </div>
+    <div class="summer-academy">
+      <p>{{ .Params.summerAcademy.eyebrow }}</p>
+      <h1>{{ .Params.summerAcademy.title }}</h1>
+      <p>{{ .Params.summerAcademy.article }}</p>
+      <a href="" class="btn btn-primary">Learn More the Summer Music Academy</a>
+    </div>
+    <div class="ready">
+      <p>{{ .Params.ready.eyebrow }}</p>
+      <div>
+        <a href="" class="btn btn-primary">Register Now</a>
+        <a href="" class="btn btn-outline">View the Schedule</a>
+      </div>
+    </div>
   </div>
 {{ end -}}

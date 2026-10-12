@@ -1,5 +1,14 @@
 {{- define "main" -}}
-  {{- partial "headshot.html" (dict "context" .) -}}
+  {{ partial "responsive_image.html"
+    (dict
+    "context" .
+    "resource" "headshot.*"
+    "sizes" "(min-width: 480px) 50vw, 100vw"
+    "cssClass" "headshot"
+    "cropAnchor" "Top"
+    "isLazyLoaded" true
+    )
+  }}
   <h1>
     {{- .Title -}}{{- with .Params.postNominal -}}, {{ . -}}{{- end -}}
   </h1>
@@ -8,7 +17,7 @@
     {{- .Content -}}
   </section>
   {{- with .Parent -}}
-    <a class="btn-outline" href="{{- .RelPermalink -}}"
+    <a class="btn btn-outline" href="{{- .RelPermalink -}}"
       >Back to {{ .LinkTitle -}}</a
     >
   {{- end -}}

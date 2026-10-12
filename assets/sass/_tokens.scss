@@ -20,8 +20,8 @@
     "primary-lighter": rgb(255, 118, 104),
     "primary-dark": rgb(146, 43, 33),
     "background-header": rgba(250, 245, 240, 0.95),
-    "background-main": rgba(255, 250, 245),
-    "background-secondary": rgb(240, 235, 230),
+    "background-main": rgb(247, 247, 255),
+    "background-secondary": rgb(254, 249, 236),
     "background-footer": rgb(72, 48, 54),
     "text-dark": rgb(72, 48, 54),
     "text-dark-muted": rgb(120, 110, 110),
@@ -44,6 +44,7 @@
 
 @function font-size($key) {
   $font-size: (
+    "display": 4vw,
     "xs": 0.5rem,
     "sm": 0.75rem,
     "std": 1rem,
@@ -87,10 +88,6 @@
     "tera": 64rem,
     "peta": 72rem,
     "exa": 84rem,
-    "zetta": 96rem,
-    "yotta": 108rem,
-    "ronna": 120rem,
-    "quetta": 132rem,
   );
 
   @return map.get($space, $key);
