@@ -1,18 +1,17 @@
-<!--
+{{/* Note:
 
-This partial requires a dictionary to be passed to it that defines. All fields
-are required unless noted:
+  This partial requires a dictionary to be passed to it that defines. All fields
+  are required unless noted:
 
-context
-resource (file name of image, colocated with content)
-sizes
-cssClass
-cropAnchor
-altText (optional)
-isLazyLoaded (optional, defaults to 'eager')
-hasFetchPriority (optional, defaults to 'auto')
-
--->
+  context
+  resource (file name of image, colocated with content)
+  sizes
+  cssClass
+  cropAnchor
+  altText (optional)
+  isLazyLoaded (optional, defaults to 'eager')
+  hasFetchPriority (optional, defaults to 'auto')
+*/}}
 
 {{- with .context }}
   {{- with $src := .Resources.GetMatch $.resource }}

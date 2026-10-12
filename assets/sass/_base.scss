@@ -26,9 +26,8 @@ main {
   display: grid;
   grid-template-columns:
     [full-start] 1fr
-    [content-start] min(100ch, 100% - space("md")) [content-end]
+    [content-start] min(100ch, 100% - space("lg")) [content-end]
     1fr [full-end];
-  justify-items: center;
 
   & > * {
     grid-column: content;

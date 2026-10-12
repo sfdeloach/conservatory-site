@@ -36,6 +36,7 @@ params:
     article: "Fantastic ensemble and masterclass opportunities that challenge and inspire students at every level of musical development. Registration opens each spring."
   ready:
     eyebrow: "READY TO BEGIN?"
+    title: "Start your journey now"
 ---
 
 > Saint Andrew’s Chapel has always placed a special emphasis on excellent music in the worship of God. We believe we are called to make skillful music to the Lord and to train up excellent musicians. Psalm 33:2-3 tells us to “Sing to Him a new song; play skillfully on the strings…” This calling to excellence drives us as we work toward fulfilling our purpose: “To train the next generation of musicians for the church, the community, and the world, for the glory of God.”

@@ -4,7 +4,6 @@
   display: grid;
   grid-column: full;
   grid-template-columns: subgrid;
-  grid-template-areas: "hero" "stats" "study-areas" "welcome" "faculty" "summer-academy" "ready";
 
   & > * {
     grid-column: content;
@@ -18,65 +17,70 @@
   .hero {
     display: grid;
     grid-column: full;
-    grid-template-areas: "text" "image";
-    justify-items: center;
-    align-items: center;
-    gap: space("lg");
-    padding-block: space("xl");
     background: linear-gradient(
       135deg,
       color("background-secondary"),
       color("background-main")
     );
 
-    .hero-text {
-      grid-area: text;
+    .content {
       display: grid;
+      grid-template-areas: "text" "image";
       justify-items: center;
-      gap: space("md");
-
-      h1 {
-        font-size: clamp(
-          font-size("lg"),
-          font-size("display") + font-size("xl"),
-          font-size("xxl")
-        );
-      }
-
-      p {
-        color: color("text-dark-muted");
-        text-align: center;
-        text-wrap: balance;
-      }
-
-      .hero-subtitle {
-        color: color("primary-dark");
-        font-family: font("serif"), serif;
-        font-size: clamp(
-          font-size("md"),
-          font-size("display") + font-size("lg"),
-          font-size("xl")
-        );
-      }
-    }
-
-    .hero-image {
-      grid-area: image;
-      max-width: 100%;
-      border-radius: radius("full") radius("full") 0 0;
-    }
-
-    @media (width >= breakpoint("lg")) {
-      grid-template-columns: 1fr 1fr;
-      grid-template-areas: "text image";
-      justify-items: start;
+      align-items: center;
+      gap: space("lg");
+      padding-block: space("xl");
+      grid-column: content;
 
       .hero-text {
-        justify-items: end;
+        grid-area: text;
+        display: grid;
+        justify-items: center;
+        gap: space("md");
 
-        h1,
+        h1 {
+          font-size: clamp(
+            font-size("lg"),
+            font-size("display") + font-size("xl"),
+            font-size("xxl")
+          );
+        }
+
         p {
-          text-align: right;
+          color: color("text-dark-muted");
+          text-align: center;
+          text-wrap: balance;
+        }
+
+        .hero-subtitle {
+          color: color("primary-dark");
+          font-family: font("serif"), serif;
+          font-size: clamp(
+            font-size("md"),
+            font-size("display") + font-size("lg"),
+            font-size("xl")
+          );
+        }
+      }
+
+      .hero-image {
+        grid-area: image;
+        max-width: 100%;
+        border-radius: radius("full") radius("full") 0 0;
+      }
+
+      @media (width >= breakpoint("lg")) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "text image";
+        justify-items: start;
+
+        .hero-text {
+          justify-items: end;
+
+          h1,
+          p {
+            text-align: right;
+          }
         }
       }
     }

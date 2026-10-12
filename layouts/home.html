@@ -1,68 +1,140 @@
 {{- define "main" }}
   <div class="home">
-    <div class="hero">
-      <div class="hero-text">
-        <p>{{ .Params.hero.eyebrow }}</p>
-        <h1>{{ .Params.hero.title }}</h1>
-        <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
-        <div>
-          <a href="" class="btn btn-primary">Register Now</a>
-          <a href="" class="btn btn-outline">Meet Our Faculty</a>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="content">
+        <div class="hero-text">
+          <p>{{ .Params.hero.eyebrow }}</p>
+          <h1 id="hero-title">{{ .Params.hero.title }}</h1>
+          <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
+          <div>
+            {{- with site.GetPage "/registration" }}
+              <a href="{{ .RelPermalink }}" class="btn btn-primary">
+                Register Now
+              </a>
+            {{- else -}}
+              {{- warnf "Broken link. See %s." site.GetPage -}}
+            {{ end -}}
+            {{- with site.GetPage "/faculty" }}
+              <a href="{{ .RelPermalink }}" class="btn btn-outline">
+                Meet Our Faculty
+              </a>
+            {{- else -}}
+              {{- warnf "Broken link. See %s." site.GetPage -}}
+            {{ end -}}
+          </div>
         </div>
+        {{ partial "responsive_image.html"
+          (dict
+          "context" .
+          "resource" .Params.hero.image
+          "sizes" "(min-width: 480px) 50vw, 100vw"
+          "cssClass" "hero-image"
+          "cropAnchor" "Center"
+          "altText" "A closeup of a violin during a concert"
+          "hasFetchPriority" true
+          )
+        }}
       </div>
-      {{ partial "responsive_image.html"
-        (dict
-        "context" .
-        "resource" "heroImage.jpg"
-        "sizes" "(min-width: 480px) 50vw, 100vw"
-        "cssClass" "hero-image"
-        "cropAnchor" "Center"
-        "altText" "A closeup of a violin during a concert"
-        "hasFetchPriority" true
-        )
-      }}
-    </div>
-    <div class="story">
-      <p>{{ .Params.story.eyebrow }}</p>
-      <h1>{{ .Params.story.title }}</h1>
+    </section>
+
+    <section class="story" aria-labelledby="story-title">
+      <hgroup>
+        <p>{{ .Params.story.eyebrow }}</p>
+        <h2 id="story-title">{{ .Params.story.title }}</h2>
+      </hgroup>
       <p>{{ .Params.story.article }}</p>
       {{ range .Params.story.stats }}
-        <p>
-          {{ .heading }}:
-          {{ .value }}
-        </p>
+        <dl>
+          <dt>{{ .heading }}:</dt>
+          <dl>
+            {{ .value }}
+          </dl>
+        </dl>
       {{ end }}
-    </div>
-    <div class="study-areas">
-      <p>{{ .Params.studyAreas.eyebrow }}</p>
-      <h1>{{ .Params.studyAreas.title }}</h1>
+    </section>
+
+    <section class="study-areas" aria-labelledby="study-areas-title">
+      <hgroup>
+        <p>{{ .Params.studyAreas.eyebrow }}</p>
+        <h2 id="study-areas-title">{{ .Params.studyAreas.title }}</h2>
+      </hgroup>
       <!-- TODO: Loop through areas of study -->
-      <a href="" class="btn btn-primary">Explore Areas of Study</a>
-    </div>
-    <div class="welcome">
-      <p>{{ .Params.welcome.eyebrow }}</p>
-      <h1>{{ .Params.welcome.title }}</h1>
+      {{- with site.GetPage "/areas" }}
+        <a href="{{ .RelPermalink }}" class="btn btn-primary">
+          Explore Areas of Study
+        </a>
+      {{- else -}}
+        {{- warnf "Broken link. See %s." site.GetPage -}}
+      {{ end -}}
+
+    </section>
+
+    <section class="welcome" aria-labelledby="welcome-title">
+      <hgroup>
+        <p>{{ .Params.welcome.eyebrow }}</p>
+        <h2 id="welcome-title">{{ .Params.welcome.title }}</h2>
+      </hgroup>
       {{ .Content }}
-      <a href="" class="btn btn-primary">Contact Us</a>
-    </div>
-    <div class="faculty">
-      <p>{{ .Params.faculty.eyebrow }}</p>
-      <h1>{{ .Params.faculty.title }}</h1>
+
+      {{- with site.GetPage "/contact" }}
+        <a href="{{ .RelPermalink }}" class="btn btn-primary">Contact Us</a>
+      {{- else -}}
+        {{- warnf "Broken link. See %s." site.GetPage -}}
+      {{ end -}}
+    </section>
+
+    <section class="faculty" aria-labelledby="faculty-title">
+      <hgroup>
+        <p>{{ .Params.faculty.eyebrow }}</p>
+        <h2 id="faculty-title">{{ .Params.faculty.title }}</h2>
+      </hgroup>
       <p>{{ .Params.faculty.article }}</p>
-      <a href="" class="btn btn-primary">Meet the Faculty</a>
-    </div>
-    <div class="summer-academy">
-      <p>{{ .Params.summerAcademy.eyebrow }}</p>
-      <h1>{{ .Params.summerAcademy.title }}</h1>
+
+      {{- with site.GetPage "/faculty" }}
+        <a href="{{ .RelPermalink }}" class="btn btn-primary">
+          Meet the Faculty
+        </a>
+      {{- else -}}
+        {{- warnf "Broken link. See %s." site.GetPage -}}
+      {{ end -}}
+    </section>
+
+    <section class="summer-academy" aria-labelledby="summer-academy-title">
+      <hgroup>
+        <p>{{ .Params.summerAcademy.eyebrow }}</p>
+        <h2 id="summer-academy-title">{{ .Params.summerAcademy.title }}</h2>
+      </hgroup>
       <p>{{ .Params.summerAcademy.article }}</p>
-      <a href="" class="btn btn-primary">Learn More the Summer Music Academy</a>
-    </div>
-    <div class="ready">
-      <p>{{ .Params.ready.eyebrow }}</p>
+
+      {{- with site.GetPage "/summer-academy" }}
+        <a href="{{ .RelPermalink }}" class="btn btn-primary">
+          Learn More About Summer Music Academy
+        </a>
+      {{- else -}}
+        {{- warnf "Broken link. See %s." site.GetPage -}}
+      {{ end -}}
+    </section>
+
+    <section class="ready" aria-labelledby="ready-title">
+      <hgroup>
+        <p>{{ .Params.ready.eyebrow }}</p>
+        <h2 id="ready-title">{{ .Params.ready.title }}</h2>
+      </hgroup>
       <div>
-        <a href="" class="btn btn-primary">Register Now</a>
-        <a href="" class="btn btn-outline">View the Schedule</a>
+        {{- with site.GetPage "/registration" }}
+          <a href="{{ .RelPermalink }}" class="btn btn-primary">Register Now</a>
+        {{- else -}}
+          {{- warnf "Broken link. See %s." site.GetPage -}}
+        {{ end -}}
+
+        {{- with site.GetPage "/schedule" }}
+          <a href="{{ .RelPermalink }}" class="btn btn-outline">
+            View the Schedule
+          </a>
+        {{- else -}}
+          {{- warnf "Broken link. See %s." site.GetPage -}}
+        {{ end -}}
       </div>
-    </div>
+    </section>
   </div>
 {{ end -}}
