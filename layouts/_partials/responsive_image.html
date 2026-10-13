@@ -20,18 +20,22 @@
     {{- $srcSet := slice }}
     {{- $images := slice }}
     {{- range $.widths }}
-      {{- if le . $src.Width }}
-        {{- $spec := "" }}
-        {{- if and $.aspectRatio (le . $src.Height)}}
-          {{- $spec = printf "fill %dx%g %s webp q80" . (math.Round (div . (float $.aspectRatio))) $.cropAnchor }}
-        {{- else }}
-          {{- $spec = printf "resize %dx webp q80" . }}
-        {{ end -}}
-        {{- $img := $src.Process $spec -}}
-        {{- $images = $images | append $img -}}
-        {{- $srcSet = $srcSet | append (printf "%s %dw" $img.RelPermalink .) -}}
-      {{ end -}}
-    {{ end -}}
+      {{- $spec := "" }}
+      {{- if $.aspectRatio }}
+        {{- $h := int (math.Round (div . (float $.aspectRatio))) }}
+        {{- if and (le . $src.Width) (le $h $src.Height) }}
+          {{- $spec = printf "fill %dx%d %s webp q80" . $h $.cropAnchor }}
+        {{- end }}
+      {{- else if le . $src.Width }}
+        {{- $spec = printf "resize %dx webp q80" . }}
+      {{- end }}
+
+      {{- with $spec }}
+        {{- $img := $src.Process . }}
+        {{- $images = $images | append $img }}
+        {{- $srcSet = $srcSet | append (printf "%s %dw" $img.RelPermalink $img.Width) }}
+      {{- end }}
+    {{- end }}
 
     {{- with $images -}}
       {{- $fallback := index . 0 }}

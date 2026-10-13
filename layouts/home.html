@@ -7,23 +7,19 @@
           <h1 id="hero-title">{{ .Params.hero.title }}</h1>
           <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
           <div>
-            {{ range .Params.hero.buttons }}
-              <a href="{{ .page }}" class="btn btn-{{ .style }}">
-                {{ .label }}
-              </a>
-            {{ end }}
+            {{ partial "cta_group.html" .Params.hero.buttons }}
           </div>
         </div>
         {{ partial "responsive_image.html"
           (dict
           "context" .
           "resource" .Params.hero.image
-          "sizes" "(min-width: 64em) 420px, 100vw"
+          "sizes" "(min-width: 30em) 420px, calc(100vw - 2rem)"
           "aspectRatio" 0.667
           "widths" (slice 320 640 960)
           "cssClass" "hero-image"
           "cropAnchor" "Center"
-          "altText" "A closeup of a violin during a concert"
+          "altText" .Params.hero.imageAlt
           "hasFetchPriority" true
           )
         }}
@@ -52,11 +48,7 @@
         <h2 id="study-areas-title">{{ .Params.studyAreas.title }}</h2>
       </hgroup>
       <!-- TODO: Loop through areas of study -->
-      {{ range .Params.studyAreas.buttons }}
-        <a href="{{ .page }}" class="btn btn-{{ .style }}">
-          {{ .label }}
-        </a>
-      {{ end }}
+      {{ partial "cta_group.html" .Params.studyAreas.buttons }}
 
     </section>
 
@@ -67,11 +59,7 @@
       </hgroup>
       {{ .Content }}
 
-      {{ range .Params.welcome.buttons }}
-        <a href="{{ .page }}" class="btn btn-{{ .style }}">
-          {{ .label }}
-        </a>
-      {{ end }}
+      {{ partial "cta_group.html" .Params.welcome.buttons }}
     </section>
 
     <section class="faculty" aria-labelledby="faculty-title">
@@ -81,11 +69,7 @@
       </hgroup>
       <p>{{ .Params.faculty.article }}</p>
 
-      {{ range .Params.faculty.buttons }}
-        <a href="{{ .page }}" class="btn btn-{{ .style }}">
-          {{ .label }}
-        </a>
-      {{ end }}
+      {{ partial "cta_group.html" .Params.faculty.buttons }}
     </section>
 
     <section class="summer-academy" aria-labelledby="summer-academy-title">
@@ -95,11 +79,7 @@
       </hgroup>
       <p>{{ .Params.summerAcademy.article }}</p>
 
-      {{ range .Params.summerAcademy.buttons }}
-        <a href="{{ .page }}" class="btn btn-{{ .style }}">
-          {{ .label }}
-        </a>
-      {{ end }}
+      {{ partial "cta_group.html" .Params.summerAcademy.buttons }}
     </section>
 
     <section class="ready" aria-labelledby="ready-title">
@@ -108,11 +88,7 @@
         <h2 id="ready-title">{{ .Params.ready.title }}</h2>
       </hgroup>
       <div>
-        {{ range .Params.ready.buttons }}
-          <a href="{{ .page }}" class="btn btn-{{ .style }}">
-            {{ .label }}
-          </a>
-        {{ end }}
+        {{ partial "cta_group.html" .Params.ready.buttons }}
       </div>
     </section>
   </div>

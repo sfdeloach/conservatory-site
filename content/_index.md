@@ -7,6 +7,7 @@ params:
     title: "The next generation of musicians."
     subtitle: "Trained for the church, the community, and the world — for the glory of God"
     image: "heroImage.jpg"
+    imageAlt: "A close-up of a violin during a concert"
     buttons:
       - label: "Register Now"
         page: "/registration"
