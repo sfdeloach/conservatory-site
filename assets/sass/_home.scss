@@ -10,13 +10,10 @@
     margin-bottom: space("xl");
   }
 
-  h3 {
-    font-size: font-size("xl");
-  }
-
   .hero {
     display: grid;
     grid-column: full;
+    grid-template-columns: subgrid;
     background: linear-gradient(
       135deg,
       color("background-secondary"),

@@ -7,29 +7,20 @@
           <h1 id="hero-title">{{ .Params.hero.title }}</h1>
           <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
           <div>
-            {{- with site.GetPage "/registration" }}
-              <a href="{{ .RelPermalink }}" class="btn btn-primary">
-                Register Now
+            {{ range .Params.hero.buttons }}
+              <a href="{{ .page }}" class="btn btn-{{ .style }}">
+                {{ .label }}
               </a>
-            {{- else -}}
-              {{- warnf "Broken link. See %s." site.GetPage -}}
-            {{ end -}}
-            {{- with site.GetPage "/faculty" }}
-              <a href="{{ .RelPermalink }}" class="btn btn-outline">
-                Meet Our Faculty
-              </a>
-            {{- else -}}
-              {{- warnf "Broken link. See %s." site.GetPage -}}
-            {{ end -}}
+            {{ end }}
           </div>
         </div>
         {{ partial "responsive_image.html"
           (dict
           "context" .
           "resource" .Params.hero.image
-          "sizes" "(min-width: 64em) 50vw, 100vw"
+          "sizes" "(min-width: 64em) 420px, 100vw"
           "aspectRatio" 0.667
-          "widths" (slice 320 480 640 768)
+          "widths" (slice 320 640 960)
           "cssClass" "hero-image"
           "cropAnchor" "Center"
           "altText" "A closeup of a violin during a concert"
@@ -45,14 +36,14 @@
         <h2 id="story-title">{{ .Params.story.title }}</h2>
       </hgroup>
       <p>{{ .Params.story.article }}</p>
-      {{ range .Params.story.stats }}
-        <dl>
-          <dt>{{ .heading }}:</dt>
-          <dl>
-            {{ .value }}
-          </dl>
-        </dl>
-      {{ end }}
+      <dl>
+        {{ range .Params.story.stats }}
+          <div>
+            <dt>{{ .heading }}</dt>
+            <dd>{{ .value }}</dd>
+          </div>
+        {{ end }}
+      </dl>
     </section>
 
     <section class="study-areas" aria-labelledby="study-areas-title">
@@ -61,13 +52,11 @@
         <h2 id="study-areas-title">{{ .Params.studyAreas.title }}</h2>
       </hgroup>
       <!-- TODO: Loop through areas of study -->
-      {{- with site.GetPage "/areas" }}
-        <a href="{{ .RelPermalink }}" class="btn btn-primary">
-          Explore Areas of Study
+      {{ range .Params.studyAreas.buttons }}
+        <a href="{{ .page }}" class="btn btn-{{ .style }}">
+          {{ .label }}
         </a>
-      {{- else -}}
-        {{- warnf "Broken link. See %s." site.GetPage -}}
-      {{ end -}}
+      {{ end }}
 
     </section>
 
@@ -78,11 +67,11 @@
       </hgroup>
       {{ .Content }}
 
-      {{- with site.GetPage "/contact" }}
-        <a href="{{ .RelPermalink }}" class="btn btn-primary">Contact Us</a>
-      {{- else -}}
-        {{- warnf "Broken link. See %s." site.GetPage -}}
-      {{ end -}}
+      {{ range .Params.welcome.buttons }}
+        <a href="{{ .page }}" class="btn btn-{{ .style }}">
+          {{ .label }}
+        </a>
+      {{ end }}
     </section>
 
     <section class="faculty" aria-labelledby="faculty-title">
@@ -92,13 +81,11 @@
       </hgroup>
       <p>{{ .Params.faculty.article }}</p>
 
-      {{- with site.GetPage "/faculty" }}
-        <a href="{{ .RelPermalink }}" class="btn btn-primary">
-          Meet the Faculty
+      {{ range .Params.faculty.buttons }}
+        <a href="{{ .page }}" class="btn btn-{{ .style }}">
+          {{ .label }}
         </a>
-      {{- else -}}
-        {{- warnf "Broken link. See %s." site.GetPage -}}
-      {{ end -}}
+      {{ end }}
     </section>
 
     <section class="summer-academy" aria-labelledby="summer-academy-title">
@@ -108,13 +95,11 @@
       </hgroup>
       <p>{{ .Params.summerAcademy.article }}</p>
 
-      {{- with site.GetPage "/summer-academy" }}
-        <a href="{{ .RelPermalink }}" class="btn btn-primary">
-          Learn More About Summer Music Academy
+      {{ range .Params.summerAcademy.buttons }}
+        <a href="{{ .page }}" class="btn btn-{{ .style }}">
+          {{ .label }}
         </a>
-      {{- else -}}
-        {{- warnf "Broken link. See %s." site.GetPage -}}
-      {{ end -}}
+      {{ end }}
     </section>
 
     <section class="ready" aria-labelledby="ready-title">
@@ -123,19 +108,11 @@
         <h2 id="ready-title">{{ .Params.ready.title }}</h2>
       </hgroup>
       <div>
-        {{- with site.GetPage "/registration" }}
-          <a href="{{ .RelPermalink }}" class="btn btn-primary">Register Now</a>
-        {{- else -}}
-          {{- warnf "Broken link. See %s." site.GetPage -}}
-        {{ end -}}
-
-        {{- with site.GetPage "/schedule" }}
-          <a href="{{ .RelPermalink }}" class="btn btn-outline">
-            View the Schedule
+        {{ range .Params.ready.buttons }}
+          <a href="{{ .page }}" class="btn btn-{{ .style }}">
+            {{ .label }}
           </a>
-        {{- else -}}
-          {{- warnf "Broken link. See %s." site.GetPage -}}
-        {{ end -}}
+        {{ end }}
       </div>
     </section>
   </div>

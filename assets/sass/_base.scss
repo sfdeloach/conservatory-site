@@ -26,7 +26,7 @@ main {
   display: grid;
   grid-template-columns:
     [full-start] 1fr
-    [content-start] min(100ch, 100% - space("lg")) [content-end]
+    [content-start] min(120ch, 100% - space("lg")) [content-end]
     1fr [full-end];
 
   & > * {

@@ -19,11 +19,10 @@
   {{- with $src := .Resources.GetMatch $.resource }}
     {{- $srcSet := slice }}
     {{- $images := slice }}
-    {{/*- range (slice 320 480 640 768 1366 1920) */}}
     {{- range $.widths }}
       {{- if le . $src.Width }}
         {{- $spec := "" }}
-        {{- if $.aspectRatio }}
+        {{- if and $.aspectRatio (le . $src.Height)}}
           {{- $spec = printf "fill %dx%g %s webp q80" . (math.Round (div . (float $.aspectRatio))) $.cropAnchor }}
         {{- else }}
           {{- $spec = printf "resize %dx webp q80" . }}
@@ -45,7 +44,7 @@
         width="{{ $fallback.Width }}"
         height="{{ $fallback.Height }}"
         decoding="async"
-        {{ with $.isLazyLoaded }}loading="lazy"{{ end -}}
+        {{ with $.isLazyLoaded }}loading="lazy"{{ end }}
         {{ with $.hasFetchPriority }}fetchpriority="high"{{ end -}}
       />
     {{ end -}}

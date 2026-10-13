@@ -7,6 +7,13 @@ params:
     title: "The next generation of musicians."
     subtitle: "Trained for the church, the community, and the world — for the glory of God"
     image: "heroImage.jpg"
+    buttons:
+      - label: "Register Now"
+        page: "/registration"
+        style: "primary"
+      - label: "Meet Our Faculty"
+        page: "/faculty"
+        style: "outline"
   story:
     eyebrow: "OUR STORY"
     title: "One of Florida's best-kept secrets"
@@ -22,21 +29,44 @@ params:
         value: "90%"
   studyAreas:
     eyebrow: "AREAS OF STUDY"
-    title: "Year-round private instruction"
+    title: "Year-round Private Instruction"
+    buttons:
+      - label: "Explore Areas of Study"
+        page: "/areas-of-study"
+        style: "primary"
   welcome:
     eyebrow: "FROM THE DEAN"
     title: "Welcome to Saint Andrew’s Conservatory of Music!"
+    buttons:
+      - label: "Contact Us"
+        page: "/contact"
+        style: "primary"
   faculty:
     eyebrow: "OUR FACULTY"
-    title: "A distinguished faculty"
+    title: "A Distinguished Faculty"
     article: "Performing musicians and active churchmen — ninety percent hold the Master of Music, from schools around the world."
+    buttons:
+      - label: "Meet the Faculty"
+        page: "/faculty"
+        style: "primary"
   summerAcademy:
     eyebrow: "SUMMER MUSIC ACADEMY"
-    title: "A summer of ensembles & masterclasses"
+    title: "A Summer of Ensembles & Masterclasses"
     article: "Fantastic ensemble and masterclass opportunities that challenge and inspire students at every level of musical development. Registration opens each spring."
+    buttons:
+      - label: "Learn More"
+        page: "/summer-academy"
+        style: "primary"
   ready:
     eyebrow: "READY TO BEGIN?"
-    title: "Start your journey now"
+    title: "Next Semester's Registration is Open"
+    buttons:
+      - label: "Enroll Now"
+        page: "/registration"
+        style: "primary"
+      - label: "View the Schedule"
+        page: "/schedule"
+        style: "outline"
 ---
 
 > Saint Andrew’s Chapel has always placed a special emphasis on excellent music in the worship of God. We believe we are called to make skillful music to the Lord and to train up excellent musicians. Psalm 33:2-3 tells us to “Sing to Him a new song; play skillfully on the strings…” This calling to excellence drives us as we work toward fulfilling our purpose: “To train the next generation of musicians for the church, the community, and the world, for the glory of God.”
