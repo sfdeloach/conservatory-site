@@ -1,5 +1,5 @@
 {{- with site.GetPage .page }}
   <a href="{{ .RelPermalink }}" class="btn btn-{{ $.style }}">{{ $.label }}</a>
 {{- else }}
-  {{- errorf "cta.html: no page found at %q (button %q)" .page .label }}
+  {{- warnf "cta.html: no page found at %q (button %q)" .page .label }}
 {{- end }}

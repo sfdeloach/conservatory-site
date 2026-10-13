@@ -1,7 +1,7 @@
 {{- with . }}
   <div class="cta-group">
-    {{- range . -}}
-      {{ partial "cta.html" . -}}
-    {{- end -}}
+    {{- range . }}
+      {{ partial "cta.html" . }}
+    {{- end }}
   </div>
 {{- end }}

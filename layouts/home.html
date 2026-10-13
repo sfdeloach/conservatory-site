@@ -6,9 +6,7 @@
           <p>{{ .Params.hero.eyebrow }}</p>
           <h1 id="hero-title">{{ .Params.hero.title }}</h1>
           <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
-          <div>
-            {{ partial "cta_group.html" .Params.hero.buttons }}
-          </div>
+          {{ partial "cta_group.html" .Params.hero.buttons }}
         </div>
         {{ partial "responsive_image.html"
           (dict
@@ -49,7 +47,6 @@
       </hgroup>
       <!-- TODO: Loop through areas of study -->
       {{ partial "cta_group.html" .Params.studyAreas.buttons }}
-
     </section>
 
     <section class="welcome" aria-labelledby="welcome-title">
@@ -58,7 +55,6 @@
         <h2 id="welcome-title">{{ .Params.welcome.title }}</h2>
       </hgroup>
       {{ .Content }}
-
       {{ partial "cta_group.html" .Params.welcome.buttons }}
     </section>
 
@@ -68,7 +64,6 @@
         <h2 id="faculty-title">{{ .Params.faculty.title }}</h2>
       </hgroup>
       <p>{{ .Params.faculty.article }}</p>
-
       {{ partial "cta_group.html" .Params.faculty.buttons }}
     </section>
 
@@ -78,7 +73,6 @@
         <h2 id="summer-academy-title">{{ .Params.summerAcademy.title }}</h2>
       </hgroup>
       <p>{{ .Params.summerAcademy.article }}</p>
-
       {{ partial "cta_group.html" .Params.summerAcademy.buttons }}
     </section>
 
@@ -87,9 +81,7 @@
         <p>{{ .Params.ready.eyebrow }}</p>
         <h2 id="ready-title">{{ .Params.ready.title }}</h2>
       </hgroup>
-      <div>
-        {{ partial "cta_group.html" .Params.ready.buttons }}
-      </div>
+      {{ partial "cta_group.html" .Params.ready.buttons }}
     </section>
   </div>
 {{ end -}}
