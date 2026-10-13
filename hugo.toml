@@ -1,7 +1,7 @@
 baseURL = 'https://saintandrewsconservatory.org/'
 locale = 'en-us'
 title = 'Saint Andrew’s Conservatory of Music'
-disableKinds = ['taxonomy', 'term']
+disableKinds = ['term']
 
 [params]
   [params.contact]
@@ -10,3 +10,6 @@ disableKinds = ['taxonomy', 'term']
   phoneHref = "+14073281139"
   phoneFormat = "(407) 328-1139"
   email = "mconservatory@sachapel.com"
+
+[taxonomies]
+  studyAreas = "areas of study"
