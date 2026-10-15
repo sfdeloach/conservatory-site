@@ -3,11 +3,11 @@ title: Sharon Chang
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "violin"
+  - "viola"
 params:
   postNominal: "MM"
-  studios:
-    - "violin"
-    - "viola"
 ---
 
 Hailed for her “instantaneously arresting… sweet, clear, vital” sound (The New York Sun), violinist Sharon Chang maintains an active career as a chamber musician, orchestral musician and teacher. Mrs. Chang has won numerous first-prize awards in competition and has had the privilege of performing as a soloist with orchestras including the North Suburban Symphony, Waukegan Symphony, and Camerata Chicago.

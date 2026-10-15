@@ -3,10 +3,10 @@ title: Elise Jimenez
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "cello"
 params:
   postNominal: "MM"
-  studios:
-    - "cello"
 ---
 
 Cellist Elise Jimenez first began her studies at the age of 11 with the late cellist Susan Goldmann. She quickly found herself collaborating with many groups throughout Central Florida as a chamber musician, orchestral player, and in various modern ensembles at her schools of study and as a freelance musician.

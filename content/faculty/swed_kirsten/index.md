@@ -3,9 +3,8 @@ title: Kirsten Swed
 layout: "page_faculty_bio"
 weight: 0
 draft: false
-params:
-  studios:
-    - "piano"
+studios:
+  - "piano"
 ---
 
 Originally from Northern Illinois, Kirsten Swed has over a decade of experience as a church pianist, choral accompanist, and piano teacher.

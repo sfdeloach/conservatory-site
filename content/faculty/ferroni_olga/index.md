@@ -3,10 +3,10 @@ title: Olga Ferroni
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "violin"
 params:
   postNominal: "MM"
-  studios:
-    - "violin"
 ---
 
 Olga Ferroni, M.M., is an acclaimed violinist, producer, and the Creative Director of Kalinka Entertainment. With a career rooted in the rigorous traditions of Eastern European classical training, Olga holds a Master’s degree in Violin Performance from G. Musicescu Conservatory in Kishinev, Moldova, and has served as a core musician with the Orlando Philharmonic Orchestra since 2001.

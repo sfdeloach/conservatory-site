@@ -3,10 +3,10 @@ title: Tammy Davis
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "piano"
 params:
   postNominal: "MM"
-  studios:
-    - "piano"
 ---
 
 Tammy Davis has taught students of all ages and skill levels through private lessons, group keyboard classes, and early childhood music programs in both Alabama and Florida. Her teaching experience includes community music school programs, college-affiliated music programs, and her own independent home studio.

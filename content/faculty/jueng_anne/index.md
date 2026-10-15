@@ -3,10 +3,10 @@ title: Anne Jueng
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "piano"
 params:
   postNominal: "MM"
-  studios:
-    - "piano"
 ---
 
 Anne Jeung started lessons at the age of seven and has never stopped learning or playing the piano since. She obtained her bachelor’s degree in Piano Performance at Queens College, City University of New York; and a Master’s Degree in Piano Performance at the Ohio State University.

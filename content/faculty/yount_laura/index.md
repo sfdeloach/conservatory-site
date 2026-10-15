@@ -3,10 +3,10 @@ title: Laura Yount
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "voice"
 params:
   postNominal: "MM"
-  studios:
-    - "voice"
 ---
 
 Currently specializing in college and competition audition preparation and advanced vocal technique.

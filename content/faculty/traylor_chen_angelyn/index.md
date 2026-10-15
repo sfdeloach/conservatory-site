@@ -3,10 +3,10 @@ title: Angelyn Traylor Chen
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "piano"
 params:
   postNominal: "MM"
-  studios:
-    - "piano"
 ---
 
 Angelyn Traylor Chen is a pianist and music educator in the Orlando area. She has worked as a company pianist for Orlando Ballet since 2019, and, in addition to providing music for daily classes, she regularly performs with the company as both a soloist and orchestral pianist. Angelyn is an active collaborative pianist, performing chamber music and playing for a number of arts organizations and schools throughout central Florida.

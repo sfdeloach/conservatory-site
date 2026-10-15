@@ -3,11 +3,11 @@ title: Terry Yount
 layout: "page_faculty_bio"
 weight: 0
 draft: false
+studios:
+  - "organ"
+  - "harpsichord"
 params:
   postNominal: "DMA"
-  studios:
-    - "organ"
-    - "harpsichord"
 ---
 
 Dr. Terry Yount earned his bachelor’s of music at the University of Alabama, and both his master’s of music and DMA at the Eastman School of Music. Emeritus both Chief Musician at Saint Andrew’s Chapel and Dean of Saint Andrew’s Conservatory, Dr. Yount teaches organ, piano, and harpsichord.

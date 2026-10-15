@@ -3,9 +3,8 @@ title: Cynthia Jimenez
 layout: "page_faculty_bio"
 weight: 0
 draft: false
-params:
-  studios:
-    - "piano"
+studios:
+  - "piano"
 ---
 
 Cynthia Jimenez has taught piano since 1994 in her home studio. She has a Bachelor of Arts degree in Music from the University of Central Florida, under the tutelage of Laurent Boukobza.
