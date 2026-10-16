@@ -1,7 +1,6 @@
 baseURL = 'https://saintandrewsconservatory.org/'
 locale = 'en-us'
 title = 'Saint Andrew’s Conservatory of Music'
-disableKinds = ['term']
 
 [params]
   [params.contact]

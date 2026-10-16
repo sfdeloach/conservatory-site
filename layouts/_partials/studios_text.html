@@ -1,4 +1,7 @@
-{{- with .Params.studios -}}
-  {{- $studios := apply . "strings.FirstUpper" "." -}}
-  <div class="studio-list">{{- delimit $studios ", " " and " -}}</div>
+{{- with .GetTerms "studios" -}}
+  <div class="studio-list">
+    {{ range . }}
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    {{ end }}
+  </div>
 {{- end -}}
