@@ -1,6 +1,7 @@
 @use "./tokens" as *;
 
-.staff-card-list {
+.staff-card-list,
+.studio-card-list {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,7 +14,8 @@
   }
 }
 
-.staff-card {
+.staff-card,
+.studio-card {
   border: 1px solid color("background-header");
   padding: space("sm");
   border-radius: radius("full") radius("full") 0 0;
@@ -30,7 +32,8 @@
       transform 0.3s ease;
   }
 
-  .headshot {
+  .headshot,
+  .studioshot {
     box-shadow: none;
     margin-bottom: 0;
   }
@@ -40,7 +43,8 @@
   }
 }
 
-.headshot {
+.headshot,
+.studioshot {
   width: min(100%, 320px);
   height: auto;
   aspect-ratio: 1;

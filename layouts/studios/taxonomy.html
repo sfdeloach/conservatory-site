@@ -1,4 +1,10 @@
 {{- define "main" }}
-  <h1>{{ .Title }}</h1>
+  {{ partial "page_header" . }}
   {{- .Content -}}
+  <h2>Explore our Studios</h2>
+  <ul class="studio-card-list">
+    {{- range .Pages -}}
+      {{ partial "studio_card" . }}
+    {{- end -}}
+  </ul>
 {{ end -}}

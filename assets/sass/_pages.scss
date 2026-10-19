@@ -1,0 +1,32 @@
+@use "./tokens" as *;
+
+.page-header {
+  position: relative;
+  overflow: hidden;
+  height: space("kilo");
+
+  h1 {
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    background: color("background-page-header");
+    color: color("text-light");
+    font-size: font-size("xxl");
+  }
+
+  img {
+    z-index: -10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(0.75);
+  }
+
+  @media (width >= breakpoint("sm")) {
+    height: space("mega");
+  }
+}
