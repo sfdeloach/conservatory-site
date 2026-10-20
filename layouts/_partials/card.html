@@ -1,0 +1,20 @@
+<li class="{{ .listClass }}">
+  <a href="{{- .context.RelPermalink -}}">
+    {{ partial "responsive_image.html"
+      (dict
+      "context" .context
+      "resource" .imageResource
+      "sizes" "320px"
+      "aspectRatio" 1.0
+      "widths" (slice 320 640)
+      "cssClass" .imageClass
+      "cropAnchor" .cropAnchor
+      "isLazyLoaded" true
+      )
+    }}
+    <h2>{{- .context.LinkTitle -}}</h2>
+  </a>
+  {{ if eq .listClass "staff-card" }}
+    {{- partial "studios_text.html" .context -}}
+  {{ end }}
+</li>

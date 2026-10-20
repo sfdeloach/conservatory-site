@@ -1,9 +1,17 @@
-{{- define "main" }}
+{{- define "main" -}}
   {{ partial "page_header" . }}
   {{- .Content -}}
   <ul class="staff-card-list">
     {{- range .Pages -}}
-      {{ partial "faculty_card" . }}
+      {{ partial "card"
+        (dict
+        "context" .
+        "listClass" "staff-card"
+        "imageResource" "headshot.*"
+        "imageClass" "headshot"
+        "cropAnchor" "Top"
+        )
+      }}
     {{- end -}}
   </ul>
-{{ end -}}
+{{- end -}}

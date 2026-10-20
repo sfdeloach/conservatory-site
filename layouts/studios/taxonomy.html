@@ -4,7 +4,15 @@
   <h2>Explore our Studios</h2>
   <ul class="studio-card-list">
     {{- range .Pages -}}
-      {{ partial "studio_card" . }}
+      {{ partial "card"
+        (dict
+        "context" .
+        "listClass" "studio-card"
+        "imageResource" "instrument.*"
+        "imageClass" "studioshot"
+        "cropAnchor" "Center"
+        )
+      }}
     {{- end -}}
   </ul>
 {{ end -}}
