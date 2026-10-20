@@ -1,6 +1,8 @@
 ---
 title: Summer Academy
-weight: 50
+menus:
+  main:
+    weight: 50
 draft: false
 params:
   image: "summer-academy.jpg"

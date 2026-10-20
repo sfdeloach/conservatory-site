@@ -61,4 +61,12 @@
   font-family: font("serif"), serif;
   font-size: font-size("lg");
   text-align: center;
+
+  li {
+    display: inline;
+
+    & + li::before {
+      content: " · ";
+    }
+  }
 }

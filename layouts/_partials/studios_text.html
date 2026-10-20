@@ -1,7 +1,9 @@
 {{- with .GetTerms "studios" -}}
-  <div class="studio-list">
+  <ul class="studio-list">
     {{ range . }}
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      </li>
     {{ end }}
-  </div>
+  </ul>
 {{- end -}}

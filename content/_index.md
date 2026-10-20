@@ -32,8 +32,8 @@ params:
     eyebrow: "AREAS OF STUDY"
     title: "Year-round Private Instruction"
     buttons:
-      - label: "Explore Areas of Study"
-        page: "/areas-of-study"
+      - label: "Explore our Studios"
+        page: "/studios"
         style: "primary"
   welcome:
     eyebrow: "FROM THE DEAN"

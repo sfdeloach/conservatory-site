@@ -1,5 +1,8 @@
 ---
 title: Studios
+menus:
+  main:
+    weight: 10
 draft: false
 params:
   image: "studios.jpg"

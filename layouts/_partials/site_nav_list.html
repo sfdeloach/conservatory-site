@@ -1,11 +1,11 @@
 <ul>
-  {{- range .Site.Home.Pages -}}
+  {{- range .Site.Menus.main -}}
     <li>
       <a
-        {{ if $.Eq . }}aria-current="page"{{- end }}
-        href="{{ .RelPermalink }}"
+        {{ if $.IsMenuCurrent "main" . }}aria-current="page"{{- end }}
+        href="{{ .URL }}"
       >
-        {{- .LinkTitle }}
+        {{- .Name }}
       </a>
     </li>
   {{- end -}}
