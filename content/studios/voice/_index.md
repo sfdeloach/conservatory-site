@@ -1,5 +1,6 @@
 ---
 title: Voice
+weight: 60
 draft: false
 params:
   image: "instrument.jpg"

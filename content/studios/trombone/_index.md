@@ -1,5 +1,6 @@
 ---
 title: Trombone
+weight: 70
 draft: false
 params:
   image: "instrument.jpg"

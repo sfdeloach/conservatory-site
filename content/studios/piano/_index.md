@@ -1,6 +1,7 @@
 ---
 title: Piano
 draft: false
+weight: 10
 params:
   image: "instrument.jpg"
 ---

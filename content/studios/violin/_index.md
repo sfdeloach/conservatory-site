@@ -1,5 +1,6 @@
 ---
 title: Violin
+weight: 20
 draft: false
 params:
   image: "instrument.jpg"

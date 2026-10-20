@@ -1,5 +1,6 @@
 ---
 title: Harpsichord
+weight: 80
 draft: false
 params:
   image: "instrument.jpg"

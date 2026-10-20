@@ -1,5 +1,6 @@
 ---
 title: Cello
+weight: 30
 draft: false
 params:
   image: "instrument.jpg"

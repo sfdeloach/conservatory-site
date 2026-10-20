@@ -1,5 +1,6 @@
 ---
 title: Organ
+weight: 50
 draft: false
 params:
   image: "instrument.jpg"
