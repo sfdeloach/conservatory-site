@@ -1,4 +1,15 @@
 <div class="page-header">
+  {{ with .Params.image }}
+    {{ partial "responsive_image.html"
+      (dict
+      "context" $
+      "resource" .
+      "sizes" "100vw"
+      "widths" (slice 320 640 960)
+      "altText" ""
+      "hasFetchPriority" true
+      )
+    }}
+  {{ end }}
   <h1>{{ .Title }}</h1>
-  <img src="{{ .Params.image }}" />
 </div>

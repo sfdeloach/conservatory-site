@@ -2,6 +2,8 @@
 title: Summer Academy
 weight: 50
 draft: false
+params:
+  image: "summer-academy.jpg"
 ---
 
 Summer Music Camp and Academy at Saint Andrew’s Conservatory are unique opportunities to combine fun with musical exploration. Students have the chance to participate in music ensembles and refine their musical skills. They are mentored and taught by caring instructors who are exceptional teachers and performers on various instruments. Participants learn about music in a fun environment where God is honored and glorified.
