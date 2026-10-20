@@ -12,3 +12,7 @@ title = 'Saint Andrew’s Conservatory of Music'
 
 [taxonomies]
   studio = "studios"
+
+[[cascade]]
+  [cascade.build]
+    publishResources = false
