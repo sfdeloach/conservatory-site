@@ -22,6 +22,10 @@
   &:focus-within {
     box-shadow: shadow("sm");
     transform: translateY(-1 * space("xxs"));
+
+    .card-image {
+      filter: grayscale(33%);
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -39,11 +43,6 @@
     margin-bottom: 0;
     filter: grayscale(50%);
     transition: filter 0.3s ease;
-
-    &:hover,
-    &:focus-within {
-      filter: grayscale(33%);
-    }
   }
 
   h3 {
