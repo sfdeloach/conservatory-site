@@ -3,27 +3,25 @@
 .page-header {
   display: grid;
   grid-column: full;
-  max-height: space("mega");
+  margin-bottom: space("xl");
 
   > * {
     grid-area: 1 / 1;
   }
 
-  img {
-    z-index: 1;
+  .page-header-image {
     width: 100%;
-    max-height: space("mega");
+    height: clamp(space("xxxl"), 35vw, space("mega"));
     object-fit: cover;
-    object-position: center;
     filter: grayscale(0.75);
   }
 
   h1 {
-    z-index: 2;
-    width: 100%;
+    z-index: 1;
+    align-self: center;
+    padding-block: space("md");
     background: color("background-page-header");
     color: color("text-light");
-    align-self: center;
     font-size: clamp(
       font-size("lg"),
       font-size("display") + font-size("xl"),

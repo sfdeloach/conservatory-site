@@ -1,15 +1,14 @@
 {{- define "main" }}
   {{ partial "page_header.html" . }}
   {{- .Content -}}
-  <h2>{{ .Params.cardHeading }}</h2>
   <ul class="card-list">
     {{- range .Pages -}}
       {{ partial "card.html"
         (dict
         "context" .
-        "listClass" "studio-card"
-        "imageResource" "instrument.*"
-        "imageClass" "studioshot"
+        "listClass" "card"
+        "imageResource" .Params.image
+        "imageClass" "card-image"
         "cropAnchor" "Center"
         )
       }}

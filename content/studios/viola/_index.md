@@ -1,6 +1,6 @@
 ---
 title: Viola
-weight: 40
+weight: 30
 draft: false
 params:
   image: "instrument.jpg"

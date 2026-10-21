@@ -14,7 +14,5 @@
     }}
     <h2>{{- .context.LinkTitle -}}</h2>
   </a>
-  {{ if eq .listClass "staff-card" }}
-    {{- partial "studios_text.html" .context -}}
-  {{ end }}
+  {{- partial "studios_text.html" .context -}}
 </li>

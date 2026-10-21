@@ -13,8 +13,7 @@
   }
 }
 
-.staff-card,
-.studio-card {
+.card {
   border: 1px solid color("background-header");
   padding: space("sm");
   border-radius: radius("full") radius("full") 0 0;
@@ -31,9 +30,9 @@
       transform 0.3s ease;
   }
 
-  .headshot,
-  .studioshot {
+  .card-image {
     box-shadow: none;
+    border-radius: radius("full") radius("full") 0 0;
     margin-bottom: 0;
   }
 
@@ -42,14 +41,13 @@
   }
 }
 
-.headshot,
-.studioshot {
+.card-image {
   width: min(100%, 320px);
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
   box-shadow: shadow("md");
-  border-radius: radius("full") radius("full") 0 0;
+  border-radius: radius("sm");
   margin-bottom: space("lg");
   filter: grayscale(50%);
 }

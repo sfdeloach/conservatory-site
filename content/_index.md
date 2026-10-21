@@ -29,7 +29,7 @@ params:
       - heading: "Hold the MM"
         value: "90%"
   studyAreas:
-    eyebrow: "AREAS OF STUDY"
+    eyebrow: "STUDIO OFFERINGS"
     title: "Year-round Private Instruction"
     buttons:
       - label: "Explore our Studios"
