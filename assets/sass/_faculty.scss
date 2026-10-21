@@ -1,7 +1,6 @@
 @use "./tokens" as *;
 
-.staff-card-list,
-.studio-card-list {
+.card-list {
   display: flex;
   justify-content: center;
   flex-direction: column;

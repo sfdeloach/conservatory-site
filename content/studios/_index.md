@@ -6,6 +6,7 @@ menus:
 draft: false
 params:
   image: "studios.jpg"
+  cardHeading: "Explore our Studios"
 ---
 
 ## Year-round instruction in several disciplines — for students of every age and ability.

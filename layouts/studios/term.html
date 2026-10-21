@@ -1,7 +1,7 @@
 {{- define "main" -}}
-  {{ partial "page_header" . }}
+  {{ partial "page_header.html" . }}
   {{- .Content -}}
-  <ul class="staff-card-list">
+  <ul class="card-list">
     {{- range .Pages -}}
       {{ partial "card"
         (dict
