@@ -1,11 +1,3 @@
-FROM hugomods/hugo:debian-dart-sass-go-0.165.0
+FROM nginx:1.30.6-alpine
 
-WORKDIR /home/conservatory-site
-
-COPY assets/ assets/.
-COPY content/ content/.
-COPY layouts/ layouts/.
-COPY static/ static/.
-COPY hugo.toml .
-
-RUN apt-get update && hugo --minify
+COPY ./public /usr/share/nginx/html
