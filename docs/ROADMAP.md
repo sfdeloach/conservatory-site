@@ -6,6 +6,21 @@ Complete, deploy, and maintain the conservatory's static website with a reliable
 
 The production domain is `saintandrewsconservatory.org`. Do not change its DNS or replace the existing production site without explicit human approval.
 
+## Status
+
+| Phase | Title                                                 | Status      |
+| ----- | ----------------------------------------------------- | ----------- |
+| 0     | Repository discovery and documentation                | Not started |
+| 1     | Production hosting and CI/CD                          | Not started |
+| 2     | Complete the homepage                                 | Not started |
+| 3     | Content migration, typography, and Markdown rendering | Not started |
+| 4     | Registration and payment workflows                    | Not started |
+| 5     | Accessibility, quality assurance, and SEO             | Not started |
+| 6     | Launch readiness and domain cutover                   | Not started |
+| 7     | Ongoing maintenance and handoff                       | Not started |
+
+Status values: Not started, In progress, Done. Update this table when a phase changes state.
+
 ## Working principles
 
 - Inspect the existing repository and understand its architecture before making changes.
@@ -25,11 +40,13 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 
 - Inspect the repository structure, Hugo version, configuration, theme, templates, content files, assets, dependencies, and existing build commands.
 - Identify existing tests, CI workflows, deployment configuration, and any unfinished implementation.
-- Preserve the current roadmap in `docs/ROADMAP.md`.
+- Document the toolchain: Hugo (extended) version, Dart Sass (required by the `dartsass` transpiler in `layouts/baseof.html`), Node and Prettier with the Go-template plugin, and the Makefile targets.
+- Inventory the existing live site at `saintandrewsconservatory.org`: its pages, URLs, content, forms, and external links. Record which content has not yet been migrated to this project. This inventory feeds content migration (Phase 3), registration and payment (Phase 4), and redirects (Phase 6).
+- Remove the experimental `Dockerfile` in a small, separate change and record the decision.
 - Create a root `CLAUDE.md` containing project architecture, coding conventions, commands, constraints, and links to relevant documentation.
 - Write a conventional root `README.md` for developers and maintainers.
-- Create `docs/DEPLOYMENT.md` for hosting, CI/CD, DNS cutover, and rollback procedures.
-- Create `docs/CONTENT-GUIDE.md` for recurring content updates, including registration and payment links.
+- Create a skeleton `docs/DEPLOYMENT.md` for hosting, CI/CD, DNS cutover, and rollback procedures. It is completed in Phases 1, 6, and 7, after the hosting decision.
+- Create a skeleton `docs/CONTENT-GUIDE.md` for recurring content updates, including registration and payment links. It is completed in Phases 4 and 7.
 - Document known limitations, outstanding decisions, and any existing technical debt.
 
 ### Acceptance criteria
@@ -38,8 +55,17 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 - A new maintainer can run the site locally using the documented instructions.
 - Build and validation commands are documented and verified.
 - Existing project behavior and user changes are preserved.
+- The live-site inventory exists, and unmigrated content is listed.
 
 ## 1. Production hosting and CI/CD
+
+### 1.0 Establish baseline validation
+
+- Make the production build fail on Hugo warnings and errors.
+- Add an internal link check against the built site, and record the tool chosen and why.
+- Expose both checks through a single documented command (for example, a Makefile target) so local runs and CI behave the same way.
+
+Later phases extend these checks rather than create new, separate ones.
 
 ### 1.1 Evaluate hosting options
 
@@ -57,7 +83,7 @@ Record the decision and rationale before implementing the production workflow.
 
 ### 1.2 Implement the deployment pipeline
 
-- Pin the Hugo version and required dependencies.
+- Pin the Hugo (extended) and Dart Sass versions, and any other required dependencies.
 - Establish a reproducible production build.
 - Configure GitHub Actions or the selected host's equivalent deployment workflow.
 - Run validation checks before deployment.
@@ -86,6 +112,7 @@ Record the decision and rationale before implementing the production workflow.
 ### Tasks
 
 - Style the story statistics as responsive large numbers with smaller labels.
+- Complete the areas-of-study section by looping through the studios (see the TODO in `layouts/home.html`).
 - Complete the faculty preview using existing faculty card markup and responsive_image.html.
 - Select featured faculty explicitly using front matter where practical.
 - Complete the Summer Academy and "Ready" full-width bands using the existing layout system.
@@ -100,10 +127,12 @@ Record the decision and rationale before implementing the production workflow.
 - Images have appropriate alternative text and dimensions.
 - The page remains usable with long text and reduced-motion preferences enabled.
 
-## 3. Content-page typography and Markdown rendering
+## 3. Content migration, typography, and Markdown rendering
 
 ### Tasks
 
+- Migrate the remaining content from the existing live site, using the Phase 0 inventory.
+- Review content accuracy with conservatory staff, including dates, faculty, programs, and contact details. For example, the current Summer Academy dates (July 2026) have already passed.
 - Introduce a consistent .prose wrapper for Markdown content.
 - Establish comfortable reading widths, generally around 65–75 characters per line.
 - Style headings, paragraphs, lists, links, blockquotes, tables, code, images, and captions.
@@ -115,6 +144,7 @@ Record the decision and rationale before implementing the production workflow.
 
 ### Acceptance criteria
 
+- All content from the old site that is still needed has been migrated, and staff have reviewed it.
 - All content pages have consistent, readable typography.
 - Internal links resolve correctly.
 - Broken-link checks run as part of the validation workflow.
@@ -131,7 +161,12 @@ Record the decision and rationale before implementing the production workflow.
 - Make routine URL updates possible without modifying templates or application logic wherever practical.
 - Avoid duplicating the same destination across multiple files.
 
-### 4.2 Document the update process
+### 4.2 Build the Registration and Payment pages
+
+- Write the content for `content/registration/index.md` and `content/payment/index.md`, which currently contain front matter only.
+- Present each active destination clearly, with the program, semester or year, and what the visitor should expect next.
+
+### 4.3 Document the update process
 
 - Explain how to replace the active semester's registration form.
 - Explain how to update the annual Summer Academy form.
@@ -139,7 +174,7 @@ Record the decision and rationale before implementing the production workflow.
 - Document how outdated forms and links are retired or archived.
 - Include a checklist for reviewing and publishing registration changes.
 
-### 4.3 Validate the user journey
+### 4.4 Validate the user journey
 
 - Verify the active form and checkout destinations.
 - Test links and any embedded forms on mobile and desktop.
@@ -203,10 +238,11 @@ This phase begins only after hosting, content, and validation are ready.
 
 ### Tasks
 
-- Inventory existing public URLs and identify redirects that may be required.
+- Finalize the redirect map from the Phase 0 inventory of the existing site's URLs.
 - Verify all critical pages, forms, and payment destinations.
 - Confirm the production build and deployment pipeline are working.
 - Document the current DNS configuration before making changes.
+- Preserve non-web DNS records (MX, SPF/DKIM/DMARC TXT, and domain-verification records) so email and third-party verifications keep working through the cutover.
 - Prepare the DNS changes and verify HTTPS configuration.
 - Obtain explicit approval before changing the production domain.
 - Validate the live domain after cutover.
@@ -239,6 +275,19 @@ This phase begins only after hosting, content, and validation are ready.
 - Ownership of recurring updates is clear.
 - The project has a documented process for dependencies, troubleshooting, and recovery.
 
+## Open decisions
+
+Record each decision here, with its rationale, once it is made.
+
+| Decision                                                 | Phase | Status | Outcome                         |
+| -------------------------------------------------------- | ----- | ------ | ------------------------------- |
+| Experimental `Dockerfile`                                | 0     | Made   | Remove; not part of the project |
+| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Open   |                                 |
+| Internal link-check tool                                 | 1     | Open   |                                 |
+| Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                 |
+| GitHub-based editing or a CMS                            | 7     | Open   |                                 |
+| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                 |
+
 ## Execution protocol
 
 For each task:
@@ -250,5 +299,6 @@ For each task:
 5. Review the diff for regressions, unrelated changes, and accidental configuration changes.
 6. Summarize what changed, what was verified, what remains unresolved, and any manual steps required.
 7. Update this roadmap and other documentation when the task is complete.
+8. At the end of each phase, stop for human review before starting the next phase.
 
 Do not mark a task complete merely because code has been written. Completion requires the applicable acceptance criteria to be satisfied or any remaining limitations to be explicitly documented.
