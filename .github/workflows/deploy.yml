@@ -54,6 +54,9 @@ jobs:
 
       - name: Build for Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        # Exposed to templates as site.Params.commit (the build-commit meta tag).
+        env:
+          HUGO_PARAMS_COMMIT: ${{ github.sha }}
         run: make build HUGO_ARGS="--baseURL ${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload Pages artifact

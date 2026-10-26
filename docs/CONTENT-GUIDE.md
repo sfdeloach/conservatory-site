@@ -92,4 +92,11 @@ _To be completed in Phase 4._ This section will describe where each registration
 
 ## Publishing changes
 
-_To be completed in Phase 1,_ once hosting and automated deployment are in place.
+Every change committed to the `main` branch is checked and published automatically.
+
+1. On GitHub, open the file you want to change, and click the pencil icon (**Edit this file**).
+2. Make your edit, then click **Commit changes…**. Write a short description, such as "Update fall schedule", and commit directly to `main`.
+3. Open the **Actions** tab. Within a couple of minutes, the newest "Build and deploy" run shows either:
+   - **a green tick**: the change is live. Check the page on the website.
+   - **a red X**: the change was **not** published, because the automatic checks found a problem, such as a broken link. The website still shows the previous version. Fix the problem, or ask the site maintainer for help.
+4. If a published change turns out to be wrong, edit it again, or ask the maintainer to revert it. See "Rollback and recovery" in [DEPLOYMENT.md](DEPLOYMENT.md).

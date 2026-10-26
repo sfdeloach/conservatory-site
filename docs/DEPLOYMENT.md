@@ -105,11 +105,61 @@ In the GitHub repository, go to **Settings → Pages → Build and deployment**,
 
 ## Publishing a change
 
-_To be completed in Phase 1.3._ Give the step-by-step Git workflow for publishing an approved change.
+1. Make the change on your computer, and preview it with `hugo server`.
+2. Run `make check`, and fix anything it reports.
+3. Commit the change. Then either:
+   - push to `main` (`git push`), or
+   - push a branch, open a pull request, wait for its check to pass, and merge it. Merging counts as a push to `main`.
+4. Open the repository's **Actions** tab and watch the "Build and deploy" run. A green tick means the change is live, usually within two minutes.
+5. Confirm that the live site is running your commit (see [Which commit is live?](#which-commit-is-live)), and look over the pages you changed.
+
+Small text edits can also be made in GitHub's web editor and committed directly to `main`. The same checks run, and a failing change is not published.
+
+### Which commit is live?
+
+Every page built by CI carries the commit it was built from:
+
+```sh
+curl -s https://sfdeloach.github.io/conservatory-site/ | grep -o 'build-commit[^>]*'
+```
+
+In a browser, view the page source and search for `build-commit`. Compare the value with the latest commit on `main`. Local builds don't include this tag.
 
 ## Rollback and recovery
 
-_To be completed in Phase 1.3._ Explain how to recognize a bad deployment and how to restore the previous release.
+### Spotting a problem
+
+- **A red X in the Actions tab**, or a failure email from GitHub. The checks or the build failed, so **nothing was published**, and the live site still shows the last good release.
+- **The live site looks wrong** even though the run succeeded. For example, broken styling, missing text, or a wrong link that the checks can't detect.
+- **`build-commit` doesn't match the latest commit on `main`.** A deployment failed, or is still in progress.
+
+### When a run failed
+
+Nothing needs to be rolled back. Read the failed step's log in the Actions tab, then fix the problem and push again, or revert the commit (below).
+
+### When a bad release is live
+
+Use one of these methods.
+
+**1. Revert the commit (preferred).** This permanently undoes the change and keeps the history clear.
+
+```sh
+git revert <bad-commit-sha>   # creates a new commit that undoes it
+git push
+```
+
+In GitHub's web interface, a merged pull request has a **Revert** button. It opens a new pull request; merge that. Either way, the normal workflow checks and deploys the revert.
+
+**2. Redeploy an earlier release (fastest).** This doesn't change `main`.
+
+1. In the **Actions** tab, open the last good "Build and deploy" run for `main`.
+2. Click **Re-run all jobs**. The run rebuilds and deploys that run's commit.
+3. Confirm that `build-commit` shows the older commit.
+4. **Follow up with a revert or a fix.** The next push to `main` deploys the latest `main` again, including the bad change, unless it has been reverted.
+
+### Recovery test results
+
+_Recorded after the Phase 1.3 rehearsal._
 
 ## DNS cutover
 
