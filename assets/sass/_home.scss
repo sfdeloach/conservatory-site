@@ -82,4 +82,46 @@
       }
     }
   }
+
+  .story {
+    dl {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: space("lg") space("md");
+      margin-block: space("lg") 0;
+
+      @media (width >= breakpoint("md")) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      // Number above label visually; DOM order stays term → value.
+      div {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end; // top-align numbers when labels wrap
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    dd {
+      margin: 0;
+      color: color("primary-dark");
+      font-family: font("serif"), serif;
+      font-size: clamp(
+        font-size("xl"),
+        font-size("display") + font-size("lg"),
+        font-size("xxl")
+      );
+      font-variant-numeric: lining-nums;
+      line-height: 1;
+    }
+
+    dt {
+      margin-top: space("xs");
+      color: color("text-dark-muted");
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+    }
+  }
 }
