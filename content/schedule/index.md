@@ -7,4 +7,3 @@ draft: false
 params:
   image: "schedule.jpg"
 ---
-[test](/does-not-exist/)
