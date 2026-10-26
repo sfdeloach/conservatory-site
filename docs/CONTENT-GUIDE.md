@@ -37,6 +37,8 @@ The Dean's letter is the Markdown text below the front matter.
 
 The studio cards in "Studio Offerings" come from `content/studios/` automatically, in `weight` order.
 
+The photo behind the Summer Academy section is the Summer Academy page's banner image (`content/summer-academy/`, `params.image`). Replacing that image changes both.
+
 ### Featured faculty
 
 The faculty shown on the homepage are listed under `faculty.featured`, as paths to their pages. They appear in the order listed. Four fit on one row on a computer screen.

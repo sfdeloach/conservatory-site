@@ -36,7 +36,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - Top-level pages (`registration`, `payment`, `schedule`, `contact`, `summer-academy`) get into the main navigation through `menus.main.weight` and use `params.image`.
 - **Layouts** (`layouts/`):
   - `baseof.html` is the shell: Sass pipeline, fingerprinted CSS and JS, font preload.
-  - `home.html` is the homepage.
+  - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
   - `page.html` and `section.html` are generic. `section.html` renders a card list of child pages.
   - `page_faculty_bio.html` is the faculty bio layout.
   - `studios/taxonomy.html` and `studios/term.html` render the studio pages.
@@ -74,7 +74,6 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - The old site's contact form has no static-site replacement yet.
 - The student handbook PDF is hosted only on the old WordPress site.
 - The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed.
-- The four featured faculty in `content/_index.md` (`faculty.featured`) are placeholder picks, one per studio area, awaiting staff confirmation (Phase 3 content review).
 - Every faculty member has `weight: 0`, so the faculty list sorts by title, which is the first name. The old site sorted by last name.
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 

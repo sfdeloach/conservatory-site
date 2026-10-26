@@ -149,4 +149,77 @@
     margin-bottom: 0;
     font-size: font-size("std");
   }
+
+  // Full-width bands: same subgrid pattern as the hero, light text throughout.
+  .band {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-column: full;
+    grid-template-columns: subgrid;
+    color: color("text-light");
+
+    .content {
+      display: grid;
+      grid-column: content;
+      justify-items: center;
+      gap: space("md");
+      padding-block: space("xl");
+    }
+
+    h2 {
+      color: color("text-light");
+    }
+
+    p {
+      max-width: 60ch;
+      text-align: center;
+    }
+
+    a:focus-visible {
+      outline-color: color("text-light");
+    }
+  }
+
+  .summer-academy {
+    background: color("background-footer");
+
+    .band-image {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+    }
+  }
+
+  .ready {
+    margin-bottom: 0;
+    background: color("primary");
+
+    .btn-primary {
+      color: color("primary-dark");
+      background-color: color("text-light");
+      border-color: color("text-light");
+
+      &:hover,
+      &:focus-visible {
+        color: color("primary-dark");
+        background-color: color("background-secondary");
+      }
+    }
+
+    .btn-outline {
+      color: color("text-light");
+      border-color: color("text-light");
+
+      &:hover,
+      &:focus-visible {
+        color: color("primary-dark");
+        background-color: color("text-light");
+      }
+    }
+  }
 }

@@ -104,21 +104,38 @@
       {{ partial "cta_group.html" .Params.faculty.buttons }}
     </section>
 
-    <section class="summer-academy" aria-labelledby="summer-academy-title">
-      <hgroup>
-        <p>{{ .Params.summerAcademy.eyebrow }}</p>
-        <h2 id="summer-academy-title">{{ .Params.summerAcademy.title }}</h2>
-      </hgroup>
-      <p>{{ .Params.summerAcademy.article }}</p>
-      {{ partial "cta_group.html" .Params.summerAcademy.buttons }}
+    <section class="band summer-academy" aria-labelledby="summer-academy-title">
+      {{ with site.GetPage "/summer-academy" }}
+        {{ partial "responsive_image.html"
+          (dict
+          "context" .
+          "resource" .Params.image
+          "sizes" "100vw"
+          "widths" (slice 640 960 1280 1920 2400)
+          "cssClass" "band-image"
+          "altText" ""
+          "isLazyLoaded" true
+          )
+        }}
+      {{ end }}
+      <div class="content">
+        <hgroup>
+          <p>{{ .Params.summerAcademy.eyebrow }}</p>
+          <h2 id="summer-academy-title">{{ .Params.summerAcademy.title }}</h2>
+        </hgroup>
+        <p>{{ .Params.summerAcademy.article }}</p>
+        {{ partial "cta_group.html" .Params.summerAcademy.buttons }}
+      </div>
     </section>
 
-    <section class="ready" aria-labelledby="ready-title">
-      <hgroup>
-        <p>{{ .Params.ready.eyebrow }}</p>
-        <h2 id="ready-title">{{ .Params.ready.title }}</h2>
-      </hgroup>
-      {{ partial "cta_group.html" .Params.ready.buttons }}
+    <section class="band ready" aria-labelledby="ready-title">
+      <div class="content">
+        <hgroup>
+          <p>{{ .Params.ready.eyebrow }}</p>
+          <h2 id="ready-title">{{ .Params.ready.title }}</h2>
+        </hgroup>
+        {{ partial "cta_group.html" .Params.ready.buttons }}
+      </div>
     </section>
   </div>
 {{ end -}}
