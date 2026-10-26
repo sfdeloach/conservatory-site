@@ -42,7 +42,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `studios/taxonomy.html` and `studios/term.html` render the studio pages.
 - **Partials** (`layouts/_partials/`):
   - `responsive_image.html` builds a WebP `srcset` from a page-bundle image. Its header comment documents the parameters it takes. Always use it rather than writing `<img>` tags by hand.
-  - `card.html` is the card in card lists.
+  - `card.html` is the card in card lists. Its header comment documents its parameters, including the optional `sizes` and `headingLevel` (use `3` when cards sit under a section's `<h2>`, as on the homepage).
   - `cta.html` and `cta_group.html` render buttons from `{label, page, style}` lists in front matter. A missing target page triggers a build warning.
   - `header.html`, `footer.html`, `site_nav_list.html`, `logo.html`, `page_header.html`, and `studios_text.html` cover the rest of the page chrome.
 - **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on).
@@ -74,7 +74,6 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - The old site's contact form has no static-site replacement yet.
 - The student handbook PDF is hosted only on the old WordPress site.
 - The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed.
-- The homepage study-areas section is incomplete (TODO in `layouts/home.html`).
 - Every faculty member has `weight: 0`, so the faculty list sorts by title, which is the first name. The old site sorted by last name.
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 

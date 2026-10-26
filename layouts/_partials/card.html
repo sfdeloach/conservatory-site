@@ -1,10 +1,25 @@
+{{/* Note:
+
+  This partial requires a dictionary to be passed to it that defines. All fields
+  are required unless noted:
+
+  context (page the card links to)
+  listClass
+  imageResource (file name of image, colocated with content)
+  imageClass
+  cropAnchor
+  sizes (optional, defaults to "320px")
+  headingLevel (optional, 2 or 3, defaults to 2)
+*/}}
+
+
 <li class="{{ .listClass }}">
   <a href="{{- .context.RelPermalink -}}">
     {{ partial "responsive_image.html"
       (dict
       "context" .context
       "resource" .imageResource
-      "sizes" "320px"
+      "sizes" (.sizes | default "320px")
       "aspectRatio" 1.0
       "widths" (slice 320 640)
       "cssClass" .imageClass
@@ -12,7 +27,11 @@
       "isLazyLoaded" true
       )
     }}
-    <h2>{{- .context.LinkTitle -}}</h2>
+    {{- if eq .headingLevel 3 -}}
+      <h3>{{- .context.LinkTitle -}}</h3>
+    {{- else -}}
+      <h2>{{- .context.LinkTitle -}}</h2>
+    {{- end -}}
   </a>
   {{- partial "studios_text.html" .context -}}
 </li>

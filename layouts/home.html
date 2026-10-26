@@ -45,7 +45,23 @@
         <p>{{ .Params.studyAreas.eyebrow }}</p>
         <h2 id="study-areas-title">{{ .Params.studyAreas.title }}</h2>
       </hgroup>
-      <!-- TODO: Loop through areas of study -->
+      {{ with site.GetPage "/studios" }}
+        <ul class="card-list">
+          {{- range .Pages -}}
+            {{ partial "card.html"
+              (dict
+              "context" .
+              "listClass" "card"
+              "imageResource" .Params.image
+              "imageClass" "card-image"
+              "cropAnchor" "Center"
+              "sizes" "(min-width: 48em) 240px, 45vw"
+              "headingLevel" 3
+              )
+            }}
+          {{- end -}}
+        </ul>
+      {{ end }}
       {{ partial "cta_group.html" .Params.studyAreas.buttons }}
     </section>
 
