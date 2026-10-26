@@ -12,7 +12,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | ----- | ----------------------------------------------------- | ----------- |
 | 0     | Repository discovery and documentation                | Done        |
 | 1     | Production hosting and CI/CD                          | Done        |
-| 2     | Complete the homepage                                 | In progress |
+| 2     | Complete the homepage                                 | Done        |
 | 3     | Content migration, typography, and Markdown rendering | Not started |
 | 4     | Registration and payment workflows                    | Not started |
 | 5     | Accessibility, quality assurance, and SEO             | Not started |
@@ -126,6 +126,18 @@ Record the decision and rationale before implementing the production workflow.
 - Complete the Summer Academy and "Ready" full-width bands using the existing layout system.
 - Resolve remaining homepage TODOs.
 - Check responsive behavior, spacing, image loading, and content overflow.
+
+**Done:** reviewed on 2026-10-26.
+
+- Stats, studio cards, and featured faculty (`faculty.featured` in `content/_index.md`) are built.
+- The Summer Academy and "Ready" sections are full-width bands.
+- Eyebrows are styled, and section text and buttons are centred.
+- No TODOs remain in the templates or styles.
+- Checked at widths from 320 to 1920px:
+  - no horizontal overflow, including with long test content;
+  - only the hero image loads eagerly;
+  - all motion respects `prefers-reduced-motion`.
+- Still to check by hand: keyboard focus inside the bands, and reduced motion with the OS setting.
 
 ### Acceptance criteria
 

@@ -45,7 +45,7 @@ params:
   faculty:
     eyebrow: "OUR FACULTY"
     title: "A Distinguished Faculty"
-    article: "Performing musicians and active churchmen — ninety percent hold the Master of Music, from schools around the world."
+    article: "Performing musicians and professing Christians — ninety percent hold the Master of Music, from schools around the world."
     # Listed order is display order.
     featured:
       - "/faculty/davis_tammy"

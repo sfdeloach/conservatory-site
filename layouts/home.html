@@ -3,7 +3,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="content">
         <div class="hero-text">
-          <p>{{ .Params.hero.eyebrow }}</p>
+          <p class="eyebrow">{{ .Params.hero.eyebrow }}</p>
           <h1 id="hero-title">{{ .Params.hero.title }}</h1>
           <p class="hero-subtitle">{{ .Params.hero.subtitle }}</p>
           {{ partial "cta_group.html" .Params.hero.buttons }}
@@ -26,7 +26,7 @@
 
     <section class="story" aria-labelledby="story-title">
       <hgroup>
-        <p>{{ .Params.story.eyebrow }}</p>
+        <p class="eyebrow">{{ .Params.story.eyebrow }}</p>
         <h2 id="story-title">{{ .Params.story.title }}</h2>
       </hgroup>
       <p>{{ .Params.story.article }}</p>
@@ -42,7 +42,7 @@
 
     <section class="study-areas" aria-labelledby="study-areas-title">
       <hgroup>
-        <p>{{ .Params.studyAreas.eyebrow }}</p>
+        <p class="eyebrow">{{ .Params.studyAreas.eyebrow }}</p>
         <h2 id="study-areas-title">{{ .Params.studyAreas.title }}</h2>
       </hgroup>
       {{ with site.GetPage "/studios" }}
@@ -67,7 +67,7 @@
 
     <section class="welcome" aria-labelledby="welcome-title">
       <hgroup>
-        <p>{{ .Params.welcome.eyebrow }}</p>
+        <p class="eyebrow">{{ .Params.welcome.eyebrow }}</p>
         <h2 id="welcome-title">{{ .Params.welcome.title }}</h2>
       </hgroup>
       {{ .Content }}
@@ -76,7 +76,7 @@
 
     <section class="faculty" aria-labelledby="faculty-title">
       <hgroup>
-        <p>{{ .Params.faculty.eyebrow }}</p>
+        <p class="eyebrow">{{ .Params.faculty.eyebrow }}</p>
         <h2 id="faculty-title">{{ .Params.faculty.title }}</h2>
       </hgroup>
       <p>{{ .Params.faculty.article }}</p>
@@ -120,7 +120,7 @@
       {{ end }}
       <div class="content">
         <hgroup>
-          <p>{{ .Params.summerAcademy.eyebrow }}</p>
+          <p class="eyebrow">{{ .Params.summerAcademy.eyebrow }}</p>
           <h2 id="summer-academy-title">{{ .Params.summerAcademy.title }}</h2>
         </hgroup>
         <p>{{ .Params.summerAcademy.article }}</p>
@@ -131,7 +131,7 @@
     <section class="band ready" aria-labelledby="ready-title">
       <div class="content">
         <hgroup>
-          <p>{{ .Params.ready.eyebrow }}</p>
+          <p class="eyebrow">{{ .Params.ready.eyebrow }}</p>
           <h2 id="ready-title">{{ .Params.ready.title }}</h2>
         </hgroup>
         {{ partial "cta_group.html" .Params.ready.buttons }}

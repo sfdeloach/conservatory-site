@@ -1,13 +1,24 @@
 @use "./tokens" as *;
 
+.cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: space("sm");
+}
+
 .btn {
   display: inline-block;
   padding: space("md");
   border-radius: radius("sm");
-  transition:
-    color 0.3s ease,
-    background-color 0.3s ease,
-    transform 0.3s ease;
+  overflow-wrap: anywhere;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
 }
 
 .btn-primary {

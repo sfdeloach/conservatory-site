@@ -10,6 +10,29 @@
     margin-bottom: space("xl");
   }
 
+  .eyebrow {
+    margin-bottom: space("xs");
+    color: color("text-dark-muted");
+    letter-spacing: space("xxs");
+    text-align: center;
+  }
+
+  hgroup {
+    margin-bottom: space("md");
+  }
+
+  // Room for the decorative quote marks, which sit outside the box.
+  .welcome blockquote {
+    margin-block: space("lg");
+  }
+
+  // Section intro text: centered, at a readable measure.
+  & > section > p {
+    max-width: 65ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+
   .hero {
     display: grid;
     grid-column: full;
@@ -167,7 +190,8 @@
       padding-block: space("xl");
     }
 
-    h2 {
+    h2,
+    .eyebrow {
       color: color("text-light");
     }
 
