@@ -10,7 +10,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 
 | Phase | Title                                                 | Status      |
 | ----- | ----------------------------------------------------- | ----------- |
-| 0     | Repository discovery and documentation                | Not started |
+| 0     | Repository discovery and documentation                | Done        |
 | 1     | Production hosting and CI/CD                          | Not started |
 | 2     | Complete the homepage                                 | Not started |
 | 3     | Content migration, typography, and Markdown rendering | Not started |
@@ -279,14 +279,17 @@ This phase begins only after hosting, content, and validation are ready.
 
 Record each decision here, with its rationale, once it is made.
 
-| Decision                                                 | Phase | Status | Outcome                         |
-| -------------------------------------------------------- | ----- | ------ | ------------------------------- |
-| Experimental `Dockerfile`                                | 0     | Made   | Remove; not part of the project |
-| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Open   |                                 |
-| Internal link-check tool                                 | 1     | Open   |                                 |
-| Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                 |
-| GitHub-based editing or a CMS                            | 7     | Open   |                                 |
-| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                 |
+| Decision                                                 | Phase | Status | Outcome                          |
+| -------------------------------------------------------- | ----- | ------ | -------------------------------- |
+| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project |
+| Replacement for the old site's WordPress contact form    | 3     | Open   |                                  |
+| Hosting the student handbook PDF                         | 3     | Open   |                                  |
+| Faculty list order (first name or last name)             | 3     | Open   |                                  |
+| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Open   |                                  |
+| Internal link-check tool                                 | 1     | Open   |                                  |
+| Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                  |
+| GitHub-based editing or a CMS                            | 7     | Open   |                                  |
+| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                  |
 
 ## Execution protocol
 
