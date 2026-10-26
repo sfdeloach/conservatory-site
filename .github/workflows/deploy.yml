@@ -1,0 +1,82 @@
+# Validates every push and pull request with `make check`, and deploys
+# main to GitHub Pages only after the checks pass. See docs/DEPLOYMENT.md.
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Pinned tool versions. When changing HUGO_VERSION, also update the
+# minimum in hugo.toml ([module.hugoVersion]) and README.md.
+env:
+  HUGO_VERSION: 0.168.0
+  DART_SASS_VERSION: 1.106.1
+  LYCHEE_VERSION: 0.24.2
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Install Hugo, Dart Sass, and lychee
+        run: |
+          bin="$RUNNER_TEMP/bin"
+          mkdir -p "$bin"
+          curl -fsSL "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
+            | tar -xz -C "$bin" hugo
+          curl -fsSL "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" \
+            | tar -xz -C "$RUNNER_TEMP"
+          curl -fsSL "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C "$bin" --strip-components=1 lychee-x86_64-unknown-linux-gnu/lychee
+          echo "$bin" >> "$GITHUB_PATH"
+          echo "$RUNNER_TEMP/dart-sass" >> "$GITHUB_PATH"
+
+      - name: Show tool versions
+        run: |
+          hugo version
+          sass --version
+          lychee --version
+
+      - name: Validate (strict build and internal link check)
+        run: make check
+
+      - name: Configure Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Build for Pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: make build HUGO_ARGS="--baseURL ${{ steps.pages.outputs.base_url }}/"
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # One deployment at a time; never cancel one that is in progress.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

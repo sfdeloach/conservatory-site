@@ -10,6 +10,11 @@ title = 'Saint Andrew’s Conservatory of Music'
   phoneFormat = "(407) 328-1139"
   email = "mconservatory@sachapel.com"
 
+[module]
+  [module.hugoVersion]
+  extended = true
+  min = "0.168.0"
+
 [taxonomies]
   studio = "studios"
 

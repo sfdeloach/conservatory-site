@@ -6,12 +6,12 @@ Read [docs/ROADMAP.md](docs/ROADMAP.md) before starting work. It defines the pha
 
 ## Toolchain
 
-- **Hugo extended**, v0.168.0 (the version verified locally). The extended edition is required for image processing to WebP.
-- **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Verified with 1.106.1.
-- **lychee**, for the internal link check in `make check`. Verified with 0.24.2.
+- **Hugo extended** 0.168.0. The extended edition is required for image processing to WebP. `hugo.toml` (`[module.hugoVersion]`) refuses to build on an older or non-extended Hugo.
+- **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Version 1.106.1.
+- **lychee**, for the internal link check in `make check`. Version 0.24.2.
 - **Node and npm**, for formatting only: Prettier 3 with `prettier-plugin-go-template`. Verified with Node 20.
 
-Versions are not yet pinned anywhere in the repo. Pinning them is roadmap Phase 1.2.
+The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.github/workflows/deploy.yml`. That is the source of truth, and CI uses exactly those versions.
 
 ## Commands
 
@@ -24,7 +24,7 @@ Versions are not yet pinned anywhere in the repo. Pinning them is roadmap Phase 
 | `npm install`            | Install Prettier and its plugin.                                        |
 | `npx prettier --check .` | Check formatting. Use `--write` to fix it.                              |
 
-Run `make check` before every commit. It is the validation that CI will run (roadmap Phase 1.2). See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#build-and-validation) for what it covers.
+Run `make check` before every commit. CI runs the same command on every push and pull request. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#build-and-validation) for what it covers.
 
 ## Architecture
 
@@ -56,6 +56,10 @@ Run `make check` before every commit. It is the validation that CI will run (roa
 - Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`).
 - Make small, focused changes. After each one, run `make check`.
 
+## Deployment
+
+Every push to `main` that passes `make check` is deployed to GitHub Pages by `.github/workflows/deploy.yml`. Pull requests are checked but never deployed. Templates must stay subpath-safe: use `RelPermalink` or `relURL` (without a leading slash) in templates, and relative `url()`s in Sass. Never hard-code root-absolute paths such as `/images/...`, because the site is served from `/conservatory-site/` until the Phase 6 cutover.
+
 ## Constraints
 
 - Do not change DNS, hosting, payment configuration, or secrets without explicit human approval.
@@ -64,7 +68,7 @@ Run `make check` before every commit. It is the validation that CI will run (roa
 
 ## Known limitations and technical debt
 
-- There is no CI yet, and the toolchain versions are not pinned (roadmap Phase 1.2). External links are not checked.
+- External links are not checked automatically.
 - `npx prettier --check .` fails on 7 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, `layouts/_partials/logo.html`, and the four front-matter-only pages. Format them in a separate change.
 - `content/registration/`, `content/payment/`, `content/schedule/`, and `content/contact/` have front matter only and no body. Their content is still on the old site (see [docs/SITE-INVENTORY.md](docs/SITE-INVENTORY.md)).
 - The old site's contact form has no static-site replacement yet.

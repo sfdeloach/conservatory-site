@@ -6,11 +6,13 @@ The source for the Saint Andrew's Conservatory of Music website (`saintandrewsco
 
 | Tool                                                             | Version            | Needed for                    |
 | ---------------------------------------------------------------- | ------------------ | ----------------------------- |
-| [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0 or later   | Building the site             |
-| [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106 or later     | Compiling the stylesheets     |
+| [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0            | Building the site             |
+| [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106.1            | Compiling the stylesheets     |
 | [Node.js](https://nodejs.org/) and npm                           | 20 or later        | Formatting with Prettier      |
-| [lychee](https://lychee.cli.rs/)                                 | 0.24 or later      | Checking links (`make check`) |
+| [lychee](https://lychee.cli.rs/)                                 | 0.24.2             | Checking links (`make check`) |
 | Git and `make`                                                   | any recent version | Getting the code, shortcuts   |
+
+These are the versions CI uses, pinned in `.github/workflows/deploy.yml`. Newer versions usually work, but if a local build differs from CI, install these exact versions first.
 
 To confirm Hugo and Sass are installed, run `hugo version` and `sass --version`. The Hugo output must contain `+extended`.
 

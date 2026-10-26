@@ -96,6 +96,8 @@ Record the decision and rationale before implementing the production workflow.
 - Use least-privilege workflow permissions and protect sensitive configuration.
 - Prevent overlapping production deployments from causing inconsistent releases.
 
+**Done:** the GitHub Actions workflow `.github/workflows/deploy.yml`. See [DEPLOYMENT.md](DEPLOYMENT.md#cicd).
+
 ### 1.3 Test deployment and recovery
 
 - Verify the initial deployment using the host-provided URL.

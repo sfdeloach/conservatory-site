@@ -1,7 +1,10 @@
 .PHONY: build check clean help
 
+# Extra hugo arguments, e.g. HUGO_ARGS="--baseURL https://example.org/sub/"
+HUGO_ARGS ?=
+
 build: ## production minified build; fails on any Hugo warning
-	hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings
+	hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings $(HUGO_ARGS)
 
 check: build ## strict build plus internal link check (requires lychee)
 	lychee --offline --include-fragments --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'

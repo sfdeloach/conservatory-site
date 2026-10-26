@@ -41,7 +41,7 @@ At cutover, the church's staff add these records at GoDaddy. Check them against 
 - A `TXT` record to verify the domain with GitHub. This prevents another GitHub user from claiming the domain for their own site.
 - Leave the existing MX and TXT records unchanged.
 
-Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-site/`. That address has a subpath, so the CI build must override `baseURL` for it (Phase 1.2).
+Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-site/`. That address has a subpath, so CI overrides `baseURL` for it (see [CI/CD](#cicd)).
 
 ### Moving the repository to the church's account
 
@@ -51,7 +51,7 @@ Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-s
 
 ## Build and validation
 
-Run `make check`. It must pass before a change is published, and CI will run the same command (Phase 1.2).
+Run `make check`. It must pass before a change is published, and CI runs the same command.
 
 | Step                        | Command                                                                                               | Fails when                                                                                                                                            |
 | --------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,11 +65,43 @@ What the checks don't cover yet:
 - **External links** (Wufoo, Breeze, maps). These are skipped in offline mode. Checking them is slow and fails whenever another site is briefly down, so they are verified by hand (Phase 4) and may get a scheduled check later.
 - Formatting (Prettier), HTML validity, and accessibility (Phase 5).
 
-_Pinned tool versions are recorded here in Phase 1.2._
+### Pinned tool versions
 
-## CI/CD and preview deployments
+| Tool          | Version | Pinned in                                                                                         |
+| ------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| Hugo extended | 0.168.0 | `HUGO_VERSION` in `.github/workflows/deploy.yml`; minimum in `hugo.toml` (`[module.hugoVersion]`) |
+| Dart Sass     | 1.106.1 | `DART_SASS_VERSION` in `.github/workflows/deploy.yml`                                             |
+| lychee        | 0.24.2  | `LYCHEE_VERSION` in `.github/workflows/deploy.yml`                                                |
 
-_To be completed in Phase 1.2._ Record the workflow file, triggers, the production branch, preview URLs, and required secrets (names only, never values).
+To upgrade a tool:
+
+1. Change its version in the workflow's `env` block. For Hugo, also raise `min` in `hugo.toml` if the site now depends on a new feature.
+2. Update the README prerequisites table.
+3. Install the same version locally and run `make check`.
+4. Open a pull request, and merge it once CI passes.
+
+## CI/CD
+
+The workflow is `.github/workflows/deploy.yml`.
+
+| Event                                      | `build` job                                                       | `deploy` job                        |
+| ------------------------------------------ | ----------------------------------------------------------------- | ----------------------------------- |
+| Pull request                               | Installs the pinned tools and runs `make check`                   | Skipped; pull requests never deploy |
+| Push to `main`                             | `make check`, then builds for Pages and uploads the site artifact | Deploys to GitHub Pages             |
+| Manual run (`workflow_dispatch`) on `main` | Same as a push to `main`                                          | Deploys                             |
+| Manual run on another branch               | `make check` only                                                 | Skipped                             |
+
+- **Production branch:** `main`. The `deploy` job only runs for `main`, and GitHub's `github-pages` environment only accepts deployments from the default branch.
+- **Failed checks block deployment.** If `make check` fails, the `build` job stops, and `deploy` (which `needs: build`) never runs. The live site stays as it was.
+- **Permissions:** the workflow defaults to `contents: read`. Only the `deploy` job gets `pages: write` and `id-token: write`, which deploy needs to sign in with GitHub's built-in OIDC token.
+- **Secrets:** none. Nothing needs to be stored in the repository's secrets.
+- **No overlapping deployments:** `deploy` uses `concurrency: pages` with `cancel-in-progress: false`. A second deployment waits for the first to finish, and one already running is never cancelled midway.
+- **Temporary address:** CI validates with the production `baseURL` from `hugo.toml`, then rebuilds with the URL GitHub Pages reports (`actions/configure-pages`), passed as `make build HUGO_ARGS="--baseURL …"`. Before the Phase 6 cutover, that URL is `https://sfdeloach.github.io/conservatory-site/`. Afterwards, it is the custom domain, and both builds are identical.
+- **Action updates:** Dependabot (`.github/dependabot.yml`) opens a pull request each month when a GitHub Action used by the workflow has a new version.
+
+### One-time setup
+
+In the GitHub repository, go to **Settings → Pages → Build and deployment**, and set **Source** to **GitHub Actions**. Until this is done, the "Configure Pages" step fails on pushes to `main`.
 
 ## Publishing a change
 
