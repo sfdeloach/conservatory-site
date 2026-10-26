@@ -83,13 +83,15 @@ Compare GitHub Pages and Cloudflare Pages against:
 
 Record the decision and rationale before implementing the production workflow.
 
+**Done:** GitHub Pages. See [DEPLOYMENT.md](DEPLOYMENT.md#hosting).
+
 ### 1.2 Implement the deployment pipeline
 
 - Pin the Hugo (extended) and Dart Sass versions, and any other required dependencies.
 - Establish a reproducible production build.
 - Configure GitHub Actions or the selected host's equivalent deployment workflow.
 - Run validation checks before deployment.
-- Build and preview proposed changes without affecting production.
+- Run `make check` on every pull request without deploying, so broken changes never reach production. Preview deployments are not required.
 - Deploy production only from the designated production branch.
 - Use least-privilege workflow permissions and protect sensitive configuration.
 - Prevent overlapping production deployments from causing inconsistent releases.
@@ -281,17 +283,17 @@ This phase begins only after hosting, content, and validation are ready.
 
 Record each decision here, with its rationale, once it is made.
 
-| Decision                                                 | Phase | Status | Outcome                                                                            |
-| -------------------------------------------------------- | ----- | ------ | ---------------------------------------------------------------------------------- |
-| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                   |
-| Replacement for the old site's WordPress contact form    | 3     | Open   |                                                                                    |
-| Hosting the student handbook PDF                         | 3     | Open   |                                                                                    |
-| Faculty list order (first name or last name)             | 3     | Open   |                                                                                    |
-| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Open   |                                                                                    |
-| Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI |
-| Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                                                                    |
-| GitHub-based editing or a CMS                            | 7     | Open   |                                                                                    |
-| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                    |
+| Decision                                                 | Phase | Status | Outcome                                                                                         |
+| -------------------------------------------------------- | ----- | ------ | ----------------------------------------------------------------------------------------------- |
+| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                                |
+| Replacement for the old site's WordPress contact form    | 3     | Open   |                                                                                                 |
+| Hosting the student handbook PDF                         | 3     | Open   |                                                                                                 |
+| Faculty list order (first name or last name)             | 3     | Open   |                                                                                                 |
+| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed |     |
+| Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI              |
+| Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                                                                                 |
+| GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                 |
+| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                 |
 
 ## Execution protocol
 
