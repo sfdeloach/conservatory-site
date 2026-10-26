@@ -4,12 +4,13 @@ The source for the Saint Andrew's Conservatory of Music website (`saintandrewsco
 
 ## Prerequisites
 
-| Tool                                                             | Version            | Needed for                  |
-| ---------------------------------------------------------------- | ------------------ | --------------------------- |
-| [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0 or later   | Building the site           |
-| [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106 or later     | Compiling the stylesheets   |
-| [Node.js](https://nodejs.org/) and npm                           | 20 or later        | Formatting with Prettier    |
-| Git and `make`                                                   | any recent version | Getting the code, shortcuts |
+| Tool                                                             | Version            | Needed for                    |
+| ---------------------------------------------------------------- | ------------------ | ----------------------------- |
+| [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0 or later   | Building the site             |
+| [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106 or later     | Compiling the stylesheets     |
+| [Node.js](https://nodejs.org/) and npm                           | 20 or later        | Formatting with Prettier      |
+| [lychee](https://lychee.cli.rs/)                                 | 0.24 or later      | Checking links (`make check`) |
+| Git and `make`                                                   | any recent version | Getting the code, shortcuts   |
 
 To confirm Hugo and Sass are installed, run `hugo version` and `sass --version`. The Hugo output must contain `+extended`.
 
@@ -26,13 +27,14 @@ Open `http://localhost:1313/`. The page reloads when you save a change.
 
 ## Common tasks
 
-| Command                  | What it does                                              |
-| ------------------------ | --------------------------------------------------------- |
-| `hugo server`            | Runs the local preview server.                            |
-| `make build`             | Builds the production site into `public/`.                |
-| `make clean`             | Deletes the generated `public/` and `resources/` folders. |
-| `make help`              | Lists the Make targets.                                   |
-| `npx prettier --check .` | Checks formatting. Use `--write` to fix it.               |
+| Command                  | What it does                                                                                 |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `hugo server`            | Runs the local preview server.                                                               |
+| `make build`             | Builds the production site into `public/`. Any Hugo warning fails the build.                 |
+| `make check`             | Runs the strict build, then checks every internal link and anchor. Run it before committing. |
+| `make clean`             | Deletes the generated `public/` and `resources/` folders.                                    |
+| `make help`              | Lists the Make targets.                                                                      |
+| `npx prettier --check .` | Checks formatting. Use `--write` to fix it.                                                  |
 
 ## Project structure
 

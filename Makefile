@@ -1,7 +1,10 @@
-.PHONY: build clean help
+.PHONY: build check clean help
 
-build: ## production minified build
-	hugo --minify
+build: ## production minified build; fails on any Hugo warning
+	hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings
+
+check: build ## strict build plus internal link check (requires lychee)
+	lychee --offline --include-fragments --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'
 
 clean: ## delete 'public' and 'resources' folders
 	rm -rf public

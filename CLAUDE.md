@@ -8,6 +8,7 @@ Read [docs/ROADMAP.md](docs/ROADMAP.md) before starting work. It defines the pha
 
 - **Hugo extended**, v0.168.0 (the version verified locally). The extended edition is required for image processing to WebP.
 - **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Verified with 1.106.1.
+- **lychee**, for the internal link check in `make check`. Verified with 0.24.2.
 - **Node and npm**, for formatting only: Prettier 3 with `prettier-plugin-go-template`. Verified with Node 20.
 
 Versions are not yet pinned anywhere in the repo. Pinning them is roadmap Phase 1.2.
@@ -17,12 +18,13 @@ Versions are not yet pinned anywhere in the repo. Pinning them is roadmap Phase 
 | Command                  | Purpose                                                                 |
 | ------------------------ | ----------------------------------------------------------------------- |
 | `hugo server`            | Local development server with live reload, at `http://localhost:1313/`. |
-| `make build`             | Production build (`hugo --minify`) into `public/`.                      |
+| `make build`             | Strict production build into `public/`. Any Hugo warning fails it.      |
+| `make check`             | `make build`, then lychee offline check of internal links and anchors.  |
 | `make clean`             | Delete `public/` and `resources/`.                                      |
 | `npm install`            | Install Prettier and its plugin.                                        |
 | `npx prettier --check .` | Check formatting. Use `--write` to fix it.                              |
 
-No tests, link checks, or CI exist yet (roadmap Phase 1.0).
+Run `make check` before every commit. It is the validation that CI will run (roadmap Phase 1.2). See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#build-and-validation) for what it covers.
 
 ## Architecture
 
@@ -52,7 +54,7 @@ No tests, link checks, or CI exist yet (roadmap Phase 1.0).
 - Follow the existing patterns. Reuse the partials, put content in front matter `params`, and keep images in page bundles.
 - Write YAML front matter in content files. Note that `archetypes/default.md` still produces TOML.
 - Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`).
-- Make small, focused changes. After each one, run `make build` and confirm there are no warnings.
+- Make small, focused changes. After each one, run `make check`.
 
 ## Constraints
 
@@ -62,7 +64,7 @@ No tests, link checks, or CI exist yet (roadmap Phase 1.0).
 
 ## Known limitations and technical debt
 
-- There is no validation, link checking, or CI, and the toolchain versions are not pinned.
+- There is no CI yet, and the toolchain versions are not pinned (roadmap Phase 1.2). External links are not checked.
 - `npx prettier --check .` fails on 7 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, `layouts/_partials/logo.html`, and the four front-matter-only pages. Format them in a separate change.
 - `content/registration/`, `content/payment/`, `content/schedule/`, and `content/contact/` have front matter only and no body. Their content is still on the old site (see [docs/SITE-INVENTORY.md](docs/SITE-INVENTORY.md)).
 - The old site's contact form has no static-site replacement yet.

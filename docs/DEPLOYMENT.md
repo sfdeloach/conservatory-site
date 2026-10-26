@@ -15,7 +15,21 @@ _To be completed in Phase 1.1._ Record the chosen host (GitHub Pages or Cloudfla
 
 ## Build and validation
 
-_To be completed in Phase 1.0 and 1.2._ Record the pinned tool versions, the validation command, and what each check covers.
+Run `make check`. It must pass before a change is published, and CI will run the same command (Phase 1.2).
+
+| Step                        | Command                                                                                               | Fails when                                                                                                                                            |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strict build (`make build`) | `hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings`                            | Hugo reports any error or warning. For example, a homepage button that points to a page that doesn't exist, or two pages that write to the same path. |
+| Internal link check         | `lychee --offline --include-fragments --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'` | A link in the built site points to a page, file, or `#anchor` that doesn't exist.                                                                     |
+
+The build empties `public/` first, so files left over from an earlier build can't hide a broken link.
+
+What the checks don't cover yet:
+
+- **External links** (Wufoo, Breeze, maps). These are skipped in offline mode. Checking them is slow and fails whenever another site is briefly down, so they are verified by hand (Phase 4) and may get a scheduled check later.
+- Formatting (Prettier), HTML validity, and accessibility (Phase 5).
+
+_Pinned tool versions are recorded here in Phase 1.2._
 
 ## CI/CD and preview deployments
 
