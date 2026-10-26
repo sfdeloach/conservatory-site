@@ -11,7 +11,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | Phase | Title                                                 | Status      |
 | ----- | ----------------------------------------------------- | ----------- |
 | 0     | Repository discovery and documentation                | Done        |
-| 1     | Production hosting and CI/CD                          | In progress |
+| 1     | Production hosting and CI/CD                          | Done        |
 | 2     | Complete the homepage                                 | Not started |
 | 3     | Content migration, typography, and Markdown rendering | Not started |
 | 4     | Registration and payment workflows                    | Not started |
@@ -105,6 +105,8 @@ Record the decision and rationale before implementing the production workflow.
 - Confirm that failed builds or checks do not publish a release.
 - Document how to identify and recover from a bad deployment.
 - Verify recovery in a safe environment where practical.
+
+**Done:** rehearsed on 2026-10-26. See "Recovery test results" in [DEPLOYMENT.md](DEPLOYMENT.md#recovery-test-results).
 
 ### Acceptance criteria
 

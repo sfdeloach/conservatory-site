@@ -159,7 +159,22 @@ In GitHub's web interface, a merged pull request has a **Revert** button. It ope
 
 ### Recovery test results
 
-_Recorded after the Phase 1.3 rehearsal._
+Rehearsed on 2026-10-26 against the temporary address, before launch.
+
+| Test                           | Commit                             | Run                                                                                               | Result                                                                                                                 |
+| ------------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Normal publish                 | `0b93271`                          | [40378069892](https://github.com/sfdeloach/conservatory-site/actions/runs/40378069892)            | Checks passed and deployed. Live `build-commit` = `0b93271`.                                                           |
+| Failed check blocks deployment | `638ae2a` (deliberate broken link) | [40378656339](https://github.com/sfdeloach/conservatory-site/actions/runs/40378656339)            | "Validate" failed. The Pages steps and the `deploy` job were skipped. The live site stayed at `0b93271`.               |
+| Recover by revert              | `5131706` (revert of `638ae2a`)    | [40379082951](https://github.com/sfdeloach/conservatory-site/actions/runs/40379082951)            | Checks passed and deployed. Live `build-commit` = `5131706`.                                                           |
+| Redeploy an earlier release    | `0b93271`                          | [40378069892](https://github.com/sfdeloach/conservatory-site/actions/runs/40378069892), attempt 2 | Re-running the old run deployed it again. Live `build-commit` went back to `0b93271` while `main` stayed at `5131706`. |
+| Next push replaces a rollback  | the commit that added this table   | the run for that push                                                                             | The live `build-commit` returned to the latest `main`.                                                                 |
+
+Other checks done in Phase 1.3:
+
+- All 28 pages in the live sitemap returned 200, and had no broken internal links. CSS, JavaScript, images, fonts, and the favicon all loaded at the temporary subpath.
+- External destinations, checked online on 2026-10-26:
+  - Both Summer Wufoo forms load, but they show "no longer accepting submissions", because the Summer 2026 forms have closed. They will be replaced in Phase 4.
+  - The Google Maps footer link works in a browser. It returns 403 to automated link checkers, which is why it is excluded from any automated external-link check.
 
 ## DNS cutover
 

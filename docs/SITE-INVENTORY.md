@@ -52,15 +52,15 @@ These are served from WordPress (`/wp-content/uploads/`) and will stop working w
 
 ## External destinations
 
-| Destination                                         | Purpose                                        | Old page(s)            | In this project           |
-| --------------------------------------------------- | ---------------------------------------------- | ---------------------- | ------------------------- |
-| `https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/` | Fall 2026 semester registration                | Registration           | No                        |
-| `https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/` | Summer Music Camp registration                 | Summer Music           | `content/summer-academy/` |
-| `https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/` | Summer Music Academy registration              | Summer Music           | `content/summer-academy/` |
-| `https://sachapel.breezechms.com/form/215b5b76`     | Full semester tuition payment                  | Payments               | No                        |
-| `https://sachapel.breezechms.com/form/215b5b`       | Installment payment (not available for summer) | Payments               | No                        |
-| `https://sachapel.breezechms.com/form/215b5b161825` | Scholarship fund donation                      | Registration, Payments | No                        |
-| `https://goo.gl/maps/YzhFXRDH8zGuP6rL9`             | Map to the campus                              | Contact                | No                        |
+| Destination                                         | Purpose                                                                                | Old page(s)            | In this project           |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------- | ------------------------- |
+| `https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/` | Fall 2026 semester registration                                                        | Registration           | No                        |
+| `https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/` | Summer Music Camp registration (closed: "no longer accepting submissions", 2026-10-26) | Summer Music           | `content/summer-academy/` |
+| `https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/` | Summer Music Academy registration (closed, 2026-10-26)                                 | Summer Music           | `content/summer-academy/` |
+| `https://sachapel.breezechms.com/form/215b5b76`     | Full semester tuition payment                                                          | Payments               | No                        |
+| `https://sachapel.breezechms.com/form/215b5b`       | Installment payment (not available for summer)                                         | Payments               | No                        |
+| `https://sachapel.breezechms.com/form/215b5b161825` | Scholarship fund donation                                                              | Registration, Payments | No                        |
+| `https://goo.gl/maps/YzhFXRDH8zGuP6rL9`             | Map to the campus                                                                      | Contact                | No                        |
 
 ## Content only on the old site
 
