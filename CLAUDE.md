@@ -30,7 +30,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 
 - `hugo.toml` holds the site config: `baseURL`, the title, contact details under `params.contact`, and the `studios` taxonomy (`studio = "studios"`).
 - **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them.
-  - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). The Markdown body is the Dean's letter.
+  - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter.
   - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, `weight` for ordering, and an optional `params.postNominal`.
   - `content/studios/<term>/_index.md` holds the content for each `studios` taxonomy term page, with an `instrument.jpg` image. Faculty pages are tagged with these terms.
   - Top-level pages (`registration`, `payment`, `schedule`, `contact`, `summer-academy`) get into the main navigation through `menus.main.weight` and use `params.image`.
@@ -74,6 +74,7 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - The old site's contact form has no static-site replacement yet.
 - The student handbook PDF is hosted only on the old WordPress site.
 - The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed.
+- The four featured faculty in `content/_index.md` (`faculty.featured`) are placeholder picks, one per studio area, awaiting staff confirmation (Phase 3 content review).
 - Every faculty member has `weight: 0`, so the faculty list sorts by title, which is the first name. The old site sorted by last name.
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 

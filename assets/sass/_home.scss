@@ -125,7 +125,8 @@
     }
   }
 
-  .study-areas {
+  .study-areas,
+  .faculty {
     .card-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -141,5 +142,11 @@
     .card-image {
       width: 100%;
     }
+  }
+
+  // Keep studio names smaller than the faculty name (h3) in compact cards.
+  .faculty .studio-list {
+    margin-bottom: 0;
+    font-size: font-size("std");
   }
 }

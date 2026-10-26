@@ -35,6 +35,20 @@ All the homepage text is in the front matter of `content/_index.md`: hero, story
 
 The Dean's letter is the Markdown text below the front matter.
 
+The studio cards in "Studio Offerings" come from `content/studios/` automatically, in `weight` order.
+
+### Featured faculty
+
+The faculty shown on the homepage are listed under `faculty.featured`, as paths to their pages. They appear in the order listed. Four fit on one row on a computer screen.
+
+```yaml
+featured:
+  - "/faculty/yount_terry"
+  - "/faculty/bak_brian"
+```
+
+Each path must match a folder under `content/faculty/`. If it doesn't, the build fails with a `home.html: no faculty page found` message and nothing is published.
+
 ## Adding or updating a faculty member
 
 1. Create a folder under `content/faculty/` named `lastname_firstname`, such as `content/faculty/bak_brian/`.
@@ -60,7 +74,7 @@ The Dean's letter is the Markdown text below the front matter.
    - `postNominal` is optional. It is shown after the name, as in "Brian Bak, DMA".
    - `weight` sets the order. Lower numbers come first. `0` means "no weight": those pages are listed after weighted ones, sorted by title, which is the first name. Every current faculty member uses `0`.
 
-To remove a faculty member, delete their folder.
+To remove a faculty member, delete their folder. If they are featured on the homepage, also remove them from `faculty.featured` in `content/_index.md`, or the build fails.
 
 ## Adding a studio
 

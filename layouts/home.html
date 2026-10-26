@@ -80,6 +80,27 @@
         <h2 id="faculty-title">{{ .Params.faculty.title }}</h2>
       </hgroup>
       <p>{{ .Params.faculty.article }}</p>
+      {{ with .Params.faculty.featured }}
+        <ul class="card-list">
+          {{- range . -}}
+            {{ with site.GetPage . }}
+              {{ partial "card.html"
+                (dict
+                "context" .
+                "listClass" "card"
+                "imageResource" "headshot.*"
+                "imageClass" "card-image"
+                "cropAnchor" "Top"
+                "sizes" "(min-width: 48em) 240px, 45vw"
+                "headingLevel" 3
+                )
+              }}
+            {{ else }}
+              {{ warnf "home.html: no faculty page found at %q (params.faculty.featured)" . }}
+            {{ end }}
+          {{- end -}}
+        </ul>
+      {{ end }}
       {{ partial "cta_group.html" .Params.faculty.buttons }}
     </section>
 

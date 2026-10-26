@@ -46,6 +46,12 @@ params:
     eyebrow: "OUR FACULTY"
     title: "A Distinguished Faculty"
     article: "Performing musicians and active churchmen — ninety percent hold the Master of Music, from schools around the world."
+    # Placeholder picks, pending staff confirmation. Listed order is display order.
+    featured:
+      - "/faculty/yount_terry" # organ, harpsichord
+      - "/faculty/bak_brian" # violin
+      - "/faculty/yount_laura" # voice
+      - "/faculty/jimenez_elise" # cello
     buttons:
       - label: "Meet the Faculty"
         page: "/faculty"
