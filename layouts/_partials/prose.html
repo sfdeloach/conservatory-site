@@ -1,0 +1,12 @@
+{{/* Note:
+
+  Renders a page's Markdown content inside the .prose wrapper, which sets the
+  reading width and typography (assets/sass/_prose.scss). Pass the page as the
+  context. Outputs nothing when the page has no content.
+
+  Use this instead of a bare .Content in templates.
+*/}}
+
+{{- with .Content }}
+  <div class="prose">{{ . }}</div>
+{{- end }}

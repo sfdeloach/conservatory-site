@@ -1,0 +1,144 @@
+@use "./tokens" as *;
+
+// Markdown content, wrapped by layouts/_partials/prose.html. Same named-line
+// grid as main, with a reading-width middle column; .full-bleed spans it all.
+// 55ch of Nunito holds about 70-75 characters of running text.
+.prose {
+  display: grid;
+  grid-column: full;
+  grid-template-columns:
+    [full-start] 1fr
+    [content-start] min(55ch, 100% - space("lg")) [content-end]
+    1fr [full-end];
+  margin-bottom: space("lg");
+  font-size: font-size("std");
+  line-height: 1.6;
+
+  @media (width >= breakpoint("md")) {
+    font-size: font-size("prose");
+  }
+
+  & > * {
+    grid-column: content;
+    margin-block: 0;
+  }
+
+  & > .full-bleed {
+    grid-column: full;
+  }
+
+  // Vertical rhythm: even spacing between blocks, more above headings and
+  // less below them.
+  & > * + * {
+    margin-top: 1em;
+  }
+
+  & > :is(h2, h3, h4) {
+    margin-top: 1.75em;
+  }
+
+  & > :is(h2, h3, h4) + * {
+    margin-top: 0.5em;
+  }
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  h2,
+  h3,
+  h4 {
+    text-align: left;
+  }
+
+  h4 {
+    font-size: font-size("std");
+    font-weight: 700;
+  }
+
+  ul,
+  ol {
+    padding-inline-start: 1.5em;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li + li,
+  li > :is(ul, ol) {
+    margin-top: space("xs");
+  }
+
+  a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+
+  // Room for the decorative quote marks, which sit outside the box.
+  blockquote {
+    margin: space("lg") 0;
+  }
+
+  hr {
+    margin-block: space("lg");
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: space("sm");
+    border-bottom: 1px solid color("primary-opaque");
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    border-bottom: 2px solid color("primary-dark");
+    font-weight: 700;
+  }
+
+  code {
+    padding: 0.1em 0.3em;
+    border-radius: radius("sm");
+    background: color("background-secondary");
+    font-family: font("mono"), monospace;
+    font-size: 0.9em;
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: space("md");
+    border-radius: radius("sm");
+    background: color("background-secondary");
+
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  img {
+    display: block;
+    border-radius: radius("sm");
+  }
+
+  figure {
+    margin-inline: 0;
+  }
+
+  figcaption {
+    margin-top: space("sm");
+    color: color("text-dark-muted");
+    font-size: font-size("sm");
+  }
+}

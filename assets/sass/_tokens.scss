@@ -38,6 +38,7 @@
     "sans": "Nunito",
     "serif": "EB Garamond",
     "brand": "Incognito Pro",
+    "mono": "ui-monospace",
   );
 
   @return map.get($font, $key);
@@ -49,6 +50,7 @@
     "xs": 0.5rem,
     "sm": 0.75rem,
     "std": 1rem,
+    "prose": 1.125rem,
     "md": 1.25rem,
     "lg": 1.5rem,
     "xl": 2rem,

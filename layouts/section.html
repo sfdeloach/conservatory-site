@@ -1,6 +1,6 @@
 {{- define "main" -}}
   {{ partial "page_header.html" . }}
-  {{- .Content -}}
+  {{ partial "prose.html" . }}
   <ul class="card-list">
     {{- range partial "faculty_sort.html" .Pages -}}
       {{ partial "card.html"

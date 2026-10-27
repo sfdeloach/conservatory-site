@@ -14,9 +14,7 @@
     {{- .Title -}}{{- with .Params.postNominal -}}, {{ . -}}{{- end -}}
   </h1>
   {{- partial "studios_text.html" . -}}
-  <section>
-    {{- .Content -}}
-  </section>
+  {{ partial "prose.html" . }}
   {{- with .Parent -}}
     <a class="btn btn-outline" href="{{- .RelPermalink -}}"
       >Back to {{ .LinkTitle -}}</a

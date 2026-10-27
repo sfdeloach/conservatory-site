@@ -15,6 +15,12 @@ title = 'Saint Andrew’s Conservatory of Music'
   extended = true
   min = "0.168.0"
 
+[markup.goldmark.parser.attribute]
+  block = true
+
+[markup.highlight]
+  codeFences = false
+
 [taxonomies]
   studio = "studios"
 
