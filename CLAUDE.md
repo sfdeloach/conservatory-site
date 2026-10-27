@@ -71,10 +71,10 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - External links are not checked automatically.
 - `npx prettier --check .` fails on 7 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, `layouts/_partials/logo.html`, and the four front-matter-only pages. Format them in a separate change.
 - `content/registration/`, `content/payment/`, `content/schedule/`, and `content/contact/` have front matter only and no body. Their content is still on the old site (see [docs/SITE-INVENTORY.md](docs/SITE-INVENTORY.md)).
-- The old site's contact form has no static-site replacement yet.
-- The student handbook PDF is hosted only on the old WordPress site.
-- The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed.
-- Every faculty member has `weight: 0`, so the faculty list sorts by title, which is the first name. The old site sorted by last name.
+- The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
+- The student handbook PDF is hosted only on the old WordPress site. Phase 3 replaces it with a web page at `/handbook/` (see the roadmap).
+- The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed. Phase 3 replaces them with "Dates for 2027 coming soon".
+- Every faculty member has `weight: 0`, so the faculty list sorts by title, which is the first name. Staff want it sorted by last name (Phase 3).
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 
 ## Documentation

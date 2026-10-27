@@ -149,22 +149,93 @@ Record the decision and rationale before implementing the production workflow.
 
 ## 3. Content migration, typography, and Markdown rendering
 
+Conservatory staff answered the content questions on 2026-10-27. Their decisions are recorded in the tasks below and in the open decisions table.
+
+**Principle:** content that changes from semester to semester (calendars, faculty, studios) has a single source of truth in `content/`. Other pages, including the student handbook, draw on that source at build time instead of keeping their own copy.
+
 ### Tasks
 
-- Migrate the remaining content from the existing live site, using the Phase 0 inventory.
-- Review content accuracy with conservatory staff, including dates, faculty, programs, and contact details. For example, the current Summer Academy dates (July 2026) have already passed.
-- Introduce a consistent .prose wrapper for Markdown content.
-- Establish comfortable reading widths, generally around 65–75 characters per line.
-- Style headings, paragraphs, lists, links, blockquotes, tables, code, images, and captions.
-- Ensure links are distinguishable, keyboard-accessible, and visually consistent.
-- Handle long URLs, wide tables, and embedded content on narrow screens.
-- Implement or improve Markdown render hooks where appropriate.
-- Add build-time checks for broken internal links and other important content errors.
-- Ensure intentional full-width components remain possible outside the standard prose measure.
+Work through the groups in this order. Each group is one or more small commits.
+
+1. **Quick content fixes**
+   - Sort faculty lists by last name. A compound last name sorts by its first word, so Angelyn Traylor Chen sorts under T.
+   - Summer Academy page:
+     - Replace the July 2026 dates with "Dates for 2027 coming soon".
+     - Keep the general program descriptions. Remove the price, the audition deadlines, and the number of orchestras.
+     - Replace the two closed "Register Here" links with a front matter switch (such as `registrationOpen: false`) and the form URL, so registration can be reopened without editing templates. Phase 4.1 may move the URL to a shared location.
+2. **Prose typography**
+   - Introduce a consistent `.prose` wrapper for Markdown content.
+   - Establish comfortable reading widths, generally around 65–75 characters per line.
+   - Style headings, paragraphs, lists, links, blockquotes, tables, code, images, and captions.
+   - Ensure intentional full-width components remain possible outside the standard prose measure.
+   - Test against existing pages and against the handbook text, added early as a draft page.
+3. **Render hooks and content checks**
+   - Implement Markdown render hooks:
+     - heading anchors, which the handbook's contents menu needs;
+     - links, failing the build on a broken internal link;
+     - images, through `responsive_image.html`;
+     - tables, in a wrapper that scrolls on narrow screens.
+   - Add build-time checks for broken internal links and other important content errors. lychee already checks the links in the built site.
+4. **Links and narrow screens**
+   - Ensure links are distinguishable, keyboard-accessible, and visually consistent.
+   - Handle long URLs, wide tables, and embedded content on narrow screens.
+5. **Content migration**, using the Phase 0 inventory. This covers Schedule, Contact, the studio requirements, and the student handbook. The Registration and Payment pages are written in Phase 4.2, after their external links are centralized, so they are not written twice.
+   - **Contact:**
+     - The address, phone, and email come from `params.contact`.
+     - Include the directions text ("near I-4 and SR 46 in Sanford") and the map link. Check that the `goo.gl` map link still works, and replace it with a full Google Maps URL if it doesn't.
+     - There is no contact form.
+   - **Schedule:**
+     - Store the semester calendars once, in the Schedule page's front matter. The Schedule page and the handbook both display them.
+     - Start with the old site's Summer and Fall 2026 calendars. Staff expect the Spring 2027 calendar in November 2026.
+   - **Studio requirements:**
+     - Add `params.requirements` to each studio, as a list of zero or more requirements. They are shown on the studio's page and in the handbook.
+     - A studio with no requirements shows nothing, or a short generic message. Choose which when building it.
+     - Fill them only from the 2026 handbook (organ, piano, violin, viola, cello, and voice). Staff add others later.
+   - **Student handbook:** see [Student handbook](#student-handbook) below.
+6. **Staff review**
+   - Review content accuracy with conservatory staff, including dates, faculty, programs, and contact details.
+   - Include the list of handbook corrections below.
+
+### Student handbook
+
+The handbook replaces the 2026 PDF that is hosted on the old site. It is designed for the web first.
+
+- **Page:**
+  - The whole handbook is one page, at `/handbook/`.
+  - It is not in the main navigation or the footer. The Registration page links to it (Phase 4.2). Until then it is reachable only by its URL.
+- **Contents menu:**
+  - Generated from the headings, with fragment links (such as `/handbook/#withdrawal`) that scroll to each section.
+  - On wide screens it is a sidebar that stays in view. On narrow screens it is a collapsible block at the top, using `<details>`, with no JavaScript.
+  - Highlighting the current section while scrolling is optional and can be added later.
+- **Print:** basic print styles hide the site header, navigation, and contents menu. A PDF-like layout and page numbers are not required.
+- **Title and date:**
+  - The title is "Student Handbook", with no year.
+  - It shows a "Last updated" date taken from Git. This needs `enableGitInfo` and the full Git history in CI (`fetch-depth: 0` on `actions/checkout`).
+  - The date should also reflect changes to the content the handbook draws on, not only to the handbook's own file.
+- **Sources for each section:**
+
+  | Section                                            | Source                                                                                                                                          |
+  | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Academic calendar                                  | The Schedule page's front matter.                                                                                                               |
+  | Faculty                                            | The faculty pages: name, `postNominal`, and studios, each linked to the bio, in last-name order.                                                |
+  | Instruments offered and their requirements         | The studio pages and their `params.requirements`.                                                                                               |
+  | Tuition, fees, and refund schedule                 | The handbook's own front matter, as structured data. The Registration page reuses it in Phase 4.2.                                              |
+  | Contact details                                    | `params.contact` in `hugo.toml`. Use the general address `mconservatory@sachapel.com` everywhere. The closing line may still name Sharon Chang. |
+  | Staff (Dean, administrative assistant, accounting) | The handbook only. These rarely change.                                                                                                         |
+  | Summer study                                       | A one-paragraph summary in the handbook, linking to the Summer Academy page for details.                                                        |
+  | Mission, registration, policies                    | The handbook's Markdown body.                                                                                                                   |
+
+- **Corrections to the 2026 PDF**, to list for staff review:
+  - Bass is removed, because it is not taught.
+  - The faculty list comes from the site. It adds Tammy Davis, replaces Olga Kolpakova (no longer on faculty) with Olga Ferroni, and uses full names: Angelyn Traylor Chen and Nathan Petersen.
+  - The contact email is the general address instead of `schang@sachapel.com`.
+  - Page references such as "see page 10" become links to sections.
+  - The broken "Error! Bookmark not defined" entry in the table of contents is gone.
 
 ### Acceptance criteria
 
 - All content from the old site that is still needed has been migrated, and staff have reviewed it.
+- The student handbook is a web page whose calendar, faculty, and studio content comes from the single sources above.
 - All content pages have consistent, readable typography.
 - Internal links resolve correctly.
 - Broken-link checks run as part of the validation workflow.
@@ -180,10 +251,13 @@ Record the decision and rationale before implementing the production workflow.
 - Keep semester registration, Summer Academy registration, and payment destinations distinct.
 - Make routine URL updates possible without modifying templates or application logic wherever practical.
 - Avoid duplicating the same destination across multiple files.
+- Fit the Summer Academy registration switch built in Phase 3 (`registrationOpen` and the form URL) into this approach.
 
 ### 4.2 Build the Registration and Payment pages
 
-- Write the content for `content/registration/index.md` and `content/payment/index.md`, which currently contain front matter only.
+- Write the content for `content/registration/index.md` and `content/payment/index.md`, which currently contain front matter only. This includes migrating their content from the old site (see [SITE-INVENTORY.md](SITE-INVENTORY.md#content-only-on-the-old-site)); Phase 3 leaves these two pages alone.
+- Link the Registration page to the student handbook (`/handbook/`).
+- Show tuition, fees, and the refund schedule from the handbook's front matter instead of repeating them.
 - Present each active destination clearly, with the program, semester or year, and what the visitor should expect next.
 
 ### 4.3 Document the update process
@@ -302,9 +376,9 @@ Record each decision here, with its rationale, once it is made.
 | Decision                                                 | Phase | Status | Outcome                                                                                         |
 | -------------------------------------------------------- | ----- | ------ | ----------------------------------------------------------------------------------------------- |
 | Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                                |
-| Replacement for the old site's WordPress contact form    | 3     | Open   |                                                                                                 |
-| Hosting the student handbook PDF                         | 3     | Open   |                                                                                                 |
-| Faculty list order (first name or last name)             | 3     | Open   |                                                                                                 |
+| Replacement for the old site's WordPress contact form    | 3     | Done   | None: an email link and phone number are enough (staff, 2026-10-27)                             |
+| Hosting the student handbook PDF                         | 3     | Done   | Replaced by a web page at `/handbook/`, not a PDF (staff, 2026-10-27)                           |
+| Faculty list order (first name or last name)             | 3     | Done   | Last name; a compound last name sorts by its first word (staff, 2026-10-27)                     |
 | Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed |     |
 | Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI              |
 | Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                                                                                 |
