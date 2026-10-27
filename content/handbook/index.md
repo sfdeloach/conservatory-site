@@ -1,6 +1,35 @@
 ---
 title: Student Handbook
-draft: true
+layout: handbook
+draft: false
+params:
+  # Fees and discounts, written into the text with the handbook_value
+  # shortcode (for example, handbook_value "fees.late").
+  fees:
+    registration: "$25"
+    change: "$25"
+    late: "$15"
+    withdrawal: "$25"
+    paymentPlan: "$5"
+  discounts:
+    member: "20%"
+    scholarship: "25%"
+  # Shown by the lesson_rates shortcode.
+  lessonRates:
+    - length: "30-minute lesson"
+      price: "$33.00"
+    - length: "45-minute lesson"
+      price: "$49.50"
+    - length: "60-minute lesson"
+      price: "$66.00"
+  # Shown by the refund_schedule shortcode.
+  refundSchedule:
+    - weeks: "1–3"
+      refund: "100% of tuition balance"
+    - weeks: "4–6"
+      refund: "75% of tuition balance"
+    - weeks: "7–15"
+      refund: "50% of tuition balance"
 ---
 
 ## Mission
@@ -9,9 +38,9 @@ The Saint Andrew’s Conservatory of Music exists to train musicians for the chu
 
 ## Registration
 
-- Each potential student, whether new or returning, must complete a registration form at saintandrewsconservatory.org/registration. Registrations may only be done online. Due to limited studio openings, submission of a new student registration does not guarantee enrollment in any studio. Disclaimer: Unless you register, there is no guarantee that a spot will be held for you in your teacher’s studio.
-- If the office does not receive payment before Friday at 5pm of the first week of lessons, you will be turned away from your next lesson and a $15 late fee will be added.
-- There is a one-time non-refundable $25 fee for the initial setup of lessons for a student. An additional $25 fee will be incurred if a student adds an additional lesson type or makes significant changes to the lesson schedule. Additional lessons or schedule changes require staff coordination with the teacher(s), as well as accounting and facility arrangements.
+- Each potential student, whether new or returning, must complete a registration form on the [registration page](/registration/). Registrations may only be done online. Due to limited studio openings, submission of a new student registration does not guarantee enrollment in any studio. Disclaimer: Unless you register, there is no guarantee that a spot will be held for you in your teacher’s studio.
+- If the office does not receive payment before Friday at 5pm of the first week of lessons, you will be turned away from your next lesson and a {{< handbook_value "fees.late" >}} late fee will be added.
+- There is a one-time non-refundable {{< handbook_value "fees.registration" >}} fee for the initial setup of lessons for a student. An additional {{< handbook_value "fees.change" >}} fee will be incurred if a student adds an additional lesson type or makes significant changes to the lesson schedule. Additional lessons or schedule changes require staff coordination with the teacher(s), as well as accounting and facility arrangements.
 - Registration fees are waived for students who return within one year.
 - Advanced students may be required to play a prepared piece, sight-read an unfamiliar piece of music, and/or meet with the individual faculty member to discuss goals before being admitted to study.
 
@@ -19,25 +48,21 @@ The Saint Andrew’s Conservatory of Music exists to train musicians for the chu
 
 ### Lesson length options
 
-| Lesson length    | Price  |
-| ---------------- | ------ |
-| 30-minute lesson | $33.00 |
-| 45-minute lesson | $49.50 |
-| 60-minute lesson | $66.00 |
+{{< lesson_rates >}}
 
 ### Tuition
 
-Tuition will be due on or before the first day of the semester. The tuition for a full semester will be assessed to all students registering, regardless of what date they begin. Students who pay in full on or before the first day of the semester will have the fee reduced by the amount of one lesson. There is no prepayment discount for the summer semester. A convenient payment plan is also available for those who prefer to pay monthly with an additional $5.00 fee per month. Members of Saint Andrew’s Chapel receive a 20% discount. Fees for group classes will vary depending on the number of weeks a class runs.
+Tuition will be due on or before the first day of the semester. The tuition for a full semester will be assessed to all students registering, regardless of what date they begin. Students who pay in full on or before the first day of the semester will have the fee reduced by the amount of one lesson. There is no prepayment discount for the summer semester. A convenient payment plan is also available for those who prefer to pay monthly with an additional {{< handbook_value "fees.paymentPlan" >}} fee per month. Members of Saint Andrew’s Chapel receive a {{< handbook_value "discounts.member" >}} discount. Fees for group classes will vary depending on the number of weeks a class runs.
 
 ### Payment
 
-Payment by credit card, check, or cash must be made on or before the published due date. If paying by check, please make the check out to Saint Andrew’s Conservatory. Payments received after the due date will incur a $15.00 late fee. No lessons will be given to the student until payment has been made.
+Payment by credit card, check, or cash must be made on or before the published due date. If paying by check, please make the check out to Saint Andrew’s Conservatory. Payments received after the due date will incur a {{< handbook_value "fees.late" >}} late fee. No lessons will be given to the student until payment has been made.
 
-Students who withdraw after the registration deadline will incur a $25.00 fee. Please see the [Withdrawal Policy](#withdrawal) for more information.
+Students who withdraw after the registration deadline will incur a {{< handbook_value "fees.withdrawal" >}} fee. Please see the [Withdrawal Policy](#withdrawal) for more information.
 
 ### Scholarships
 
-Outstanding students who are recommended by their teacher after at least one full year of study may be considered for a 25% scholarship. Teachers must contact the Conservatory Office to request an application form.
+Outstanding students who are recommended by their teacher after at least one full year of study may be considered for a {{< handbook_value "discounts.scholarship" >}} scholarship. Teachers must contact the Conservatory Office to request an application form.
 
 ## Policies
 
@@ -62,13 +87,9 @@ We strongly discourage virtual lessons through the Conservatory. If there is a h
 
 ### Withdrawal
 
-Withdrawal requests must be made in writing (including email). A $25.00 fee will be collected for any withdrawal, unless waived by the Dean of the Conservatory. The Withdrawal Refund Policy is as follows:
+Withdrawal requests must be made in writing (including email). A {{< handbook_value "fees.withdrawal" >}} fee will be collected for any withdrawal, unless waived by the Dean of the Conservatory. The Withdrawal Refund Policy is as follows:
 
-| Week | Refund                  |
-| ---- | ----------------------- |
-| 1–3  | 100% of tuition balance |
-| 4–6  | 75% of tuition balance  |
-| 7–15 | 50% of tuition balance  |
+{{< refund_schedule >}}
 
 Tuition balance is defined as tuition remaining for lessons not taken.
 
@@ -116,43 +137,29 @@ Saint Andrew’s Conservatory reserves the right to dismiss any student due to f
 
 ## Private and group instruction
 
-Saint Andrew’s Conservatory faculty is committed to upholding the highest standards of musical excellence, using effective teaching methods and the finest curricula available. Our teachers are members of professional organizations such as National Federation of Music Teachers, Music Teachers National Association, National Association of Music Education, American Guild of Organists, Royal School of Music, and National Association of Teachers of Singing. We offer private instruction in organ, piano, violin, viola, cello, bass, voice, tenor and bass trombone.
+Saint Andrew’s Conservatory faculty is committed to upholding the highest standards of musical excellence, using effective teaching methods and the finest curricula available. Our teachers are members of professional organizations such as National Federation of Music Teachers, Music Teachers National Association, National Association of Music Education, American Guild of Organists, Royal School of Music, and National Association of Teachers of Singing.
 
 30-, 45-, or 60-minute lessons are available to adults and children. Lessons are typically scheduled once a week during the academic year.
 
-### Organ
+We offer private instruction in the studios below. Some have requirements for new students.
 
-Students are required to have access to an organ on which to practice during the week, which may include scheduled time on one of the Conservatory’s organs. Piano experience is necessary before beginning organ, and an audition with the teacher is required.
-
-### Piano
-
-Students are required to own or have regular access to a well-tuned acoustic piano on which to practice during the week. At this time there is a wait list for new piano students; please register online to reserve a spot on the waitlist.
-
-### Violin, viola, cello, and bass
-
-Students are required to own or have regular access to an appropriately sized string instrument. For cello and bass students an audition may be required depending on the student’s background.
-
-### Voice
-
-Students will primarily specialize in classical vocal repertoire. An audition may be required depending on the student’s background. At this time we do not accept voice students under the age of 14.
+{{< studio_requirements >}}
 
 ## Summer study
 
 Teachers and students will schedule six or eight lessons within the dates of the summer semester (see the [academic calendar](#academic-calendar)). This allows for flexible availability for both teacher and student.
 
-Each summer, we offer a five-day Summer Music Camp and Academy that provides a fun setting for students to learn and grow both musically and spiritually. Academy sessions are taught by contracted teachers who are confessing Christians and who take their mission as teachers/performers seriously.
-
-Our Summer Music Camp is open to students having completed grades K-4 with no previous musical experience required. Students will spend the week singing in choir, playing Orff instruments and handbells/handchimes.
-
-Our Summer Music Academy is open to students having completed grades 5-12 who are intermediate through advanced level musicians. Students will spend the week rehearsing in both small and larger ensemble settings.
+Each summer, we also offer a five-day Summer Music Camp, for students who have completed grades K–4, and Summer Music Academy, for intermediate to advanced musicians who have completed grades 5–12. Academy sessions are taught by contracted teachers who are confessing Christians and who take their mission as teachers and performers seriously. See the [Summer Academy page](/summer-academy/) for details.
 
 ## Academic calendar
 
-_Placeholder: this section will show the semester calendars from the Schedule page (Phase 3, group 5)._
+These calendars are also on the [Schedule page](/schedule/).
+
+{{< semester_calendars level=3 >}}
 
 ## Conservatory faculty
 
-_Placeholder: this section will list the faculty from the faculty pages (Phase 3, group 5)._
+{{< faculty_list >}}
 
 ## Conservatory staff
 
@@ -162,4 +169,4 @@ _Placeholder: this section will list the faculty from the faculty pages (Phase 3
 | Sharon Chang     | Conservatory Administrative Assistant    |
 | Stassia Petersen | Director of Accounting & Human Resources |
 
-If you have any questions or concerns, please contact Sharon Chang at schang@sachapel.com, or by calling the church office at (407) 328-1139.
+If you have any questions or concerns, please contact Sharon Chang at {{< contact "email" >}}, or call the church office at {{< contact "phone" >}}.

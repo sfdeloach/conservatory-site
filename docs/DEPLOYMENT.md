@@ -53,10 +53,10 @@ Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-s
 
 Run `make check`. It must pass before a change is published, and CI runs the same command.
 
-| Step                        | Command                                                                                               | Fails when                                                                                                                                            |
-| --------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Strict build (`make build`) | `hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings`                            | Hugo reports any error or warning. For example, a homepage button that points to a page that doesn't exist, or two pages that write to the same path. |
-| Internal link check         | `lychee --offline --include-fragments --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'` | A link in the built site points to a page, file, or `#anchor` that doesn't exist.                                                                     |
+| Step                        | Command                                                                                                                        | Fails when                                                                                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strict build (`make build`) | `hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings`                                                     | Hugo reports any error or warning. For example, a homepage button that points to a page that doesn't exist, or two pages that write to the same path. |
+| Internal link check         | `lychee --offline --include-fragments --index-files index.html --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'` | A link in the built site points to a page, file, or `#anchor` that doesn't exist.                                                                     |
 
 The build empties `public/` first, so files left over from an earlier build can't hide a broken link.
 

@@ -1,0 +1,28 @@
+{{/* Note:
+
+  Lists the faculty from the faculty pages as a table: name (linked to the
+  bio), credentials (params.postNominal), and instruments (studios), in
+  last-name order. Used in the handbook, so the list never falls out of date.
+*/}}
+
+{{- $rows := slice }}
+{{- range partial "faculty_sort.html" (site.GetPage "/faculty").Pages }}
+  {{- $studios := slice }}
+  {{- range .GetTerms "studios" }}
+    {{ $studios = $studios | append .LinkTitle }}
+  {{ end }}
+  {{- $rows = $rows | append (dict
+    "name" (printf `<a href="%s">%s</a>` .RelPermalink (htmlEscape .Title) | safeHTML)
+    "credentials" (.Params.postNominal | default "")
+    "instruments" (delimit $studios ", ")
+    )
+  }}
+{{- end }}
+{{ partial "simple_table.html"
+  (dict
+  "headers" (slice "Name" "Credentials" "Instruments")
+  "keys" (slice "name" "credentials" "instruments")
+  "rows" $rows
+  "label" "Conservatory faculty"
+  )
+}}

@@ -1,0 +1,21 @@
+{{/* Note:
+
+  Outputs one value from the student handbook's front matter
+  (content/handbook/index.md), such as a fee, so it is stored once. Call it
+  with a dotted path, as in: handbook_value "fees.late". Works on any page.
+  An unknown path fails the build.
+*/}}
+
+{{- $path := .Get 0 }}
+{{- $v := (site.GetPage "/handbook").Params }}
+{{- range split $path "." }}
+  {{- if reflect.IsMap $v }}
+    {{- $v = index $v (lower .) }}
+  {{- else }}
+    {{- $v = "" }}
+  {{- end }}
+{{- end }}
+{{- if not $v }}
+  {{- errorf "handbook_value: %q not found in content/handbook/index.md params (%s)" $path .Position }}
+{{- end }}
+{{- $v -}}

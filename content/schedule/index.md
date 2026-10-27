@@ -57,6 +57,6 @@ params:
           event: "Fall Recitals"
 ---
 
-Registration windows, payment dates, breaks, and recitals for each semester.
+Registration windows, payment dates, breaks, and recitals for each semester. The same calendars appear in the [student handbook](/handbook/#academic-calendar).
 
 {{< semester_calendars >}}

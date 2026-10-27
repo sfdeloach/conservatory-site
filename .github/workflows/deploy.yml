@@ -24,6 +24,9 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v7
+        with:
+          # Full history, so Hugo's enableGitInfo gives real page dates.
+          fetch-depth: 0
 
       - name: Install Hugo, Dart Sass, and lychee
         run: |

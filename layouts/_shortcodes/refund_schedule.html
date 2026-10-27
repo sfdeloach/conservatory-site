@@ -1,0 +1,18 @@
+{{/* Note:
+
+  Renders the withdrawal refund schedule from the student handbook's front
+  matter (params.refundSchedule: weeks, refund) as a table. Works on any page.
+*/}}
+
+{{- with (site.GetPage "/handbook").Params.refundSchedule }}
+  {{ partial "simple_table.html"
+    (dict
+    "headers" (slice "Week" "Refund")
+    "keys" (slice "weeks" "refund")
+    "rows" .
+    "label" "Withdrawal refund schedule"
+    )
+  }}
+{{- else }}
+  {{- errorf "refund_schedule: no params.refundSchedule in content/handbook/index.md (%s)" .Position }}
+{{- end }}

@@ -1,0 +1,101 @@
+@use "./tokens" as *;
+
+// The student handbook (layouts/handbook.html): a contents menu and the
+// prose. On narrow screens the menu is a collapsible block above the text;
+// from lg up it is a sidebar that stays in view.
+.handbook {
+  display: grid;
+  grid-template-areas: "updated" "toc" "body";
+  gap: space("lg");
+
+  // .prose normally spans main's full grid and keeps its own side gutter;
+  // here it sits in its own area, already inside main's gutter.
+  > .prose {
+    grid-area: body;
+    grid-template-columns:
+      [full-start] 1fr
+      [content-start] min(55ch, 100%) [content-end]
+      1fr [full-end];
+  }
+
+  @media (width >= breakpoint("lg")) {
+    grid-template-columns: space("hecto") 1fr;
+    grid-template-areas: "updated updated" "toc body";
+  }
+}
+
+.handbook-updated {
+  grid-area: updated;
+  color: color("text-dark-muted");
+  font-size: font-size("sm");
+  text-align: center;
+}
+
+.toc-mobile {
+  grid-area: toc;
+  width: min(100%, 55ch);
+  justify-self: center;
+  padding: space("sm") space("md");
+  border: 1px solid color("primary-opaque");
+  border-radius: radius("sm");
+
+  summary {
+    color: color("primary-dark");
+    font-family: font("serif"), serif;
+    font-size: font-size("md");
+    cursor: pointer;
+  }
+
+  @media (width >= breakpoint("lg")) {
+    display: none;
+  }
+}
+
+.toc-sidebar {
+  display: none;
+
+  @media (width >= breakpoint("lg")) {
+    position: sticky;
+    top: calc(space("xxl") + space("md"));
+    display: block;
+    grid-area: toc;
+    align-self: start;
+    max-height: calc(100vh - space("xxl") - space("lg"));
+    overflow-y: auto;
+  }
+}
+
+.toc-title {
+  margin-bottom: space("sm");
+  color: color("primary-dark");
+  font-family: font("serif"), serif;
+  font-size: font-size("md");
+}
+
+// The contents list, in both menus.
+:is(.toc-mobile, .toc-sidebar) {
+  ul ul {
+    padding-inline-start: space("md");
+  }
+
+  li {
+    margin-block: space("xs");
+    line-height: 1.3;
+  }
+
+  a {
+    color: color("text-dark-muted");
+
+    &:hover {
+      color: color("primary-dark");
+    }
+  }
+}
+
+@media print {
+  body:has(.handbook) :is(header, footer, .skip-link),
+  .toc-mobile,
+  .toc-sidebar {
+    display: none;
+  }
+}

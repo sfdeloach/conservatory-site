@@ -1,0 +1,18 @@
+{{/* Note:
+
+  Renders the lesson rates from the student handbook's front matter
+  (params.lessonRates: length, price) as a table. Works on any page.
+*/}}
+
+{{- with (site.GetPage "/handbook").Params.lessonRates }}
+  {{ partial "simple_table.html"
+    (dict
+    "headers" (slice "Lesson length" "Price")
+    "keys" (slice "length" "price")
+    "rows" .
+    "label" "Lesson rates"
+    )
+  }}
+{{- else }}
+  {{- errorf "lesson_rates: no params.lessonRates in content/handbook/index.md (%s)" .Position }}
+{{- end }}

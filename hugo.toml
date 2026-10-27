@@ -1,6 +1,8 @@
 baseURL = 'https://saintandrewsconservatory.org/'
 locale = 'en-us'
 title = 'Saint Andrew’s Conservatory of Music'
+# Page dates (.Lastmod) come from Git. CI checks out full history for this.
+enableGitInfo = true
 
 [params]
   [params.contact]
@@ -20,6 +22,10 @@ title = 'Saint Andrew’s Conservatory of Music'
 
 [markup.goldmark.parser.attribute]
   block = true
+
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
 
 [markup.highlight]
   codeFences = false

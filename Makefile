@@ -7,7 +7,7 @@ build: ## production minified build; fails on any Hugo warning
 	hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings $(HUGO_ARGS)
 
 check: build ## strict build plus internal link check (requires lychee)
-	lychee --offline --include-fragments --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'
+	lychee --offline --include-fragments --index-files index.html --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'
 
 clean: ## delete 'public' and 'resources' folders
 	rm -rf public

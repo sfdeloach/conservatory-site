@@ -1,0 +1,33 @@
+{{- define "main" -}}
+  {{ partial "page_header.html" . }}
+
+  {{- /* The newest change among the handbook and the pages it draws on. */}}
+  {{- $sources := slice . (site.GetPage "/schedule") }}
+  {{- $sources = $sources | append (site.GetPage "/faculty").Pages }}
+  {{- $sources = $sources | append (site.GetPage "/studios").Pages }}
+  {{- $updated := (index (sort $sources "Lastmod" "desc") 0).Lastmod }}
+
+  {{- /* .TableOfContents wraps the list in <nav id="TableOfContents">; it is
+    shown twice (narrow and wide screens), so keep only the list.
+  */}}
+  {{- $toc := .TableOfContents | replaceRE `</?nav[^>]*>` "" | safeHTML }}
+
+
+  <div class="handbook">
+    <p class="handbook-updated">
+      Last updated
+      <time datetime="{{ $updated.Format `2006-01-02` }}"
+        >{{ $updated.Format "January 2, 2006" }}</time
+      >
+    </p>
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      {{ $toc }}
+    </details>
+    <nav class="toc-sidebar" aria-label="Handbook contents">
+      <p class="toc-title">Contents</p>
+      {{ $toc }}
+    </nav>
+    {{ partial "prose.html" . }}
+  </div>
+{{- end -}}
