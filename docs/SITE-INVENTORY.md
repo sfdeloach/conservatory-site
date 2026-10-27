@@ -16,28 +16,28 @@ Migration status values:
 - **Not migrated:** the page exists here but has no body content.
 - **None:** no equivalent page exists here.
 
-| Old URL                  | Title                | New path                         | Status       | Redirect | Notes                                                                                 |
-| ------------------------ | -------------------- | -------------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------- |
-| `/`                      | Home                 | `/`                              | Migrated     | No       | Rewritten. See "Content only on the old site" below.                                  |
-| `/registration/`         | Registration         | `/registration/`                 | Not migrated | No       | Fall 2026 registration, fees, tuition, scholarships. Wufoo and Breeze links.          |
-| `/schedule/`             | Schedule             | `/schedule/`                     | Not migrated | No       | Summer 2026 and Fall 2026 semester calendars.                                         |
-| `/payments/`             | Payments             | `/payment/`                      | Not migrated | Yes      | Check payment details and three Breeze links.                                         |
-| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Both Wufoo forms are present. Dates are for July 2026.                                |
-| `/contact/`              | Contact Us           | `/contact/`                      | Not migrated | No       | WordPress contact form, a Google Maps link, and directions text.                      |
-| `/faculty/`              | Faculty              | `/faculty/`                      | Migrated     | No       | Same 12 faculty members.                                                              |
-| `/news/`                 | News                 | none                             | None         | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                 |
-| `/angelyn-traylor-chen/` | Angelyn Traylor Chen | `/faculty/traylor_chen_angelyn/` | Migrated     | Yes      |                                                                                       |
-| `/anne-jueng/`           | Anne Jueng           | `/faculty/jueng_anne/`           | Migrated     | Yes      |                                                                                       |
-| `/brian-bak-2/`          | Brian Bak            | `/faculty/bak_brian/`            | Migrated     | Yes      |                                                                                       |
-| `/cynthia-jimenez/`      | Cynthia Jimenez      | `/faculty/jimenez_cynthia/`      | Migrated     | Yes      |                                                                                       |
-| `/dr-terry-yount/`       | Dr. Terry Yount      | `/faculty/yount_terry/`          | Migrated     | Yes      |                                                                                       |
-| `/elise-jimenez/`        | Elise Jimenez        | `/faculty/jimenez_elise/`        | Migrated     | Yes      |                                                                                       |
-| `/kristen-swed/`         | Kristen Swed         | `/faculty/swed_kirsten/`         | Migrated     | Yes      | The old site spells the name both "Kristen" and "Kirsten". Staff confirmed "Kirsten". |
-| `/laura-yount/`          | Laura Yount          | `/faculty/yount_laura/`          | Migrated     | Yes      |                                                                                       |
-| `/nathan-petersen/`      | Nathan Petersen      | `/faculty/petersen_nathan/`      | Migrated     | Yes      |                                                                                       |
-| `/olga-ferroni/`         | Olga Ferroni         | `/faculty/ferroni_olga/`         | Migrated     | Yes      |                                                                                       |
-| `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated     | Yes      |                                                                                       |
-| `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated     | Yes      |                                                                                       |
+| Old URL                  | Title                | New path                         | Status       | Redirect | Notes                                                                                                                    |
+| ------------------------ | -------------------- | -------------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `/`                      | Home                 | `/`                              | Migrated     | No       | Rewritten. See "Content only on the old site" below.                                                                     |
+| `/registration/`         | Registration         | `/registration/`                 | Not migrated | No       | Fall 2026 registration, fees, tuition, scholarships. Wufoo and Breeze links.                                             |
+| `/schedule/`             | Schedule             | `/schedule/`                     | Not migrated | No       | Summer 2026 and Fall 2026 semester calendars.                                                                            |
+| `/payments/`             | Payments             | `/payment/`                      | Not migrated | Yes      | Check payment details and three Breeze links.                                                                            |
+| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in front matter, with their buttons switched off. |
+| `/contact/`              | Contact Us           | `/contact/`                      | Not migrated | No       | WordPress contact form, a Google Maps link, and directions text.                                                         |
+| `/faculty/`              | Faculty              | `/faculty/`                      | Migrated     | No       | Same 12 faculty members.                                                                                                 |
+| `/news/`                 | News                 | none                             | None         | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                                                    |
+| `/angelyn-traylor-chen/` | Angelyn Traylor Chen | `/faculty/traylor_chen_angelyn/` | Migrated     | Yes      |                                                                                                                          |
+| `/anne-jueng/`           | Anne Jueng           | `/faculty/jueng_anne/`           | Migrated     | Yes      |                                                                                                                          |
+| `/brian-bak-2/`          | Brian Bak            | `/faculty/bak_brian/`            | Migrated     | Yes      |                                                                                                                          |
+| `/cynthia-jimenez/`      | Cynthia Jimenez      | `/faculty/jimenez_cynthia/`      | Migrated     | Yes      |                                                                                                                          |
+| `/dr-terry-yount/`       | Dr. Terry Yount      | `/faculty/yount_terry/`          | Migrated     | Yes      |                                                                                                                          |
+| `/elise-jimenez/`        | Elise Jimenez        | `/faculty/jimenez_elise/`        | Migrated     | Yes      |                                                                                                                          |
+| `/kristen-swed/`         | Kristen Swed         | `/faculty/swed_kirsten/`         | Migrated     | Yes      | The old site spells the name both "Kristen" and "Kirsten". Staff confirmed "Kirsten".                                    |
+| `/laura-yount/`          | Laura Yount          | `/faculty/yount_laura/`          | Migrated     | Yes      |                                                                                                                          |
+| `/nathan-petersen/`      | Nathan Petersen      | `/faculty/petersen_nathan/`      | Migrated     | Yes      |                                                                                                                          |
+| `/olga-ferroni/`         | Olga Ferroni         | `/faculty/ferroni_olga/`         | Migrated     | Yes      |                                                                                                                          |
+| `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated     | Yes      |                                                                                                                          |
+| `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated     | Yes      |                                                                                                                          |
 
 Pages that are new in this project and have no old equivalent: `/studios/` and its eight studio pages.
 

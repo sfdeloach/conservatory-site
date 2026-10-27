@@ -45,6 +45,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `card.html` is the card in card lists. Its header comment documents its parameters, including the optional `sizes` and `headingLevel` (use `3` when cards sit under a section's `<h2>`, as on the homepage).
   - `cta.html` and `cta_group.html` render buttons from `{label, page, style}` lists in front matter. A missing target page triggers a build warning.
   - `header.html`, `footer.html`, `site_nav_list.html`, `logo.html`, `page_header.html`, and `studios_text.html` cover the rest of the page chrome.
+- **Shortcodes** (`layouts/_shortcodes/`): `registration_button.html` shows a registration button from `params.registration.<key>` (`open`, `label`, `url`) only while `open` is true. Used on the Summer Academy page.
 - **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on).
 - **Script:** `assets/js/script.js` toggles the mobile navigation menu.
 - **Static files:** `static/` holds self-hosted fonts (EB Garamond, Nunito, Incognito Pro) and the favicon.
@@ -73,7 +74,6 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - `content/registration/`, `content/payment/`, `content/schedule/`, and `content/contact/` have front matter only and no body. Their content is still on the old site (see [docs/SITE-INVENTORY.md](docs/SITE-INVENTORY.md)).
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
 - The student handbook PDF is hosted only on the old WordPress site. Phase 3 replaces it with a web page at `/handbook/` (see the roadmap).
-- The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed. Phase 3 replaces them with "Dates for 2027 coming soon".
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 
 ## Documentation

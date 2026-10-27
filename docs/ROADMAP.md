@@ -13,7 +13,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 0     | Repository discovery and documentation                | Done        |
 | 1     | Production hosting and CI/CD                          | Done        |
 | 2     | Complete the homepage                                 | Done        |
-| 3     | Content migration, typography, and Markdown rendering | Not started |
+| 3     | Content migration, typography, and Markdown rendering | In progress |
 | 4     | Registration and payment workflows                    | Not started |
 | 5     | Accessibility, quality assurance, and SEO             | Not started |
 | 6     | Launch readiness and domain cutover                   | Not started |
@@ -157,12 +157,12 @@ Conservatory staff answered the content questions on 2026-10-27. Their decisions
 
 Work through the groups in this order. Each group is one or more small commits.
 
-1. **Quick content fixes**
-   - Sort faculty lists by last name. A compound last name sorts by its first word, so Angelyn Traylor Chen sorts under T.
+1. **Quick content fixes** (done on 2026-10-27)
+   - Sort faculty lists by last name. A compound last name sorts by its first word, so Angelyn Traylor Chen sorts under T. **Done:** lists sort by folder name through `_partials/faculty_sort.html`.
    - Summer Academy page:
      - Replace the July 2026 dates with "Dates for 2027 coming soon".
-     - Keep the general program descriptions. Remove the price, the audition deadlines, and the number of orchestras.
-     - Replace the two closed "Register Here" links with a front matter switch (such as `registrationOpen: false`) and the form URL, so registration can be reopened without editing templates. Phase 4.1 may move the URL to a shared location.
+     - Keep the general program descriptions. Remove the price, the audition deadlines, and the number of orchestras. The instrument list is now general too ("strings, winds, and keyboard instruments").
+     - Replace the two closed "Register Here" links with a front matter switch and the form URL, so registration can be reopened without editing templates. Phase 4.1 may move the URL to a shared location. **Done:** `params.registration.camp` and `.academy` (`open`, `label`, `url`), rendered by the `registration_button` shortcode. Both are off.
 2. **Prose typography**
    - Introduce a consistent `.prose` wrapper for Markdown content.
    - Establish comfortable reading widths, generally around 65–75 characters per line.
@@ -251,7 +251,7 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Keep semester registration, Summer Academy registration, and payment destinations distinct.
 - Make routine URL updates possible without modifying templates or application logic wherever practical.
 - Avoid duplicating the same destination across multiple files.
-- Fit the Summer Academy registration switch built in Phase 3 (`registrationOpen` and the form URL) into this approach.
+- Fit the Summer Academy registration switch built in Phase 3 (`params.registration` and the `registration_button` shortcode) into this approach.
 
 ### 4.2 Build the Registration and Payment pages
 

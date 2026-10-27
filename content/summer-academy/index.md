@@ -6,6 +6,15 @@ menus:
 draft: false
 params:
   image: "summer-academy.jpg"
+  registration:
+    camp:
+      open: false
+      label: "Register for Summer Music Camp"
+      url: "https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/"
+    academy:
+      open: false
+      label: "Register for Summer Music Academy"
+      url: "https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/"
 ---
 
 Summer Music Camp and Academy at Saint Andrew’s Conservatory are unique opportunities to combine fun with musical exploration. Students have the chance to participate in music ensembles and refine their musical skills. They are mentored and taught by caring instructors who are exceptional teachers and performers on various instruments. Participants learn about music in a fun environment where God is honored and glorified.
@@ -16,30 +25,28 @@ Elementary school students get to participate in live performance on a variety o
 
 ## Summer Music Camp
 
-### July 20-24, 2026, 9am – 12pm
+### Dates for 2027 coming soon
 
 For rising 1st through 5th graders, no music experience necessary.
 
 Students will explore music in a group context with their peers as they engage with choral music, ORFF instruments, handbells, and a variety of other musical activities.
 
-[Register Here](https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/)
+{{< registration_button "camp" >}}
 
 ---
 
 ## Summer Music Academy
 
-### July 20-24, 2026, 12:30pm – 5:30pm
+### Dates for 2027 coming soon
 
-For rising 6th through graduated high school seniors with instrumental experience (audition video required, including for returning students). We offer ensemble experiences with Violin, Viola, Cello/Bass, Flute, Piano, and Organ.
+For rising 6th through graduated high school seniors with instrumental experience (audition video required, including for returning students). We offer ensemble experiences for strings, winds, and keyboard instruments.
 
-Instead of having all students in one large string orchestra, this year’s Academy will offer two separate orchestras–one for advanced students and one for early-intermediate students. This will allow us to challenge more experienced students while providing an opportunity for younger students to have success with less demanding repertoire.
+Each student participates in orchestra, in addition to smaller chamber ensembles organized by ability. Each ensemble has instruction time with a different faculty member each day throughout the week, which gives students a broad experience with different coaching perspectives from our experienced faculty.
 
-Each student will participate in one orchestra, in addition to smaller chamber ensembles organized by ability. Each ensemble will have instruction time with a different faculty member each day throughout the week, which will allow the students to have a broad experience with different coaching perspectives from our experienced faculty.
+The week ends with a final concert for family and friends in the sanctuary.
 
-A final concert for family and friends will be held on Friday, July 24, at 7:00pm in the sanctuary.
-
-$240 per student. Please note your registration will be pending until your audition video has been adjudicated. An audition does not guarantee admittance. The video audition deadline is Monday, May 4, 2026, and all students will be notified of acceptance by May 15th. Accepted students will receive music assignments prior to Summer Music Academy and should learn their parts as thoroughly as possible before the start of the Academy week. Accepted students will receive an invoice on July 1.
+Registration is pending until your audition video has been adjudicated. An audition does not guarantee admittance. Accepted students will receive music assignments before the Academy week and should learn their parts as thoroughly as possible before it begins.
 
 Details of the audition requirements, including video submission instructions, are on the registration form.
 
-[Register Here](https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/)
+{{< registration_button "academy" >}}

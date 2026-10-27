@@ -101,6 +101,22 @@ The address, phone number, and email in the footer come from `[params.contact]` 
 
 ## Registration and payment links
 
+### Opening Summer Academy registration
+
+The Summer Academy page has one registration button for Summer Music Camp and one for Summer Music Academy. Each is set in the front matter of `content/summer-academy/index.md`:
+
+```yaml
+registration:
+  camp:
+    open: false # true shows the button, false hides it
+    label: "Register for Summer Music Camp" # button text
+    url: "https://sachapel.wufoo.com/forms/…" # the registration form
+```
+
+To open registration, paste the new form's address into `url` and change `open` to `true`. When registration closes, change `open` back to `false`. Also replace "Dates for 2027 coming soon" in the page text with the dates. If `open` is `true` and `url` is empty, the build fails and nothing is published.
+
+### Other registration and payment links
+
 _To be completed in Phase 4._ This section will describe where each registration form and payment link is kept, how to replace them each semester and each summer, and the checklist to follow before a registration period opens. The current links are listed in [SITE-INVENTORY.md](SITE-INVENTORY.md).
 
 ## Publishing changes

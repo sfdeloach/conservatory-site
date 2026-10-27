@@ -1,0 +1,24 @@
+{{/* Note:
+
+  Renders a registration button from the page's front matter, only while
+  registration is open. Call it in the page body with one argument, the key
+  of an entry under params.registration, such as "camp".
+
+  Each entry defines:
+
+  open (true shows the button, false shows nothing)
+  label (button text)
+  url (registration form; required when open is true)
+*/}}
+
+{{- $key := .Get 0 }}
+{{- with index (.Page.Params.registration | default dict) $key }}
+  {{- if .open }}
+    {{- if not .url }}
+      {{- errorf "registration_button: registration.%s is open but has no url (%s)" $key $.Position }}
+    {{- end }}
+    <a href="{{ .url }}" class="btn btn-primary">{{ .label }}</a>
+  {{- end }}
+{{- else }}
+  {{- errorf "registration_button: no registration.%s in front matter (%s)" $key $.Position }}
+{{- end }}
