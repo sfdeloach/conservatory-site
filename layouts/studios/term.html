@@ -1,4 +1,9 @@
 {{- define "main" -}}
+  {{- if not .File }}
+    {{- $tagged := slice }}
+    {{- range .Pages }}{{ $tagged = $tagged | append .File.Path }}{{ end }}
+    {{- errorf "studios: %q has no content/studios/%s/_index.md. Check the studios: list in %s" .Data.Term .Data.Term (delimit $tagged ", ") }}
+  {{- end }}
   {{ partial "page_header.html" . }}
   {{ partial "prose.html" . }}
   <ul class="card-list">

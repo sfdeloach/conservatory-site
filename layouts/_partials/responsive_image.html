@@ -13,6 +13,9 @@
   altText (optional)
   isLazyLoaded (optional, defaults to 'eager')
   hasFetchPriority (optional, defaults to 'auto')
+
+  The build fails if no image in the page bundle matches resource. If the image
+  is smaller than every requested width, a single WebP at its own size is used.
 */}}
 
 {{- with .context }}
@@ -37,6 +40,18 @@
       {{- end }}
     {{- end }}
 
+    {{- if not $images }}
+      {{- $spec := printf "resize %dx webp q80" $src.Width }}
+      {{- if $.aspectRatio }}
+        {{- $w := int (math.Min $src.Width (math.Floor (mul $src.Height (float $.aspectRatio)))) }}
+        {{- $h := int (math.Round (div $w (float $.aspectRatio))) }}
+        {{- $spec = printf "fill %dx%d %s webp q80" $w $h $.cropAnchor }}
+      {{- end }}
+      {{- $img := $src.Process $spec }}
+      {{- $images = slice $img }}
+      {{- $srcSet = slice (printf "%s %dw" $img.RelPermalink $img.Width) }}
+    {{- end }}
+
     {{- with $images -}}
       {{- $fallback := index . 0 }}
       <img
@@ -52,5 +67,7 @@
         {{ with $.hasFetchPriority }}fetchpriority="high"{{ end -}}
       />
     {{ end -}}
+  {{- else }}
+    {{- errorf "responsive_image: no image matching %v in %s" $.resource .Path }}
   {{ end -}}
 {{ end -}}
