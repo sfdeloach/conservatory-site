@@ -182,9 +182,17 @@ Work through the groups in this order. Each group is one or more small commits.
      - No heading hook was needed: Goldmark gives every heading an id, and staff don't want visible "#" links.
      - Internal links are now checked twice: by the link hook at build time, naming the source line, and by lychee on the built site, including fragments.
      - The build also fails on a missing image file, a missing alt text, a bundle with no matching image (such as a faculty folder without a headshot), and a `studios:` entry with no studio page.
-4. **Links and narrow screens**
+4. **Links and narrow screens** (done on 2026-10-27)
    - Ensure links are distinguishable, keyboard-accessible, and visually consistent.
    - Handle long URLs, wide tables, and embedded content on narrow screens.
+   - **Done:**
+     - Every link colour meets WCAG AA contrast. Prose links are also underlined.
+     - The footer focus ring was 1.8:1 against the dark background; it is now light.
+     - A "Skip to content" link is the first focus stop on every page.
+     - `scroll-padding-top` keeps section links clear of the sticky header.
+     - Footer links no longer open a new tab, so every link opens in the same tab.
+     - Long URLs and words break in prose, embeds fit the column, and code blocks and wide tables scroll inside their own box.
+     - Checked at 320px: no page scrolls sideways. Full keyboard and contrast testing stays in Phase 5.
 5. **Content migration**, using the Phase 0 inventory. This covers Schedule, Contact, the studio requirements, and the student handbook. The Registration and Payment pages are written in Phase 4.2, after their external links are centralized, so they are not written twice.
    - **Contact:**
      - The address, phone, and email come from `params.contact`.

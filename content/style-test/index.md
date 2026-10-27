@@ -57,6 +57,14 @@ A wide table:
 | Spring 2026 | December 1         | December 31         | January 2     | January 5       | January 9   | March 16 – 20 | May 1         | May 4 – 8       | May 4, 5 & 7       |
 | Fall 2026   | July 1             | August 3            | August 7      | August 10       | August 14   | October 5 – 9 | December 4    | December 7 – 11 | December 7, 8 & 10 |
 
+An unbroken word: Pneumonoultramicroscopicsilicovolcanoconiosis-and-then-some-more-without-spaces.
+
+## Embeds
+
+A YouTube video through Hugo's built-in shortcode:
+
+{{< youtube id="0RKpf3rK57I" >}}
+
 ## Code
 
 ```text

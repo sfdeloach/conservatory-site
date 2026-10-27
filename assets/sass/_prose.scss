@@ -13,6 +13,8 @@
   margin-bottom: space("lg");
   font-size: font-size("std");
   line-height: 1.6;
+  // Break long URLs and words only where they would overflow the column.
+  overflow-wrap: break-word;
 
   @media (width >= breakpoint("md")) {
     font-size: font-size("prose");
@@ -135,6 +137,19 @@
       padding: 0;
       background: none;
     }
+  }
+
+  // Embeds come only from shortcodes (raw HTML is off). Hugo's youtube and
+  // vimeo shortcodes size themselves; this keeps anything else in bounds.
+  :is(iframe, video, embed, object) {
+    max-width: 100%;
+  }
+
+  iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
   }
 
   img {

@@ -36,7 +36,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - Top-level pages (`registration`, `payment`, `schedule`, `contact`, `summer-academy`) get into the main navigation through `menus.main.weight` and use `params.image`.
   - Draft pages, shown only by `hugo server -D` and never published: `content/style-test/` has every Markdown element the site styles, for checking typography; `content/handbook/` is the student handbook in progress (roadmap Phase 3).
 - **Layouts** (`layouts/`):
-  - `baseof.html` is the shell: Sass pipeline, fingerprinted CSS and JS, font preload.
+  - `baseof.html` is the shell: Sass pipeline, fingerprinted CSS and JS, font preload, and a "Skip to content" link (styled in `_base.scss`) to `<main id="main">`. `_base.scss` sets `scroll-padding-top` so section links land below the sticky header.
   - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
   - `page.html` and `section.html` are generic. `section.html` renders a card list of child pages.
   - `page_faculty_bio.html` is the faculty bio layout.
@@ -60,6 +60,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 ## Conventions
 
 - Follow the existing patterns. Reuse the partials, put content in front matter `params`, and keep images in page bundles.
+- Links open in the same tab. Don't add `target="_blank"`.
 - Write YAML front matter in content files. Note that `archetypes/default.md` still produces TOML.
 - Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`).
 - Make small, focused changes. After each one, run `make check`.
