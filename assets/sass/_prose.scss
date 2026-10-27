@@ -89,6 +89,16 @@
     margin-block: space("lg");
   }
 
+  // Wrapper from layouts/_markup/render-table.html.
+  .table-scroll {
+    overflow-x: auto;
+
+    &:focus-visible {
+      outline: 2px solid color("primary");
+      outline-offset: space("xs");
+    }
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -139,6 +149,6 @@
   figcaption {
     margin-top: space("sm");
     color: color("text-dark-muted");
-    font-size: font-size("sm");
+    font-size: 0.875em;
   }
 }

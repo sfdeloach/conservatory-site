@@ -1,0 +1,42 @@
+{{/* Note:
+
+  Renders Markdown tables inside a .table-scroll wrapper, so a wide table
+  scrolls sideways on a narrow screen instead of widening the page. The
+  wrapper is focusable, so keyboard users can scroll it too. Attributes from
+  a block attribute (such as {.full-bleed}) go on the wrapper.
+*/}}
+
+
+<div
+  class="table-scroll {{ .Attributes.class }}"
+  {{ with .Attributes.id }}id="{{ . }}"{{ end }}
+  tabindex="0"
+  role="region"
+  aria-label="Table"
+>
+  <table>
+    <thead>
+      {{- range .THead }}
+        <tr>
+          {{- range . }}
+            <th {{ with .Alignment }}style="text-align: {{ . }}"{{ end }}>
+              {{- .Text -}}
+            </th>
+          {{- end }}
+        </tr>
+      {{- end }}
+    </thead>
+    <tbody>
+      {{- range .TBody }}
+        <tr>
+          {{- range . }}
+            <td {{ with .Alignment }}style="text-align: {{ . }}"{{ end }}>
+              {{- .Text -}}
+            </td>
+          {{- end }}
+        </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
+{{- /* chomp trailing newline */ -}}
