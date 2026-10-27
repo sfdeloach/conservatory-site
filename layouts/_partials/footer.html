@@ -11,12 +11,7 @@
 </a>
 
 <address class="footer-address">
-  <a
-    href="https://www.google.com/maps/search/?api=1&query=
-    {{- with .Site.Params.contact -}}
-      {{ printf `%s, %s` .address .cityStZip -}}
-    {{ end }}"
-  >
+  <a href="{{ partial "map_url.html" . }}">
     <p>{{- .Site.Params.contact.address -}}</p>
     <p>{{- .Site.Params.contact.cityStZip -}}</p>
   </a>

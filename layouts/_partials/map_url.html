@@ -1,0 +1,10 @@
+{{/* Note:
+
+  Returns the Google Maps search URL for the address in params.contact
+  (hugo.toml). Used by the footer and the contact shortcode, so the address
+  has one source. Call it as: partial "map_url.html" .
+*/}}
+
+{{- $q := printf "%s, %s" site.Params.contact.address site.Params.contact.cityStZip }}
+{{- $url := printf "https://www.google.com/maps/search/?api=1&query=%s" (urlquery $q) | safeURL }}
+{{- return $url -}}
