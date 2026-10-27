@@ -1,7 +1,6 @@
 ---
 title: Kirsten Swed
 layout: "page_faculty_bio"
-weight: 0
 draft: false
 studios:
   - "piano"

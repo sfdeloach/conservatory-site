@@ -53,7 +53,7 @@ Each path must match a folder under `content/faculty/`. If it doesn't, the build
 
 ## Adding or updating a faculty member
 
-1. Create a folder under `content/faculty/` named `lastname_firstname`, such as `content/faculty/bak_brian/`.
+1. Create a folder under `content/faculty/` named `lastname_firstname` in lowercase, such as `content/faculty/bak_brian/`. Faculty lists are sorted by this folder name, so it sets the last-name order. For a compound last name, write the whole last name first, with words joined by `_`, as in `traylor_chen_angelyn`.
 2. Add a headshot to the folder, named `headshot`, with any common image extension (`headshot.jpg`, `.png`, `.webp`). Portrait photos work best. The top of the photo is kept when it is cropped.
 3. Create `index.md` in that folder:
 
@@ -61,7 +61,6 @@ Each path must match a folder under `content/faculty/`. If it doesn't, the build
    ---
    title: Firstname Lastname
    layout: "page_faculty_bio"
-   weight: 0
    draft: false
    studios:
      - "piano"
@@ -74,9 +73,7 @@ Each path must match a folder under `content/faculty/`. If it doesn't, the build
 
    - `studios` lists the studios this person teaches in. Each entry must match a folder name under `content/studios/`.
    - `postNominal` is optional. It is shown after the name, as in "Brian Bak, DMA".
-   - `weight` sets the order. Lower numbers come first. `0` means "no weight": those pages are listed after weighted ones, sorted by title, which is the first name. Every current faculty member uses `0`.
-
-To remove a faculty member, delete their folder. If they are featured on the homepage, also remove them from `faculty.featured` in `content/_index.md`, or the build fails.
+     To remove a faculty member, delete their folder. If they are featured on the homepage, also remove them from `faculty.featured` in `content/_index.md`, or the build fails.
 
 ## Adding a studio
 

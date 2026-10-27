@@ -31,7 +31,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 - `hugo.toml` holds the site config: `baseURL`, the title, contact details under `params.contact`, and the `studios` taxonomy (`studio = "studios"`).
 - **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them.
   - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter.
-  - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, `weight` for ordering, and an optional `params.postNominal`.
+  - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, and an optional `params.postNominal`. Faculty lists sort by folder name (last name) through `_partials/faculty_sort.html`, not by `weight`.
   - `content/studios/<term>/_index.md` holds the content for each `studios` taxonomy term page, with an `instrument.jpg` image. Faculty pages are tagged with these terms.
   - Top-level pages (`registration`, `payment`, `schedule`, `contact`, `summer-academy`) get into the main navigation through `menus.main.weight` and use `params.image`.
 - **Layouts** (`layouts/`):
@@ -74,7 +74,6 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
 - The student handbook PDF is hosted only on the old WordPress site. Phase 3 replaces it with a web page at `/handbook/` (see the roadmap).
 - The Summer Academy dates (July 2026) in `content/summer-academy/index.md` have already passed. Phase 3 replaces them with "Dates for 2027 coming soon".
-- Every faculty member has `weight: 0`, so the faculty list sorts by title, which is the first name. Staff want it sorted by last name (Phase 3).
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 
 ## Documentation

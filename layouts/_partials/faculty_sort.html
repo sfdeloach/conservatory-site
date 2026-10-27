@@ -1,0 +1,11 @@
+{{/* Note:
+
+  Returns a collection of faculty pages sorted by last name. Pass the pages as
+  the context, as in: partial "faculty_sort.html" .Pages
+
+  The sort key is the page bundle's folder name, which is lastname_firstname
+  (content/faculty/<last>_<first>/). A compound last name is written in full
+  first, as in traylor_chen_angelyn, so it sorts by its first word.
+*/}}
+
+{{- return sort . "File.ContentBaseName" -}}

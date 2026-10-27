@@ -2,7 +2,7 @@
   {{ partial "page_header.html" . }}
   {{- .Content -}}
   <ul class="card-list">
-    {{- range .Pages -}}
+    {{- range partial "faculty_sort.html" .Pages -}}
       {{ partial "card.html"
         (dict
         "context" .
