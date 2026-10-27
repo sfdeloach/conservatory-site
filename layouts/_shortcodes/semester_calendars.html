@@ -1,0 +1,27 @@
+{{/* Note:
+
+  Renders the semester calendars stored in the Schedule page's front matter
+  (content/schedule/index.md, params.semesters): for each semester, a heading,
+  its summary, and a table of dates. Used on the Schedule page and in the
+  handbook, so the calendars have one source.
+
+  level (optional, the heading level, defaults to 2)
+*/}}
+
+{{- $level := int (.Get "level" | default 2) }}
+{{- $semesters := (site.GetPage "/schedule").Params.semesters }}
+{{- if not $semesters }}
+  {{- errorf "semester_calendars: no params.semesters in content/schedule/index.md (%s)" .Position }}
+{{- end }}
+{{- range $semesters }}
+  {{ printf `<h%d id="%s">%s</h%d>` $level (anchorize .name) (htmlEscape .name) $level | safeHTML }}
+  {{ with .summary }}<p>{{ . }}</p>{{ end }}
+  {{ partial "simple_table.html"
+    (dict
+    "headers" (slice "Date" "Event")
+    "keys" (slice "date" "event")
+    "rows" .dates
+    "label" (printf "%s calendar" .name)
+    )
+  }}
+{{- end }}

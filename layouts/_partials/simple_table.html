@@ -1,0 +1,39 @@
+{{/* Note:
+
+  Renders a table from data, with the same markup as Markdown tables
+  (layouts/_markup/render-table.html), so it gets the same styles and scrolls
+  sideways on narrow screens. Requires a dictionary:
+
+  headers (slice of column headings)
+  keys (slice of map keys, one per column, in the same order as headers)
+  rows (slice of maps, such as a front matter list; cells are text or
+  safeHTML)
+  label (optional, the region's accessible name, defaults to "Table")
+*/}}
+
+
+<div
+  class="table-scroll"
+  tabindex="0"
+  role="region"
+  aria-label="{{ .label | default `Table` }}"
+>
+  <table>
+    <thead>
+      <tr>
+        {{- range .headers }}
+          <th>{{ . }}</th>
+        {{- end }}
+      </tr>
+    </thead>
+    <tbody>
+      {{- range $row := .rows }}
+        <tr>
+          {{- range $.keys }}
+            <td>{{ index $row . }}</td>
+          {{- end }}
+        </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
