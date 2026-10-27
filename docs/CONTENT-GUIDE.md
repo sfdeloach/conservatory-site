@@ -10,14 +10,15 @@ Preview your changes with `hugo server` before publishing them (see [README.md](
 
 1. Open the page's file:
 
-   | Page            | File                              |
-   | --------------- | --------------------------------- |
-   | Registration    | `content/registration/index.md`   |
-   | Schedule        | `content/schedule/index.md`       |
-   | Payment         | `content/payment/index.md`        |
-   | Contact         | `content/contact/index.md`        |
-   | Summer Academy  | `content/summer-academy/index.md` |
-   | Studios (intro) | `content/studios/_index.md`       |
+   | Page             | File                              |
+   | ---------------- | --------------------------------- |
+   | Student handbook | `content/handbook/index.md`       |
+   | Registration     | `content/registration/index.md`   |
+   | Schedule         | `content/schedule/index.md`       |
+   | Payment          | `content/payment/index.md`        |
+   | Contact          | `content/contact/index.md`        |
+   | Summer Academy   | `content/summer-academy/index.md` |
+   | Studios (intro)  | `content/studios/_index.md`       |
 
 2. Edit the text below the front matter. Use `##` for headings, `-` for bullet lists, and `[link text](https://example.com)` for links.
 
@@ -105,9 +106,63 @@ Each path must match a folder under `content/faculty/`. If it doesn't, the build
 
 4. Add the studio's name to the `studios:` list of each faculty member who teaches it.
 
+### Studio requirements
+
+A studio can list requirements for new students, such as an audition or a minimum age. They appear on the studio's page under "Requirements" and in the student handbook. Add them to the studio's `_index.md`:
+
+```yaml
+params:
+  image: "instrument.jpg"
+  requirements:
+    - "An audition with the teacher is required."
+    - "Students must be at least 14 years old."
+```
+
+Leave `requirements` out if there are none. The studio page then shows no Requirements section, and the handbook says "No additional requirements."
+
+## Updating the semester schedule
+
+The semester calendars are in the front matter of `content/schedule/index.md`, under `semesters`. They appear on the Schedule page and in the student handbook, so you only edit them here. Update them when each new calendar is ready: Spring in early November, Summer in March or April, and Fall in June or July.
+
+```yaml
+semesters:
+  - name: "Fall 2026" # the heading
+    summary: "15 weeks of instruction." # one line under the heading
+    dates:
+      - date: "July 1" # any text, such as "October 5–9"
+        event: "Registration opens"
+```
+
+Add the new semester's entry, and remove a semester once it has ended. Semesters appear in the order listed. The build fails if the list is empty.
+
+## The student handbook
+
+The handbook is one page at `/handbook/`, edited in `content/handbook/index.md`. Edit its text like any other page. Some parts come from elsewhere, so change them there:
+
+| Part of the handbook                        | Where to change it                                                 |
+| ------------------------------------------- | ------------------------------------------------------------------ |
+| Academic calendar                           | `content/schedule/index.md` (see "Updating the semester schedule") |
+| Conservatory faculty                        | The faculty pages (see "Adding or updating a faculty member")      |
+| Studios and their requirements              | The studio pages (see "Studio requirements")                       |
+| Contact email and phone                     | `[params.contact]` in `hugo.toml`                                  |
+| Fees, discounts, lesson rates, refund table | The handbook's own front matter (below)                            |
+
+Fees are written into the text with a shortcode, such as `{{< handbook_value "fees.late" >}}`, which shows the value stored in the front matter:
+
+```yaml
+params:
+  fees:
+    late: "$15" # change the amount here; every mention updates
+  lessonRates:
+    - length: "30-minute lesson"
+      price: "$33.00"
+```
+
+The contents menu is built from the headings (`##` and `###`), and the "Last updated" date changes by itself whenever the handbook or one of those sources changes.
+
 ## Contact details
 
-The address, phone number, and email in the footer come from `[params.contact]` in `hugo.toml`.
+The address, phone number, and email in the footer, on the Contact page, and in the handbook come from `[params.contact]` in `hugo.toml`. The map link is built from the address.
 
 ## Registration and payment links
 

@@ -193,7 +193,7 @@ Work through the groups in this order. Each group is one or more small commits.
      - Footer links no longer open a new tab, so every link opens in the same tab.
      - Long URLs and words break in prose, embeds fit the column, and code blocks and wide tables scroll inside their own box.
      - Checked at 320px: no page scrolls sideways. Full keyboard and contrast testing stays in Phase 5.
-5. **Content migration**, using the Phase 0 inventory. This covers Schedule, Contact, the studio requirements, and the student handbook. The Registration and Payment pages are written in Phase 4.2, after their external links are centralized, so they are not written twice.
+5. **Content migration** (done on 2026-10-27), using the Phase 0 inventory. This covers Schedule, Contact, the studio requirements, and the student handbook. The Registration and Payment pages are written in Phase 4.2, after their external links are centralized, so they are not written twice.
    - **Contact:**
      - The address, phone, and email come from `params.contact`.
      - Include the directions text ("near I-4 and SR 46 in Sanford") and the map link. Check that the `goo.gl` map link still works, and replace it with a full Google Maps URL if it doesn't.
@@ -203,12 +203,24 @@ Work through the groups in this order. Each group is one or more small commits.
      - Start with the old site's Summer and Fall 2026 calendars. Staff expect the Spring 2027 calendar in November 2026.
    - **Studio requirements:**
      - Add `params.requirements` to each studio, as a list of zero or more requirements. They are shown on the studio's page and in the handbook.
-     - A studio with no requirements shows nothing, or a short generic message. Choose which when building it.
+     - A studio with no requirements shows nothing on its page, and "No additional requirements." in the handbook (decided 2026-10-27).
      - Fill them only from the 2026 handbook (organ, piano, violin, viola, cello, and voice). Staff add others later.
    - **Student handbook:** see [Student handbook](#student-handbook) below.
+   - **Done:**
+     - Contact and Schedule are migrated. The `goo.gl` map link still worked, but it is replaced by a Maps search built from `params.contact`, shared with the footer.
+     - Studio requirements are on six studio pages.
+     - The handbook is published at `/handbook/`, with every source in the table below.
+     - `make check` now runs lychee with `--index-files index.html`, so fragments on directory links (such as `/handbook/#academic-calendar`) are checked.
+     - The fee amounts in the handbook are now written consistently (`$15`, not `$15.00`).
 6. **Staff review**
    - Review content accuracy with conservatory staff, including dates, faculty, programs, and contact details.
    - Include the list of handbook corrections below.
+   - Also confirm:
+     - **Schedule:** the old site listed May 25, 2026 as "Labor Day". The new site says Memorial Day, as the handbook does.
+     - **Schedule:** the Summer summary adds the handbook's "30-minute lesson minimum per student".
+     - **Piano:** the handbook's wait-list note is carried over as a piano requirement. Is it still current?
+     - **Requirements:** the wording of each studio's requirements, reworded slightly from the handbook (for example "an appropriately sized violin").
+     - **Handbook:** the Summer study section is now a one-paragraph summary linking to the Summer Academy page.
 
 ### Student handbook
 

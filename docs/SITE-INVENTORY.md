@@ -16,28 +16,28 @@ Migration status values:
 - **Not migrated:** the page exists here but has no body content.
 - **None:** no equivalent page exists here.
 
-| Old URL                  | Title                | New path                         | Status       | Redirect | Notes                                                                                                                    |
-| ------------------------ | -------------------- | -------------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `/`                      | Home                 | `/`                              | Migrated     | No       | Rewritten. See "Content only on the old site" below.                                                                     |
-| `/registration/`         | Registration         | `/registration/`                 | Not migrated | No       | Fall 2026 registration, fees, tuition, scholarships. Wufoo and Breeze links.                                             |
-| `/schedule/`             | Schedule             | `/schedule/`                     | Not migrated | No       | Summer 2026 and Fall 2026 semester calendars.                                                                            |
-| `/payments/`             | Payments             | `/payment/`                      | Not migrated | Yes      | Check payment details and three Breeze links.                                                                            |
-| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in front matter, with their buttons switched off. |
-| `/contact/`              | Contact Us           | `/contact/`                      | Not migrated | No       | WordPress contact form, a Google Maps link, and directions text.                                                         |
-| `/faculty/`              | Faculty              | `/faculty/`                      | Migrated     | No       | Same 12 faculty members.                                                                                                 |
-| `/news/`                 | News                 | none                             | None         | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                                                    |
-| `/angelyn-traylor-chen/` | Angelyn Traylor Chen | `/faculty/traylor_chen_angelyn/` | Migrated     | Yes      |                                                                                                                          |
-| `/anne-jueng/`           | Anne Jueng           | `/faculty/jueng_anne/`           | Migrated     | Yes      |                                                                                                                          |
-| `/brian-bak-2/`          | Brian Bak            | `/faculty/bak_brian/`            | Migrated     | Yes      |                                                                                                                          |
-| `/cynthia-jimenez/`      | Cynthia Jimenez      | `/faculty/jimenez_cynthia/`      | Migrated     | Yes      |                                                                                                                          |
-| `/dr-terry-yount/`       | Dr. Terry Yount      | `/faculty/yount_terry/`          | Migrated     | Yes      |                                                                                                                          |
-| `/elise-jimenez/`        | Elise Jimenez        | `/faculty/jimenez_elise/`        | Migrated     | Yes      |                                                                                                                          |
-| `/kristen-swed/`         | Kristen Swed         | `/faculty/swed_kirsten/`         | Migrated     | Yes      | The old site spells the name both "Kristen" and "Kirsten". Staff confirmed "Kirsten".                                    |
-| `/laura-yount/`          | Laura Yount          | `/faculty/yount_laura/`          | Migrated     | Yes      |                                                                                                                          |
-| `/nathan-petersen/`      | Nathan Petersen      | `/faculty/petersen_nathan/`      | Migrated     | Yes      |                                                                                                                          |
-| `/olga-ferroni/`         | Olga Ferroni         | `/faculty/ferroni_olga/`         | Migrated     | Yes      |                                                                                                                          |
-| `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated     | Yes      |                                                                                                                          |
-| `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated     | Yes      |                                                                                                                          |
+| Old URL                  | Title                | New path                         | Status       | Redirect | Notes                                                                                                                            |
+| ------------------------ | -------------------- | -------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                      | Home                 | `/`                              | Migrated     | No       | Rewritten. See "Content only on the old site" below.                                                                             |
+| `/registration/`         | Registration         | `/registration/`                 | Not migrated | No       | Fall 2026 registration, fees, tuition, scholarships. Wufoo and Breeze links.                                                     |
+| `/schedule/`             | Schedule             | `/schedule/`                     | Migrated     | No       | Summer and Fall 2026 calendars, in `params.semesters`. May 25 corrected from \"Labor Day\" to Memorial Day (confirm with staff). |
+| `/payments/`             | Payments             | `/payment/`                      | Not migrated | Yes      | Check payment details and three Breeze links.                                                                                    |
+| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in front matter, with their buttons switched off.         |
+| `/contact/`              | Contact Us           | `/contact/`                      | Migrated     | No       | Directions text and contact details. No contact form, as staff decided. The map link is built from `params.contact`.             |
+| `/faculty/`              | Faculty              | `/faculty/`                      | Migrated     | No       | Same 12 faculty members.                                                                                                         |
+| `/news/`                 | News                 | none                             | None         | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                                                            |
+| `/angelyn-traylor-chen/` | Angelyn Traylor Chen | `/faculty/traylor_chen_angelyn/` | Migrated     | Yes      |                                                                                                                                  |
+| `/anne-jueng/`           | Anne Jueng           | `/faculty/jueng_anne/`           | Migrated     | Yes      |                                                                                                                                  |
+| `/brian-bak-2/`          | Brian Bak            | `/faculty/bak_brian/`            | Migrated     | Yes      |                                                                                                                                  |
+| `/cynthia-jimenez/`      | Cynthia Jimenez      | `/faculty/jimenez_cynthia/`      | Migrated     | Yes      |                                                                                                                                  |
+| `/dr-terry-yount/`       | Dr. Terry Yount      | `/faculty/yount_terry/`          | Migrated     | Yes      |                                                                                                                                  |
+| `/elise-jimenez/`        | Elise Jimenez        | `/faculty/jimenez_elise/`        | Migrated     | Yes      |                                                                                                                                  |
+| `/kristen-swed/`         | Kristen Swed         | `/faculty/swed_kirsten/`         | Migrated     | Yes      | The old site spells the name both "Kristen" and "Kirsten". Staff confirmed "Kirsten".                                            |
+| `/laura-yount/`          | Laura Yount          | `/faculty/yount_laura/`          | Migrated     | Yes      |                                                                                                                                  |
+| `/nathan-petersen/`      | Nathan Petersen      | `/faculty/petersen_nathan/`      | Migrated     | Yes      |                                                                                                                                  |
+| `/olga-ferroni/`         | Olga Ferroni         | `/faculty/ferroni_olga/`         | Migrated     | Yes      |                                                                                                                                  |
+| `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated     | Yes      |                                                                                                                                  |
+| `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated     | Yes      |                                                                                                                                  |
 
 Pages that are new in this project and have no old equivalent: `/studios/` and its eight studio pages.
 
@@ -45,22 +45,22 @@ Pages that are new in this project and have no old equivalent: `/studios/` and i
 
 These are served from WordPress (`/wp-content/uploads/`) and will stop working when the old site is retired.
 
-| File                                                                               | Linked from                        | Action                                                                                                    |
-| ---------------------------------------------------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf` | Footer of every page; Registration | Replace with a web page at `/handbook/` (roadmap Phase 3), and redirect the old URL at cutover (Phase 6). |
-| Faculty headshots and summer photos under `/wp-content/uploads/`                   | Faculty and Summer pages           | None. This project has its own images.                                                                    |
+| File                                                                               | Linked from                        | Action                                                                                      |
+| ---------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------- |
+| `/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf` | Footer of every page; Registration | Replaced by the web page `/handbook/` (Phase 3). Redirect the old URL at cutover (Phase 6). |
+| Faculty headshots and summer photos under `/wp-content/uploads/`                   | Faculty and Summer pages           | None. This project has its own images.                                                      |
 
 ## External destinations
 
-| Destination                                         | Purpose                                                                                | Old page(s)            | In this project           |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------- | ------------------------- |
-| `https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/` | Fall 2026 semester registration                                                        | Registration           | No                        |
-| `https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/` | Summer Music Camp registration (closed: "no longer accepting submissions", 2026-10-26) | Summer Music           | `content/summer-academy/` |
-| `https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/` | Summer Music Academy registration (closed, 2026-10-26)                                 | Summer Music           | `content/summer-academy/` |
-| `https://sachapel.breezechms.com/form/215b5b76`     | Full semester tuition payment                                                          | Payments               | No                        |
-| `https://sachapel.breezechms.com/form/215b5b`       | Installment payment (not available for summer)                                         | Payments               | No                        |
-| `https://sachapel.breezechms.com/form/215b5b161825` | Scholarship fund donation                                                              | Registration, Payments | No                        |
-| `https://goo.gl/maps/YzhFXRDH8zGuP6rL9`             | Map to the campus                                                                      | Contact                | No                        |
+| Destination                                         | Purpose                                                                                | Old page(s)            | In this project                                                             |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------- |
+| `https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/` | Fall 2026 semester registration                                                        | Registration           | No                                                                          |
+| `https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/` | Summer Music Camp registration (closed: "no longer accepting submissions", 2026-10-26) | Summer Music           | `content/summer-academy/`                                                   |
+| `https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/` | Summer Music Academy registration (closed, 2026-10-26)                                 | Summer Music           | `content/summer-academy/`                                                   |
+| `https://sachapel.breezechms.com/form/215b5b76`     | Full semester tuition payment                                                          | Payments               | No                                                                          |
+| `https://sachapel.breezechms.com/form/215b5b`       | Installment payment (not available for summer)                                         | Payments               | No                                                                          |
+| `https://sachapel.breezechms.com/form/215b5b161825` | Scholarship fund donation                                                              | Registration, Payments | No                                                                          |
+| `https://goo.gl/maps/YzhFXRDH8zGuP6rL9`             | Map to the campus                                                                      | Contact                | Replaced by a Google Maps search for the address (`_partials/map_url.html`) |
 
 ## Content only on the old site
 
