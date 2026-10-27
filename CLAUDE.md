@@ -28,7 +28,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 
 ## Architecture
 
-- `hugo.toml` holds the site config: `baseURL`, the title, contact details under `params.contact`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), and code-fence highlighting is off.
+- `hugo.toml` holds the site config: `baseURL`, the title, contact details under `params.contact`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), a standalone image is not wrapped in a paragraph (`wrapStandAloneImageWithinParagraph = false`, so the image hook can render a figure), and code-fence highlighting is off.
 - **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them.
   - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter.
   - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, and an optional `params.postNominal`. Faculty lists sort by folder name (last name) through `_partials/faculty_sort.html`, not by `weight`.
@@ -40,13 +40,18 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
   - `page.html` and `section.html` are generic. `section.html` renders a card list of child pages.
   - `page_faculty_bio.html` is the faculty bio layout.
-  - `studios/taxonomy.html` and `studios/term.html` render the studio pages.
+  - `studios/taxonomy.html` and `studios/term.html` render the studio pages. `term.html` fails the build when a studio in a faculty page's `studios:` list has no `content/studios/<term>/_index.md`, which catches a misspelling.
 - **Partials** (`layouts/_partials/`):
-  - `responsive_image.html` builds a WebP `srcset` from a page-bundle image. Its header comment documents the parameters it takes. Always use it rather than writing `<img>` tags by hand.
+  - `responsive_image.html` builds a WebP `srcset` from a page-bundle image. Its header comment documents the parameters it takes. Always use it rather than writing `<img>` tags by hand. It fails the build when no bundle image matches, and uses one WebP at the image's own size when the image is smaller than every requested width.
   - `card.html` is the card in card lists. Its header comment documents its parameters, including the optional `sizes` and `headingLevel` (use `3` when cards sit under a section's `<h2>`, as on the homepage).
   - `prose.html` wraps a page's Markdown content in `.prose` (reading width and typography). Use it instead of a bare `.Content`. The homepage is the exception: its Dean's letter is styled by `_home.scss`.
   - `cta.html` and `cta_group.html` render buttons from `{label, page, style}` lists in front matter. A missing target page triggers a build warning.
   - `header.html`, `footer.html`, `site_nav_list.html`, `logo.html`, `page_header.html`, and `studios_text.html` cover the rest of the page chrome.
+- **Render hooks** (`layouts/_markup/`), each with a header comment:
+  - `render-link.html` outputs internal links as the target page's or bundle file's `RelPermalink` (subpath-safe), and fails the build with the source file and line if the target doesn't exist. External and `#fragment` links are output as written.
+  - `render-image.html` renders bundle images through `responsive_image.html`. A standalone image becomes a `<figure>` with the Markdown title as its caption. The build fails on a missing file or missing alt text.
+  - `render-table.html` wraps tables in a focusable `.table-scroll` region that scrolls sideways on narrow screens.
+  - There is no heading hook: Goldmark's automatic heading ids are enough.
 - **Shortcodes** (`layouts/_shortcodes/`): `registration_button.html` shows a registration button from `params.registration.<key>` (`open`, `label`, `url`) only while `open` is true. Used on the Summer Academy page.
 - **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on). `_prose.scss` styles Markdown inside `.prose`: a 55ch column on the same named-line grid as `main`, which `.full-bleed` children escape.
 - **Script:** `assets/js/script.js` toggles the mobile navigation menu.

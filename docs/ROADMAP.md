@@ -170,13 +170,18 @@ Work through the groups in this order. Each group is one or more small commits.
    - Ensure intentional full-width components remain possible outside the standard prose measure.
    - Test against existing pages and against the handbook text, added early as a draft page.
    - **Done:** `_partials/prose.html` and `_prose.scss`. The column is 55ch, about 70–75 characters of Nunito; text is 16px, 18px from the `md` breakpoint. Headings in prose are left-aligned. `{.full-bleed}` spans the window. Drafts `content/style-test/` and `content/handbook/` are the test pages. Image and caption styles are in place, but are checked in group 3, once the image render hook makes Markdown images load. Wide tables, long URLs, and long code lines still overflow on narrow screens until groups 3 and 4.
-3. **Render hooks and content checks**
+3. **Render hooks and content checks** (done on 2026-10-27)
    - Implement Markdown render hooks:
      - heading anchors, which the handbook's contents menu needs;
      - links, failing the build on a broken internal link;
      - images, through `responsive_image.html`;
      - tables, in a wrapper that scrolls on narrow screens.
    - Add build-time checks for broken internal links and other important content errors. lychee already checks the links in the built site.
+   - **Done:**
+     - Link, image, and table hooks are in `layouts/_markup/`.
+     - No heading hook was needed: Goldmark gives every heading an id, and staff don't want visible "#" links.
+     - Internal links are now checked twice: by the link hook at build time, naming the source line, and by lychee on the built site, including fragments.
+     - The build also fails on a missing image file, a missing alt text, a bundle with no matching image (such as a faculty folder without a headshot), and a `studios:` entry with no studio page.
 4. **Links and narrow screens**
    - Ensure links are distinguishable, keyboard-accessible, and visually consistent.
    - Handle long URLs, wide tables, and embedded content on narrow screens.
