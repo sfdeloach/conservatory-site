@@ -1,0 +1,30 @@
+{{/* Note:
+
+  Renders Markdown links.
+
+  - External links (with a scheme, such as https: or mailto:) and links to a
+  fragment on the same page (#withdrawal) are output as written. lychee
+  checks fragments against the built site.
+  - Any other link is internal: it must name a page (/schedule, or a relative
+  path) or a file in the page bundle. It is output as that target's
+  RelPermalink, so it works under a subpath. If no target is found, the
+  build fails with the source file and line.
+*/}}
+
+{{- $u := urls.Parse .Destination }}
+{{- $href := .Destination }}
+{{- if not (or $u.IsAbs $u.Host (hasPrefix .Destination "#")) }}
+  {{- with or (.Page.GetPage $u.Path) (.Page.Resources.Get $u.Path) }}
+    {{- $href = .RelPermalink }}
+    {{- with $u.RawQuery }}{{ $href = printf "%s?%s" $href . }}{{ end }}
+    {{- with $u.Fragment }}{{ $href = printf "%s#%s" $href . }}{{ end }}
+  {{- else }}
+    {{- errorf "render-link: %q not found (%s)" .Destination .Position }}
+  {{- end }}
+{{- end -}}
+
+
+<a href="{{ $href }}" {{ with .Title }}title="{{ . }}"{{ end }}>
+  {{- .Text -}}
+</a>
+{{- /* chomp trailing newline */ -}}

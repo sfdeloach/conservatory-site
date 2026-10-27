@@ -33,7 +33,7 @@ Tuition will be due on or before the first day of the semester. The tuition for 
 
 Payment by credit card, check, or cash must be made on or before the published due date. If paying by check, please make the check out to Saint Andrew’s Conservatory. Payments received after the due date will incur a $15.00 late fee. No lessons will be given to the student until payment has been made.
 
-Students who withdraw after the registration deadline will incur a $25.00 fee. Please see the Withdrawal Policy on page 6 for more information.
+Students who withdraw after the registration deadline will incur a $25.00 fee. Please see the [Withdrawal Policy](#withdrawal) for more information.
 
 ### Scholarships
 
@@ -138,7 +138,7 @@ Students will primarily specialize in classical vocal repertoire. An audition ma
 
 ## Summer study
 
-Teachers and students will schedule six or eight lessons within the dates of the summer semester (see page 10). This allows for flexible availability for both teacher and student.
+Teachers and students will schedule six or eight lessons within the dates of the summer semester (see the [academic calendar](#academic-calendar)). This allows for flexible availability for both teacher and student.
 
 Each summer, we offer a five-day Summer Music Camp and Academy that provides a fun setting for students to learn and grow both musically and spiritually. Academy sessions are taught by contracted teachers who are confessing Christians and who take their mission as teachers/performers seriously.
 

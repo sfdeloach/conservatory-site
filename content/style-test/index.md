@@ -15,6 +15,8 @@ A longer paragraph that runs across several lines, to check the reading width an
 
 A very long URL that must not break the layout on a phone: <https://example.com/a/very/long/path/that/keeps/going/and/going/without/any/spaces/to/break/on/index.html>.
 
+Links of each kind: [an internal page](/summer-academy), [a section on this page](#tables), [an email address](mailto:mconservatory@sachapel.com), and [a link with a title](/faculty "Our faculty").
+
 #### Heading level four
 
 - A bulleted list item.
@@ -31,6 +33,14 @@ A very long URL that must not break the layout on a phone: <https://example.com/
 > If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
 
 ---
+
+## Images
+
+A block image with a caption:
+
+![A violin lying on its side](test-image.jpg "A caption, taken from the Markdown image title.")
+
+An inline image ![A small violin](test-image.jpg) inside a sentence.
 
 ## Tables
 

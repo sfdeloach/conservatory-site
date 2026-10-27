@@ -1,0 +1,46 @@
+{{/* Note:
+
+  Renders Markdown images. Alt text is required, and the build fails without
+  it.
+
+  - A local image must be in the page bundle. It goes through
+  responsive_image.html (WebP srcset, sized for the prose column). If the
+  file is missing, the build fails with the source file and line.
+  - A remote image (with a scheme) is output as a plain lazy-loaded img.
+  - An image on its own line is a block: it is wrapped in a figure, the
+  Markdown title becomes the figcaption, and a class from a block
+  attribute (such as {.full-bleed}) goes on the figure.
+*/}}
+
+{{- $u := urls.Parse .Destination }}
+{{- if not .PlainText }}
+  {{- errorf "render-image: %q has no alt text (%s)" .Destination .Position }}
+{{- end }}
+
+{{- $img := "" }}
+{{- if $u.IsAbs }}
+  {{- $img = printf `<img src="%s" alt="%s" loading="lazy" />` (htmlEscape .Destination) (htmlEscape .PlainText) | safeHTML }}
+{{- else if .Page.Resources.Get $u.Path }}
+  {{- $img = partial "responsive_image.html"
+    (dict
+    "context" .Page
+    "resource" $u.Path
+    "sizes" "(min-width: 48em) 600px, calc(100vw - 2rem)"
+    "widths" (slice 600 900 1200)
+    "altText" .PlainText
+    "isLazyLoaded" true
+    )
+  }}
+{{- else }}
+  {{- errorf "render-image: %q not found in the page bundle (%s)" .Destination .Position }}
+{{- end }}
+
+{{- if .IsBlock }}
+  <figure {{ with .Attributes.class }}class="{{ . }}"{{ end }}>
+    {{- $img -}}
+    {{- with .Title }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+{{- else }}
+  {{- $img }}
+{{- end }}
+{{- /* chomp trailing newline */ -}}
