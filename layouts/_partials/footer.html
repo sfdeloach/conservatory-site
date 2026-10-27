@@ -16,8 +16,6 @@
     {{- with .Site.Params.contact -}}
       {{ printf `%s, %s` .address .cityStZip -}}
     {{ end }}"
-    target="_blank"
-    rel="noopener noreferrer"
   >
     <p>{{- .Site.Params.contact.address -}}</p>
     <p>{{- .Site.Params.contact.cityStZip -}}</p>
@@ -27,7 +25,7 @@
       {{- .Site.Params.contact.phoneFormat -}}
     </p>
   </a>
-  <a href="mailto:{{- .Site.Params.contact.email -}}" target="_blank">
+  <a href="mailto:{{- .Site.Params.contact.email -}}">
     <p>
       {{- .Site.Params.contact.email -}}
     </p>

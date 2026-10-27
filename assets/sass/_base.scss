@@ -4,6 +4,8 @@ html {
   box-sizing: border-box;
   font-size: 100%;
   text-size-adjust: 100%;
+  // Keep section links and the skip link from landing under the sticky header.
+  scroll-padding-top: calc(space("xxl") + space("md"));
 }
 
 *,
@@ -97,6 +99,24 @@ button {
   color: inherit;
   font: inherit;
   cursor: pointer;
+}
+
+// Hidden until focused: the first stop when tabbing, above the sticky header.
+.skip-link {
+  position: absolute;
+  top: space("sm");
+  left: space("sm");
+  z-index: 300;
+  padding: space("sm") space("md");
+  border-radius: radius("sm");
+  color: color("text-light");
+  background-color: color("primary");
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    color: color("text-light");
+    transform: none;
+  }
 }
 
 a:focus-visible,

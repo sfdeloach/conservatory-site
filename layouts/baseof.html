@@ -43,8 +43,9 @@
   </head>
 
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header>{{- partial "header.html" . -}}</header>
-    <main>
+    <main id="main">
       {{- block "main" . -}}
         This will be replaced with content from the corresponding "define"
         action found in the template to which this _base_ template is applied.
