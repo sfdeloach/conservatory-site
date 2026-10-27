@@ -21,6 +21,8 @@ Preview your changes with `hugo server` before publishing them (see [README.md](
 
 2. Edit the text below the front matter. Use `##` for headings, `-` for bullet lists, and `[link text](https://example.com)` for links.
 
+   Page text is shown in a narrow column that is comfortable to read. To make one block, such as a table, span the full width of the window, put `{.full-bleed}` on the line directly after it.
+
 3. To replace a page's banner image, replace the image file in the same folder and keep the file name the front matter uses (`params.image`).
 
 ## Editing the homepage

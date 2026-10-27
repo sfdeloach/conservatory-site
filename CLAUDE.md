@@ -28,12 +28,13 @@ Run `make check` before every commit. CI runs the same command on every push and
 
 ## Architecture
 
-- `hugo.toml` holds the site config: `baseURL`, the title, contact details under `params.contact`, and the `studios` taxonomy (`studio = "studios"`).
+- `hugo.toml` holds the site config: `baseURL`, the title, contact details under `params.contact`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), and code-fence highlighting is off.
 - **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them.
   - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter.
   - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, and an optional `params.postNominal`. Faculty lists sort by folder name (last name) through `_partials/faculty_sort.html`, not by `weight`.
   - `content/studios/<term>/_index.md` holds the content for each `studios` taxonomy term page, with an `instrument.jpg` image. Faculty pages are tagged with these terms.
   - Top-level pages (`registration`, `payment`, `schedule`, `contact`, `summer-academy`) get into the main navigation through `menus.main.weight` and use `params.image`.
+  - Draft pages, shown only by `hugo server -D` and never published: `content/style-test/` has every Markdown element the site styles, for checking typography; `content/handbook/` is the student handbook in progress (roadmap Phase 3).
 - **Layouts** (`layouts/`):
   - `baseof.html` is the shell: Sass pipeline, fingerprinted CSS and JS, font preload.
   - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
@@ -43,10 +44,11 @@ Run `make check` before every commit. CI runs the same command on every push and
 - **Partials** (`layouts/_partials/`):
   - `responsive_image.html` builds a WebP `srcset` from a page-bundle image. Its header comment documents the parameters it takes. Always use it rather than writing `<img>` tags by hand.
   - `card.html` is the card in card lists. Its header comment documents its parameters, including the optional `sizes` and `headingLevel` (use `3` when cards sit under a section's `<h2>`, as on the homepage).
+  - `prose.html` wraps a page's Markdown content in `.prose` (reading width and typography). Use it instead of a bare `.Content`. The homepage is the exception: its Dean's letter is styled by `_home.scss`.
   - `cta.html` and `cta_group.html` render buttons from `{label, page, style}` lists in front matter. A missing target page triggers a build warning.
   - `header.html`, `footer.html`, `site_nav_list.html`, `logo.html`, `page_header.html`, and `studios_text.html` cover the rest of the page chrome.
 - **Shortcodes** (`layouts/_shortcodes/`): `registration_button.html` shows a registration button from `params.registration.<key>` (`open`, `label`, `url`) only while `open` is true. Used on the Summer Academy page.
-- **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on).
+- **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on). `_prose.scss` styles Markdown inside `.prose`: a 55ch column on the same named-line grid as `main`, which `.full-bleed` children escape.
 - **Script:** `assets/js/script.js` toggles the mobile navigation menu.
 - **Static files:** `static/` holds self-hosted fonts (EB Garamond, Nunito, Incognito Pro) and the favicon.
 

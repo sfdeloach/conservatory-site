@@ -163,12 +163,13 @@ Work through the groups in this order. Each group is one or more small commits.
      - Replace the July 2026 dates with "Dates for 2027 coming soon".
      - Keep the general program descriptions. Remove the price, the audition deadlines, and the number of orchestras. The instrument list is now general too ("strings, winds, and keyboard instruments").
      - Replace the two closed "Register Here" links with a front matter switch and the form URL, so registration can be reopened without editing templates. Phase 4.1 may move the URL to a shared location. **Done:** `params.registration.camp` and `.academy` (`open`, `label`, `url`), rendered by the `registration_button` shortcode. Both are off.
-2. **Prose typography**
+2. **Prose typography** (done on 2026-10-27)
    - Introduce a consistent `.prose` wrapper for Markdown content.
    - Establish comfortable reading widths, generally around 65–75 characters per line.
    - Style headings, paragraphs, lists, links, blockquotes, tables, code, images, and captions.
    - Ensure intentional full-width components remain possible outside the standard prose measure.
    - Test against existing pages and against the handbook text, added early as a draft page.
+   - **Done:** `_partials/prose.html` and `_prose.scss`. The column is 55ch, about 70–75 characters of Nunito; text is 16px, 18px from the `md` breakpoint. Headings in prose are left-aligned. `{.full-bleed}` spans the window. Drafts `content/style-test/` and `content/handbook/` are the test pages. Image and caption styles are in place, but are checked in group 3, once the image render hook makes Markdown images load. Wide tables, long URLs, and long code lines still overflow on narrow screens until groups 3 and 4.
 3. **Render hooks and content checks**
    - Implement Markdown render hooks:
      - heading anchors, which the handbook's contents menu needs;
