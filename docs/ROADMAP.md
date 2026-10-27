@@ -137,7 +137,7 @@ Record the decision and rationale before implementing the production workflow.
   - no horizontal overflow, including with long test content;
   - only the hero image loads eagerly;
   - all motion respects `prefers-reduced-motion`.
-- Still to check by hand: keyboard focus inside the bands, and reduced motion with the OS setting.
+- Checked by hand on 2026-10-27: keyboard focus inside the bands, and reduced motion with the OS setting. Both pass.
 
 ### Acceptance criteria
 
