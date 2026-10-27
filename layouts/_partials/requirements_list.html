@@ -1,0 +1,13 @@
+{{/* Note:
+
+  Renders a studio's requirements (params.requirements in
+  content/studios/<term>/_index.md) as a list. Pass the list as the context.
+  Used on studio pages and in the handbook.
+*/}}
+
+
+<ul>
+  {{- range . }}
+    <li>{{ . }}</li>
+  {{- end }}
+</ul>

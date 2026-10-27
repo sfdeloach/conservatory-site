@@ -1,0 +1,15 @@
+{{/* Note:
+
+  Lists every studio, in weight order, with its requirements from the studio
+  page's params.requirements. A studio with none says so. Used in the
+  handbook, so requirements are edited only on the studio pages.
+*/}}
+
+{{- range (site.GetPage "/studios").Pages }}
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  {{- with .Params.requirements }}
+    {{ partial "requirements_list.html" . }}
+  {{- else }}
+    <p>No additional requirements.</p>
+  {{- end }}
+{{- end }}
