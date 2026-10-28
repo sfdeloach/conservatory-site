@@ -13,7 +13,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 0     | Repository discovery and documentation                | Done        |
 | 1     | Production hosting and CI/CD                          | Done        |
 | 2     | Complete the homepage                                 | Done        |
-| 3     | Content migration, typography, and Markdown rendering | In progress |
+| 3     | Content migration, typography, and Markdown rendering | Done        |
 | 4     | Registration and payment workflows                    | Not started |
 | 5     | Accessibility, quality assurance, and SEO             | Not started |
 | 6     | Launch readiness and domain cutover                   | Not started |
@@ -149,7 +149,7 @@ Record the decision and rationale before implementing the production workflow.
 
 ## 3. Content migration, typography, and Markdown rendering
 
-Conservatory staff answered the content questions on 2026-10-27. Their decisions are recorded in the tasks below and in the open decisions table.
+Conservatory staff answered the content questions on 2026-10-27 and approved the migrated content on 2026-10-28. Their decisions are recorded in the tasks below and in the open decisions table.
 
 **Principle:** content that changes from semester to semester (calendars, faculty, studios) has a single source of truth in `content/`. Other pages, including the student handbook, draw on that source at build time instead of keeping their own copy.
 
@@ -204,15 +204,15 @@ Work through the groups in this order. Each group is one or more small commits.
    - **Studio requirements:**
      - Add `params.requirements` to each studio, as a list of zero or more requirements. They are shown on the studio's page and in the handbook.
      - A studio with no requirements shows nothing on its page, and "No additional requirements." in the handbook (decided 2026-10-27).
-     - Fill them only from the 2026 handbook (organ, piano, violin, viola, cello, and voice). Staff add others later.
+     - Fill them from the 2026 handbook (organ, piano, violin, viola, cello, and voice). Staff supplied the harpsichord and trombone requirements on 2026-10-27.
    - **Student handbook:** see [Student handbook](#student-handbook) below.
    - **Done:**
      - Contact and Schedule are migrated. The `goo.gl` map link still worked, but it is replaced by a Maps search built from `params.contact`, shared with the footer.
-     - Studio requirements are on six studio pages.
+     - All eight studio pages list requirements. The handbook's "No additional requirements." text stays in place for any studio added later without them.
      - The handbook is published at `/handbook/`, with every source in the table below.
      - `make check` now runs lychee with `--index-files index.html`, so fragments on directory links (such as `/handbook/#academic-calendar`) are checked.
      - The fee amounts in the handbook are now written consistently (`$15`, not `$15.00`).
-6. **Staff review**
+6. **Staff review** (done on 2026-10-28)
    - Review content accuracy with conservatory staff, including dates, faculty, programs, and contact details.
    - Include the list of handbook corrections below.
    - Also confirm:
@@ -221,6 +221,7 @@ Work through the groups in this order. Each group is one or more small commits.
      - **Piano:** the handbook's wait-list note is carried over as a piano requirement. Is it still current?
      - **Requirements:** the wording of each studio's requirements, reworded slightly from the handbook (for example "an appropriately sized violin").
      - **Handbook:** the Summer study section is now a one-paragraph summary linking to the Summer Academy page.
+   - **Done:** staff approved the content, the handbook corrections, and every item above with no changes. The piano wait-list note stays as a requirement.
 
 ### Student handbook
 
@@ -251,7 +252,7 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
   | Summer study                                       | A one-paragraph summary in the handbook, linking to the Summer Academy page for details.                                                        |
   | Mission, registration, policies                    | The handbook's Markdown body.                                                                                                                   |
 
-- **Corrections to the 2026 PDF**, to list for staff review:
+- **Corrections to the 2026 PDF**, approved by staff on 2026-10-28:
   - Bass is removed, because it is not taught.
   - The faculty list comes from the site. It adds Tammy Davis, replaces Olga Kolpakova (no longer on faculty) with Olga Ferroni, and uses full names: Angelyn Traylor Chen and Nathan Petersen.
   - The contact email is the general address instead of `schang@sachapel.com`.
