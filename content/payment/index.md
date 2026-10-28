@@ -16,9 +16,7 @@ Credit cards, checks, and cash are accepted.
 
 Pay tuition by credit or debit card. A processing fee is added to online card payments to cover their cost; the form shows the amount. Installment payments are not available for the summer semester.
 
-{{< destination_button "fullPayment" >}}
-
-{{< destination_button "installmentPayment" >}}
+{{< destination_button "fullPayment" "installmentPayment" >}}
 
 ## Pay by check
 

@@ -307,6 +307,12 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
   - **Due date:** "the first day of the semester". The old site said "the first day of lessons".
   - **Returning-student priority:** "tell the office before the end of the current semester". This line is from the old site only; the handbook doesn't mention it.
   - **Card fee:** the Payment page gives no amounts (the Breeze forms show $15 and $4). It says the form shows the fee.
+- Button layout, fixed after review on 2026-10-28:
+  - Buttons were stretching to full width, because `main` and `.prose` are grids. This included the faculty "Back to Faculty" button, which predates Phase 4.
+  - Prose also underlined button text.
+  - Every button now sits in a `.cta-group`: centred on faculty pages, as on the homepage, and aligned with the text inside prose. Prose underlines only links that aren't buttons.
+  - `destination_button` takes several entry names for one group.
+  - The style-test page has a Buttons section.
 
 ### 4.3 Document the update process
 

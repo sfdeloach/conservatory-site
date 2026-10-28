@@ -191,7 +191,7 @@ summerCamp:
 
 - To open a form, paste its address into `url` and change `open` to `true`. When it closes, change `open` back to `false`.
 - While a form is closed, its `closedText` is shown in place of the button. Leave `closedText` out to show nothing.
-- A page shows a button with `{{< destination_button "summerCamp" >}}`, using the entry's name.
+- A page shows a button with `{{< destination_button "summerCamp" >}}`, using the entry's name. Give several names, as in `{{< destination_button "fullPayment" "installmentPayment" >}}`, to show their buttons side by side.
 - The build fails, and nothing is published, if a page names an entry that doesn't exist, if an entry has no `label`, or if an open entry's `url` is empty or doesn't start with `https://`.
 
 ### Opening Summer Academy registration

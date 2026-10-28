@@ -71,6 +71,18 @@ A YouTube video through Hugo's built-in shortcode:
 A fenced code block with a very long line that should scroll sideways inside its box rather than widen the page on a narrow screen.
 ```
 
+## Buttons
+
+An ordinary [link to the Schedule](/schedule/) stays underlined, and buttons do not.
+
+{{< destination_button "fullPayment" "installmentPayment" >}}
+
+A closed entry with closed text, followed by a single button:
+
+{{< destination_button "semesterRegistration" "donation" >}}
+
+A paragraph after a button group, with [another link](/registration/), to check the spacing.
+
 ## Full bleed
 
 This paragraph has the `full-bleed` class, so it spans the full width of the window instead of the reading column.

@@ -1,35 +1,44 @@
 {{/* Note:
 
-  Renders a button for one external destination in data/destinations.yaml.
-  Pass a dict with:
+  Renders buttons for one or more external destinations in
+  data/destinations.yaml. Pass a dict with:
 
-  key (the entry's name, such as "summerCamp")
+  keys (a list of entry names, such as (slice "fullPayment" "donation"))
   position (the caller's position, for error messages)
 
-  While the entry is open, it renders a button to its url. While it is
-  closed, it renders closedText as a paragraph, or nothing when there is
-  none. The build fails on an unknown key, a missing label, or an open entry
-  without an https:// url.
+  Each closed entry renders its closedText as a paragraph, or nothing when it
+  has none. The open entries' buttons follow in one .cta-group, in the order
+  given; there is no group when every entry is closed. The build fails on an
+  unknown key, a missing label, or an open entry without an https:// url.
 */}}
 
-{{- $key := .key }}
 {{- $pos := .position }}
-{{- with index (hugo.Data.destinations | default dict) $key }}
-  {{- if not .label }}
-    {{- errorf "destination_button: %s has no label in data/destinations.yaml (%s)" $key $pos }}
-  {{- end }}
-  {{- if .open }}
-    {{- if not .url }}
-      {{- errorf "destination_button: %s is open but has no url in data/destinations.yaml (%s)" $key $pos }}
-    {{- else if not (strings.HasPrefix .url "https://") }}
-      {{- errorf "destination_button: %s url must start with https:// (%s)" $key $pos }}
+{{- $open := slice }}
+{{- range $key := .keys }}
+  {{- with index (hugo.Data.destinations | default dict) $key }}
+    {{- if not .label }}
+      {{- errorf "destination_button: %s has no label in data/destinations.yaml (%s)" $key $pos }}
     {{- end }}
-    <a href="{{ .url }}" class="btn btn-primary">{{ .label }}</a>
+    {{- if .open }}
+      {{- if not .url }}
+        {{- errorf "destination_button: %s is open but has no url in data/destinations.yaml (%s)" $key $pos }}
+      {{- else if not (strings.HasPrefix .url "https://") }}
+        {{- errorf "destination_button: %s url must start with https:// (%s)" $key $pos }}
+      {{- end }}
+      {{- $open = $open | append . }}
+    {{- else }}
+      {{- with .closedText }}
+        <p>{{ . }}</p>
+      {{- end }}
+    {{- end }}
   {{- else }}
-    {{- with .closedText }}
-      <p>{{ . }}</p>
-    {{- end }}
+    {{- errorf "destination_button: no %q in data/destinations.yaml (%s)" $key $pos }}
   {{- end }}
-{{- else }}
-  {{- errorf "destination_button: no %q in data/destinations.yaml (%s)" $key $pos }}
+{{- end }}
+{{- with $open }}
+  <div class="cta-group">
+    {{- range . }}
+      <a href="{{ .url }}" class="btn btn-primary">{{ .label }}</a>
+    {{- end }}
+  </div>
 {{- end }}

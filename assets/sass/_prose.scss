@@ -76,10 +76,16 @@
     margin-top: space("xs");
   }
 
-  a {
+  // Buttons keep their own styles (_buttons.scss).
+  a:not(.btn) {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.15em;
+  }
+
+  // Buttons in text line up with it, instead of centring as elsewhere.
+  .cta-group {
+    justify-content: flex-start;
   }
 
   // Room for the decorative quote marks, which sit outside the box.

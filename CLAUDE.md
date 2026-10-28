@@ -51,7 +51,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `prose.html` wraps a page's Markdown content in `.prose` (reading width and typography). Use it instead of a bare `.Content`. The homepage is the exception: its Dean's letter is styled by `_home.scss`.
   - `cta.html` and `cta_group.html` render buttons from `{label, page, style}` lists in front matter. A missing target page triggers a build warning.
   - `simple_table.html` renders a table from a list of maps (`headers`, `keys`, `rows`) with the same markup as Markdown tables. `requirements_list.html` renders a studio's requirements. `map_url.html` returns the Google Maps URL for `params.contact`.
-  - `destination_button.html` renders one `data/destinations.yaml` entry (`key`, `position`): a button while it is open, otherwise its `closedText` or nothing. It fails the build on an unknown key, a missing label, or an open entry without an `https://` URL.
+  - `destination_button.html` renders `data/destinations.yaml` entries (`keys`, a list, and `position`): each closed entry's `closedText` (or nothing), then the open entries' buttons in one `.cta-group`. It fails the build on an unknown key, a missing label, or an open entry without an `https://` URL.
   - `header.html`, `footer.html`, `site_nav_list.html`, `logo.html`, `page_header.html`, and `studios_text.html` cover the rest of the page chrome.
 - **Render hooks** (`layouts/_markup/`), each with a header comment:
   - `render-link.html` outputs internal links as the target page's or bundle file's `RelPermalink` (subpath-safe), and fails the build with the source file and line if the target doesn't exist. External and `#fragment` links are output as written.
@@ -59,7 +59,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `render-table.html` wraps tables in a focusable `.table-scroll` region that scrolls sideways on narrow screens.
   - There is no heading hook: Goldmark's automatic heading ids are enough.
 - **Shortcodes** (`layouts/_shortcodes/`), each with a header comment, and each failing the build on missing data:
-  - `destination_button` renders a `data/destinations.yaml` entry by key (`"summerCamp"`) through the partial. Used on the Summer Academy page.
+  - `destination_button` renders one or more `data/destinations.yaml` entries by key (`"fullPayment" "installmentPayment"`) through the partial. Used on the Registration, Payment, and Summer Academy pages.
   - `contact` renders `"address"`, `"phone"`, or `"email"` from `params.contact` as a link, or `"mailing"` as the plain-text address.
   - `semester_calendars` renders the Schedule page's calendars (`level` sets the heading level).
   - `studio_requirements` lists every studio with its requirements.
@@ -72,6 +72,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 ## Conventions
 
 - Follow the existing patterns. Reuse the partials, put content in front matter `params`, and keep images in page bundles.
+- Every button sits in a `.cta-group` (use `cta_group.html` or `destination_button`). Never write a bare `.btn` link as a child of `main` or `.prose`: both are grids, and a grid item stretches to full width. Groups are centred, except in `.prose`, where they align with the text.
 - Links open in the same tab. Don't add `target="_blank"`.
 - Write YAML front matter in content files. Note that `archetypes/default.md` still produces TOML.
 - Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`).

@@ -1,8 +1,13 @@
 {{/* Note:
 
-  Renders a button for one external destination in data/destinations.yaml,
+  Renders buttons for external destinations in data/destinations.yaml,
   through _partials/destination_button.html. Call it in the page body with
-  one argument, the entry's name, such as "summerCamp".
+  one or more entry names, as in: destination_button "fullPayment"
+  "installmentPayment". Several open entries sit side by side in one group.
+  Calling it with no name fails the build.
 */}}
 
-{{- partial "destination_button.html" (dict "key" (.Get 0) "position" .Position) }}
+{{- if not .Params }}
+  {{- errorf "destination_button: no entry name given (%s)" .Position }}
+{{- end }}
+{{- partial "destination_button.html" (dict "keys" .Params "position" .Position) }}
