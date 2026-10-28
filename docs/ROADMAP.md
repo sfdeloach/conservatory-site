@@ -296,6 +296,18 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Show tuition, fees, and the refund schedule from the handbook's front matter instead of repeating them.
 - Present each active destination clearly, with the program, semester or year, and what the visitor should expect next.
 
+**Done** (2026-10-28):
+
+- Both pages are written. Every fee, rate, discount, and the refund schedule come from the handbook's front matter through `handbook_value`, `lesson_rates`, and `refund_schedule`. Every form button comes from `data/destinations.yaml`.
+- Registration links to the handbook, the Schedule, Summer Academy, and Payment. While the semester form is closed it shows "Spring 2027 registration opens soon." (`closedText`).
+- Payment has the two Breeze payment buttons, check instructions with the mailing address from `params.contact` (the new `"mailing"` detail of the `contact` shortcode), and Donate, which is also on Registration.
+- Where the old site and the handbook disagreed, the handbook was followed (decided 2026-10-28). For staff to confirm:
+  - **Scholarships:** a 25% scholarship after one full year, on the teacher's recommendation. The old site said "consistently high quality in a semester", renewable.
+  - **Check payee:** "Saint Andrew's Conservatory". The old site said "Saint Andrew's Conservatory of Music".
+  - **Due date:** "the first day of the semester". The old site said "the first day of lessons".
+  - **Returning-student priority:** "tell the office before the end of the current semester". This line is from the old site only; the handbook doesn't mention it.
+  - **Card fee:** the Payment page gives no amounts (the Breeze forms show $15 and $4). It says the form shows the fee.
+
 ### 4.3 Document the update process
 
 - Explain how to replace the active semester's registration form.

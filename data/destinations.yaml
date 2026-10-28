@@ -14,6 +14,7 @@ semesterRegistration:
   open: false
   label: "Register for Fall 2026"
   url: "https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/"
+  closedText: "Spring 2027 registration opens soon."
 
 # Summer Music Camp registration (Summer Academy page)
 summerCamp:

@@ -160,6 +160,8 @@ params:
 
 The contents menu is built from the headings (`##` and `###`), and the "Last updated" date changes by itself whenever the handbook or one of those sources changes.
 
+The Registration and Payment pages show the same fees, lesson rates, and refund table with the same shortcodes, so a change in the handbook's front matter updates all three pages.
+
 ## Contact details
 
 The address, phone number, and email in the footer, on the Contact page, and in the handbook come from `[params.contact]` in `hugo.toml`. The map link is built from the address.

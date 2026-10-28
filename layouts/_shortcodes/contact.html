@@ -1,8 +1,9 @@
 {{/* Note:
 
   Renders one contact detail from params.contact (hugo.toml) as a link. Call
-  it with one argument: "address" (a Google Maps link), "phone" (a tel: link),
-  or "email" (a mailto: link). Any other argument fails the build.
+  it with one argument: "address" (a Google Maps link), "mailing" (the same
+  address as plain text, for mailing a check), "phone" (a tel: link), or
+  "email" (a mailto: link). Any other argument fails the build.
 */}}
 
 {{- $c := site.Params.contact }}
@@ -11,10 +12,13 @@
   <a href="{{ partial "map_url.html" . }}"
     >{{ $c.address }}, {{ $c.cityStZip }}</a
   >
+{{- else if eq $key "mailing" -}}
+  {{ $c.address }},
+  {{ $c.cityStZip }}
 {{- else if eq $key "phone" -}}
   <a href="tel:{{ $c.phoneHref }}">{{ $c.phoneFormat }}</a>
 {{- else if eq $key "email" -}}
   <a href="mailto:{{ $c.email }}">{{ $c.email }}</a>
 {{- else }}
-  {{- errorf "contact: unknown detail %q; use \"address\", \"phone\", or \"email\" (%s)" $key .Position }}
+  {{- errorf "contact: unknown detail %q; use \"address\", \"mailing\", \"phone\", or \"email\" (%s)" $key .Position }}
 {{- end -}}

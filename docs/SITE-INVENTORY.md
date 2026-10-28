@@ -16,28 +16,28 @@ Migration status values:
 - **Not migrated:** the page exists here but has no body content.
 - **None:** no equivalent page exists here.
 
-| Old URL                  | Title                | New path                         | Status       | Redirect | Notes                                                                                                                            |
-| ------------------------ | -------------------- | -------------------------------- | ------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                      | Home                 | `/`                              | Migrated     | No       | Rewritten. See "Content only on the old site" below.                                                                             |
-| `/registration/`         | Registration         | `/registration/`                 | Not migrated | No       | Fall 2026 registration, fees, tuition, scholarships. Wufoo and Breeze links.                                                     |
-| `/schedule/`             | Schedule             | `/schedule/`                     | Migrated     | No       | Summer and Fall 2026 calendars, in `params.semesters`. May 25 corrected from \"Labor Day\" to Memorial Day (confirm with staff). |
-| `/payments/`             | Payments             | `/payment/`                      | Not migrated | Yes      | Check payment details and three Breeze links.                                                                                    |
-| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in `data/destinations.yaml`, closed.                      |
-| `/contact/`              | Contact Us           | `/contact/`                      | Migrated     | No       | Directions text and contact details. No contact form, as staff decided. The map link is built from `params.contact`.             |
-| `/faculty/`              | Faculty              | `/faculty/`                      | Migrated     | No       | Same 12 faculty members.                                                                                                         |
-| `/news/`                 | News                 | none                             | None         | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                                                            |
-| `/angelyn-traylor-chen/` | Angelyn Traylor Chen | `/faculty/traylor_chen_angelyn/` | Migrated     | Yes      |                                                                                                                                  |
-| `/anne-jueng/`           | Anne Jueng           | `/faculty/jueng_anne/`           | Migrated     | Yes      |                                                                                                                                  |
-| `/brian-bak-2/`          | Brian Bak            | `/faculty/bak_brian/`            | Migrated     | Yes      |                                                                                                                                  |
-| `/cynthia-jimenez/`      | Cynthia Jimenez      | `/faculty/jimenez_cynthia/`      | Migrated     | Yes      |                                                                                                                                  |
-| `/dr-terry-yount/`       | Dr. Terry Yount      | `/faculty/yount_terry/`          | Migrated     | Yes      |                                                                                                                                  |
-| `/elise-jimenez/`        | Elise Jimenez        | `/faculty/jimenez_elise/`        | Migrated     | Yes      |                                                                                                                                  |
-| `/kristen-swed/`         | Kristen Swed         | `/faculty/swed_kirsten/`         | Migrated     | Yes      | The old site spells the name both "Kristen" and "Kirsten". Staff confirmed "Kirsten".                                            |
-| `/laura-yount/`          | Laura Yount          | `/faculty/yount_laura/`          | Migrated     | Yes      |                                                                                                                                  |
-| `/nathan-petersen/`      | Nathan Petersen      | `/faculty/petersen_nathan/`      | Migrated     | Yes      |                                                                                                                                  |
-| `/olga-ferroni/`         | Olga Ferroni         | `/faculty/ferroni_olga/`         | Migrated     | Yes      |                                                                                                                                  |
-| `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated     | Yes      |                                                                                                                                  |
-| `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated     | Yes      |                                                                                                                                  |
+| Old URL                  | Title                | New path                         | Status   | Redirect | Notes                                                                                                                            |
+| ------------------------ | -------------------- | -------------------------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                      | Home                 | `/`                              | Migrated | No       | Rewritten. See "Content only on the old site" below.                                                                             |
+| `/registration/`         | Registration         | `/registration/`                 | Migrated | No       | Fees, tuition, refunds, scholarships from the handbook. Buttons from `data/destinations.yaml`.                                   |
+| `/schedule/`             | Schedule             | `/schedule/`                     | Migrated | No       | Summer and Fall 2026 calendars, in `params.semesters`. May 25 corrected from \"Labor Day\" to Memorial Day (confirm with staff). |
+| `/payments/`             | Payments             | `/payment/`                      | Migrated | Yes      | Check payment details and three Breeze buttons from `data/destinations.yaml`.                                                    |
+| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in `data/destinations.yaml`, closed.                      |
+| `/contact/`              | Contact Us           | `/contact/`                      | Migrated | No       | Directions text and contact details. No contact form, as staff decided. The map link is built from `params.contact`.             |
+| `/faculty/`              | Faculty              | `/faculty/`                      | Migrated | No       | Same 12 faculty members.                                                                                                         |
+| `/news/`                 | News                 | none                             | None     | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                                                            |
+| `/angelyn-traylor-chen/` | Angelyn Traylor Chen | `/faculty/traylor_chen_angelyn/` | Migrated | Yes      |                                                                                                                                  |
+| `/anne-jueng/`           | Anne Jueng           | `/faculty/jueng_anne/`           | Migrated | Yes      |                                                                                                                                  |
+| `/brian-bak-2/`          | Brian Bak            | `/faculty/bak_brian/`            | Migrated | Yes      |                                                                                                                                  |
+| `/cynthia-jimenez/`      | Cynthia Jimenez      | `/faculty/jimenez_cynthia/`      | Migrated | Yes      |                                                                                                                                  |
+| `/dr-terry-yount/`       | Dr. Terry Yount      | `/faculty/yount_terry/`          | Migrated | Yes      |                                                                                                                                  |
+| `/elise-jimenez/`        | Elise Jimenez        | `/faculty/jimenez_elise/`        | Migrated | Yes      |                                                                                                                                  |
+| `/kristen-swed/`         | Kristen Swed         | `/faculty/swed_kirsten/`         | Migrated | Yes      | The old site spells the name both "Kristen" and "Kirsten". Staff confirmed "Kirsten".                                            |
+| `/laura-yount/`          | Laura Yount          | `/faculty/yount_laura/`          | Migrated | Yes      |                                                                                                                                  |
+| `/nathan-petersen/`      | Nathan Petersen      | `/faculty/petersen_nathan/`      | Migrated | Yes      |                                                                                                                                  |
+| `/olga-ferroni/`         | Olga Ferroni         | `/faculty/ferroni_olga/`         | Migrated | Yes      |                                                                                                                                  |
+| `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated | Yes      |                                                                                                                                  |
+| `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated | Yes      |                                                                                                                                  |
 
 Pages that are new in this project and have no old equivalent: `/studios/` and its eight studio pages.
 
@@ -66,13 +66,13 @@ These are served from WordPress (`/wp-content/uploads/`) and will stop working w
 
 This is the work list for Phase 3 content migration and Phase 4 registration and payment. Confirm with conservatory staff whether each item is still current before migrating it.
 
-- **Registration:**
+- **Registration** (migrated in Phase 4.2, following the handbook where it differs; see the roadmap):
   - Registration policy: the $25 registration fee, the $25 change fee, priority for returning students, and the fee waiver for students returning within one year.
   - Tuition rates: $33, $49.50, and $66 for 30-, 45-, and 60-minute lessons.
   - The 20% discount for Saint Andrew's Chapel members.
   - Payment terms: the pay-in-full discount and the $15 late fee.
   - Scholarship information.
-- **Payment:**
+- **Payment** (migrated in Phase 4.2):
   - Check payment instructions: payable to "Saint Andrew's Conservatory of Music", mailing address, note "Lesson Payment".
   - The online processing-fee notice.
   - The donation appeal.

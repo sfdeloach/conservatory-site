@@ -60,11 +60,11 @@ Run `make check` before every commit. CI runs the same command on every push and
   - There is no heading hook: Goldmark's automatic heading ids are enough.
 - **Shortcodes** (`layouts/_shortcodes/`), each with a header comment, and each failing the build on missing data:
   - `destination_button` renders a `data/destinations.yaml` entry by key (`"summerCamp"`) through the partial. Used on the Summer Academy page.
-  - `contact` renders `"address"`, `"phone"`, or `"email"` from `params.contact` as a link.
+  - `contact` renders `"address"`, `"phone"`, or `"email"` from `params.contact` as a link, or `"mailing"` as the plain-text address.
   - `semester_calendars` renders the Schedule page's calendars (`level` sets the heading level).
   - `studio_requirements` lists every studio with its requirements.
   - `faculty_list` is a table of faculty, credentials, and instruments, in last-name order.
-  - `handbook_value` outputs one value from the handbook's front matter by dotted path (`"fees.late"`); `lesson_rates` and `refund_schedule` render its tables. They work on any page, for reuse on Registration (Phase 4.2).
+  - `handbook_value` outputs one value from the handbook's front matter by dotted path (`"fees.late"`); `lesson_rates` and `refund_schedule` render its tables. They work on any page, and the Registration and Payment pages use them.
 - **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on). `_prose.scss` styles Markdown inside `.prose`: a 55ch column on the same named-line grid as `main`, which `.full-bleed` children escape. `_handbook.scss` styles the handbook layout and its print view.
 - **Script:** `assets/js/script.js` toggles the mobile navigation menu.
 - **Static files:** `static/` holds self-hosted fonts (EB Garamond, Nunito, Incognito Pro) and the favicon.
@@ -90,10 +90,9 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 ## Known limitations and technical debt
 
 - External links are not checked automatically.
-- `npx prettier --check .` fails on 5 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, `layouts/_partials/logo.html`, `content/registration/index.md`, and `content/payment/index.md`. Format them in a separate change.
-- `content/registration/` and `content/payment/` have front matter only and no body. Their content is still on the old site (see [docs/SITE-INVENTORY.md](docs/SITE-INVENTORY.md)) and is written in Phase 4.2.
+- `npx prettier --check .` fails on 3 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, and `layouts/_partials/logo.html`. Format them in a separate change.
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
-- The handbook at `/handbook/` is not linked from anywhere yet. Phase 4.2 links it from the Registration page.
+- The handbook at `/handbook/` is linked only from the Registration page, not from the menus or the footer (staff decision).
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
 
 ## Documentation
