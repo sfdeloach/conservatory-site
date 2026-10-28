@@ -322,6 +322,12 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Document how outdated forms and links are retired or archived.
 - Include a checklist for reviewing and publishing registration changes.
 
+**Done** (2026-10-28): see "Registration and payment links" in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#registration-and-payment-links). Decided 2026-10-28:
+
+- **Ownership:** by role, not by name, from the handbook's staff list. The Conservatory Administrative Assistant owns the Wufoo registration forms, the Director of Accounting owns the Breeze payment and donation forms, and the site maintainer owns the site. Names can be added in Phase 7.
+- **Retiring forms:** a new URL replaces the old one in `data/destinations.yaml`, and Git history is the archive. Old forms are closed in Wufoo or Breeze, never deleted, because their submissions are stored there.
+- **Checklist:** one checklist, in the content guide, for opening, the payment check, and closing.
+
 ### 4.4 Validate the user journey
 
 - Verify the active form and checkout destinations.
@@ -329,7 +335,7 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Confirm that program descriptions and semester labels match the active forms.
 - Verify the expected return, confirmation, and failure behavior where supported.
 - Confirm that sensitive registration and payment information is handled by the appropriate external provider, not by the static site.
-- Require human end-to-end verification before each registration cycle.
+- Require human end-to-end verification before each registration cycle. This is the checklist in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#checklist-for-each-registration-period); don't write a second one.
 
 ### Acceptance criteria
 
@@ -427,17 +433,17 @@ This phase begins only after hosting, content, and validation are ready.
 
 Record each decision here, with its rationale, once it is made.
 
-| Decision                                                 | Phase | Status | Outcome                                                                                         |
-| -------------------------------------------------------- | ----- | ------ | ----------------------------------------------------------------------------------------------- |
-| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                                |
-| Replacement for the old site's WordPress contact form    | 3     | Done   | None: an email link and phone number are enough (staff, 2026-10-27)                             |
-| Hosting the student handbook PDF                         | 3     | Done   | Replaced by a web page at `/handbook/`, not a PDF (staff, 2026-10-27)                           |
-| Faculty list order (first name or last name)             | 3     | Done   | Last name; a compound last name sorts by its first word (staff, 2026-10-27)                     |
-| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed |     |
-| Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI              |
-| Owners of content, registration links, and maintenance   | 4, 7  | Open   |                                                                                                 |
-| GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                 |
-| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                 |
+| Decision                                                 | Phase | Status | Outcome                                                                                                                                                          |
+| -------------------------------------------------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                                                                                                 |
+| Replacement for the old site's WordPress contact form    | 3     | Done   | None: an email link and phone number are enough (staff, 2026-10-27)                                                                                              |
+| Hosting the student handbook PDF                         | 3     | Done   | Replaced by a web page at `/handbook/`, not a PDF (staff, 2026-10-27)                                                                                            |
+| Faculty list order (first name or last name)             | 3     | Done   | Last name; a compound last name sorts by its first word (staff, 2026-10-27)                                                                                      |
+| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                  |     |
+| Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                               |
+| Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
+| GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |
+| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                  |
 
 ## Execution protocol
 

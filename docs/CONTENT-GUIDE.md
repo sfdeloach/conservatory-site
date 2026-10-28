@@ -194,13 +194,73 @@ summerCamp:
 - A page shows a button with `{{< destination_button "summerCamp" >}}`, using the entry's name. Give several names, as in `{{< destination_button "fullPayment" "installmentPayment" >}}`, to show their buttons side by side.
 - The build fails, and nothing is published, if a page names an entry that doesn't exist, if an entry has no `label`, or if an open entry's `url` is empty or doesn't start with `https://`.
 
-### Opening Summer Academy registration
+### Who looks after these links
 
-In `data/destinations.yaml`, update `summerCamp` and `summerAcademy` as above. Also replace "Dates for 2027 coming soon" in the text of `content/summer-academy/index.md` with the dates.
+| Links                                        | Owner                                                       |
+| -------------------------------------------- | ----------------------------------------------------------- |
+| Semester and summer registration (Wufoo)     | Conservatory Administrative Assistant (Conservatory Office) |
+| Tuition payment and donation (Breeze ChMS)   | Director of Accounting                                      |
+| The website itself: builds, failed publishes | Site maintainer                                             |
 
-### Replacing forms each semester
+The owner makes or approves each change. Anyone with access to the GitHub repository can make the edit itself.
 
-_To be completed in Phase 4.3._ This section will describe how to replace the semester form, how to retire old forms, who owns the payment links, and the checklist to follow before a registration period opens.
+### Replacing the semester registration form
+
+Each semester has its own Wufoo form with its own address, so this is done every semester. In `data/destinations.yaml`, under `semesterRegistration`:
+
+1. Paste the new form's public link into `url`.
+2. Change `label` to name the new semester, such as `"Register for Spring 2027"`.
+3. When registration opens, change `open` to `true`.
+4. When registration closes, change `open` back to `false`, and change `closedText` to name the next semester, such as `"Summer 2027 registration opens soon."`.
+
+The registration dates themselves are in the semester calendar (see "Updating the semester schedule").
+
+### Reopening Summer Camp and Academy registration
+
+Once a year, follow the same steps for `summerCamp` and `summerAcademy`. Also replace "Dates for 2027 coming soon" in the text of `content/summer-academy/index.md` with that year's dates.
+
+### Payment and donation links
+
+The Breeze forms usually keep the same address from year to year, so most semesters need no change here.
+
+- Change `fullPayment`, `installmentPayment`, or `donation` only when accounting replaces that form in Breeze.
+- Installments are not available for the summer semester. To hide that button over the summer, change `installmentPayment` to `open: false`, and back to `true` for fall.
+- The Payment page does not give the online card fee amounts; the Breeze forms show them. A fee change in Breeze needs no website edit.
+
+### Retiring old forms
+
+- Paste the new address over the old one. Don't keep old addresses in the file: Git keeps every earlier version, under **History** on the file's GitHub page.
+- In Wufoo or Breeze, set the old form to stop accepting entries. Don't delete it, because its submissions and payments are stored there.
+- If a form is retired with no replacement, change its entry to `open: false` instead of deleting the entry. Pages still use it, and the build fails if it is missing.
+
+### Checklist for each registration period
+
+Before opening:
+
+- [ ] The new form exists, and its title names the right semester or summer.
+- [ ] The fees and dates on the form match the student handbook and the Schedule page on the website.
+- [ ] The Schedule has the new semester's calendar.
+- [ ] Submit a test entry through the form, then delete the test entry in Wufoo.
+
+Opening:
+
+- [ ] Change `url`, `label`, and `open` in `data/destinations.yaml`, and commit.
+- [ ] In the **Actions** tab, the run shows a green tick (see "Publishing changes").
+- [ ] On the live site, click the button on Registration (or Summer Academy) and check that the right form opens.
+- [ ] Check the page on a phone as well as a computer.
+
+Each semester, check the payment links:
+
+- [ ] On the live Payment page, open both payment buttons and the Donate button.
+- [ ] Each opens the right Breeze form: "Conservatory Full Semester Lesson Payment", "Conservatory Installment Lesson Payment", and "Saint Andrew's Conservatory Scholarship Fund Donation". Don't make a test payment.
+
+Closing:
+
+- [ ] Change `open` to `false` and update `closedText` in `data/destinations.yaml`, and commit.
+- [ ] Set the Wufoo form to stop accepting entries.
+- [ ] On the live site, the page shows the closed text in place of the button.
+
+If any step fails, set the entry to `open: false` (or leave it there), and contact the site maintainer.
 
 ## Publishing changes
 
