@@ -1,4 +1,4 @@
-.PHONY: build check clean help
+.PHONY: build check check-destinations clean help
 
 # Extra hugo arguments, e.g. HUGO_ARGS="--baseURL https://example.org/sub/"
 HUGO_ARGS ?=
@@ -9,9 +9,12 @@ build: ## production minified build; fails on any Hugo warning
 check: build ## strict build plus internal link check (requires lychee)
 	lychee --offline --include-fragments --index-files index.html --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'
 
+check-destinations: ## online check of the forms in data/destinations.yaml (requires curl); not run in CI
+	./scripts/check-destinations.sh
+
 clean: ## delete 'public' and 'resources' folders
 	rm -rf public
 	rm -rf resources
 
 help:  ## show this help
-	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*## "};{printf "  %-15s %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*## "};{printf "  %-20s %s\n", $$1, $$2}'

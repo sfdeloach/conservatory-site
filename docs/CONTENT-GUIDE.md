@@ -241,6 +241,7 @@ Before opening:
 - [ ] The fees and dates on the form match the student handbook and the Schedule page on the website.
 - [ ] The Schedule has the new semester's calendar.
 - [ ] Submit a test entry through the form, then delete the test entry in Wufoo.
+- [ ] The site maintainer runs `make check-destinations` after the new address is in `data/destinations.yaml`. Every line should start with `OK`, or `NOTE` for a form that isn't open on the site yet.
 
 Opening:
 
@@ -259,6 +260,7 @@ Closing:
 - [ ] Change `open` to `false` and update `closedText` in `data/destinations.yaml`, and commit.
 - [ ] Set the Wufoo form to stop accepting entries.
 - [ ] On the live site, the page shows the closed text in place of the button.
+- [ ] The site maintainer runs `make check-destinations` to confirm that the site and the forms agree.
 
 If any step fails, set the entry to `open: false` (or leave it there), and contact the site maintainer.
 

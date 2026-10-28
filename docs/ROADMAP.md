@@ -337,6 +337,29 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Confirm that sensitive registration and payment information is handled by the appropriate external provider, not by the static site.
 - Require human end-to-end verification before each registration cycle. This is the checklist in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#checklist-for-each-registration-period); don't write a second one.
 
+**Automated checks** (done on 2026-10-28, against the deployed site at `7f0958a`):
+
+- **Destinations:** pass.
+  - Registration shows "Spring 2027 registration opens soon." and Donate.
+  - Payment shows the full-semester, installment, and Donate buttons.
+  - Summer Academy shows no buttons, because both forms are closed.
+  - Every button URL matches `data/destinations.yaml`, and all six forms return 200.
+- **Labels against the forms:** pass.
+  - The three Wufoo forms ("Conservatory Student Registration - Fall 2026", "Summer Music Camp 2026 - 1st-5th Grade", "Summer Music Academy 2026 - Upper School") are closed, as `open: false` says.
+  - The three Breeze form titles match the buttons and the content guide.
+- **Sensitive data:** pass.
+  - The built site has no form, iframe, or input elements.
+  - Its only script is the local navigation toggle, with no network calls.
+  - Every external link is `https://` to Breeze, Wufoo, or Google Maps.
+  - No credential files are tracked, and the workflow uses no secrets.
+- **`make check-destinations`** (`scripts/check-destinations.sh`) repeats the destination and label checks on demand. It was added because Breeze returns 200 for a form that doesn't exist (with the page title "Form"), so a plain link checker would miss a mistyped Breeze URL. It is not in CI. See [DEPLOYMENT.md](DEPLOYMENT.md#registration-and-payment-forms).
+
+Still to do by hand, so 4.4 stays open:
+
+- Test the Registration, Payment, and Summer Academy pages and the forms on a phone and on a computer.
+- Check the confirmation and failure behaviour of a real submission. Staff decide whether to submit a test registration; never make a test payment.
+- Before the Spring 2027 registration opens, staff work through the checklist in the content guide.
+
 ### Acceptance criteria
 
 - Each active registration or payment destination is easy to identify and update.

@@ -9,20 +9,22 @@ Read [docs/ROADMAP.md](docs/ROADMAP.md) before starting work. It defines the pha
 - **Hugo extended** 0.168.0. The extended edition is required for image processing to WebP. `hugo.toml` (`[module.hugoVersion]`) refuses to build on an older or non-extended Hugo.
 - **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Version 1.106.1.
 - **lychee**, for the internal link check in `make check`. Version 0.24.2.
+- **curl**, for `make check-destinations` only.
 - **Node and npm**, for formatting only: Prettier 3 with `prettier-plugin-go-template`. Verified with Node 20.
 
 The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.github/workflows/deploy.yml`. That is the source of truth, and CI uses exactly those versions.
 
 ## Commands
 
-| Command                  | Purpose                                                                 |
-| ------------------------ | ----------------------------------------------------------------------- |
-| `hugo server`            | Local development server with live reload, at `http://localhost:1313/`. |
-| `make build`             | Strict production build into `public/`. Any Hugo warning fails it.      |
-| `make check`             | `make build`, then lychee offline check of internal links and anchors.  |
-| `make clean`             | Delete `public/` and `resources/`.                                      |
-| `npm install`            | Install Prettier and its plugin.                                        |
-| `npx prettier --check .` | Check formatting. Use `--write` to fix it.                              |
+| Command                   | Purpose                                                                                                                                 |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `hugo server`             | Local development server with live reload, at `http://localhost:1313/`.                                                                 |
+| `make build`              | Strict production build into `public/`. Any Hugo warning fails it.                                                                      |
+| `make check`              | `make build`, then lychee offline check of internal links and anchors.                                                                  |
+| `make check-destinations` | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI. |
+| `make clean`              | Delete `public/` and `resources/`.                                                                                                      |
+| `npm install`             | Install Prettier and its plugin.                                                                                                        |
+| `npx prettier --check .`  | Check formatting. Use `--write` to fix it.                                                                                              |
 
 Run `make check` before every commit. CI runs the same command on every push and pull request. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#build-and-validation) for what it covers.
 
@@ -90,7 +92,7 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 
 ## Known limitations and technical debt
 
-- External links are not checked automatically.
+- External links are not checked automatically, except the six forms in `data/destinations.yaml`, which `make check-destinations` checks on demand.
 - `npx prettier --check .` fails on 3 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, and `layouts/_partials/logo.html`. Format them in a separate change.
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
 - The handbook at `/handbook/` is linked only from the Registration page, not from the menus or the footer (staff decision).

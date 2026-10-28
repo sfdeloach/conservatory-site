@@ -62,8 +62,18 @@ The build empties `public/` first, so files left over from an earlier build can'
 
 What the checks don't cover yet:
 
-- **External links** (Wufoo, Breeze, maps). These are skipped in offline mode. Checking them is slow and fails whenever another site is briefly down, so they are verified by hand (Phase 4) and may get a scheduled check later.
+- **External links** (Wufoo, Breeze, maps). These are skipped in offline mode. Checking them is slow and fails whenever another site is briefly down, so they are not part of `make check` or CI. The six forms have their own on-demand check, below.
 - Formatting (Prettier), HTML validity, and accessibility (Phase 5).
+
+### Registration and payment forms
+
+`make check-destinations` runs `scripts/check-destinations.sh`, which fetches each form in `data/destinations.yaml` and prints its page title. It fails when:
+
+- a form can't be reached, or doesn't return 200 (a missing Wufoo form returns 404);
+- a Breeze page's title is "Form". Breeze returns 200 with that title for a form that doesn't exist, so a plain link checker such as lychee would pass a mistyped Breeze address;
+- an entry is open on the site, but its Wufoo form says it is no longer accepting submissions.
+
+A form that accepts entries while the site shows it closed is only noted, because that is normal while staff prepare a new form. The command needs only `curl`. It is run on demand, as part of the registration checklist in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#checklist-for-each-registration-period), and not in CI, so an outage at Wufoo or Breeze never blocks a deploy.
 
 ### Pinned tool versions
 
