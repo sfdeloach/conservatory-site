@@ -180,6 +180,7 @@
     display: grid;
     grid-column: full;
     grid-template-columns: subgrid;
+    padding-block: clamp(space("lg"), 8vw, space("xxl"));
     color: color("text-light");
 
     .content {
@@ -206,6 +207,7 @@
   }
 
   .summer-academy {
+    margin-bottom: 0;
     background: color("background-footer");
 
     .band-image {

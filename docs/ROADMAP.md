@@ -286,8 +286,8 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - The `destination_button` shortcode and partial render them, replacing `registration_button` and `params.registration`. The Summer Academy page is unchanged in the built output.
 - The build fails on an unknown entry, a missing label, or an open entry without an `https://` URL.
 - Checked on 2026-10-28: the Fall 2026 semester form is closed and stored closed. Staff replace it when the Spring 2027 form is ready. All three Breeze forms load.
-- The button labels for the semester and payment entries are placeholders until Phase 4.2.
-- For Phase 4.2 and 4.4: the online card fee is $15 on the full-payment form and $4 on the installment form. Confirm both with staff before writing the payment text.
+- The button labels for the semester and payment entries were placeholders, replaced in Phase 4.2.
+- The online card fee is $15 on the full-payment form and $4 on the installment form. Phase 4.2 left the amounts to the forms (see below).
 
 ### 4.2 Build the Registration and Payment pages
 
@@ -301,7 +301,7 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Both pages are written. Every fee, rate, discount, and the refund schedule come from the handbook's front matter through `handbook_value`, `lesson_rates`, and `refund_schedule`. Every form button comes from `data/destinations.yaml`.
 - Registration links to the handbook, the Schedule, Summer Academy, and Payment. While the semester form is closed it shows "Spring 2027 registration opens soon." (`closedText`).
 - Payment has the two Breeze payment buttons, check instructions with the mailing address from `params.contact` (the new `"mailing"` detail of the `contact` shortcode), and Donate, which is also on Registration.
-- Where the old site and the handbook disagreed, the handbook was followed (decided 2026-10-28). For staff to confirm:
+- Where the old site and the handbook disagreed, the handbook was followed (decided 2026-10-28). Staff confirmed all five as written on 2026-10-28:
   - **Scholarships:** a 25% scholarship after one full year, on the teacher's recommendation. The old site said "consistently high quality in a semester", renewable.
   - **Check payee:** "Saint Andrew's Conservatory". The old site said "Saint Andrew's Conservatory of Music".
   - **Due date:** "the first day of the semester". The old site said "the first day of lessons".

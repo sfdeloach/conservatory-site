@@ -183,7 +183,7 @@ Other checks done in Phase 1.3:
 
 - All 28 pages in the live sitemap returned 200, and had no broken internal links. CSS, JavaScript, images, fonts, and the favicon all loaded at the temporary subpath.
 - External destinations, checked online on 2026-10-26:
-  - Both Summer Wufoo forms load, but they show "no longer accepting submissions", because the Summer 2026 forms have closed. They will be replaced in Phase 4.
+  - Both Summer Wufoo forms load, but they show "no longer accepting submissions", because the Summer 2026 forms have closed. Phase 4 stores them as closed in `data/destinations.yaml`, and staff replace them each spring (see the content guide).
   - The Google Maps footer link works in a browser. It returns 403 to automated link checkers, which is why it is excluded from any automated external-link check.
 
 ## DNS cutover
