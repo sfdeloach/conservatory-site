@@ -29,6 +29,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 ## Architecture
 
 - `hugo.toml` holds the site config: `baseURL`, the title, `enableGitInfo` (page dates come from Git; CI checks out full history with `fetch-depth: 0`), contact details under `params.contact`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), a standalone image is not wrapped in a paragraph (`wrapStandAloneImageWithinParagraph = false`, so the image hook can render a figure), code-fence highlighting is off, and the table of contents covers `h2`–`h3`.
+- `data/destinations.yaml` is the single source for every external form: Wufoo registration (`semesterRegistration`, `summerCamp`, `summerAcademy`) and Breeze ChMS payment (`fullPayment`, `installmentPayment`, `donation`). Each entry has `open`, `label`, `url`, and an optional `closedText`. Never write these URLs into pages or templates; use the `destination_button` shortcode or partial.
 - **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them.
   - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter.
   - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, and an optional `params.postNominal`. Faculty lists sort by folder name (last name) through `_partials/faculty_sort.html`, not by `weight`.
@@ -50,6 +51,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `prose.html` wraps a page's Markdown content in `.prose` (reading width and typography). Use it instead of a bare `.Content`. The homepage is the exception: its Dean's letter is styled by `_home.scss`.
   - `cta.html` and `cta_group.html` render buttons from `{label, page, style}` lists in front matter. A missing target page triggers a build warning.
   - `simple_table.html` renders a table from a list of maps (`headers`, `keys`, `rows`) with the same markup as Markdown tables. `requirements_list.html` renders a studio's requirements. `map_url.html` returns the Google Maps URL for `params.contact`.
+  - `destination_button.html` renders one `data/destinations.yaml` entry (`key`, `position`): a button while it is open, otherwise its `closedText` or nothing. It fails the build on an unknown key, a missing label, or an open entry without an `https://` URL.
   - `header.html`, `footer.html`, `site_nav_list.html`, `logo.html`, `page_header.html`, and `studios_text.html` cover the rest of the page chrome.
 - **Render hooks** (`layouts/_markup/`), each with a header comment:
   - `render-link.html` outputs internal links as the target page's or bundle file's `RelPermalink` (subpath-safe), and fails the build with the source file and line if the target doesn't exist. External and `#fragment` links are output as written.
@@ -57,7 +59,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `render-table.html` wraps tables in a focusable `.table-scroll` region that scrolls sideways on narrow screens.
   - There is no heading hook: Goldmark's automatic heading ids are enough.
 - **Shortcodes** (`layouts/_shortcodes/`), each with a header comment, and each failing the build on missing data:
-  - `registration_button` shows a registration button from `params.registration.<key>` (`open`, `label`, `url`) only while `open` is true. Used on the Summer Academy page.
+  - `destination_button` renders a `data/destinations.yaml` entry by key (`"summerCamp"`) through the partial. Used on the Summer Academy page.
   - `contact` renders `"address"`, `"phone"`, or `"email"` from `params.contact` as a link.
   - `semester_calendars` renders the Schedule page's calendars (`level` sets the heading level).
   - `studio_requirements` lists every studio with its requirements.

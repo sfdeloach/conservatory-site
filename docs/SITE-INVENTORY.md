@@ -22,7 +22,7 @@ Migration status values:
 | `/registration/`         | Registration         | `/registration/`                 | Not migrated | No       | Fall 2026 registration, fees, tuition, scholarships. Wufoo and Breeze links.                                                     |
 | `/schedule/`             | Schedule             | `/schedule/`                     | Migrated     | No       | Summer and Fall 2026 calendars, in `params.semesters`. May 25 corrected from \"Labor Day\" to Memorial Day (confirm with staff). |
 | `/payments/`             | Payments             | `/payment/`                      | Not migrated | Yes      | Check payment details and three Breeze links.                                                                                    |
-| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in front matter, with their buttons switched off.         |
+| `/summer-music/`         | Summer Music         | `/summer-academy/`               | Migrated     | Yes      | Dates replaced with "Dates for 2027 coming soon". Both Wufoo forms are in `data/destinations.yaml`, closed.                      |
 | `/contact/`              | Contact Us           | `/contact/`                      | Migrated     | No       | Directions text and contact details. No contact form, as staff decided. The map link is built from `params.contact`.             |
 | `/faculty/`              | Faculty              | `/faculty/`                      | Migrated     | No       | Same 12 faculty members.                                                                                                         |
 | `/news/`                 | News                 | none                             | None         | Yes      | Empty ("Sorry, no content matched"). Redirect to `/`.                                                                            |
@@ -52,15 +52,15 @@ These are served from WordPress (`/wp-content/uploads/`) and will stop working w
 
 ## External destinations
 
-| Destination                                         | Purpose                                                                                | Old page(s)            | In this project                                                             |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------------- |
-| `https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/` | Fall 2026 semester registration                                                        | Registration           | No                                                                          |
-| `https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/` | Summer Music Camp registration (closed: "no longer accepting submissions", 2026-10-26) | Summer Music           | `content/summer-academy/`                                                   |
-| `https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/` | Summer Music Academy registration (closed, 2026-10-26)                                 | Summer Music           | `content/summer-academy/`                                                   |
-| `https://sachapel.breezechms.com/form/215b5b76`     | Full semester tuition payment                                                          | Payments               | No                                                                          |
-| `https://sachapel.breezechms.com/form/215b5b`       | Installment payment (not available for summer)                                         | Payments               | No                                                                          |
-| `https://sachapel.breezechms.com/form/215b5b161825` | Scholarship fund donation                                                              | Registration, Payments | No                                                                          |
-| `https://goo.gl/maps/YzhFXRDH8zGuP6rL9`             | Map to the campus                                                                      | Contact                | Replaced by a Google Maps search for the address (`_partials/map_url.html`) |
+| Destination                                         | Purpose                                                                                    | Old page(s)            | In this project                                                             |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------- | --------------------------------------------------------------------------- |
+| `https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/` | Fall 2026 semester registration (closed, 2026-10-28)                                       | Registration           | `semesterRegistration` in `data/destinations.yaml` (closed)                 |
+| `https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/` | Summer Music Camp registration (closed: "no longer accepting submissions", 2026-10-26)     | Summer Music           | `summerCamp` in `data/destinations.yaml` (closed)                           |
+| `https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/` | Summer Music Academy registration (closed, 2026-10-26)                                     | Summer Music           | `summerAcademy` in `data/destinations.yaml` (closed)                        |
+| `https://sachapel.breezechms.com/form/215b5b76`     | Full semester tuition payment (form loads, 2026-10-28; $15 online card fee)                | Payments               | `fullPayment` in `data/destinations.yaml`                                   |
+| `https://sachapel.breezechms.com/form/215b5b`       | Installment payment, not available for summer (form loads, 2026-10-28; $4 online card fee) | Payments               | `installmentPayment` in `data/destinations.yaml`                            |
+| `https://sachapel.breezechms.com/form/215b5b161825` | Scholarship fund donation (form loads, 2026-10-28)                                         | Registration, Payments | `donation` in `data/destinations.yaml`                                      |
+| `https://goo.gl/maps/YzhFXRDH8zGuP6rL9`             | Map to the campus                                                                          | Contact                | Replaced by a Google Maps search for the address (`_partials/map_url.html`) |
 
 ## Content only on the old site
 

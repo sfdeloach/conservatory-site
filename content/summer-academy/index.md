@@ -6,15 +6,6 @@ menus:
 draft: false
 params:
   image: "summer-academy.jpg"
-  registration:
-    camp:
-      open: false
-      label: "Register for Summer Music Camp"
-      url: "https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/"
-    academy:
-      open: false
-      label: "Register for Summer Music Academy"
-      url: "https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/"
 ---
 
 Summer Music Camp and Academy at Saint Andrew’s Conservatory are unique opportunities to combine fun with musical exploration. Students have the chance to participate in music ensembles and refine their musical skills. They are mentored and taught by caring instructors who are exceptional teachers and performers on various instruments. Participants learn about music in a fun environment where God is honored and glorified.
@@ -31,7 +22,7 @@ For rising 1st through 5th graders, no music experience necessary.
 
 Students will explore music in a group context with their peers as they engage with choral music, ORFF instruments, handbells, and a variety of other musical activities.
 
-{{< registration_button "camp" >}}
+{{< destination_button "summerCamp" >}}
 
 ---
 
@@ -49,4 +40,4 @@ Registration is pending until your audition video has been adjudicated. An audit
 
 Details of the audition requirements, including video submission instructions, are on the registration form.
 
-{{< registration_button "academy" >}}
+{{< destination_button "summerAcademy" >}}

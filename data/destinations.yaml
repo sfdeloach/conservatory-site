@@ -1,0 +1,46 @@
+# External forms the site links to: registration (Wufoo) and payment
+# (Breeze ChMS). Each one is stored here once, and pages show it with the
+# destination_button shortcode, such as {{< destination_button "summerCamp" >}}.
+#
+# Each entry defines:
+#
+#   open: true shows the button; false shows closedText, or nothing
+#   label: the button text
+#   url: the form's address (must start with https://)
+#   closedText: optional text shown in place of the button while closed
+
+# Semester lesson registration (Registration page)
+semesterRegistration:
+  open: false
+  label: "Register for Fall 2026"
+  url: "https://sachapel.wufoo.com/forms/w1u72etr1adhdx6/"
+
+# Summer Music Camp registration (Summer Academy page)
+summerCamp:
+  open: false
+  label: "Register for Summer Music Camp"
+  url: "https://sachapel.wufoo.com/forms/s1epcsxn1ahxr1d/"
+
+# Summer Music Academy registration (Summer Academy page)
+summerAcademy:
+  open: false
+  label: "Register for Summer Music Academy"
+  url: "https://sachapel.wufoo.com/forms/s123tw3y1qmy8uq/"
+
+# Full semester tuition payment (Payment page)
+fullPayment:
+  open: true
+  label: "Pay the full semester"
+  url: "https://sachapel.breezechms.com/form/215b5b76"
+
+# Installment tuition payment (Payment page). Not available for summer.
+installmentPayment:
+  open: true
+  label: "Pay an installment"
+  url: "https://sachapel.breezechms.com/form/215b5b"
+
+# Scholarship fund donation (Registration and Payment pages)
+donation:
+  open: true
+  label: "Donate"
+  url: "https://sachapel.breezechms.com/form/215b5b161825"

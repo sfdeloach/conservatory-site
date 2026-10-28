@@ -1,0 +1,8 @@
+{{/* Note:
+
+  Renders a button for one external destination in data/destinations.yaml,
+  through _partials/destination_button.html. Call it in the page body with
+  one argument, the entry's name, such as "summerCamp".
+*/}}
+
+{{- partial "destination_button.html" (dict "key" (.Get 0) "position" .Position) }}

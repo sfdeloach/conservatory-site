@@ -14,7 +14,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 1     | Production hosting and CI/CD                          | Done        |
 | 2     | Complete the homepage                                 | Done        |
 | 3     | Content migration, typography, and Markdown rendering | Done        |
-| 4     | Registration and payment workflows                    | Not started |
+| 4     | Registration and payment workflows                    | In progress |
 | 5     | Accessibility, quality assurance, and SEO             | Not started |
 | 6     | Launch readiness and domain cutover                   | Not started |
 | 7     | Ongoing maintenance and handoff                       | Not started |
@@ -279,6 +279,15 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Make routine URL updates possible without modifying templates or application logic wherever practical.
 - Avoid duplicating the same destination across multiple files.
 - Fit the Summer Academy registration switch built in Phase 3 (`params.registration` and the `registration_button` shortcode) into this approach.
+
+**Done** (2026-10-28):
+
+- All six destinations are in `data/destinations.yaml`, each with `open`, `label`, `url`, and an optional `closedText` shown while the form is closed (decided 2026-10-28).
+- The `destination_button` shortcode and partial render them, replacing `registration_button` and `params.registration`. The Summer Academy page is unchanged in the built output.
+- The build fails on an unknown entry, a missing label, or an open entry without an `https://` URL.
+- Checked on 2026-10-28: the Fall 2026 semester form is closed and stored closed. Staff replace it when the Spring 2027 form is ready. All three Breeze forms load.
+- The button labels for the semester and payment entries are placeholders until Phase 4.2.
+- For Phase 4.2 and 4.4: the online card fee is $15 on the full-payment form and $4 on the installment form. Confirm both with staff before writing the payment text.
 
 ### 4.2 Build the Registration and Payment pages
 

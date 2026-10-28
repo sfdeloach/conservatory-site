@@ -166,23 +166,39 @@ The address, phone number, and email in the footer, on the Contact page, and in 
 
 ## Registration and payment links
 
-### Opening Summer Academy registration
+Every registration form (Wufoo) and payment form (Breeze ChMS) the site links to is kept in one file, `data/destinations.yaml`. Change a link there, and every page that shows it updates.
 
-The Summer Academy page has one registration button for Summer Music Camp and one for Summer Music Academy. Each is set in the front matter of `content/summer-academy/index.md`:
+| Name                   | Form                                | Shown on              |
+| ---------------------- | ----------------------------------- | --------------------- |
+| `semesterRegistration` | Semester lesson registration        | Registration          |
+| `summerCamp`           | Summer Music Camp registration      | Summer Academy        |
+| `summerAcademy`        | Summer Music Academy registration   | Summer Academy        |
+| `fullPayment`          | Full semester tuition payment       | Payment               |
+| `installmentPayment`   | Installment payment (not in summer) | Payment               |
+| `donation`             | Scholarship fund donation           | Registration, Payment |
+
+Each entry looks like this:
 
 ```yaml
-registration:
-  camp:
-    open: false # true shows the button, false hides it
-    label: "Register for Summer Music Camp" # button text
-    url: "https://sachapel.wufoo.com/forms/…" # the registration form
+summerCamp:
+  open: false # true shows the button; false hides it
+  label: "Register for Summer Music Camp" # button text
+  url: "https://sachapel.wufoo.com/forms/…" # the form's address
+  closedText: "Registration opens in March." # optional; shown while closed
 ```
 
-To open registration, paste the new form's address into `url` and change `open` to `true`. When registration closes, change `open` back to `false`. Also replace "Dates for 2027 coming soon" in the page text with the dates. If `open` is `true` and `url` is empty, the build fails and nothing is published.
+- To open a form, paste its address into `url` and change `open` to `true`. When it closes, change `open` back to `false`.
+- While a form is closed, its `closedText` is shown in place of the button. Leave `closedText` out to show nothing.
+- A page shows a button with `{{< destination_button "summerCamp" >}}`, using the entry's name.
+- The build fails, and nothing is published, if a page names an entry that doesn't exist, if an entry has no `label`, or if an open entry's `url` is empty or doesn't start with `https://`.
 
-### Other registration and payment links
+### Opening Summer Academy registration
 
-_To be completed in Phase 4._ This section will describe where each registration form and payment link is kept, how to replace them each semester and each summer, and the checklist to follow before a registration period opens. The current links are listed in [SITE-INVENTORY.md](SITE-INVENTORY.md).
+In `data/destinations.yaml`, update `summerCamp` and `summerAcademy` as above. Also replace "Dates for 2027 coming soon" in the text of `content/summer-academy/index.md` with the dates.
+
+### Replacing forms each semester
+
+_To be completed in Phase 4.3._ This section will describe how to replace the semester form, how to retire old forms, who owns the payment links, and the checklist to follow before a registration period opens.
 
 ## Publishing changes
 
