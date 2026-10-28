@@ -11,6 +11,15 @@
     flex-direction: row;
     gap: space("lg");
   }
+
+  // A column would stretch each card to full width; keep it hugging the
+  // image (its 320px cap below, plus padding and border) and centred.
+  .card {
+    @media (width < breakpoint("sm")) {
+      width: min(100%, 320px + 2 * space("sm") + 2px);
+      margin-inline: auto;
+    }
+  }
 }
 
 .card {

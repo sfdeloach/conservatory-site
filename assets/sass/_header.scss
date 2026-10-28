@@ -11,6 +11,15 @@ header {
   padding-inline: space("sm");
   background: color("background-header");
 
+  @media (width >= breakpoint("lg")) {
+    padding-inline: space("lg");
+  }
+
+  // On very wide screens, line up with the footer's content edges.
+  @media (width >= breakpoint("xl")) {
+    padding-inline: max(space("xl"), (100% - space("exa")) / 2);
+  }
+
   #nav-button {
     @media (width >= breakpoint("lg")) {
       display: none;

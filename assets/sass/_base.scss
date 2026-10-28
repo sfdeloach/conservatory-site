@@ -30,6 +30,12 @@ main {
     [full-start] 1fr
     [content-start] min(120ch, 100% - space("lg")) [content-end]
     1fr [full-end];
+  padding-bottom: space("xl");
+
+  // The homepage ends in a full-width band that meets the footer.
+  &:has(> .home) {
+    padding-bottom: 0;
+  }
 
   & > * {
     grid-column: content;

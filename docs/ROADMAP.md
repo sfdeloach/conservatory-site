@@ -14,7 +14,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 1     | Production hosting and CI/CD                          | Done        |
 | 2     | Complete the homepage                                 | Done        |
 | 3     | Content migration, typography, and Markdown rendering | Done        |
-| 4     | Registration and payment workflows                    | In progress |
+| 4     | Registration and payment workflows                    | Done        |
 | 5     | Accessibility, quality assurance, and SEO             | Not started |
 | 6     | Launch readiness and domain cutover                   | Not started |
 | 7     | Ongoing maintenance and handoff                       | Not started |
@@ -337,6 +337,8 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 - Confirm that sensitive registration and payment information is handled by the appropriate external provider, not by the static site.
 - Require human end-to-end verification before each registration cycle. This is the checklist in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#checklist-for-each-registration-period); don't write a second one.
 
+**Done** (2026-10-28).
+
 **Automated checks** (done on 2026-10-28, against the deployed site at `7f0958a`):
 
 - **Destinations:** pass.
@@ -354,11 +356,14 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
   - No credential files are tracked, and the workflow uses no secrets.
 - **`make check-destinations`** (`scripts/check-destinations.sh`) repeats the destination and label checks on demand. It was added because Breeze returns 200 for a form that doesn't exist (with the page title "Form"), so a plain link checker would miss a mistyped Breeze URL. It is not in CI. See [DEPLOYMENT.md](DEPLOYMENT.md#registration-and-payment-forms).
 
-Still to do by hand, so 4.4 stays open:
+**Checks by hand** (done on 2026-10-28):
 
-- Test the Registration, Payment, and Summer Academy pages and the forms on a phone and on a computer.
-- Check the confirmation and failure behaviour of a real submission. Staff decide whether to submit a test registration; never make a test payment.
-- Before the Spring 2027 registration opens, staff work through the checklist in the content guide.
+- **Phone and computer:** the pages and forms work. The testing found three layout problems, now fixed:
+  - **Header on wide screens:** the logo and nav sat almost at the screen edges. Now they get 2rem of side padding from `lg`, and 4rem from `xl`. From 84rem up, they line up with the footer's content edges (`_header.scss`).
+  - **Cards below `sm`:** on `/faculty/` and `/studios/`, each card stretched to the full column width, and its image sat at the left of the arch. Below 40em the card now hugs its 320px image and is centred (`_cards.scss`). The homepage card grids are unchanged.
+  - **Space above the footer:** `main` now has 4rem of bottom padding on every page except the homepage, whose "Ready" band meets the footer (`_base.scss`).
+- **Submission behaviour:** staff decided no test registration is needed for now. Never make a test payment.
+- **Checklist:** staff approved the checklist in the content guide and will work through it before each registration period, starting with Spring 2027.
 
 ### Acceptance criteria
 
