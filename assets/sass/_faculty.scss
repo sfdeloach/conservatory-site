@@ -1,0 +1,47 @@
+@use "./tokens" as *;
+
+// Headshot beside the name and instruments from md up; stacked below.
+.bio-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: space("lg");
+  margin-block: space("lg");
+
+  h1 {
+    font-size: clamp(
+      font-size("lg"),
+      font-size("display") + font-size("xl"),
+      font-size("xxl")
+    );
+  }
+
+  .studio-list {
+    margin-bottom: 0;
+  }
+
+  @media (width >= breakpoint("md")) {
+    flex-direction: row;
+    justify-content: center;
+    gap: space("xl");
+
+    .portrait {
+      flex-shrink: 0;
+      width: min(45%, 480px);
+    }
+
+    .bio-title :is(.eyebrow, h1, .studio-list) {
+      text-align: left;
+    }
+  }
+}
+
+.portrait {
+  width: min(100%, 480px);
+  height: auto;
+  aspect-ratio: 0.833;
+  object-fit: cover;
+  box-shadow: shadow("md");
+  border-radius: radius("sm");
+  filter: grayscale(25%);
+}

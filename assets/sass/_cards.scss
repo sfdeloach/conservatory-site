@@ -59,16 +59,6 @@
   }
 }
 
-.portrait {
-  width: min(100%, 480px);
-  height: auto;
-  aspect-ratio: 0.833;
-  object-fit: cover;
-  box-shadow: shadow("md");
-  border-radius: radius("sm");
-  filter: grayscale(25%);
-}
-
 .studio-list {
   margin-bottom: space("lg");
   color: color("text-dark-muted");

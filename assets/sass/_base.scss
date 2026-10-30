@@ -81,6 +81,14 @@ p {
   text-wrap: pretty;
 }
 
+// A small spaced label above a heading.
+.eyebrow {
+  margin-bottom: space("xs");
+  color: color("text-dark-muted");
+  letter-spacing: space("xxs");
+  text-align: center;
+}
+
 ol,
 ul {
   margin: 0;

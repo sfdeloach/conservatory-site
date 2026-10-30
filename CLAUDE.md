@@ -44,7 +44,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `baseof.html` is the shell: Sass pipeline, fingerprinted CSS and JS, font preload, and a "Skip to content" link (styled in `_base.scss`) to `<main id="main">`. `_base.scss` sets `scroll-padding-top` so section links land below the sticky header.
   - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
   - `page.html` and `section.html` are generic. `section.html` renders a card list of child pages.
-  - `page_faculty_bio.html` is the faculty bio layout.
+  - `page_faculty_bio.html` is the faculty bio layout: the parent section's name as an eyebrow, then the headshot beside the name and instruments from `md` up (stacked below), styled in `_faculty.scss`.
   - `handbook.html` is the handbook layout: a contents menu built from `.TableOfContents` (a `<details>` block on narrow screens, a sticky sidebar from `lg` up), and a "Last updated" date: the newest `.Lastmod` among the handbook, Schedule, faculty, and studio pages.
   - `studios/taxonomy.html` and `studios/term.html` render the studio pages. `term.html` fails the build when a studio in a faculty page's `studios:` list has no `content/studios/<term>/_index.md`, which catches a misspelling. It shows a Requirements section when the studio has `params.requirements`.
 - **Partials** (`layouts/_partials/`):
@@ -67,7 +67,7 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `studio_requirements` lists every studio with its requirements.
   - `faculty_list` is a table of faculty, credentials, and instruments, in last-name order.
   - `handbook_value` outputs one value from the handbook's front matter by dotted path (`"fees.late"`); `lesson_rates` and `refund_schedule` render its tables. They work on any page, and the Registration and Payment pages use them.
-- **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on). `_prose.scss` styles Markdown inside `.prose`: a 55ch column on the same named-line grid as `main`, which `.full-bleed` children escape. `_handbook.scss` styles the handbook layout and its print view.
+- **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on). `_prose.scss` styles Markdown inside `.prose`: a 55ch column on the same named-line grid as `main`, which `.full-bleed` children escape. `_handbook.scss` styles the handbook layout and its print view. `_faculty.scss` styles the faculty bio's headshot and title block. `.eyebrow` (the small spaced label above a heading) is a global class in `_base.scss`.
 - **Script:** `assets/js/script.js` toggles the mobile navigation menu.
 - **Static files:** `static/` holds self-hosted fonts (EB Garamond, Nunito, Incognito Pro) and the favicon.
 
