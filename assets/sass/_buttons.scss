@@ -7,6 +7,12 @@
   gap: space("sm");
 }
 
+// Buttons after a page's card list (the studio pages' back button) get the
+// same gap that .prose gives the faculty bio's.
+main > .card-list + .cta-group {
+  margin-top: space("lg");
+}
+
 .btn {
   display: inline-block;
   padding: space("md");

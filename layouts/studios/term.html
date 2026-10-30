@@ -25,4 +25,9 @@
       }}
     {{- end -}}
   </ul>
+  {{- with .Parent -}}
+    {{ partial "cta_group.html"
+      (slice (dict "label" (printf "Back to %s" .LinkTitle) "page" .Path "style" "outline"))
+    }}
+  {{- end -}}
 {{- end -}}

@@ -34,7 +34,7 @@ Links of each kind: [an internal page](/summer-academy), [a section on this page
 
 The same quotation with an attribution, from the `quote` shortcode:
 
-{{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory" >}}
+{{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory of Music" >}}
 If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
 {{< /quote >}}
 

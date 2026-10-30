@@ -32,7 +32,7 @@ Preview your changes with `hugo server` before publishing them (see [README.md](
 - **Add a quotation with an attribution** with the `quote` shortcode. Put the quoted text between the tags, give the person's name as `by`, and optionally their title as `role`:
 
   ```
-  {{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory" >}}
+  {{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory of Music" >}}
   If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
   {{< /quote >}}
   ```
