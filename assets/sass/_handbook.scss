@@ -93,9 +93,16 @@
 }
 
 @media print {
-  body:has(.handbook) :is(header, footer, .skip-link),
+  body:has(.handbook) :is(header, footer, .skip-link, .page-header-image),
   .toc-mobile,
   .toc-sidebar {
     display: none;
+  }
+
+  // Browsers drop backgrounds when printing, which would leave the title's
+  // light text on white.
+  body:has(.handbook) .page-header h1 {
+    background: none;
+    color: color("text-dark");
   }
 }

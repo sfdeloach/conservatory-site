@@ -3,6 +3,7 @@ title: Student Handbook
 layout: handbook
 draft: false
 params:
+  image: "handbook.jpg"
   # Fees and discounts, written into the text with the handbook_value
   # shortcode (for example, handbook_value "fees.late").
   fees:
