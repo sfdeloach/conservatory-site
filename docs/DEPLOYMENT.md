@@ -66,8 +66,8 @@ The build empties `public/` first, so files left over from an earlier build can'
 What the checks don't cover yet:
 
 - **External links** (Wufoo, Breeze, maps). These are skipped in offline mode. Checking them is slow and fails whenever another site is briefly down, so they are not part of `make check` or CI. The six forms have their own on-demand check, below.
-- **Contrast over images and gradients.** axe can't measure text over a photo or a gradient (the page-header titles and the homepage hero), so it reports them as "needs review". These are warnings, not failures, and are checked by hand (Phase 5.2).
-- **Keyboard use and layout.** The checks can't tell whether a page is easy to use with a keyboard or on a phone. That is checked by hand.
+- **Contrast over images and gradients.** axe can't measure text over a photo or a gradient (the page-header titles and the homepage hero), so it reports them as "needs review". These are warnings, not failures. Their contrast was checked by calculation in Phase 5.2 (see the roadmap); check it again when a page-header photo, the hero, or a colour token changes.
+- **Keyboard use and layout.** The checks can't tell whether a page is easy to use with a keyboard or on a phone. That was checked by hand in Phase 5.2. Repeat the roadmap's 5.2 hand check after a change to the header, the navigation, or a layout.
 
 The accessibility check serves `public/` on `127.0.0.1:8137` with python3 while it runs (set `CHECK_A11Y_PORT` to use another port), and stops the server when it ends. Its Chrome comes from Puppeteer, which downloads it during `npm install`. CI caches that download, keyed on `package-lock.json`.
 

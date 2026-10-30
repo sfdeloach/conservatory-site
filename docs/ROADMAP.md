@@ -411,7 +411,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - End with a keyboard and phone check by hand.
 - If 5.1 finds a lot, split this into automated findings and the manual review.
 
-**Automated work done** (2026-10-30). 5.1 found little, so 5.2 stayed one part. **Awaiting the hand check** below; mark 5.2 Done after it.
+**Done** (2026-10-30). 5.1 found little, so 5.2 stayed one part.
 
 - **Audit:**
   - **Headings:** every page has one `h1` and no skipped levels. Every page has the skip link, `main`, `nav`, and `footer`.
@@ -429,7 +429,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
   - **Layout:** no page scrolls sideways at 320px.
   - **Reduced motion:** buttons, cards, and the menu have no motion transitions.
 
-**Hand check** (to do, by a person):
+**Hand check** (done on 2026-10-30, all passed):
 
 1. **Keyboard on a computer:**
    - Go through each page with Tab and Shift+Tab, and use the skip link.
