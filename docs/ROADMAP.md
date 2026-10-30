@@ -15,7 +15,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 2     | Complete the homepage                                 | Done        |
 | 3     | Content migration, typography, and Markdown rendering | Done        |
 | 4     | Registration and payment workflows                    | Done        |
-| 5     | Accessibility, quality assurance, and SEO             | Not started |
+| 5     | Accessibility, quality assurance, and SEO             | In progress |
 | 6     | Launch readiness and domain cutover                   | Not started |
 | 7     | Ongoing maintenance and handoff                       | Not started |
 
@@ -376,36 +376,54 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
 
 These are ongoing requirements, not exclusively final polish.
 
-### Accessibility and responsive quality
+Work through the parts in order (agreed 2026-10-30). Each part is planned, approved, and committed on its own. 5.1 comes first so the checks it adds cover the later parts. 5.3 and 5.4 are independent and may swap. 5.5 is optional.
 
-- Use semantic HTML and a logical heading hierarchy.
-- Verify keyboard navigation and visible focus states.
-- Check text contrast, link clarity, image alternatives, and form labels.
-- Test common mobile and desktop layouts.
-- Respect reduced-motion preferences.
+### 5.1 Automated validation
 
-### Automated validation
-
-- Run a production Hugo build.
-- Validate internal links.
-- Add HTML validation and targeted automated accessibility checks where practical.
-- Review build warnings and errors.
+- The production Hugo build and the internal link check already run in `make check` and CI (Phase 1.0).
+- Add HTML validation and targeted automated accessibility checks where practical. Extend `make check` rather than adding a separate command, so local runs and CI stay the same.
+- Choose the tools, and record the choice and why. Weigh each new dependency's maintenance cost.
+- Decide whether the accessibility check runs in CI or only locally.
+- Review build warnings and errors, and record what the new checks find on the current site as the baseline for 5.2.
 - Ensure required checks run in CI before production deployment.
 
-### SEO and sharing
+### 5.2 Accessibility and responsive quality
 
-- Add appropriate page titles and meta descriptions.
+- Fix what the 5.1 checks find.
+- Use semantic HTML and a logical heading hierarchy on every layout.
+- Verify keyboard navigation and visible focus states, including the mobile menu.
+- Check text contrast (each colour token against its backgrounds), link clarity, image alternatives (including the intentionally empty alt text on headshots and page-header images), and form labels.
+- Test common mobile and desktop layouts.
+- Respect reduced-motion preferences, including the header's scroll shadow and the card hover effect.
+- End with a keyboard and phone check by hand.
+- If 5.1 finds a lot, split this into automated findings and the manual review.
+
+### 5.3 SEO and sharing
+
+- Add appropriate page titles and meta descriptions (a front matter `description` with a fallback).
 - Add canonical URLs where appropriate.
 - Configure Open Graph metadata and a production-accessible sharing image.
+- Add appropriate favicon and browser metadata (for example, an Apple touch icon).
 - Verify sitemap and robots directives.
-- Add a custom 404 page and appropriate favicon/browser metadata.
-- Preserve existing URLs where possible and document necessary redirects.
+- Decide whether the staging copy on GitHub Pages (under `/conservatory-site/`) should be kept out of search engines until cutover, and how canonical and sharing URLs behave before and after cutover.
 
-### Optional refinements
+### 5.4 404 page and URL preservation
+
+- Add a custom 404 page that works on GitHub Pages, including under the `/conservatory-site/` subpath.
+- Preserve existing URLs where possible. Choose a redirect mechanism (GitHub Pages has no server-side redirects, so Hugo `aliases` are the likely option) and record the decision.
+- Draft the redirect map from [SITE-INVENTORY.md](SITE-INVENTORY.md). Phase 6 finalizes it and verifies it on the live domain.
+
+### 5.5 Optional refinements
 
 - Consider scroll-driven animations only where they improve the experience.
 - Consider View Transitions after checking browser support, navigation behavior, and accessibility.
 - Optimize images, fonts, and other assets without compromising visual quality.
+- Defer or skip this part unless time allows or a measurement shows a real problem.
+
+### Close-out
+
+- Check the acceptance criteria below, record any remaining limitations, and set the phase to Done.
+- Stop for human review before Phase 6.
 
 ### Acceptance criteria
 
@@ -470,6 +488,9 @@ Record each decision here, with its rationale, once it is made.
 | Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                  |     |
 | Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                               |
 | Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
+| HTML validation and accessibility check tools            | 5.1   | Open   |                                                                                                                                                                  |
+| Indexing of the staging site before cutover              | 5.3   | Open   |                                                                                                                                                                  |
+| Redirect mechanism for old URLs                          | 5.4   | Open   |                                                                                                                                                                  |
 | GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |
 | Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                  |
 
