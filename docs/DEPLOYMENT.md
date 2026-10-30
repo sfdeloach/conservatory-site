@@ -51,19 +51,25 @@ Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-s
 
 ## Build and validation
 
-Run `make check`. It must pass before a change is published, and CI runs the same command.
+Run `make check`. It must pass before a change is published, and CI runs the same command. It needs the npm packages (`nvm use`, then `npm install`), lychee, curl, and python3.
 
-| Step                        | Command                                                                                                                        | Fails when                                                                                                                                            |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Strict build (`make build`) | `hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings`                                                     | Hugo reports any error or warning. For example, a homepage button that points to a page that doesn't exist, or two pages that write to the same path. |
-| Internal link check         | `lychee --offline --include-fragments --index-files index.html --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'` | A link in the built site points to a page, file, or `#anchor` that doesn't exist.                                                                     |
+| Step                        | Command                                                                                                                        | Fails when                                                                                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Strict build (`make build`) | `hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings`                                                     | Hugo reports any error or warning. For example, a homepage button that points to a page that doesn't exist, or two pages that write to the same path.             |
+| Internal link check         | `lychee --offline --include-fragments --index-files index.html --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'` | A link in the built site points to a page, file, or `#anchor` that doesn't exist.                                                                                 |
+| Formatting                  | `npx --no-install prettier --check .`                                                                                          | A file isn't formatted the way Prettier would format it. Run `npx prettier --write` on it.                                                                        |
+| HTML validation             | `npx --no-install html-validate 'public/**/*.html'` (rules: `.htmlvalidate.json`, the `standard` and `a11y` presets)           | The built HTML is invalid, or breaks an accessibility rule that can be checked without a browser, such as a button without a `type` or an image without alt text. |
+| Accessibility (axe)         | `scripts/check-a11y.sh` (settings: `.pa11yci.json`), also run alone by `make check-a11y`                                       | axe, run by pa11y-ci in headless Chrome on every page in `public/sitemap.xml`, reports an issue, such as text whose colour contrast is too low.                   |
 
 The build empties `public/` first, so files left over from an earlier build can't hide a broken link.
 
 What the checks don't cover yet:
 
 - **External links** (Wufoo, Breeze, maps). These are skipped in offline mode. Checking them is slow and fails whenever another site is briefly down, so they are not part of `make check` or CI. The six forms have their own on-demand check, below.
-- Formatting (Prettier), HTML validity, and accessibility (Phase 5).
+- **Contrast over images and gradients.** axe can't measure text over a photo or a gradient (the page-header titles and the homepage hero), so it reports them as "needs review". These are warnings, not failures, and are checked by hand (Phase 5.2).
+- **Keyboard use and layout.** The checks can't tell whether a page is easy to use with a keyboard or on a phone. That is checked by hand.
+
+The accessibility check serves `public/` on `127.0.0.1:8137` with python3 while it runs (set `CHECK_A11Y_PORT` to use another port), and stops the server when it ends. Its Chrome comes from Puppeteer, which downloads it during `npm install`. CI caches that download, keyed on `package-lock.json`.
 
 ### Registration and payment forms
 

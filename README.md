@@ -4,13 +4,13 @@ The source for the Saint Andrew's Conservatory of Music website (`saintandrewsco
 
 ## Prerequisites
 
-| Tool                                                             | Version            | Needed for                    |
-| ---------------------------------------------------------------- | ------------------ | ----------------------------- |
-| [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0            | Building the site             |
-| [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106.1            | Compiling the stylesheets     |
-| [Node.js](https://nodejs.org/) and npm                           | 24 (`.nvmrc`)      | Formatting and checks         |
-| [lychee](https://lychee.cli.rs/)                                 | 0.24.2             | Checking links (`make check`) |
-| Git and `make`                                                   | any recent version | Getting the code, shortcuts   |
+| Tool                                                             | Version            | Needed for                                           |
+| ---------------------------------------------------------------- | ------------------ | ---------------------------------------------------- |
+| [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0            | Building the site                                    |
+| [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106.1            | Compiling the stylesheets                            |
+| [Node.js](https://nodejs.org/) and npm                           | 24 (`.nvmrc`)      | Formatting and checks                                |
+| [lychee](https://lychee.cli.rs/)                                 | 0.24.2             | Checking links (`make check`)                        |
+| Git, `make`, `curl`, and python3                                 | any recent version | Getting the code, shortcuts, the accessibility check |
 
 These are the versions CI uses, pinned in `.github/workflows/deploy.yml`, except Node, which is pinned in `.nvmrc`. Newer versions usually work, but if a local build differs from CI, install these exact versions first.
 
@@ -22,7 +22,7 @@ To confirm Hugo and Sass are installed, run `hugo version` and `sass --version`.
 git clone <repository-url> conservatory-site
 cd conservatory-site
 nvm use            # Node 24, from .nvmrc
-npm install        # only needed for formatting
+npm install        # needed for formatting and make check
 hugo server
 ```
 
@@ -34,7 +34,8 @@ Open `http://localhost:1313/`. The page reloads when you save a change.
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `hugo server`             | Runs the local preview server.                                                                                                  |
 | `make build`              | Builds the production site into `public/`. Any Hugo warning fails the build.                                                    |
-| `make check`              | Runs the strict build, then checks every internal link and anchor. Run it before committing.                                    |
+| `make check`              | Runs the strict build, then checks formatting, links, HTML, and accessibility. Run it before committing.                        |
+| `make check-a11y`         | Runs only the accessibility (axe) check, against the last build.                                                                |
 | `make check-destinations` | Checks the registration and payment forms online (needs `curl`). Run it before a registration period opens and after it closes. |
 | `make clean`              | Deletes the generated `public/` and `resources/` folders.                                                                       |
 | `make help`               | Lists the Make targets.                                                                                                         |

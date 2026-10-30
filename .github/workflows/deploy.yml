@@ -35,6 +35,14 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
+      # Before npm ci: Puppeteer's install step skips the Chrome download
+      # (for the axe check) when the browser is already cached.
+      - name: Cache Puppeteer's Chrome
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install npm packages
         run: npm ci
 
@@ -59,7 +67,7 @@ jobs:
           node --version
           npm --version
 
-      - name: Validate (strict build and internal link check)
+      - name: Validate (make check)
         run: make check
 
       - name: Configure Pages

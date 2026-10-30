@@ -9,8 +9,9 @@ Read [docs/ROADMAP.md](docs/ROADMAP.md) before starting work. It defines the pha
 - **Hugo extended** 0.168.0. The extended edition is required for image processing to WebP. `hugo.toml` (`[module.hugoVersion]`) refuses to build on an older or non-extended Hugo.
 - **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Version 1.106.1.
 - **lychee**, for the internal link check in `make check`. Version 0.24.2.
-- **curl**, for `make check-destinations` only.
-- **Node 24 LTS and npm**, for formatting only: Prettier 3 with `prettier-plugin-go-template`. The version is pinned in `.nvmrc` (run `nvm use`), not in the workflow `env` block.
+- **curl**, for `make check-destinations` and the local server check in `make check-a11y`.
+- **python3**, for the local web server that `make check-a11y` (part of `make check`) runs the axe check against.
+- **Node 24 LTS and npm**, for formatting and checks: Prettier 3 with `prettier-plugin-go-template`, html-validate, and pa11y-ci (axe). The version is pinned in `.nvmrc` (run `nvm use`), not in the workflow `env` block. Run `npm install` before `make check`. pa11y-ci's Puppeteer downloads its own Chrome on install; npm only runs that step because `package.json` approves it (`allowScripts`, pinned to the Puppeteer version), so a Puppeteer upgrade needs `npm install-scripts approve puppeteer` again.
 
 The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.github/workflows/deploy.yml`. That is the source of truth, and CI uses exactly those versions.
 
@@ -20,7 +21,8 @@ The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.gith
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `hugo server`             | Local development server with live reload, at `http://localhost:1313/`.                                                                 |
 | `make build`              | Strict production build into `public/`. Any Hugo warning fails it.                                                                      |
-| `make check`              | `make build`, then lychee offline check of internal links and anchors.                                                                  |
+| `make check`              | `make build`, then Prettier, lychee (internal links and anchors), html-validate, and axe on every page in the sitemap.                  |
+| `make check-a11y`         | The axe check alone, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.                                   |
 | `make check-destinations` | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI. |
 | `make clean`              | Delete `public/` and `resources/`.                                                                                                      |
 | `npm install`             | Install Prettier and its plugin.                                                                                                        |

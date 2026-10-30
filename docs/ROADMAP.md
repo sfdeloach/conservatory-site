@@ -387,6 +387,19 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Review build warnings and errors, and record what the new checks find on the current site as the baseline for 5.2.
 - Ensure required checks run in CI before production deployment.
 
+**Done** (2026-10-30), in three commits: the last unformatted files formatted (`bfcb37d`), the toolchain moved to Node 24 LTS (`d5f15e4`), and the checks added to `make check`.
+
+- **Tools** (decided 2026-10-30):
+  - **html-validate**, with the `standard` and `a11y` presets: an npm package beside Prettier, offline and fast, with static accessibility rules. The default `recommended` preset was not used, because it objects to the minified output's style (unquoted attributes, a lowercase doctype). The W3C Nu checker was not used, because it would add Java.
+  - **axe, through pa11y-ci**, in `make check` and in CI, so a colour change that breaks contrast blocks the deploy. It checks every page in the sitemap against a local python3 server (`scripts/check-a11y.sh`, also `make check-a11y`). axe's "needs review" results are warnings.
+  - **Prettier** (`prettier --check .`), so formatting can't drift.
+  - pa11y-ci 5 needs Node 22.13 or newer, and Node 20 was past end of life, so the toolchain moved to Node 24 (`.nvmrc`). npm 11 blocks install scripts by default, so `package.json` approves Puppeteer's (which downloads Chrome), pinned to its version.
+- **Baseline** on the current site:
+  - html-validate found two template problems, now fixed: the mobile menu button had no `type="button"`, and the table wrappers used `role="region"` instead of a `<section>` (the Markdown table hook and `simple_table.html`).
+  - axe found no violations. Its 20 "needs review" results are the homepage hero's text over a gradient and the page-header titles over photos. 5.2 checks their contrast by hand.
+- **Verified:** `make check` passes under Node 24 (about a minute). Each new check was shown to fail on a planted problem: a missing button type, a low-contrast colour token, and a badly formatted file. The local server stops even when the check fails.
+- **CI:** the new steps (Node setup, the Chrome cache, and the checks) are confirmed only by the first CI run after these commits are pushed.
+
 ### 5.2 Accessibility and responsive quality
 
 - Fix what the 5.1 checks find.
@@ -488,7 +501,7 @@ Record each decision here, with its rationale, once it is made.
 | Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                  |     |
 | Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                               |
 | Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
-| HTML validation and accessibility check tools            | 5.1   | Open   |                                                                                                                                                                  |
+| HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                     |
 | Indexing of the staging site before cutover              | 5.3   | Open   |                                                                                                                                                                  |
 | Redirect mechanism for old URLs                          | 5.4   | Open   |                                                                                                                                                                  |
 | GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |

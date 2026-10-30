@@ -2,16 +2,17 @@
 
   Renders Markdown tables inside a .table-scroll wrapper, so a wide table
   scrolls sideways on a narrow screen instead of widening the page. The
-  wrapper is focusable, so keyboard users can scroll it too. Attributes from
-  a block attribute (such as {.full-bleed}) go on the wrapper.
+  wrapper is focusable, so keyboard users can scroll it too, and is a
+  section with a name, so screen readers announce it as a "Table" region.
+  Attributes from a block attribute (such as {.full-bleed}) go on the
+  wrapper.
 */}}
 
 
-<div
+<section
   class="table-scroll {{ .Attributes.class }}"
   {{ with .Attributes.id }}id="{{ . }}"{{ end }}
   tabindex="0"
-  role="region"
   aria-label="Table"
 >
   <table>
@@ -38,5 +39,5 @@
       {{- end }}
     </tbody>
   </table>
-</div>
+</section>
 {{- /* chomp trailing newline */ -}}
