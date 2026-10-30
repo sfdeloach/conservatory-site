@@ -3,11 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{- if not .IsHome -}}{{- .Title }} |{{- end }} {{ .Site.Title -}}</title>
+    {{- $title := site.Title }}
+    {{- if not .IsHome }}
+      {{- $title = printf "%s | %s" .Title site.Title }}
+    {{- end }}
+    <title>{{ $title }}</title>
     {{- with site.Params.commit }}
       <meta name="build-commit" content="{{ . }}" />
     {{- end }}
-    <link rel="icon" type="image/svg+xml" href="{{ "images/favicon.svg" | relURL }}" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ "images/favicon.svg" | relURL }}"
+    />
     {{- with resources.Get "sass/main.scss" -}}
       {{- $opts := dict
         "enableSourceMap" hugo.IsDevelopment

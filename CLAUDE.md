@@ -78,7 +78,8 @@ Run `make check` before every commit. CI runs the same command on every push and
 - Every button sits in a `.cta-group` (use `cta_group.html` or `destination_button`). Never write a bare `.btn` link as a child of `main` or `.prose`: both are grids, and a grid item stretches to full width. Groups are centred, except in `.prose`, where they align with the text.
 - Links open in the same tab. Don't add `target="_blank"`.
 - Write YAML front matter in content files. Note that `archetypes/default.md` still produces TOML.
-- Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`).
+- Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`). `.prettierignore` excludes `.claude/`.
+- The go-template plugin can change a template's output. It rewraps elements onto several lines, which adds whitespace to text such as a `<title>`, and it drops a space written just before `{{ . }}` in an attribute. Keep such expressions short, or put the space inside the expression (`printf " %s"`). After formatting a template, compare the built `public/` with the previous build.
 - Make small, focused changes. After each one, run `make check`.
 
 ## Deployment
@@ -94,7 +95,6 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 ## Known limitations and technical debt
 
 - External links are not checked automatically, except the six forms in `data/destinations.yaml`, which `make check-destinations` checks on demand.
-- `npx prettier --check .` fails on 3 files that were never formatted: `.prettierrc`, `layouts/baseof.html`, and `layouts/_partials/logo.html`. Format them in a separate change.
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
 - The handbook at `/handbook/` is linked only from the Registration page, not from the menus or the footer (staff decision).
 - Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
