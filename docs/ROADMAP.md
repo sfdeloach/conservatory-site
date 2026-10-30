@@ -398,7 +398,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
   - html-validate found two template problems, now fixed: the mobile menu button had no `type="button"`, and the table wrappers used `role="region"` instead of a `<section>` (the Markdown table hook and `simple_table.html`).
   - axe found no violations. Its 20 "needs review" results are the homepage hero's text over a gradient and the page-header titles over photos. 5.2 checks their contrast by hand.
 - **Verified:** `make check` passes under Node 24 (about a minute). Each new check was shown to fail on a planted problem: a missing button type, a low-contrast colour token, and a badly formatted file. The local server stops even when the check fails.
-- **CI:** the new steps (Node setup, the Chrome cache, and the checks) are confirmed only by the first CI run after these commits are pushed.
+- **CI:** confirmed on 2026-10-30 by the first run after the push ([run 41107882166](https://github.com/sfdeloach/conservatory-site/actions/runs/41107882166), commit `0bb3160`). The build job, with Node setup, the Chrome download, and the full `make check`, passed in 107 seconds, and the deploy job published the site. The live site's `build-commit` meta tag shows `0bb3160`.
 
 ### 5.2 Accessibility and responsive quality
 
