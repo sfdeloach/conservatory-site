@@ -1,0 +1,22 @@
+{{/* Note:
+
+  Renders a quotation with its attribution: a figure holding the blockquote
+  and a figcaption. The text between the opening and closing tags is
+  Markdown. Takes "by", the person quoted (required; a missing one fails the
+  build), and an optional "role", shown below the name, as in:
+  quote by="Todd Alexander" role="Dean of Conservatory".
+*/}}
+
+{{- $by := .Get "by" }}
+{{- if not $by }}
+  {{- errorf "quote: missing \"by\", the person quoted (%s)" .Position }}
+{{- end }}
+<figure class="quote">
+  <blockquote>
+    {{ trim .Inner "\n" | .Page.RenderString (dict "display" "block") }}
+  </blockquote>
+  <figcaption>
+    <span class="quote-by">{{ $by }}</span>
+    {{ with .Get "role" }}<span class="quote-role">{{ . }}</span>{{ end }}
+  </figcaption>
+</figure>

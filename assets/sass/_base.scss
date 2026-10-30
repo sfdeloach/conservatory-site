@@ -157,40 +157,6 @@ hr {
   );
 }
 
-blockquote {
-  position: relative;
-  margin: 0 space("sm");
-  padding: space("lg");
-  border-radius: 0 space("lg");
-  box-shadow: shadow("md");
-  font-family: font("serif"), serif;
-  letter-spacing: space("nano");
-
-  strong {
-    letter-spacing: space("xxxs");
-  }
-}
-
-blockquote::before {
-  content: "\201C";
-  position: absolute;
-  top: -1 * space("lg");
-  left: space("xs");
-  font-size: font-size("xxxl");
-  line-height: 1;
-  color: color("primary-opaque");
-}
-
-blockquote::after {
-  content: "\201D";
-  position: absolute;
-  bottom: -2.5 * space("lg");
-  right: space("xs");
-  font-size: font-size("xxxl");
-  line-height: 1;
-  color: color("primary-opaque");
-}
-
 address {
   font-style: normal;
 }

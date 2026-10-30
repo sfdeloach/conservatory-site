@@ -88,11 +88,6 @@
     justify-content: flex-start;
   }
 
-  // Room for the decorative quote marks, which sit outside the box.
-  blockquote {
-    margin: space("lg") 0;
-  }
-
   hr {
     margin-block: space("lg");
   }

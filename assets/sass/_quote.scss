@@ -1,0 +1,69 @@
+@use "./tokens" as *;
+
+// Quotations: a rule on the left and one opening mark hanging above it. The
+// quote shortcode wraps a blockquote in figure.quote with an attribution.
+blockquote {
+  position: relative;
+  margin: space("xl") 0 space("lg");
+  padding-left: space("md");
+  border-left: space("xxs") solid color("primary");
+  font-family: font("serif"), serif;
+  font-size: font-size("md");
+  font-style: italic;
+  line-height: 1.4;
+
+  &::before {
+    content: "\201C";
+    position: absolute;
+    top: -0.55em;
+    left: -0.1em;
+    font-size: font-size("xxl");
+    font-style: normal;
+    line-height: 1;
+    color: color("primary");
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.quote {
+  margin: space("xl") 0 space("lg");
+
+  blockquote {
+    margin: 0;
+  }
+
+  figcaption {
+    display: grid;
+    justify-items: end;
+    margin-top: space("sm");
+    color: color("text-dark");
+    font-size: font-size("std");
+    text-align: right;
+  }
+}
+
+// Keep room above for the mark when .prose's rhythm would tighten it, as
+// after a heading.
+.prose > :is(blockquote, .quote) {
+  margin-block: space("xl") space("lg");
+}
+
+.quote-by {
+  font-family: font("sans"), sans-serif;
+  font-size: font-size("sm");
+  letter-spacing: space("xxs");
+  text-transform: uppercase;
+
+  &::before {
+    content: "— ";
+  }
+}
+
+.quote-role {
+  color: color("text-dark-muted");
+  font-family: font("serif"), serif;
+  font-style: italic;
+}

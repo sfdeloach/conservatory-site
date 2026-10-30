@@ -29,6 +29,16 @@ Preview your changes with `hugo server` before publishing them (see [README.md](
 - **Link to another page** by its path: `[Schedule](/schedule/)`. To link to a section, add the heading's id, which is the heading in lowercase with spaces replaced by `-`: `[Withdrawal](/handbook/#withdrawal)`, or `[Withdrawal](#withdrawal)` on the same page.
 - **Add an image** by putting the file in the page's folder and writing it on its own line: `![A description of the image](photo.jpg "An optional caption")`. The description (alt text) is required; it is read aloud to people who can't see the image. Images inside a sentence are not supported.
 - Links open in the same tab, including links to other websites.
+- **Add a quotation with an attribution** with the `quote` shortcode. Put the quoted text between the tags, give the person's name as `by`, and optionally their title as `role`:
+
+  ```
+  {{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory" >}}
+  If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
+  {{< /quote >}}
+  ```
+
+  The attribution is shown below the quotation, on the right. A line starting with `>` also makes a quotation, but without an attribution. The build fails if `by` is missing.
+
 - **Add a video** with Hugo's built-in shortcode, on its own line: `{{< youtube id="VIDEO_ID" >}}` (or `vimeo`). The id is the part of the video's address after `v=`. Other HTML can't be pasted into a page; it is removed.
 - The build fails, and nothing is published, if a link points to a page that doesn't exist, if an image file is missing, or if an image has no description. The error names the file and line to fix.
 

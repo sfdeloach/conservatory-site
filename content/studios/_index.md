@@ -10,7 +10,9 @@ params:
 
 ## Year-round instruction in several disciplines — for students of every age and ability.
 
-> If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
+{{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory" >}}
+If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
+{{< /quote >}}
 
 Luther ranked music second only to theology, calling it a gift of God and no mere human invention. He did not treat it as something to admire from a distance. He insisted that children be taught to sing, that schoolmasters be trained in music, and that natural ability be refined by skilled instruction. He believed that disciplined musicianship shapes capable, well-ordered people and, in its fullest artistry, reflects the wisdom of the God who gave it. That conviction shapes our work at Saint Andrew’s. Each lesson is an act of stewardship: we receive a student’s gift as something entrusted, and we cultivate it patiently and with excellence. Our concerts and recitals are not performances for their own sake but offerings, where hard-won skill is returned to the Giver and shared with the community. Because we believe the gift comes from Christ’s hand, we teach each student at their own stage of growth, in a context where discipline and grace go together.
 

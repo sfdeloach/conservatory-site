@@ -32,6 +32,12 @@ Links of each kind: [an internal page](/summer-academy), [a section on this page
 
 > If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
 
+The same quotation with an attribution, from the `quote` shortcode:
+
+{{< quote by="Dr. R.C. Sproul" role="Founder of Saint Andrew’s Conservatory" >}}
+If music is, as Martin Luther says, a gift from God — then we are obliged to develop that gift.
+{{< /quote >}}
+
 ---
 
 ## Images

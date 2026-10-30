@@ -14,9 +14,20 @@
     margin-bottom: space("md");
   }
 
-  // Room for the decorative quote marks, which sit outside the box.
-  .welcome blockquote {
-    margin-block: space("lg");
+  // The Dean's letter: upright, at reading size and measure, signed without
+  // a dash.
+  .welcome .quote {
+    max-width: 75ch;
+    margin-inline: auto;
+
+    blockquote {
+      font-size: font-size("prose");
+      font-style: normal;
+    }
+
+    .quote-by::before {
+      content: none;
+    }
   }
 
   // Section intro text: centered, at a readable measure.
