@@ -8,11 +8,11 @@ The source for the Saint Andrew's Conservatory of Music website (`saintandrewsco
 | ---------------------------------------------------------------- | ------------------ | ----------------------------- |
 | [Hugo, extended edition](https://gohugo.io/installation/)        | 0.168.0            | Building the site             |
 | [Dart Sass](https://sass-lang.com/install/) (the `sass` command) | 1.106.1            | Compiling the stylesheets     |
-| [Node.js](https://nodejs.org/) and npm                           | 20 or later        | Formatting with Prettier      |
+| [Node.js](https://nodejs.org/) and npm                           | 24 (`.nvmrc`)      | Formatting and checks         |
 | [lychee](https://lychee.cli.rs/)                                 | 0.24.2             | Checking links (`make check`) |
 | Git and `make`                                                   | any recent version | Getting the code, shortcuts   |
 
-These are the versions CI uses, pinned in `.github/workflows/deploy.yml`. Newer versions usually work, but if a local build differs from CI, install these exact versions first.
+These are the versions CI uses, pinned in `.github/workflows/deploy.yml`, except Node, which is pinned in `.nvmrc`. Newer versions usually work, but if a local build differs from CI, install these exact versions first.
 
 To confirm Hugo and Sass are installed, run `hugo version` and `sass --version`. The Hugo output must contain `+extended`.
 
@@ -21,6 +21,7 @@ To confirm Hugo and Sass are installed, run `hugo version` and `sass --version`.
 ```sh
 git clone <repository-url> conservatory-site
 cd conservatory-site
+nvm use            # Node 24, from .nvmrc
 npm install        # only needed for formatting
 hugo server
 ```

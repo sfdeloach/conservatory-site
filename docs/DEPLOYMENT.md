@@ -82,10 +82,11 @@ A form that accepts entries while the site shows it closed is only noted, becaus
 | Hugo extended | 0.168.0 | `HUGO_VERSION` in `.github/workflows/deploy.yml`; minimum in `hugo.toml` (`[module.hugoVersion]`) |
 | Dart Sass     | 1.106.1 | `DART_SASS_VERSION` in `.github/workflows/deploy.yml`                                             |
 | lychee        | 0.24.2  | `LYCHEE_VERSION` in `.github/workflows/deploy.yml`                                                |
+| Node          | 24.x    | `.nvmrc`, read by `actions/setup-node` in CI; minimum in `package.json` (`engines`)               |
 
 To upgrade a tool:
 
-1. Change its version in the workflow's `env` block. For Hugo, also raise `min` in `hugo.toml` if the site now depends on a new feature.
+1. Change its version in the workflow's `env` block. For Hugo, also raise `min` in `hugo.toml` if the site now depends on a new feature. For Node, change `.nvmrc` and `engines` in `package.json` instead.
 2. Update the README prerequisites table.
 3. Install the same version locally and run `make check`.
 4. Open a pull request, and merge it once CI passes.

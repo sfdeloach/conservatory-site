@@ -12,7 +12,8 @@ permissions:
   contents: read
 
 # Pinned tool versions. When changing HUGO_VERSION, also update the
-# minimum in hugo.toml ([module.hugoVersion]) and README.md.
+# minimum in hugo.toml ([module.hugoVersion]) and README.md. Node's version
+# is in .nvmrc, not here.
 env:
   HUGO_VERSION: 0.168.0
   DART_SASS_VERSION: 1.106.1
@@ -27,6 +28,15 @@ jobs:
         with:
           # Full history, so Hugo's enableGitInfo gives real page dates.
           fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install npm packages
+        run: npm ci
 
       - name: Install Hugo, Dart Sass, and lychee
         run: |
@@ -46,6 +56,8 @@ jobs:
           hugo version
           sass --version
           lychee --version
+          node --version
+          npm --version
 
       - name: Validate (strict build and internal link check)
         run: make check

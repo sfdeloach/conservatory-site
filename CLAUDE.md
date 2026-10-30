@@ -10,7 +10,7 @@ Read [docs/ROADMAP.md](docs/ROADMAP.md) before starting work. It defines the pha
 - **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Version 1.106.1.
 - **lychee**, for the internal link check in `make check`. Version 0.24.2.
 - **curl**, for `make check-destinations` only.
-- **Node and npm**, for formatting only: Prettier 3 with `prettier-plugin-go-template`. Verified with Node 20.
+- **Node 24 LTS and npm**, for formatting only: Prettier 3 with `prettier-plugin-go-template`. The version is pinned in `.nvmrc` (run `nvm use`), not in the workflow `env` block.
 
 The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.github/workflows/deploy.yml`. That is the source of truth, and CI uses exactly those versions.
 
