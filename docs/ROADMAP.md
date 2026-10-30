@@ -411,6 +411,33 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - End with a keyboard and phone check by hand.
 - If 5.1 finds a lot, split this into automated findings and the manual review.
 
+**Automated work done** (2026-10-30). 5.1 found little, so 5.2 stayed one part. **Awaiting the hand check** below; mark 5.2 Done after it.
+
+- **Audit:**
+  - **Headings:** every page has one `h1` and no skipped levels. Every page has the skip link, `main`, `nav`, and `footer`.
+  - **Contrast:** every colour token pair passes WCAG AA. The tightest are `text-dark-muted` on `background-main` (4.63:1) and `text-light-muted` on the footer (4.54:1).
+  - **axe's "needs review" items, checked by calculation:**
+    - The hero's text over its gradient is 4.6:1 to 10:1.
+    - Page titles over photos are about 4.0:1 at worst (light text on the 75% red band, over the brightest photo the `brightness(0.9)` filter allows). That passes only as large text, and the titles are always 24px or more. Staff kept the band at 75% (decided 2026-10-30), and a comment in `_pages.scss` records the limit.
+  - **Alt text:** the hero has alt text. Headshots, page-header photos, card images, and the band image are empty on purpose, because the text next to them already says what they show (decided 2026-10-30). The rule is in CLAUDE.md.
+  - **Motion:** the menu slide and the button and card transitions are already off under `prefers-reduced-motion`. The header's scroll shadow stays on, because nothing moves (decided 2026-10-30; noted in `_header.scss`).
+- **Fixed:** on narrow screens with the menu open, tabbing past the last link moved focus to the page hidden behind the menu. The menu now closes when focus leaves the header (`assets/js/script.js`).
+- **Added to `make check` and CI:** the axe check runs at 375px as well as 1280px (`.pa11yci.js`, which replaces `.pa11yci.json`). A phone-only contrast problem was shown to fail it.
+- **One-off automated checks**, run in headless Chrome on every page:
+  - **Keyboard walk** at 1280px and at 375px: every focusable element shows a focus ring and is on screen when focused. The skip link is first and moves focus to `main`.
+  - **Mobile menu:** Enter opens it, tabbing past the last link closes it, Escape closes it and returns focus to the button, and Shift+Tab to the logo keeps it open.
+  - **Layout:** no page scrolls sideways at 320px.
+  - **Reduced motion:** buttons, cards, and the menu have no motion transitions.
+
+**Hand check** (to do, by a person):
+
+1. **Keyboard on a computer:**
+   - Go through each page with Tab and Shift+Tab, and use the skip link.
+   - Open and close the handbook's contents menu.
+   - Narrow the window and use the mobile menu: Enter to open, Tab through, Escape, then open it again and Tab past the end.
+2. **A real phone:** open the menu and tap the links, scroll the handbook tables sideways, and use the handbook's contents menu.
+3. **Reduce motion turned on in the operating system:** buttons and cards don't move on hover, and the menu appears without sliding.
+
 ### 5.3 SEO and sharing
 
 - Add appropriate page titles and meta descriptions (a front matter `description` with a fallback).

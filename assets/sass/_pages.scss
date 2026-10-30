@@ -20,6 +20,10 @@
     z-index: 1;
     align-self: center;
     padding-block: space("md");
+    // Light text on this band, over the brightest photo the image filter
+    // allows, is about 4.0:1. That passes WCAG AA only as large text (24px
+    // and up), so don't shrink the title, lower the band's alpha, or remove
+    // the image filter.
     background: color("background-page-header");
     color: color("text-light");
     font-size: clamp(

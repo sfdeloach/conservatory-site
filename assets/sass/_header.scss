@@ -48,7 +48,9 @@ header {
 }
 
 // Fade in a shadow as the page starts to scroll. Browsers without
-// scroll-driven animations keep the flat header.
+// scroll-driven animations keep the flat header. Nothing moves, so this
+// stays on under prefers-reduced-motion; the motion that does move (the
+// menu slide, the button and card lift) is turned off there.
 @supports (animation-timeline: scroll()) {
   header {
     animation: header-lift linear both;

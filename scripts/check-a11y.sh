@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-# Runs axe, through pa11y-ci, on every page in the built site's sitemap.
-# Part of `make check` and CI; run it alone with `make check-a11y` after
+# Runs axe, through pa11y-ci, on every page in the built site's sitemap,
+# at a desktop width (1280px) and a phone width (375px). Part of
+# `make check` and CI; run it alone with `make check-a11y` after
 # `make build`.
 #
 # It serves public/ on 127.0.0.1 with python3 for the length of the check,
 # and swaps the sitemap URLs' scheme and host for that address, so it works
-# whatever the baseURL. Settings are in .pa11yci.json. axe's "needs review"
+# whatever the baseURL. Settings are in .pa11yci.js. axe's "needs review"
 # results (such as text over an image or a gradient, whose contrast axe
-# can't measure) are warnings; every other issue fails the check (exit 2).
+# can't measure) are warnings; every other issue fails the check (exit 2),
+# at either width.
 #
 # CHECK_A11Y_PORT sets the port (default 8137).
 
@@ -35,6 +37,13 @@ if ! curl -fs -o /dev/null "$base/sitemap.xml"; then
   exit 1
 fi
 
-npx --no-install pa11y-ci --config .pa11yci.json \
-  --sitemap "$base/sitemap.xml" \
-  --sitemap-find '^https?://[^/]+' --sitemap-replace "$base"
+status=0
+for width in 1280 375; do
+  echo "check-a11y: ${width}px wide"
+  A11Y_WIDTH="$width" npx --no-install pa11y-ci --config .pa11yci.js \
+    --sitemap "$base/sitemap.xml" \
+    --sitemap-find '^https?://[^/]+' --sitemap-replace "$base"
+  result=$?
+  [ "$result" -gt "$status" ] && status=$result
+done
+exit "$status"

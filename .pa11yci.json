@@ -1,8 +1,0 @@
-{
-  "defaults": {
-    "runners": ["axe"],
-    "levelCapWhenNeedsReview": "warning",
-    "timeout": 30000,
-    "chromeLaunchConfig": { "args": ["--no-sandbox"] }
-  }
-}

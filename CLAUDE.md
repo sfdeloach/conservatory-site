@@ -22,7 +22,7 @@ The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.gith
 | `hugo server`             | Local development server with live reload, at `http://localhost:1313/`.                                                                 |
 | `make build`              | Strict production build into `public/`. Any Hugo warning fails it.                                                                      |
 | `make check`              | `make build`, then Prettier, lychee (internal links and anchors), html-validate, and axe on every page in the sitemap.                  |
-| `make check-a11y`         | The axe check alone, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.                                   |
+| `make check-a11y`         | The axe check alone, at 1280px and 375px, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.              |
 | `make check-destinations` | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI. |
 | `make clean`              | Delete `public/` and `resources/`.                                                                                                      |
 | `npm install`             | Install Prettier and its plugin.                                                                                                        |
@@ -79,6 +79,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 - Follow the existing patterns. Reuse the partials, put content in front matter `params`, and keep images in page bundles.
 - Every button sits in a `.cta-group` (use `cta_group.html` or `destination_button`). Never write a bare `.btn` link as a child of `main` or `.prose`: both are grids, and a grid item stretches to full width. Groups are centred, except in `.prose`, where they align with the text.
 - Links open in the same tab. Don't add `target="_blank"`.
+- Alt text: leave `alt` empty for an image whose meaning is already in the text next to it: faculty headshots beside the name, page-header photos under the title, card images inside a link named by the card's heading, and the band image behind its text. A screen reader would only repeat that text. Give descriptive `alt` to an image that adds information, such as the hero (`params.hero.imageAlt`) and Markdown images (the image hook requires it).
 - Write YAML front matter in content files. Note that `archetypes/default.md` still produces TOML.
 - Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`). `.prettierignore` excludes `.claude/`.
 - The go-template plugin can change a template's output. It rewraps elements onto several lines, which adds whitespace to text such as a `<title>`, and it drops a space written just before `{{ . }}` in an attribute. Keep such expressions short, or put the space inside the expression (`printf " %s"`). After formatting a template, compare the built `public/` with the previous build.
