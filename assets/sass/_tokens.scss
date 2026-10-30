@@ -19,7 +19,6 @@
     "primary-light": rgb(192, 57, 43),
     "primary-lighter": rgb(255, 118, 104),
     "primary-dark": rgb(146, 43, 33),
-    "background-header": rgba(250, 245, 240, 0.95),
     "background-main": rgb(247, 247, 255),
     "background-secondary": rgb(254, 249, 236),
     "background-page-header": rgb(170, 50, 38, 0.75),
@@ -28,6 +27,7 @@
     "text-dark-muted": rgb(120, 110, 110),
     "text-light": rgb(246, 246, 236),
     "text-light-muted": rgb(194, 148, 148),
+    "border-subtle": rgb(72, 48, 54, 0.12),
   );
 
   @return map.get($color, $key);
@@ -66,6 +66,7 @@
     "sm": 2px 2px 6px rgba(0, 0, 0, 0.2),
     "md": 4px 4px 9px rgba(0, 0, 0, 0.2),
     "lg": 6px 6px 12px rgba(0, 0, 0, 0.2),
+    "header": 0 2px 6px rgba(0, 0, 0, 0.15),
   );
 
   @return map.get($shadow, $key);

@@ -9,7 +9,7 @@ header {
   justify-content: space-between;
   min-height: space("xxl");
   padding-inline: space("sm");
-  background: color("background-header");
+  background: color("background-secondary");
 
   @media (width >= breakpoint("lg")) {
     padding-inline: space("lg");
@@ -47,6 +47,22 @@ header {
   }
 }
 
+// Fade in a shadow as the page starts to scroll. Browsers without
+// scroll-driven animations keep the flat header.
+@supports (animation-timeline: scroll()) {
+  header {
+    animation: header-lift linear both;
+    animation-timeline: scroll();
+    animation-range: 0 space("lg");
+  }
+
+  @keyframes header-lift {
+    to {
+      box-shadow: shadow("header");
+    }
+  }
+}
+
 #header-menu {
   ul {
     display: flex;
@@ -75,7 +91,7 @@ header {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: color("background-header");
+    background: color("background-secondary");
 
     ul {
       flex-direction: column;
