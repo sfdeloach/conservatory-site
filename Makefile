@@ -6,10 +6,11 @@ HUGO_ARGS ?=
 build: ## production minified build; fails on any Hugo warning
 	hugo --minify --cleanDestinationDir --panicOnWarning --printPathWarnings $(HUGO_ARGS)
 
-check: build ## strict build, then formatting, links, HTML, and accessibility checks
+check: build ## strict build, then formatting, links, HTML, metadata, and accessibility checks
 	npx --no-install prettier --check .
 	lychee --offline --include-fragments --index-files index.html --root-dir "$(CURDIR)/public" --no-progress 'public/**/*.html'
 	npx --no-install html-validate 'public/**/*.html'
+	python3 scripts/check-meta.py
 	./scripts/check-a11y.sh
 
 check-a11y: ## axe accessibility check of the built site (run make build first)

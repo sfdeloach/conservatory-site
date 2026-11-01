@@ -8,6 +8,7 @@
       {{- $title = printf "%s | %s" .Title site.Title }}
     {{- end }}
     <title>{{ $title }}</title>
+    {{- partial "head_meta.html" . }}
     {{- with site.Params.commit }}
       <meta name="build-commit" content="{{ . }}" />
     {{- end }}
@@ -16,6 +17,12 @@
       type="image/svg+xml"
       href="{{ "images/favicon.svg" | relURL }}"
     />
+    <link
+      rel="apple-touch-icon"
+      href="{{ "images/apple-touch-icon.png" | relURL }}"
+    />
+    {{- /* The header's background, background-secondary in _tokens.scss */}}
+    <meta name="theme-color" content="#fef9ec" />
     {{- with resources.Get "sass/main.scss" -}}
       {{- $opts := dict
         "enableSourceMap" hugo.IsDevelopment

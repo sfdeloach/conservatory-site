@@ -1,5 +1,6 @@
 ---
 title: Payment
+description: "Pay tuition online in full or in installments, or by check, and give to the Conservatory Scholarship Fund."
 menus:
   main:
     weight: 60

@@ -447,6 +447,23 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Verify sitemap and robots directives.
 - Decide whether the staging copy on GitHub Pages (under `/conservatory-site/`) should be kept out of search engines until cutover, and how canonical and sharing URLs behave before and after cutover.
 
+**Done** (2026-11-01).
+
+- **Staging and canonical URLs** (decided 2026-11-01):
+  - Every page gets `<meta name="robots" content="noindex">` when the base URL's host is not `params.productionHost` (`saintandrewsconservatory.org`). The staging copy and local builds stay out of search engines. At cutover, CI builds with the live domain and the tag disappears without an edit.
+  - Canonical links and `og:url` point to the page's own URL. Before cutover that is the staging URL, which is harmless because staging isn't indexed. Pointing them at the live domain early would point to pages that the WordPress site doesn't have.
+  - `robots.txt` allows everything and names the sitemap. A `Disallow` for staging would do nothing (crawlers read `robots.txt` only at a host's root, and staging is under a subpath) and would hide the `noindex` tag from crawlers.
+- **Built:**
+  - `layouts/_partials/head_meta.html`: a description from front matter, else the page summary cut to about 160 characters, else the homepage's. Also the canonical link, Open Graph tags, and the Twitter card.
+  - Descriptions written for the homepage, the five menu pages, the handbook, Faculty, and Studios. Faculty bios and studio pages use their opening text.
+  - Sharing images: the page's `params.image` cropped to 1200x630 JPEG, the homepage hero, or a faculty headshot as a square (up to 600px) with a `summary` card, so faces aren't cropped. Pages without an image use the hero.
+  - `static/images/apple-touch-icon.png` (180px, rendered once from the favicon) and `theme-color` (the header's background).
+  - Titles were already right (`Page | Site`, the site name alone on the homepage) and are unchanged.
+- **Sitemap:** all 29 pages, with absolute URLs under the current base URL, `lastmod` from Git, and the draft style test left out.
+- **Guard:** `scripts/check-meta.py`, in `make check` and run again in CI on the build that is deployed. It checks each sitemap page's tags, that the sharing image exists, `robots.txt`, and that `noindex` is present on a non-production build and absent on a production one. It also fails when the host is `www.` plus `productionHost`, which would mean the live site ships with `noindex`. Each check was shown to fail on a planted problem.
+- **Still to do by hand** after the next deploy: paste a staging URL into a share-preview tool (the Facebook Sharing Debugger or LinkedIn Post Inspector) to see the card, and add the site to an iPhone home screen to see the icon.
+- **Not done:** JSON-LD structured data (an `EducationalOrganization` with the address and phone). Moved to 5.5.
+
 ### 5.4 404 page and URL preservation
 
 - Add a custom 404 page that works on GitHub Pages, including under the `/conservatory-site/` subpath.
@@ -458,6 +475,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Consider scroll-driven animations only where they improve the experience.
 - Consider View Transitions after checking browser support, navigation behavior, and accessibility.
 - Optimize images, fonts, and other assets without compromising visual quality.
+- Consider JSON-LD structured data for the conservatory (`EducationalOrganization`, with the name, address, and phone from `params.contact`), which can help in local search results. Left out of 5.3 to keep it small.
 - Defer or skip this part unless time allows or a measurement shows a real problem.
 
 ### Close-out
@@ -529,7 +547,7 @@ Record each decision here, with its rationale, once it is made.
 | Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                               |
 | Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
 | HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                     |
-| Indexing of the staging site before cutover              | 5.3   | Open   |                                                                                                                                                                  |
+| Indexing of the staging site before cutover              | 5.3   | Done   | `noindex` on any host other than the live domain; canonical and sharing URLs point to the page's own URL; `robots.txt` allows all (2026-11-01)                   |
 | Redirect mechanism for old URLs                          | 5.4   | Open   |                                                                                                                                                                  |
 | GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |
 | Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                  |

@@ -10,31 +10,31 @@ Read [docs/ROADMAP.md](docs/ROADMAP.md) before starting work. It defines the pha
 - **Dart Sass**, which must be on `PATH` as `sass`. `layouts/baseof.html` compiles `assets/sass/main.scss` using `"transpiler" "dartsass"`, and the build fails without it. Version 1.106.1.
 - **lychee**, for the internal link check in `make check`. Version 0.24.2.
 - **curl**, for `make check-destinations` and the local server check in `make check-a11y`.
-- **python3**, for the local web server that `make check-a11y` (part of `make check`) runs the axe check against.
+- **python3** 3.11 or newer, for the local web server that `make check-a11y` (part of `make check`) runs the axe check against, and for `scripts/check-meta.py`.
 - **Node 24 LTS and npm**, for formatting and checks: Prettier 3 with `prettier-plugin-go-template`, html-validate, and pa11y-ci (axe). The version is pinned in `.nvmrc` (run `nvm use`), not in the workflow `env` block. Run `npm install` before `make check`. pa11y-ci's Puppeteer downloads its own Chrome on install; npm only runs that step because `package.json` approves it (`allowScripts`, pinned to the Puppeteer version), so a Puppeteer upgrade needs `npm install-scripts approve puppeteer` again.
 
 The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.github/workflows/deploy.yml`. That is the source of truth, and CI uses exactly those versions.
 
 ## Commands
 
-| Command                   | Purpose                                                                                                                                 |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `hugo server`             | Local development server with live reload, at `http://localhost:1313/`.                                                                 |
-| `make build`              | Strict production build into `public/`. Any Hugo warning fails it.                                                                      |
-| `make check`              | `make build`, then Prettier, lychee (internal links and anchors), html-validate, and axe on every page in the sitemap.                  |
-| `make check-a11y`         | The axe check alone, at 1280px and 375px, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.              |
-| `make check-destinations` | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI. |
-| `make clean`              | Delete `public/` and `resources/`.                                                                                                      |
-| `npm install`             | Install Prettier and its plugin.                                                                                                        |
-| `npx prettier --check .`  | Check formatting. Use `--write` to fix it.                                                                                              |
+| Command                   | Purpose                                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `hugo server`             | Local development server with live reload, at `http://localhost:1313/`.                                                                    |
+| `make build`              | Strict production build into `public/`. Any Hugo warning fails it.                                                                         |
+| `make check`              | `make build`, then Prettier, lychee (internal links and anchors), html-validate, the metadata check, and axe on every page in the sitemap. |
+| `make check-a11y`         | The axe check alone, at 1280px and 375px, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.                 |
+| `make check-destinations` | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI.    |
+| `make clean`              | Delete `public/` and `resources/`.                                                                                                         |
+| `npm install`             | Install Prettier and its plugin.                                                                                                           |
+| `npx prettier --check .`  | Check formatting. Use `--write` to fix it.                                                                                                 |
 
 Run `make check` before every commit. CI runs the same command on every push and pull request. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#build-and-validation) for what it covers.
 
 ## Architecture
 
-- `hugo.toml` holds the site config: `baseURL`, the title, `enableGitInfo` (page dates come from Git; CI checks out full history with `fetch-depth: 0`), contact details under `params.contact`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), a standalone image is not wrapped in a paragraph (`wrapStandAloneImageWithinParagraph = false`, so the image hook can render a figure), code-fence highlighting is off, and the table of contents covers `h2`–`h3`.
+- `hugo.toml` holds the site config: `baseURL`, the title, `enableGitInfo` (page dates come from Git; CI checks out full history with `fetch-depth: 0`), contact details under `params.contact`, `params.productionHost` (the live domain's host; every other host gets `noindex`), `enableRobotsTXT`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), a standalone image is not wrapped in a paragraph (`wrapStandAloneImageWithinParagraph = false`, so the image hook can render a figure), code-fence highlighting is off, and the table of contents covers `h2`–`h3`.
 - `data/destinations.yaml` is the single source for every external form: Wufoo registration (`semesterRegistration`, `summerCamp`, `summerAcademy`) and Breeze ChMS payment (`fullPayment`, `installmentPayment`, `donation`). Each entry has `open`, `label`, `url`, and an optional `closedText`. Never write these URLs into pages or templates; use the `destination_button` shortcode or partial.
-- **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them.
+- **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them. A front matter `description` is the page's meta description; pages without one (faculty bios, studio pages) use their summary.
   - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter, inside a `quote` shortcode that signs it.
   - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, and an optional `params.postNominal`. Faculty lists sort by folder name (last name) through `_partials/faculty_sort.html`, not by `weight`.
   - `content/studios/<term>/_index.md` holds the content for each `studios` taxonomy term page, with an `instrument.jpg` image and an optional `params.requirements` list. Faculty pages are tagged with these terms.
@@ -43,13 +43,14 @@ Run `make check` before every commit. CI runs the same command on every push and
   - Top-level pages (`registration`, `payment`, `schedule`, `contact`, `summer-academy`) get into the main navigation through `menus.main.weight` and use `params.image`.
   - `content/style-test/` is a draft page, shown only by `hugo server -D` and never published, with every Markdown element the site styles, for checking typography.
 - **Layouts** (`layouts/`):
-  - `baseof.html` is the shell: Sass pipeline, fingerprinted CSS and JS, font preload, and a "Skip to content" link (styled in `_base.scss`) to `<main id="main">`. `_base.scss` sets `scroll-padding-top` so section links land below the sticky header.
+  - `baseof.html` is the shell: search and sharing metadata (`head_meta.html`), icons and `theme-color`, Sass pipeline, fingerprinted CSS and JS, font preload, and a "Skip to content" link (styled in `_base.scss`) to `<main id="main">`. `_base.scss` sets `scroll-padding-top` so section links land below the sticky header.
   - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
   - `page.html` and `section.html` are generic. `section.html` renders a card list of child pages.
   - `page_faculty_bio.html` is the faculty bio layout: the parent section's name as an eyebrow, then the headshot beside the name and instruments from `md` up (stacked below), styled in `_faculty.scss`.
   - `handbook.html` is the handbook layout: a contents menu built from `.TableOfContents` (a `<details>` block on narrow screens, a sticky sidebar from `lg` up), and a "Last updated" date: the newest `.Lastmod` among the handbook, Schedule, faculty, and studio pages.
   - `studios/taxonomy.html` and `studios/term.html` render the studio pages. `term.html` fails the build when a studio in a faculty page's `studios:` list has no `content/studios/<term>/_index.md`, which catches a misspelling. It shows a Requirements section when the studio has `params.requirements`, and ends with a "Back to Studios" button, as faculty bios end with "Back to Faculty".
 - **Partials** (`layouts/_partials/`):
+  - `head_meta.html` writes the meta description, the canonical link, the Open Graph and Twitter card tags, and `noindex` on any host other than `params.productionHost`. Its header comment documents the fallbacks. The sharing image is a JPEG: 1200x630 from `params.image` (or the homepage hero), or a square headshot on faculty bios. `scripts/check-meta.py` checks its output on every page.
   - `responsive_image.html` builds a WebP `srcset` from a page-bundle image. Its header comment documents the parameters it takes. Always use it rather than writing `<img>` tags by hand. It fails the build when no bundle image matches, and uses one WebP at the image's own size when the image is smaller than every requested width.
   - `card.html` is the card in card lists. Its header comment documents its parameters, including the optional `sizes` and `headingLevel` (use `3` when cards sit under a section's `<h2>`, as on the homepage).
   - `prose.html` wraps a page's Markdown content in `.prose` (reading width and typography). Use it instead of a bare `.Content`. The homepage is the exception: its Dean's letter is styled by `_home.scss` (upright, at reading size, and signed without a dash).
@@ -72,7 +73,8 @@ Run `make check` before every commit. CI runs the same command on every push and
   - `handbook_value` outputs one value from the handbook's front matter by dotted path (`"fees.late"`); `lesson_rates` and `refund_schedule` render its tables. They work on any page, and the Registration and Payment pages use them.
 - **Styles:** `assets/sass/main.scss` imports partials. Design tokens live in `_tokens.scss`, with one partial per area (`_home.scss`, `_cards.scss`, and so on). `_prose.scss` styles Markdown inside `.prose`: a 55ch column on the same named-line grid as `main`, which `.full-bleed` children escape. `_handbook.scss` styles the handbook layout and its print view. `_faculty.scss` styles the faculty bio's headshot and title block. `_quote.scss` styles every `blockquote` (a left rule and one hanging opening mark) and the `quote` shortcode's attribution. `.eyebrow` (the small spaced label above a heading) is a global class in `_base.scss`.
 - **Script:** `assets/js/script.js` toggles the mobile navigation menu.
-- **Static files:** `static/` holds self-hosted fonts (EB Garamond, Nunito, Incognito Pro) and the favicon.
+- **`layouts/robots.txt`** allows every crawler and names the sitemap. It has no `Disallow` for staging: crawlers read `robots.txt` only at a host's root, and the `noindex` tag keeps staging out of search engines.
+- **Static files:** `static/` holds self-hosted fonts (EB Garamond, Nunito, Incognito Pro), the favicon, and `images/apple-touch-icon.png` (180px, rendered once from the favicon on the header's background colour).
 
 ## Conventions
 
@@ -87,7 +89,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 
 ## Deployment
 
-Every push to `main` that passes `make check` is deployed to GitHub Pages by `.github/workflows/deploy.yml`. Pull requests are checked but never deployed. Templates must stay subpath-safe: use `RelPermalink` or `relURL` (without a leading slash) in templates, and relative `url()`s in Sass. Never hard-code root-absolute paths such as `/images/...`, because the site is served from `/conservatory-site/` until the Phase 6 cutover.
+Every push to `main` that passes `make check` is deployed to GitHub Pages by `.github/workflows/deploy.yml`. Pull requests are checked but never deployed. Templates must stay subpath-safe: use `RelPermalink` or `relURL` (without a leading slash) in templates, and relative `url()`s in Sass. Never hard-code root-absolute paths such as `/images/...`, because the site is served from `/conservatory-site/` until the Phase 6 cutover. The exceptions are the canonical link, Open Graph URLs, and `robots.txt`, which must be absolute (`Permalink`, `absURL`).
 
 ## Constraints
 

@@ -1,5 +1,6 @@
 ---
 title: Student Handbook
+description: "The Conservatory’s policies for students and families: registration, tuition and fees, attendance, the academic calendar, faculty, and staff."
 layout: handbook
 draft: false
 params:
