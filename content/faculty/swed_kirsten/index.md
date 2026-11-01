@@ -2,6 +2,9 @@
 title: Kirsten Swed
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/kristen-swed/"
 studios:
   - "piano"
 ---

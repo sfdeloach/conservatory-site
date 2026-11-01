@@ -470,6 +470,20 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Preserve existing URLs where possible. Choose a redirect mechanism (GitHub Pages has no server-side redirects, so Hugo `aliases` are the likely option) and record the decision.
 - Draft the redirect map from [SITE-INVENTORY.md](SITE-INVENTORY.md). Phase 6 finalizes it and verifies it on the live domain.
 
+**Done** (2026-11-01), except one check that needs the deployed site (below).
+
+- **Redirect mechanism** (decided 2026-11-01): Hugo `aliases` in each new page's front matter. Hugo writes a page at each old path that redirects at once with a meta refresh, which search engines treat as a permanent redirect. A single data file with a custom template was considered and not used: it would duplicate what Hugo already does. The limitation: an old URL answers 200, not 301, because GitHub Pages can't send server redirects.
+- **Redirect map:** 16 old URLs, in [SITE-INVENTORY.md](SITE-INVENTORY.md#redirect-map): `/payments/`, `/summer-music/`, `/news/` (to the homepage), the 12 faculty bios, and the old handbook PDF (to `/handbook/`). The old site couldn't be reached from the work environment, so the map comes from the 2026-10-26 inventory. Phase 6 compares it with the old site again.
+- **Built:**
+  - `layouts/alias.html`, the redirect page: a meta refresh, a canonical link, `noindex`, and a visible link. Hugo's built-in one has no `<body>` and failed html-validate.
+  - `layouts/404.html`, the "Page not found" page, with the agreed wording: links to Home, Studios, Faculty, and Registration, a pointer to the handbook, and the office's phone and email. It is `noindex`, has no canonical or sharing tags, and is checked by axe at both widths (`.pa11yci.js` adds it, because it isn't in the sitemap).
+  - `scripts/check-redirects.sh` (`make check-redirects BASE=<url>`), an on-demand check of every old path and the 404 page on a deployed copy.
+- **Verified:**
+  - `make check` passes, with html-validate and lychee covering the 16 redirect pages and the 404 page.
+  - The 404 page was checked by screenshot at 1280px and 375px.
+  - `make check-redirects` passed against a local server that behaves like GitHub Pages (the `/conservatory-site/` subpath, a 301 that adds a folder's trailing slash, and `404.html` with status 404). It failed, as it should, when a redirect's new page was missing, when the PDF address got no trailing-slash redirect, and when the server had no custom 404 page.
+- **Still to do after the next deploy** (the staging site couldn't be reached from the work environment): run `make build`, then `make check-redirects BASE=https://sfdeloach.github.io/conservatory-site/`. It confirms the redirects and the 404 page on GitHub Pages, including whether the old PDF address reaches its redirect. If only the PDF fails, record it as a known limitation: that link gets the 404 page, which links to the handbook.
+
 ### 5.5 Optional refinements
 
 - Consider scroll-driven animations only where they improve the experience.
@@ -548,7 +562,7 @@ Record each decision here, with its rationale, once it is made.
 | Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
 | HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                     |
 | Indexing of the staging site before cutover              | 5.3   | Done   | `noindex` on any host other than the live domain; canonical and sharing URLs point to the page's own URL; `robots.txt` allows all (2026-11-01)                   |
-| Redirect mechanism for old URLs                          | 5.4   | Open   |                                                                                                                                                                  |
+| Redirect mechanism for old URLs                          | 5.4   | Done   | Hugo `aliases` in front matter, rendered by `layouts/alias.html` (meta refresh); map in SITE-INVENTORY (2026-11-01)                                              |
 | GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |
 | Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                  |
 

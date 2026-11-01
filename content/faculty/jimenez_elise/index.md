@@ -2,6 +2,9 @@
 title: Elise Jimenez
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/elise-jimenez/"
 studios:
   - "cello"
 params:

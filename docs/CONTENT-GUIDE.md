@@ -60,6 +60,19 @@ Search engines show a page's **description** under its title, and messaging apps
 - The sharing image is the page's banner image (`params.image`), a faculty member's headshot, or, on the homepage, the hero photo. It is cropped automatically. A page without one uses the homepage hero.
 - Previews are cached by the apps that show them. After changing a description or image, a shared link can take days to show the new one.
 
+### Old addresses (redirects)
+
+Some pages list old addresses in their front matter, under `aliases`. These are the old WordPress site's addresses for that page, such as `/brian-bak-2/` for Brian Bak's bio. The site publishes a small page at each one that sends visitors, and search engines, on to the new page, so old links and bookmarks keep working.
+
+```yaml
+aliases:
+  - "/brian-bak-2/"
+```
+
+- Keep these lines when you edit a page.
+- If you rename or move a page (change its folder name), add its old address, such as `"/faculty/old_folder_name/"`, to `aliases`, so links to it keep working.
+- Deleting a page also deletes its old addresses. Visitors who follow one then get the "Page not found" page, which links to the main pages.
+
 ## Editing the homepage
 
 All the homepage text is in the front matter of `content/_index.md`: hero, story, stats, faculty, Summer Academy, and the "Ready" section. Each section has an `eyebrow` (the small label above it), a `title`, and the body text. Buttons are lists of:
@@ -110,7 +123,7 @@ Each path must match a folder under `content/faculty/`. If it doesn't, the build
 
    - `studios` lists the studios this person teaches in. Each entry must match a folder name under `content/studios/`.
    - `postNominal` is optional. It is shown after the name, as in "Brian Bak, DMA".
-     To remove a faculty member, delete their folder. If they are featured on the homepage, also remove them from `faculty.featured` in `content/_index.md`, or the build fails.
+     To remove a faculty member, delete their folder. If they are featured on the homepage, also remove them from `faculty.featured` in `content/_index.md`, or the build fails. Their old address from the WordPress site (`aliases`, see [Old addresses](#old-addresses-redirects)) goes with the folder.
 
 ## Adding a studio
 

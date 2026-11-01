@@ -2,6 +2,9 @@
 title: Olga Ferroni
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/olga-ferroni/"
 studios:
   - "violin"
 params:

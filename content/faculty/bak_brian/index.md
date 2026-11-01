@@ -2,6 +2,9 @@
 title: Brian Bak
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/brian-bak-2/"
 studios:
   - "violin"
 params:

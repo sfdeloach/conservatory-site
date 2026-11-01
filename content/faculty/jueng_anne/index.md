@@ -2,6 +2,9 @@
 title: Anne Jueng
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/anne-jueng/"
 studios:
   - "piano"
 params:

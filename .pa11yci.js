@@ -3,6 +3,9 @@
 const phone = process.env.A11Y_WIDTH === "375";
 
 module.exports = {
+  // The 404 page isn't in the sitemap; check it too. A11Y_BASE is the local
+  // server's address, set by scripts/check-a11y.sh.
+  urls: process.env.A11Y_BASE ? [`${process.env.A11Y_BASE}/404.html`] : [],
   defaults: {
     runners: ["axe"],
     // axe's "needs review" results, such as text over an image or a

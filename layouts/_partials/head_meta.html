@@ -16,78 +16,85 @@
   1200x630, with a `summary_large_image` card). A page without one
   uses the homepage hero. The image is a JPEG, which every link-preview
   service reads, and its URL is absolute.
+  - The 404 page gets only `noindex`.
   */
 -}}
 {{- $productionHost := site.Params.productionHost }}
 {{- if not $productionHost }}
   {{- errorf "head_meta.html: params.productionHost is not set in hugo.toml" }}
 {{- end }}
-{{- if ne (urls.Parse site.BaseURL).Host $productionHost }}
+{{- $notFound := eq .Kind "404" }}
+{{- if or $notFound (ne (urls.Parse site.BaseURL).Host $productionHost) }}
   <meta name="robots" content="noindex" />
 {{- end }}
 
-{{- /* Description */}}
-{{- $description := .Description }}
-{{- if not $description }}
-  {{- $description = .Summary | plainify | htmlUnescape }}
-  {{- $description = replaceRE `\s+` " " $description | strings.TrimSpace | truncate 160 }}
-{{- end }}
-{{- if not $description }}
-  {{- $description = site.Home.Description }}
-{{- end }}
-{{- if not $description }}
-  {{- warnf "head_meta.html: %s has no description, and the homepage has none to fall back on" .Path }}
-{{- end }}
-<meta name="description" content="{{ $description }}" />
-<link rel="canonical" href="{{ .Permalink }}" />
-
-{{- /* Sharing image: a source resource, how to crop it, and its alt text */}}
-{{- $image := "" }}
-{{- $square := false }}
-{{- $imageAlt := "" }}
-{{- $hero := site.Home.Params.hero }}
-{{- if .IsHome }}
-  {{- $image = .Resources.Get $hero.image }}
-  {{- $imageAlt = $hero.imageAlt }}
-{{- else if eq .Layout "page_faculty_bio" }}
-  {{- $image = .Resources.GetMatch "headshot.*" }}
-  {{- $square = true }}
-{{- else }}
-  {{- with .Params.image }}
-    {{- $image = $.Resources.Get . }}
+{{- /* The 404 page is served at any missing path: it has no URL of its own
+  to name as canonical or share, so it gets nothing more.
+*/}}
+{{- if not $notFound }}
+  {{- /* Description */}}
+  {{- $description := .Description }}
+  {{- if not $description }}
+    {{- $description = .Summary | plainify | htmlUnescape }}
+    {{- $description = replaceRE `\s+` " " $description | strings.TrimSpace | truncate 160 }}
   {{- end }}
-{{- end }}
-{{- if not $image }}
-  {{- $image = site.Home.Resources.Get $hero.image }}
-  {{- $imageAlt = $hero.imageAlt }}
-{{- end }}
-{{- if not $image }}
-  {{- errorf "head_meta.html: no sharing image for %s, and the homepage hero image was not found" .Path }}
-{{- end }}
-{{- $size := "1200x630" }}
-{{- if $square }}
-  {{- $side := math.Min 600 $image.Width $image.Height }}
-  {{- $size = printf "%dx%d" (int $side) (int $side) }}
-{{- end }}
-{{- $image = $image.Fill (printf "%s Center q80 jpg" $size) }}
+  {{- if not $description }}
+    {{- $description = site.Home.Description }}
+  {{- end }}
+  {{- if not $description }}
+    {{- warnf "head_meta.html: %s has no description, and the homepage has none to fall back on" .Path }}
+  {{- end }}
+  <meta name="description" content="{{ $description }}" />
+  <link rel="canonical" href="{{ .Permalink }}" />
 
-{{- $title := .Title }}
-{{- if .IsHome }}
-  {{- $title = site.Title }}
+  {{- /* Sharing image: a source resource, how to crop it, and its alt text */}}
+  {{- $image := "" }}
+  {{- $square := false }}
+  {{- $imageAlt := "" }}
+  {{- $hero := site.Home.Params.hero }}
+  {{- if .IsHome }}
+    {{- $image = .Resources.Get $hero.image }}
+    {{- $imageAlt = $hero.imageAlt }}
+  {{- else if eq .Layout "page_faculty_bio" }}
+    {{- $image = .Resources.GetMatch "headshot.*" }}
+    {{- $square = true }}
+  {{- else }}
+    {{- with .Params.image }}
+      {{- $image = $.Resources.Get . }}
+    {{- end }}
+  {{- end }}
+  {{- if not $image }}
+    {{- $image = site.Home.Resources.Get $hero.image }}
+    {{- $imageAlt = $hero.imageAlt }}
+  {{- end }}
+  {{- if not $image }}
+    {{- errorf "head_meta.html: no sharing image for %s, and the homepage hero image was not found" .Path }}
+  {{- end }}
+  {{- $size := "1200x630" }}
+  {{- if $square }}
+    {{- $side := math.Min 600 $image.Width $image.Height }}
+    {{- $size = printf "%dx%d" (int $side) (int $side) }}
+  {{- end }}
+  {{- $image = $image.Fill (printf "%s Center q80 jpg" $size) }}
+
+  {{- $title := .Title }}
+  {{- if .IsHome }}
+    {{- $title = site.Title }}
+  {{- end }}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{{ site.Title }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="{{ $title }}" />
+  <meta property="og:description" content="{{ $description }}" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="og:image" content="{{ $image.Permalink }}" />
+  <meta property="og:image:width" content="{{ $image.Width }}" />
+  <meta property="og:image:height" content="{{ $image.Height }}" />
+  {{- with $imageAlt }}
+    <meta property="og:image:alt" content="{{ . }}" />
+  {{- end }}
+  <meta
+    name="twitter:card"
+    content="{{ cond $square "summary" "summary_large_image" }}"
+  />
 {{- end }}
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="{{ site.Title }}" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:title" content="{{ $title }}" />
-<meta property="og:description" content="{{ $description }}" />
-<meta property="og:url" content="{{ .Permalink }}" />
-<meta property="og:image" content="{{ $image.Permalink }}" />
-<meta property="og:image:width" content="{{ $image.Width }}" />
-<meta property="og:image:height" content="{{ $image.Height }}" />
-{{- with $imageAlt }}
-  <meta property="og:image:alt" content="{{ . }}" />
-{{- end }}
-<meta
-  name="twitter:card"
-  content="{{ cond $square "summary" "summary_large_image" }}"
-/>

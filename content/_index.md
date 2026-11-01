@@ -2,6 +2,9 @@
 title: Home
 description: "Saint Andrew’s Conservatory of Music in Sanford, Florida, offers year-round private music lessons for every age and ability, and a Summer Music Academy."
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/news/"
 params:
   hero:
     eyebrow: "TWO DECADES OF MUSICAL TRAINING"

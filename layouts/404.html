@@ -1,0 +1,39 @@
+{{- define "main" -}}
+  {{/* Note:
+
+    The "Page not found" page, written to public/404.html. GitHub Pages serves
+    it for every missing path, at any depth, so every link and asset must be
+    root-relative (RelPermalink, relURL), as they are everywhere else.
+    head_meta.html gives it noindex, and no canonical link or sharing tags. It
+    is not in the sitemap, so .pa11yci.js adds it to the axe check.
+  */}}
+  {{- /* page_header.html would show Hugo's title, "404 Page not found". */}}
+  <div class="page-header"><h1>Page not found</h1></div>
+  {{- $c := site.Params.contact }}
+  <div class="prose">
+    <p>
+      Sorry, we couldn’t find that page. Our website was recently rebuilt, so an
+      old link or bookmark may no longer work.
+    </p>
+    {{ partial "cta_group.html" (slice
+      (dict "label" "Home" "page" "/" "style" "primary")
+      (dict "label" "Studios" "page" "/studios" "style" "outline")
+      (dict "label" "Faculty" "page" "/faculty" "style" "outline")
+      (dict "label" "Registration" "page" "/registration" "style" "outline")
+      )
+    }}
+    <p>
+      Looking for the student handbook? It’s now a page on this site:
+      {{ with site.GetPage "/handbook" -}}
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>.
+      {{- else -}}
+        {{- errorf "404.html: no page at /handbook" -}}
+      {{- end }}
+    </p>
+    <p>
+      To reach the Conservatory Office, call
+      <a href="tel:{{ $c.phoneHref }}">{{ $c.phoneFormat }}</a> or email
+      <a href="mailto:{{ $c.email }}">{{ $c.email }}</a>.
+    </p>
+  </div>
+{{- end -}}

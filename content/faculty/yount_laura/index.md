@@ -2,6 +2,9 @@
 title: Laura Yount
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/laura-yount/"
 studios:
   - "voice"
 params:

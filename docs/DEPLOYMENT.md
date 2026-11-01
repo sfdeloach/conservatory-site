@@ -73,6 +73,19 @@ What the checks don't cover yet:
 
 The accessibility check serves `public/` on `127.0.0.1:8137` with python3 while it runs (set `CHECK_A11Y_PORT` to use another port), and stops the server when it ends. Its Chrome comes from Puppeteer, which downloads it during `npm install`. CI caches that download, keyed on `package-lock.json`.
 
+### Old URLs and the 404 page
+
+The old WordPress site's addresses are kept working with Hugo `aliases` in the new pages' front matter (the map is in [SITE-INVENTORY.md](SITE-INVENTORY.md#redirect-map)). GitHub Pages can't send server redirects, so Hugo writes a small page at each old path (`layouts/alias.html`) that redirects at once with a meta refresh. Search engines treat an instant refresh as a permanent redirect, but the old URL itself answers with status 200, not 301. `layouts/404.html` becomes `public/404.html`, which GitHub Pages serves, with status 404, for any path that doesn't exist.
+
+`make check-redirects BASE=<url>` runs `scripts/check-redirects.sh` against a deployed copy: the staging address now, the live domain at cutover. It takes the list of old paths from the local `public/` (run `make build` first), and fails when:
+
+- an old path, with its trailing slash, doesn't return 200 with a refresh to a page under `<url>`;
+- the old path without its trailing slash doesn't reach the same page (GitHub Pages adds the slash with a redirect);
+- the page an old path refreshes to doesn't return 200;
+- a path that doesn't exist isn't answered with status 404 and the site's "Page not found" page.
+
+It is run on demand, not in CI, because it needs the deployed site.
+
 ### Registration and payment forms
 
 `make check-destinations` runs `scripts/check-destinations.sh`, which fetches each form in `data/destinations.yaml` and prints its page title. It fails when:
@@ -197,4 +210,4 @@ Other checks done in Phase 1.3:
 
 ## DNS cutover
 
-_To be completed in Phase 6._ After cutover, confirm the live pages have no `noindex` tag (view the source of a few pages) and that `https://saintandrewsconservatory.org/robots.txt` names the sitemap, then submit the sitemap in Google Search Console if the church uses it. Record the current DNS records, including the non-web records that must be preserved (MX, SPF/DKIM/DMARC, and verification records), the planned changes, the redirect map (from [SITE-INVENTORY.md](SITE-INVENTORY.md)), the validation steps, and the rollback steps.
+_To be completed in Phase 6._ After cutover, run `make check-redirects BASE=https://saintandrewsconservatory.org/`, and confirm the live pages have no `noindex` tag (view the source of a few pages) and that `https://saintandrewsconservatory.org/robots.txt` names the sitemap, then submit the sitemap in Google Search Console if the church uses it. Record the current DNS records, including the non-web records that must be preserved (MX, SPF/DKIM/DMARC, and verification records), the planned changes, the redirect map (from [SITE-INVENTORY.md](SITE-INVENTORY.md)), the validation steps, and the rollback steps.

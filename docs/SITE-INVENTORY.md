@@ -4,7 +4,7 @@ A snapshot of the current production site at `https://saintandrewsconservatory.o
 
 - **Platform:** WordPress, served through Cloudflare.
 - **Source:** the WordPress sitemap (`/wp-sitemap-posts-page-1.xml`, 20 pages) plus each page's main and footer navigation.
-- **Uses:** content migration (roadmap Phase 3), registration and payment (Phase 4), and redirects (Phase 6).
+- **Uses:** content migration (roadmap Phase 3), registration and payment (Phase 4), and redirects (built in Phase 5.4, verified on the live domain in Phase 6).
 
 Re-check this inventory before the Phase 6 cutover, because the old site may change in the meantime.
 
@@ -41,14 +41,41 @@ Migration status values:
 
 Pages that are new in this project and have no old equivalent: `/studios/` and its eight studio pages.
 
+## Redirect map
+
+Each old URL is kept working by an `aliases` entry in the new page's front matter (Phase 5.4). Hugo writes a redirect page at the old path (`layouts/alias.html`). `make check-redirects BASE=<url>` checks them all on a deployed copy (see [DEPLOYMENT.md](DEPLOYMENT.md#old-urls-and-the-404-page)).
+
+| Old URL                                                                            | New page                         | Alias in                                        |
+| ---------------------------------------------------------------------------------- | -------------------------------- | ----------------------------------------------- |
+| `/payments/`                                                                       | `/payment/`                      | `content/payment/index.md`                      |
+| `/summer-music/`                                                                   | `/summer-academy/`               | `content/summer-academy/index.md`               |
+| `/news/`                                                                           | `/`                              | `content/_index.md`                             |
+| `/angelyn-traylor-chen/`                                                           | `/faculty/traylor_chen_angelyn/` | `content/faculty/traylor_chen_angelyn/index.md` |
+| `/anne-jueng/`                                                                     | `/faculty/jueng_anne/`           | `content/faculty/jueng_anne/index.md`           |
+| `/brian-bak-2/`                                                                    | `/faculty/bak_brian/`            | `content/faculty/bak_brian/index.md`            |
+| `/cynthia-jimenez/`                                                                | `/faculty/jimenez_cynthia/`      | `content/faculty/jimenez_cynthia/index.md`      |
+| `/dr-terry-yount/`                                                                 | `/faculty/yount_terry/`          | `content/faculty/yount_terry/index.md`          |
+| `/elise-jimenez/`                                                                  | `/faculty/jimenez_elise/`        | `content/faculty/jimenez_elise/index.md`        |
+| `/kristen-swed/`                                                                   | `/faculty/swed_kirsten/`         | `content/faculty/swed_kirsten/index.md`         |
+| `/laura-yount/`                                                                    | `/faculty/yount_laura/`          | `content/faculty/yount_laura/index.md`          |
+| `/nathan-petersen/`                                                                | `/faculty/petersen_nathan/`      | `content/faculty/petersen_nathan/index.md`      |
+| `/olga-ferroni/`                                                                   | `/faculty/ferroni_olga/`         | `content/faculty/ferroni_olga/index.md`         |
+| `/sharon-chang/`                                                                   | `/faculty/chang_sharon/`         | `content/faculty/chang_sharon/index.md`         |
+| `/tammy-davis/`                                                                    | `/faculty/davis_tammy/`          | `content/faculty/davis_tammy/index.md`          |
+| `/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf` | `/handbook/`                     | `content/handbook/index.md`                     |
+
+- **The handbook PDF:** Hugo writes this alias as a folder named `…handbook.pdf/` holding an `index.html`. A request for the PDF's address, which has no trailing slash, works only if GitHub Pages redirects it to that folder, as it does for other folders. Not yet verified: run `make check-redirects` on staging after the deploy. If it fails, the old PDF link gets the "Page not found" page, which links to the handbook.
+- **Not redirected:** WordPress's own addresses, such as `/feed/`, `/wp-login.php`, and `/?page_id=…` links (a query string loads the homepage). Any other missing path gets the "Page not found" page.
+- **Re-check before cutover:** the old site couldn't be reached from the Phase 5.4 work environment, so this map is from the 2026-10-26 snapshot. Compare it with the old site's sitemap again in Phase 6.
+
 ## Files hosted on the old site
 
 These are served from WordPress (`/wp-content/uploads/`) and will stop working when the old site is retired.
 
-| File                                                                               | Linked from                        | Action                                                                                      |
-| ---------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------- |
-| `/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf` | Footer of every page; Registration | Replaced by the web page `/handbook/` (Phase 3). Redirect the old URL at cutover (Phase 6). |
-| Faculty headshots and summer photos under `/wp-content/uploads/`                   | Faculty and Summer pages           | None. This project has its own images.                                                      |
+| File                                                                               | Linked from                        | Action                                                                               |
+| ---------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------ |
+| `/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf` | Footer of every page; Registration | Replaced by the web page `/handbook/` (Phase 3). Redirected by an alias (Phase 5.4). |
+| Faculty headshots and summer photos under `/wp-content/uploads/`                   | Faculty and Summer pages           | None. This project has its own images.                                               |
 
 ## External destinations
 
