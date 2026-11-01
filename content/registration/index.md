@@ -1,5 +1,6 @@
 ---
 title: Registration
+description: "How to register for private lessons each semester, with registration fees, tuition rates, discounts, and payment plans."
 menus:
   main:
     weight: 20

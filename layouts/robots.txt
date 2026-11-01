@@ -1,0 +1,10 @@
+{{- /*
+  Allows every crawler and points to the sitemap. Crawlers read robots.txt
+  only at the root of a host, so this matters only on the live domain. The
+  staging copy is kept out of search engines by a noindex tag instead
+  (head_meta.html): a Disallow rule here would stop crawlers from seeing it.
+*/ -}}
+User-agent: *
+Disallow:
+
+Sitemap: {{ "sitemap.xml" | absURL }}

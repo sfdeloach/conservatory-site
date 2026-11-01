@@ -44,6 +44,22 @@ Preview your changes with `hugo server` before publishing them (see [README.md](
 
 3. To replace a page's banner image, replace the image file in the same folder and keep the file name the front matter uses (`params.image`).
 
+### Search and sharing previews
+
+Search engines show a page's **description** under its title, and messaging apps and social media show it, with the page's title and an image, when someone shares a link.
+
+- The description is the front matter `description`, one or two plain sentences of about 160 characters at most:
+
+  ```yaml
+  title: Schedule
+  description: "Semester calendars with registration windows, payment due dates, breaks, and recitals."
+  ```
+
+  Each menu page, the handbook, the homepage, and the Faculty and Studios pages have one. Update it when the page's content changes enough that it no longer fits. A page without one, such as a faculty bio or a studio page, uses the start of its text instead, so write that opening sentence to stand on its own.
+
+- The sharing image is the page's banner image (`params.image`), a faculty member's headshot, or, on the homepage, the hero photo. It is cropped automatically. A page without one uses the homepage hero.
+- Previews are cached by the apps that show them. After changing a description or image, a shared link can take days to show the new one.
+
 ## Editing the homepage
 
 All the homepage text is in the front matter of `content/_index.md`: hero, story, stats, faculty, Summer Academy, and the "Ready" section. Each section has an `eyebrow` (the small label above it), a `title`, and the body text. Buttons are lists of:

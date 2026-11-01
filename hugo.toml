@@ -3,8 +3,14 @@ locale = 'en-us'
 title = 'Saint Andrew’s Conservatory of Music'
 # Page dates (.Lastmod) come from Git. CI checks out full history for this.
 enableGitInfo = true
+# Writes public/robots.txt from layouts/robots.txt.
+enableRobotsTXT = true
 
 [params]
+# The live domain's host. Every other host (the GitHub Pages staging copy,
+# a local build) gets a noindex tag; see layouts/_partials/head_meta.html.
+productionHost = "saintandrewsconservatory.org"
+
   [params.contact]
   address = "5525 Wayside Drive"
   cityStZip = "Sanford, Florida 32771"

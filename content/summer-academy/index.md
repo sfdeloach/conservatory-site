@@ -1,5 +1,6 @@
 ---
 title: Summer Academy
+description: "Summer Music Camp for rising 1st through 5th graders, and Summer Music Academy ensembles and masterclasses for middle and high school musicians."
 menus:
   main:
     weight: 50

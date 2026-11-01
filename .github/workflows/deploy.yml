@@ -82,6 +82,13 @@ jobs:
           HUGO_PARAMS_COMMIT: ${{ github.sha }}
         run: make build HUGO_ARGS="--baseURL ${{ steps.pages.outputs.base_url }}/"
 
+      # make check saw a production-style build. Check the metadata of the
+      # build that is deployed: noindex while the Pages URL is not the live
+      # domain, and none once it is.
+      - name: Check the deployed build's metadata
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: python3 scripts/check-meta.py
+
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v5

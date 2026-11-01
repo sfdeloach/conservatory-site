@@ -1,5 +1,6 @@
 ---
 title: Contact
+description: "Visit the Conservatory in Sanford, Florida, near I-4 and SR 46, or reach the office by phone or email."
 menus:
   main:
     weight: 70

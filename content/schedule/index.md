@@ -1,5 +1,6 @@
 ---
 title: Schedule
+description: "Semester calendars with registration windows, payment due dates, breaks, and recitals."
 menus:
   main:
     weight: 30

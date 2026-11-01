@@ -1,5 +1,6 @@
 ---
 title: Studios
+description: "Year-round private instruction for every age and ability, anchored by piano and strings and joined by other studios as the seasons change."
 menus:
   main:
     weight: 10
