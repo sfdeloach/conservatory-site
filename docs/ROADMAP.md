@@ -461,7 +461,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
   - Titles were already right (`Page | Site`, the site name alone on the homepage) and are unchanged.
 - **Sitemap:** all 29 pages, with absolute URLs under the current base URL, `lastmod` from Git, and the draft style test left out.
 - **Guard:** `scripts/check-meta.py`, in `make check` and run again in CI on the build that is deployed. It checks each sitemap page's tags, that the sharing image exists, `robots.txt`, and that `noindex` is present on a non-production build and absent on a production one. It also fails when the host is `www.` plus `productionHost`, which would mean the live site ships with `noindex`. Each check was shown to fail on a planted problem.
-- **Still to do by hand** after the next deploy: paste a staging URL into a share-preview tool (the Facebook Sharing Debugger or LinkedIn Post Inspector) to see the card, and add the site to an iPhone home screen to see the icon.
+- **Checked by hand** (2026-11-02): the share card looks right in the Facebook Sharing Debugger. Staff decided Facebook is enough and skipped the LinkedIn Post Inspector. Still to do: add the site to an iPhone home screen to see the icon.
 - **Not done in 5.3:** JSON-LD structured data (an `EducationalOrganization` with the address and phone). Done in 5.5.
 
 ### 5.4 404 page and URL preservation
@@ -518,11 +518,11 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - **Keyboard and responsive behaviour:** met. Tested automatically and by hand in 5.2.
 - **Motion:** met. Transitions are off under `prefers-reduced-motion`; checked in 5.2.
 - **Remaining limitations:**
-  - How a shared link's card looks in a sharing service (the Facebook Sharing Debugger or LinkedIn Post Inspector), and the icon on an iPhone home screen, have not been checked by hand yet (5.3). The tags behind them are checked on every build.
+  - The icon on an iPhone home screen has not been checked by hand yet (5.3). The tags behind it are checked on every build. The share card passed in the Facebook Sharing Debugger on 2026-11-02.
   - Old URLs answer 200 and redirect with a meta refresh, not a 301, because GitHub Pages can't send server redirects (5.4).
   - The redirect map comes from the 2026-10-26 inventory, because the old site couldn't be reached from the work environment. Phase 6 compares it with the old site again.
   - The page titles over photos reach about 4.0:1 contrast at worst, which passes only as large text (5.2, staff decision).
-- **Next:** human review before Phase 6 (launch readiness and domain cutover).
+- **Human review** (2026-11-02): staff approved the site and asked for no changes. Phase 6 (launch readiness and domain cutover) can start.
 
 ## 6. Launch readiness and domain cutover
 
@@ -577,7 +577,7 @@ Record each decision here, with its rationale, once it is made.
 | Replacement for the old site's WordPress contact form    | 3     | Done   | None: an email link and phone number are enough (staff, 2026-10-27)                                                                                              |
 | Hosting the student handbook PDF                         | 3     | Done   | Replaced by a web page at `/handbook/`, not a PDF (staff, 2026-10-27)                                                                                            |
 | Faculty list order (first name or last name)             | 3     | Done   | Last name; a compound last name sorts by its first word (staff, 2026-10-27)                                                                                      |
-| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                  |     |
+| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                  |
 | Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                               |
 | Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
 | HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                     |
