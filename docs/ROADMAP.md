@@ -15,7 +15,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 2     | Complete the homepage                                 | Done        |
 | 3     | Content migration, typography, and Markdown rendering | Done        |
 | 4     | Registration and payment workflows                    | Done        |
-| 5     | Accessibility, quality assurance, and SEO             | In progress |
+| 5     | Accessibility, quality assurance, and SEO             | Done        |
 | 6     | Launch readiness and domain cutover                   | Not started |
 | 7     | Ongoing maintenance and handoff                       | Not started |
 
@@ -462,7 +462,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - **Sitemap:** all 29 pages, with absolute URLs under the current base URL, `lastmod` from Git, and the draft style test left out.
 - **Guard:** `scripts/check-meta.py`, in `make check` and run again in CI on the build that is deployed. It checks each sitemap page's tags, that the sharing image exists, `robots.txt`, and that `noindex` is present on a non-production build and absent on a production one. It also fails when the host is `www.` plus `productionHost`, which would mean the live site ships with `noindex`. Each check was shown to fail on a planted problem.
 - **Still to do by hand** after the next deploy: paste a staging URL into a share-preview tool (the Facebook Sharing Debugger or LinkedIn Post Inspector) to see the card, and add the site to an iPhone home screen to see the icon.
-- **Not done:** JSON-LD structured data (an `EducationalOrganization` with the address and phone). Moved to 5.5.
+- **Not done in 5.3:** JSON-LD structured data (an `EducationalOrganization` with the address and phone). Done in 5.5.
 
 ### 5.4 404 page and URL preservation
 
@@ -492,6 +492,13 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Consider JSON-LD structured data for the conservatory (`EducationalOrganization`, with the name, address, and phone from `params.contact`), which can help in local search results. Left out of 5.3 to keep it small.
 - Defer or skip this part unless time allows or a measurement shows a real problem.
 
+**Done** (2026-11-02): JSON-LD added; the rest skipped.
+
+- **JSON-LD** (`layouts/_partials/json_ld.html`), on the homepage only: an `EducationalOrganization` with the site's name, URL, and description, the logo (the Apple touch icon), the phone, email, and postal address from `params.contact`, and Saint Andrew’s Chapel as its parent organization. It has no data of its own. `cityStZip` is split into city, state, and ZIP code, and the build fails if it isn't in the form "City, State 12345". `scripts/check-meta.py` checks that the homepage has exactly one block that parses, with the name, its own URL, an address, and a logo in `public/`, and that no other page has one. Each check was shown to fail on a planted problem.
+- **Skipped** (decided 2026-11-02), because nothing shows a need:
+  - Scroll-driven animations and View Transitions: the site has no motion problem to solve, and each would need its own reduced-motion and browser-support work.
+  - Asset optimisation: images are already resized WebP with `srcset`, the fonts are self-hosted WOFF2 with the body font preloaded, and CSS and JS are minified and fingerprinted. No measurement has shown a slow page. Revisit if one does.
+
 ### Close-out
 
 - Check the acceptance criteria below, record any remaining limitations, and set the phase to Done.
@@ -503,6 +510,19 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Core pages have appropriate metadata and social-sharing previews.
 - Keyboard navigation and responsive behavior have been tested.
 - Motion effects do not prevent users from accessing content.
+
+**Close-out** (2026-11-02):
+
+- **Build and link checks:** met. `make check` (strict build, Prettier, lychee, html-validate, the metadata check, and axe at 1280px and 375px) passes, and CI runs it before every deploy (5.1). The redirects and the 404 page passed `make check-redirects` on staging (5.4).
+- **Metadata and sharing previews:** met for the markup. Every page has a description, canonical link, and Open Graph tags with an existing image, checked on every build by `scripts/check-meta.py` (5.3). The homepage has JSON-LD (5.5).
+- **Keyboard and responsive behaviour:** met. Tested automatically and by hand in 5.2.
+- **Motion:** met. Transitions are off under `prefers-reduced-motion`; checked in 5.2.
+- **Remaining limitations:**
+  - How a shared link's card looks in a sharing service (the Facebook Sharing Debugger or LinkedIn Post Inspector), and the icon on an iPhone home screen, have not been checked by hand yet (5.3). The tags behind them are checked on every build.
+  - Old URLs answer 200 and redirect with a meta refresh, not a 301, because GitHub Pages can't send server redirects (5.4).
+  - The redirect map comes from the 2026-10-26 inventory, because the old site couldn't be reached from the work environment. Phase 6 compares it with the old site again.
+  - The page titles over photos reach about 4.0:1 contrast at worst, which passes only as large text (5.2, staff decision).
+- **Next:** human review before Phase 6 (launch readiness and domain cutover).
 
 ## 6. Launch readiness and domain cutover
 

@@ -1,0 +1,43 @@
+{{/* Note:
+
+  Structured data (JSON-LD) describing the Conservatory, on the homepage
+  only: its name, address, phone, email, logo, and its parent, Saint
+  Andrew's Chapel. Search engines can use it for the organization's details
+  in local results. Called from baseof.html with the page as its context.
+
+  Everything comes from hugo.toml (site.Title, params.contact) and the
+  homepage's description, so it has no copy of its own. The address's
+  cityStZip is split into city, state, and ZIP code, and the build fails if
+  it isn't in the form "City, State 12345". scripts/check-meta.py checks the
+  output.
+*/}}
+{{- if .IsHome }}
+  {{- $c := site.Params.contact }}
+  {{- $parts := findRESubmatch `^(.+), (.+) (\d{5})$` $c.cityStZip 1 }}
+  {{- if not $parts }}
+    {{- errorf "json_ld.html: params.contact.cityStZip %q is not in the form \"City, State 12345\"" $c.cityStZip }}
+  {{- end }}
+  {{- $parts = index $parts 0 }}
+  {{- $data := dict
+    "@context" "https://schema.org"
+    "@type" "EducationalOrganization"
+    "name" site.Title
+    "url" site.Home.Permalink
+    "description" site.Home.Description
+    "logo" ("images/apple-touch-icon.png" | absURL)
+    "telephone" $c.phoneHref
+    "email" $c.email
+    "address" (dict
+    "@type" "PostalAddress"
+    "streetAddress" $c.address
+    "addressLocality" (index $parts 1)
+    "addressRegion" (index $parts 2)
+    "postalCode" (index $parts 3)
+    "addressCountry" "US"
+    )
+    "parentOrganization" (dict "@type" "Church" "name" "Saint Andrew’s Chapel")
+  }}
+  <script type="application/ld+json">
+    {{ $data | jsonify | safeJS }}
+  </script>
+{{- end }}

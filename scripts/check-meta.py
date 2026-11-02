@@ -14,10 +14,14 @@ listed there, checks the tags that layouts/_partials/head_meta.html writes:
   that is a subdomain of productionHost (www) fails, because it means the
   two disagree.
 
-robots.txt must name the sitemap. Uses only the Python standard library.
+The homepage, and no other page, must have one JSON-LD block that parses,
+with the organization's name, its own URL, an address, and a logo in
+public/. robots.txt must name the sitemap. Uses only the Python standard
+library.
 Exits 1 with one line per problem.
 """
 
+import json
 import re
 import sys
 import tomllib
@@ -44,10 +48,24 @@ class HeadTags(HTMLParser):
     def __init__(self):
         super().__init__()
         self.tags = []
+        self.json_ld = []  # the text of each JSON-LD script
+        self._in_json_ld = False
 
     def handle_starttag(self, tag, attrs):
+        attrs = {k: v or "" for k, v in attrs}
         if tag in ("meta", "link"):
-            self.tags.append((tag, {k: v or "" for k, v in attrs}))
+            self.tags.append((tag, attrs))
+        if tag == "script" and attrs.get("type") == "application/ld+json":
+            self._in_json_ld = True
+            self.json_ld.append("")
+
+    def handle_endtag(self, tag):
+        if tag == "script":
+            self._in_json_ld = False
+
+    def handle_data(self, data):
+        if self._in_json_ld:
+            self.json_ld[-1] += data
 
 
 def find(tags, tag, key, value):
@@ -57,6 +75,34 @@ def find(tags, tag, key, value):
         if t == tag and value in attrs.get(key, "").split():
             out.append(attrs.get("href" if tag == "link" else "content", ""))
     return out
+
+
+def check_json_ld(where, blocks, base, local_path):
+    """Checks the homepage's JSON-LD block; returns a list of problems."""
+    if len(blocks) != 1:
+        return [f"{where}: {len(blocks)} JSON-LD blocks, expected 1"]
+    try:
+        data = json.loads(blocks[0])
+    except json.JSONDecodeError as e:
+        return [f"{where}: JSON-LD doesn't parse: {e}"]
+    if not isinstance(data, dict):
+        return [f"{where}: JSON-LD is not a JSON object"]
+    problems = []
+    for key in ("@context", "@type", "name", "url", "logo", "address"):
+        if not data.get(key):
+            problems.append(f"{where}: JSON-LD has no {key}")
+    if data.get("url") and data["url"] != base:
+        problems.append(f"{where}: JSON-LD url is {data['url']}, expected {base}")
+    address = data.get("address") or {}
+    for key in ("streetAddress", "addressLocality", "addressRegion", "postalCode"):
+        if not address.get(key):
+            problems.append(f"{where}: JSON-LD address has no {key}")
+    logo = data.get("logo")
+    if logo:
+        file = local_path(logo)
+        if file is None or not file.is_file():
+            problems.append(f"{where}: JSON-LD logo {logo} is not in public/")
+    return problems
 
 
 def main():
@@ -124,6 +170,11 @@ def main():
             file = local_path(image)
             if file is None or not file.is_file():
                 problems.append(f"{where}: og:image {image} is not in public/")
+
+        if url == base:
+            problems += check_json_ld(where, parser.json_ld, base, local_path)
+        elif parser.json_ld:
+            problems.append(f"{where}: JSON-LD is only for the homepage")
 
         noindex = any(
             "noindex" in re.split(r"[\s,]+", c)
