@@ -12,6 +12,7 @@
     {{- end }}
     <title>{{ $title }}</title>
     {{- partial "head_meta.html" . }}
+    {{- partial "json_ld.html" . }}
     {{- with site.Params.commit }}
       <meta name="build-commit" content="{{ . }}" />
     {{- end }}

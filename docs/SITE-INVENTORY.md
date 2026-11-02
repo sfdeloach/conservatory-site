@@ -64,7 +64,7 @@ Each old URL is kept working by an `aliases` entry in the new page's front matte
 | `/tammy-davis/`                                                                    | `/faculty/davis_tammy/`          | `content/faculty/davis_tammy/index.md`          |
 | `/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf` | `/handbook/`                     | `content/handbook/index.md`                     |
 
-- **The handbook PDF:** Hugo writes this alias as a folder named `…handbook.pdf/` holding an `index.html`. A request for the PDF's address, which has no trailing slash, works only if GitHub Pages redirects it to that folder, as it does for other folders. Not yet verified: run `make check-redirects` on staging after the deploy. If it fails, the old PDF link gets the "Page not found" page, which links to the handbook.
+- **The handbook PDF:** Hugo writes this alias as a folder named `…handbook.pdf/` holding an `index.html`. A request for the PDF's address, which has no trailing slash, works because GitHub Pages redirects it to that folder, as it does for other folders. `make check-redirects` confirmed this on staging on 2026-11-02.
 - **Not redirected:** WordPress's own addresses, such as `/feed/`, `/wp-login.php`, and `/?page_id=…` links (a query string loads the homepage). Any other missing path gets the "Page not found" page.
 - **Re-check before cutover:** the old site couldn't be reached from the Phase 5.4 work environment, so this map is from the 2026-10-26 snapshot. Compare it with the old site's sitemap again in Phase 6.
 

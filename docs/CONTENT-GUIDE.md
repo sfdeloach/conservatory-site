@@ -203,7 +203,7 @@ The Registration and Payment pages show the same fees, lesson rates, and refund 
 
 ## Contact details
 
-The address, phone number, and email in the footer, on the Contact page, and in the handbook come from `[params.contact]` in `hugo.toml`. The map link is built from the address.
+The address, phone number, and email in the footer, on the Contact page, and in the handbook come from `[params.contact]` in `hugo.toml`. The map link is built from the address. They also fill the details search engines read on the homepage (structured data), so keep `cityStZip` in the form `City, State 12345`; the build fails otherwise.
 
 ## Registration and payment links
 
