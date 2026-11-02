@@ -17,16 +17,17 @@ The Hugo, Dart Sass, and lychee versions are pinned in the `env` block of `.gith
 
 ## Commands
 
-| Command                   | Purpose                                                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `hugo server`             | Local development server with live reload, at `http://localhost:1313/`.                                                                    |
-| `make build`              | Strict production build into `public/`. Any Hugo warning fails it.                                                                         |
-| `make check`              | `make build`, then Prettier, lychee (internal links and anchors), html-validate, the metadata check, and axe on every page in the sitemap. |
-| `make check-a11y`         | The axe check alone, at 1280px and 375px, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.                 |
-| `make check-destinations` | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI.    |
-| `make clean`              | Delete `public/` and `resources/`.                                                                                                         |
-| `npm install`             | Install Prettier and its plugin.                                                                                                           |
-| `npx prettier --check .`  | Check formatting. Use `--write` to fix it.                                                                                                 |
+| Command                           | Purpose                                                                                                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `hugo server`                     | Local development server with live reload, at `http://localhost:1313/`.                                                                                      |
+| `make build`                      | Strict production build into `public/`. Any Hugo warning fails it.                                                                                           |
+| `make check`                      | `make build`, then Prettier, lychee (internal links and anchors), html-validate, the metadata check, and axe on every page in the sitemap.                   |
+| `make check-a11y`                 | The axe check alone, at 1280px and 375px, against the current `public/` (`scripts/check-a11y.sh`). Run `make build` first.                                   |
+| `make check-destinations`         | Online check of the six forms in `data/destinations.yaml` (`scripts/check-destinations.sh`). On demand only; not in `make check` or CI.                      |
+| `make check-redirects BASE=<url>` | Online check of the old WordPress URLs (aliases) and the 404 page on a deployed copy (`scripts/check-redirects.sh`). Run `make build` first. On demand only. |
+| `make clean`                      | Delete `public/` and `resources/`.                                                                                                                           |
+| `npm install`                     | Install Prettier and its plugin.                                                                                                                             |
+| `npx prettier --check .`          | Check formatting. Use `--write` to fix it.                                                                                                                   |
 
 Run `make check` before every commit. CI runs the same command on every push and pull request. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md#build-and-validation) for what it covers.
 
@@ -34,7 +35,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 
 - `hugo.toml` holds the site config: `baseURL`, the title, `enableGitInfo` (page dates come from Git; CI checks out full history with `fetch-depth: 0`), contact details under `params.contact`, `params.productionHost` (the live domain's host; every other host gets `noindex`), `enableRobotsTXT`, the `studios` taxonomy (`studio = "studios"`), and Markdown settings: Goldmark block attributes are on (for `{.full-bleed}`), a standalone image is not wrapped in a paragraph (`wrapStandAloneImageWithinParagraph = false`, so the image hook can render a figure), code-fence highlighting is off, and the table of contents covers `h2`–`h3`.
 - `data/destinations.yaml` is the single source for every external form: Wufoo registration (`semesterRegistration`, `summerCamp`, `summerAcademy`) and Breeze ChMS payment (`fullPayment`, `installmentPayment`, `donation`). Each entry has `open`, `label`, `url`, and an optional `closedText`. Never write these URLs into pages or templates; use the `destination_button` shortcode or partial.
-- **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them. A front matter `description` is the page's meta description; pages without one (faculty bios, studio pages) use their summary.
+- **Content** uses page bundles with YAML front matter. Images sit in the same folder as the page that uses them. A front matter `description` is the page's meta description; pages without one (faculty bios, studio pages) use their summary. Front matter `aliases` lists the old WordPress URLs that redirect to the page; keep them, and add a page's old path when renaming or moving it.
   - `content/_index.md` drives the homepage. Every homepage section is defined in front matter `params` (hero, story, studyAreas, welcome, faculty, summerAcademy, ready). `faculty.featured` lists the faculty page paths shown as homepage cards, in order; a path with no page fails the build. The Markdown body is the Dean's letter, inside a `quote` shortcode that signs it.
   - `content/faculty/<last>_<first>/index.md` holds one faculty bio. It uses `layout: page_faculty_bio`, a `headshot.*` image, a `studios:` list of taxonomy terms, and an optional `params.postNominal`. Faculty lists sort by folder name (last name) through `_partials/faculty_sort.html`, not by `weight`.
   - `content/studios/<term>/_index.md` holds the content for each `studios` taxonomy term page, with an `instrument.jpg` image and an optional `params.requirements` list. Faculty pages are tagged with these terms.
@@ -45,6 +46,8 @@ Run `make check` before every commit. CI runs the same command on every push and
 - **Layouts** (`layouts/`):
   - `baseof.html` is the shell: search and sharing metadata (`head_meta.html`), icons and `theme-color`, Sass pipeline, fingerprinted CSS and JS, font preload, and a "Skip to content" link (styled in `_base.scss`) to `<main id="main">`. `_base.scss` sets `scroll-padding-top` so section links land below the sticky header.
   - `home.html` is the homepage. The Summer Academy and "Ready" sections are full-width `.band`s; the Summer Academy band's photo is the `/summer-academy` page's `params.image`.
+  - `404.html` is the "Page not found" page (`public/404.html`, served by GitHub Pages for any missing path). It sets its own heading, because Hugo's title for it is "404 Page not found" (`baseof.html` sets the `<title>`). `head_meta.html` gives it only `noindex`. It isn't in the sitemap, so `.pa11yci.js` adds it to the axe check.
+  - `alias.html` is the redirect page Hugo writes at each old URL in a page's front matter `aliases` (the redirect map in `docs/SITE-INVENTORY.md`): a meta refresh, a canonical link, `noindex`, and a visible link. Hugo's built-in one has no `<body>` and fails html-validate.
   - `page.html` and `section.html` are generic. `section.html` renders a card list of child pages.
   - `page_faculty_bio.html` is the faculty bio layout: the parent section's name as an eyebrow, then the headshot beside the name and instruments from `md` up (stacked below), styled in `_faculty.scss`.
   - `handbook.html` is the handbook layout: a contents menu built from `.TableOfContents` (a `<details>` block on narrow screens, a sticky sidebar from `lg` up), and a "Last updated" date: the newest `.Lastmod` among the handbook, Schedule, faculty, and studio pages.
@@ -85,6 +88,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 - Write YAML front matter in content files. Note that `archetypes/default.md` still produces TOML.
 - Format with Prettier before committing. Templates use the go-template parser (see `.prettierrc`). `.prettierignore` excludes `.claude/`.
 - The go-template plugin can change a template's output. It rewraps elements onto several lines, which adds whitespace to text such as a `<title>`, and it drops a space written just before `{{ . }}` in an attribute. Keep such expressions short, or put the space inside the expression (`printf " %s"`). After formatting a template, compare the built `public/` with the previous build.
+- The plugin also moves a comment's closing `-}}` onto its own line. That is valid only at the start of a line: an indented `*/` followed by an indented `-}}` fails to parse ("comment ends before closing delimiter"). A header comment inside `{{ define }}` uses `{{/* Note: … */}}`, without trim markers, which the plugin leaves alone.
 - Make small, focused changes. After each one, run `make check`.
 
 ## Deployment
@@ -102,7 +106,7 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - External links are not checked automatically, except the six forms in `data/destinations.yaml`, which `make check-destinations` checks on demand.
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
 - The handbook at `/handbook/` is linked only from the Registration page, not from the menus or the footer (staff decision).
-- Faculty and summer URLs differ from the old site's, so redirects are needed at cutover (roadmap Phase 6).
+- Old URLs redirect with a meta refresh (Hugo `aliases`), because GitHub Pages can't send server redirects: the old URL answers 200, not 301. The handbook PDF's old URL depends on GitHub Pages adding a trailing slash, which `make check-redirects` checks on a deployed copy.
 
 ## Documentation
 

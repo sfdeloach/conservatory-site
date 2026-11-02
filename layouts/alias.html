@@ -1,0 +1,28 @@
+{{- /* Note:
+
+  The page Hugo writes at each old URL listed in a page's front matter
+  `aliases` (the redirect map from the old WordPress site, in
+  docs/SITE-INVENTORY.md). GitHub Pages can't send server redirects, so this
+  page redirects at once with a meta refresh, which search engines treat as
+  a permanent redirect. It names the new page as canonical, is noindex, and
+  has a link for a browser that doesn't follow the refresh. Replaces Hugo's
+  built-in alias page, which has no <body> and fails html-validate.
+  */
+-}}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    {{- $title := cond .Page.IsHome site.Title .Page.Title }}
+    <title>{{ printf "Moved: %s" $title }}</title>
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="0; url={{ .Permalink }}" />
+  </head>
+  <body>
+    <p>
+      This page has moved to
+      <a href="{{ .Page.RelPermalink }}">{{ $title }}</a>.
+    </p>
+  </body>
+</html>

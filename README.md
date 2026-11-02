@@ -30,16 +30,17 @@ Open `http://localhost:1313/`. The page reloads when you save a change.
 
 ## Common tasks
 
-| Command                   | What it does                                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `hugo server`             | Runs the local preview server.                                                                                                  |
-| `make build`              | Builds the production site into `public/`. Any Hugo warning fails the build.                                                    |
-| `make check`              | Runs the strict build, then checks formatting, links, HTML, and accessibility. Run it before committing.                        |
-| `make check-a11y`         | Runs only the accessibility (axe) check, against the last build.                                                                |
-| `make check-destinations` | Checks the registration and payment forms online (needs `curl`). Run it before a registration period opens and after it closes. |
-| `make clean`              | Deletes the generated `public/` and `resources/` folders.                                                                       |
-| `make help`               | Lists the Make targets.                                                                                                         |
-| `npx prettier --check .`  | Checks formatting. Use `--write` to fix it.                                                                                     |
+| Command                           | What it does                                                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `hugo server`                     | Runs the local preview server.                                                                                                  |
+| `make build`                      | Builds the production site into `public/`. Any Hugo warning fails the build.                                                    |
+| `make check`                      | Runs the strict build, then checks formatting, links, HTML, metadata, and accessibility. Run it before committing.              |
+| `make check-a11y`                 | Runs only the accessibility (axe) check, against the last build.                                                                |
+| `make check-destinations`         | Checks the registration and payment forms online (needs `curl`). Run it before a registration period opens and after it closes. |
+| `make check-redirects BASE=<url>` | Checks the old WordPress addresses and the 404 page on the deployed site at `<url>` (needs `curl`; run `make build` first).     |
+| `make clean`                      | Deletes the generated `public/` and `resources/` folders.                                                                       |
+| `make help`                       | Lists the Make targets.                                                                                                         |
+| `npx prettier --check .`          | Checks formatting. Use `--write` to fix it.                                                                                     |
 
 ## Project structure
 

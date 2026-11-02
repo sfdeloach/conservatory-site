@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Runs axe, through pa11y-ci, on every page in the built site's sitemap,
-# at a desktop width (1280px) and a phone width (375px). Part of
-# `make check` and CI; run it alone with `make check-a11y` after
-# `make build`.
+# Runs axe, through pa11y-ci, on every page in the built site's sitemap
+# and on the 404 page, at a desktop width (1280px) and a phone width
+# (375px). Part of `make check` and CI; run it alone with
+# `make check-a11y` after `make build`.
 #
 # It serves public/ on 127.0.0.1 with python3 for the length of the check,
 # and swaps the sitemap URLs' scheme and host for that address, so it works
@@ -40,7 +40,7 @@ fi
 status=0
 for width in 1280 375; do
   echo "check-a11y: ${width}px wide"
-  A11Y_WIDTH="$width" npx --no-install pa11y-ci --config .pa11yci.js \
+  A11Y_WIDTH="$width" A11Y_BASE="$base" npx --no-install pa11y-ci --config .pa11yci.js \
     --sitemap "$base/sitemap.xml" \
     --sitemap-find '^https?://[^/]+' --sitemap-replace "$base"
   result=$?

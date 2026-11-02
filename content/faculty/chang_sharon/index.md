@@ -2,6 +2,9 @@
 title: Sharon Chang
 layout: "page_faculty_bio"
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/sharon-chang/"
 studios:
   - "violin"
   - "viola"

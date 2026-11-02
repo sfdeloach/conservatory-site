@@ -5,6 +5,9 @@ menus:
   main:
     weight: 60
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/payments/"
 params:
   image: "payment.jpg"
 ---

@@ -3,6 +3,9 @@ title: Student Handbook
 description: "The Conservatory’s policies for students and families: registration, tuition and fees, attendance, the academic calendar, faculty, and staff."
 layout: handbook
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/wp-content/uploads/2026/03/2026-Saint-Andrews-Conservatory-student-handbook.pdf"
 params:
   image: "handbook.jpg"
   # Fees and discounts, written into the text with the handbook_value

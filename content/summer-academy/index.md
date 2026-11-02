@@ -5,6 +5,9 @@ menus:
   main:
     weight: 50
 draft: false
+# Old URLs from the WordPress site, redirected here.
+aliases:
+  - "/summer-music/"
 params:
   image: "summer-academy.jpg"
 ---
