@@ -470,7 +470,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
 - Preserve existing URLs where possible. Choose a redirect mechanism (GitHub Pages has no server-side redirects, so Hugo `aliases` are the likely option) and record the decision.
 - Draft the redirect map from [SITE-INVENTORY.md](SITE-INVENTORY.md). Phase 6 finalizes it and verifies it on the live domain.
 
-**Done** (2026-11-01), except one check that needs the deployed site (below).
+**Done** (2026-11-01; checked on staging 2026-11-02).
 
 - **Redirect mechanism** (decided 2026-11-01): Hugo `aliases` in each new page's front matter. Hugo writes a page at each old path that redirects at once with a meta refresh, which search engines treat as a permanent redirect. A single data file with a custom template was considered and not used: it would duplicate what Hugo already does. The limitation: an old URL answers 200, not 301, because GitHub Pages can't send server redirects.
 - **Redirect map:** 16 old URLs, in [SITE-INVENTORY.md](SITE-INVENTORY.md#redirect-map): `/payments/`, `/summer-music/`, `/news/` (to the homepage), the 12 faculty bios, and the old handbook PDF (to `/handbook/`). The old site couldn't be reached from the work environment, so the map comes from the 2026-10-26 inventory. Phase 6 compares it with the old site again.
@@ -482,7 +482,7 @@ Work through the parts in order (agreed 2026-10-30). Each part is planned, appro
   - `make check` passes, with html-validate and lychee covering the 16 redirect pages and the 404 page.
   - The 404 page was checked by screenshot at 1280px and 375px.
   - `make check-redirects` passed against a local server that behaves like GitHub Pages (the `/conservatory-site/` subpath, a 301 that adds a folder's trailing slash, and `404.html` with status 404). It failed, as it should, when a redirect's new page was missing, when the PDF address got no trailing-slash redirect, and when the server had no custom 404 page.
-- **Still to do after the next deploy** (the staging site couldn't be reached from the work environment): run `make build`, then `make check-redirects BASE=https://sfdeloach.github.io/conservatory-site/`. It confirms the redirects and the 404 page on GitHub Pages, including whether the old PDF address reaches its redirect. If only the PDF fails, record it as a known limitation: that link gets the 404 page, which links to the handbook.
+- **Checked on staging** (2026-11-02, after PR #2 was deployed): `make check-redirects BASE=https://sfdeloach.github.io/conservatory-site/` passed, run by the maintainer because the work environment couldn't reach GitHub Pages. All 16 old URLs redirect, with and without the trailing slash, and a missing path gets the 404 page with status 404. That includes the old handbook PDF address: GitHub Pages adds the trailing slash, as it does for other folders. Phase 6 runs the same check on the live domain.
 
 ### 5.5 Optional refinements
 
