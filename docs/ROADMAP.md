@@ -204,11 +204,11 @@ Work through the groups in this order. Each group is one or more small commits.
    - **Studio requirements:**
      - Add `params.requirements` to each studio, as a list of zero or more requirements. They are shown on the studio's page and in the handbook.
      - A studio with no requirements shows nothing on its page, and "No additional requirements." in the handbook (decided 2026-10-27).
-     - Fill them from the 2026 handbook (organ, piano, violin, viola, cello, and voice). Staff supplied the harpsichord and trombone requirements on 2026-10-27.
+     - Fill them from the 2026 handbook (organ, piano, violin, viola, cello, and voice). Staff supplied the harpsichord and trombone requirements on 2026-10-27. The harpsichord studio was removed on 2026-11-05 (see [Open decisions](#open-decisions)).
    - **Student handbook:** see [Student handbook](#student-handbook) below.
    - **Done:**
      - Contact and Schedule are migrated. The `goo.gl` map link still worked, but it is replaced by a Maps search built from `params.contact`, shared with the footer.
-     - All eight studio pages list requirements. The handbook's "No additional requirements." text stays in place for any studio added later without them.
+     - All seven studio pages list requirements. The handbook's "No additional requirements." text stays in place for any studio added later without them.
      - The handbook is published at `/handbook/`, with every source in the table below.
      - `make check` now runs lychee with `--index-files index.html`, so fragments on directory links (such as `/handbook/#academic-calendar`) are checked.
      - The fee amounts in the handbook are now written consistently (`$15`, not `$15.00`).
@@ -572,21 +572,22 @@ This phase begins only after hosting, content, and validation are ready.
 
 Record each decision here, with its rationale, once it is made.
 
-| Decision                                                 | Phase | Status | Outcome                                                                                                                                                          |
-| -------------------------------------------------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                                                                                                 |
-| Replacement for the old site's WordPress contact form    | 3     | Done   | None: an email link and phone number are enough (staff, 2026-10-27)                                                                                              |
-| Hosting the student handbook PDF                         | 3     | Done   | Replaced by a web page at `/handbook/`, not a PDF (staff, 2026-10-27)                                                                                            |
-| Faculty list order (first name or last name)             | 3     | Done   | Last name; a compound last name sorts by its first word (staff, 2026-10-27)                                                                                      |
-| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                  |
-| Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                               |
-| Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7 |
-| HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                     |
-| Indexing of the staging site before cutover              | 5.3   | Done   | `noindex` on any host other than the live domain; canonical and sharing URLs point to the page's own URL; `robots.txt` allows all (2026-11-01)                   |
-| Redirect mechanism for old URLs                          | 5.4   | Done   | Hugo `aliases` in front matter, rendered by `layouts/alias.html` (meta refresh); map in SITE-INVENTORY (2026-11-01)                                              |
-| Contact email address                                    | 3, 6  | Done   | Sharon Chang's work address, `schang@sachapel.com`. `mconservatory@sachapel.com` is discontinued when the old site is taken offline (2026-11-05)                 |
-| GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |
-| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                  |
+| Decision                                                 | Phase | Status | Outcome                                                                                                                                                                             |
+| -------------------------------------------------------- | ----- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Experimental `Dockerfile`                                | 0     | Done   | Removed; not part of the project                                                                                                                                                    |
+| Replacement for the old site's WordPress contact form    | 3     | Done   | None: an email link and phone number are enough (staff, 2026-10-27)                                                                                                                 |
+| Hosting the student handbook PDF                         | 3     | Done   | Replaced by a web page at `/handbook/`, not a PDF (staff, 2026-10-27)                                                                                                               |
+| Faculty list order (first name or last name)             | 3     | Done   | Last name; a compound last name sorts by its first word (staff, 2026-10-27)                                                                                                         |
+| Hosting platform (GitHub Pages or Cloudflare Pages)      | 1     | Done   | GitHub Pages: no new account, free for a public repo, DNS stays at GoDaddy; previews not needed                                                                                     |
+| Internal link-check tool                                 | 1     | Done   | lychee, offline mode: maintained, packaged for Arch, official GitHub Action for CI                                                                                                  |
+| Owners of content, registration links, and maintenance   | 4, 7  | Open   | By role in CONTENT-GUIDE (Phase 4.3): Conservatory Office (registration forms), Director of Accounting (payment forms), site maintainer (site). Names in Phase 7                    |
+| HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                                        |
+| Indexing of the staging site before cutover              | 5.3   | Done   | `noindex` on any host other than the live domain; canonical and sharing URLs point to the page's own URL; `robots.txt` allows all (2026-11-01)                                      |
+| Redirect mechanism for old URLs                          | 5.4   | Done   | Hugo `aliases` in front matter, rendered by `layouts/alias.html` (meta refresh); map in SITE-INVENTORY (2026-11-01)                                                                 |
+| Contact email address                                    | 3, 6  | Done   | Sharon Chang's work address, `schang@sachapel.com`. `mconservatory@sachapel.com` is discontinued when the old site is taken offline (2026-11-05)                                    |
+| Harpsichord studio                                       | 3     | Done   | Removed: no longer offered (staff, 2026-11-05). Terry Yount's bio still says "organ, piano, and harpsichord" and is left as written for now, though the only studio listed is organ |
+| GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                                     |
+| Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                                     |
 
 ## Execution protocol
 

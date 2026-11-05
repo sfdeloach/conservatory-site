@@ -39,7 +39,7 @@ Migration status values:
 | `/sharon-chang/`         | Sharon Chang         | `/faculty/chang_sharon/`         | Migrated | Yes      |                                                                                                                                  |
 | `/tammy-davis/`          | Tammy Davis          | `/faculty/davis_tammy/`          | Migrated | Yes      |                                                                                                                                  |
 
-Pages that are new in this project and have no old equivalent: `/studios/` and its eight studio pages.
+Pages that are new in this project and have no old equivalent: `/studios/` and its seven studio pages.
 
 ## Redirect map
 
@@ -115,5 +115,5 @@ This is the work list for Phase 3 content migration and Phase 4 registration and
   - The "faculty are Christians, active in local churches" paragraph.
   - The note that some faculty require an audition and that there is no age restriction.
   - Already migrated: the Dean's letter and the story text, in `content/_index.md`.
-- **Studios:** the old homepage lists bass and does not list viola or trombone. Staff confirmed that this project's list is correct and bass is not taught.
+- **Studios:** the old homepage lists bass and does not list viola or trombone. Staff confirmed that this project's list is correct and bass is not taught. Harpsichord was removed from the list on 2026-11-05, because it is no longer offered.
 - **Footer:** links to "Registration, Tuition & Payment", "Semester Schedule", and the student handbook. Staff decided the new footer does not link to the handbook.
