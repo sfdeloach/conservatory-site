@@ -241,21 +241,21 @@ The handbook replaces the 2026 PDF that is hosted on the old site. It is designe
   - The date should also reflect changes to the content the handbook draws on, not only to the handbook's own file.
 - **Sources for each section:**
 
-  | Section                                            | Source                                                                                                                                          |
-  | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-  | Academic calendar                                  | The Schedule page's front matter.                                                                                                               |
-  | Faculty                                            | The faculty pages: name, `postNominal`, and studios, each linked to the bio, in last-name order.                                                |
-  | Instruments offered and their requirements         | The studio pages and their `params.requirements`.                                                                                               |
-  | Tuition, fees, and refund schedule                 | The handbook's own front matter, as structured data. The Registration page reuses it in Phase 4.2.                                              |
-  | Contact details                                    | `params.contact` in `hugo.toml`. Use the general address `mconservatory@sachapel.com` everywhere. The closing line may still name Sharon Chang. |
-  | Staff (Dean, administrative assistant, accounting) | The handbook only. These rarely change.                                                                                                         |
-  | Summer study                                       | A one-paragraph summary in the handbook, linking to the Summer Academy page for details.                                                        |
-  | Mission, registration, policies                    | The handbook's Markdown body.                                                                                                                   |
+  | Section                                            | Source                                                                                                                                                |
+  | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Academic calendar                                  | The Schedule page's front matter.                                                                                                                     |
+  | Faculty                                            | The faculty pages: name, `postNominal`, and studios, each linked to the bio, in last-name order.                                                      |
+  | Instruments offered and their requirements         | The studio pages and their `params.requirements`.                                                                                                     |
+  | Tuition, fees, and refund schedule                 | The handbook's own front matter, as structured data. The Registration page reuses it in Phase 4.2.                                                    |
+  | Contact details                                    | `params.contact` in `hugo.toml`. Use Sharon Chang's work address, `schang@sachapel.com`, everywhere (decided 2026-11-05). The closing line names her. |
+  | Staff (Dean, administrative assistant, accounting) | The handbook only. These rarely change.                                                                                                               |
+  | Summer study                                       | A one-paragraph summary in the handbook, linking to the Summer Academy page for details.                                                              |
+  | Mission, registration, policies                    | The handbook's Markdown body.                                                                                                                         |
 
 - **Corrections to the 2026 PDF**, approved by staff on 2026-10-28:
   - Bass is removed, because it is not taught.
   - The faculty list comes from the site. It adds Tammy Davis, replaces Olga Kolpakova (no longer on faculty) with Olga Ferroni, and uses full names: Angelyn Traylor Chen and Nathan Petersen.
-  - The contact email is the general address instead of `schang@sachapel.com`.
+  - The contact email is the general address, `mconservatory@sachapel.com`, instead of `schang@sachapel.com`. Reversed on 2026-11-05: the site now uses `schang@sachapel.com` (see [Open decisions](#open-decisions)).
   - Page references such as "see page 10" become links to sections.
   - The broken "Error! Bookmark not defined" entry in the table of contents is gone.
 
@@ -538,6 +538,7 @@ This phase begins only after hosting, content, and validation are ready.
 - Prepare the DNS changes and verify HTTPS configuration.
 - Obtain explicit approval before changing the production domain.
 - Validate the live domain after cutover.
+- Discontinue the old contact address, `mconservatory@sachapel.com`, when the old site is taken offline.
 - Document the rollback procedure and recovery decision points.
 
 ### Acceptance criteria
@@ -583,6 +584,7 @@ Record each decision here, with its rationale, once it is made.
 | HTML validation and accessibility check tools            | 5.1   | Done   | html-validate (`standard` + `a11y`) and axe through pa11y-ci, both in `make check` and CI; Node 24 for pa11y-ci (2026-10-30)                                     |
 | Indexing of the staging site before cutover              | 5.3   | Done   | `noindex` on any host other than the live domain; canonical and sharing URLs point to the page's own URL; `robots.txt` allows all (2026-11-01)                   |
 | Redirect mechanism for old URLs                          | 5.4   | Done   | Hugo `aliases` in front matter, rendered by `layouts/alias.html` (meta refresh); map in SITE-INVENTORY (2026-11-01)                                              |
+| Contact email address                                    | 3, 6  | Done   | Sharon Chang's work address, `schang@sachapel.com`. `mconservatory@sachapel.com` is discontinued when the old site is taken offline (2026-11-05)                 |
 | GitHub-based editing or a CMS                            | 7     | Open   |                                                                                                                                                                  |
 | Analytics, webmaster verification, and uptime monitoring | 7     | Open   |                                                                                                                                                                  |
 
