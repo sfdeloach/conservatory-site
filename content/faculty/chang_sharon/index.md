@@ -7,7 +7,6 @@ aliases:
   - "/sharon-chang/"
 studios:
   - "violin"
-  - "viola"
 params:
   postNominal: "MM"
 ---

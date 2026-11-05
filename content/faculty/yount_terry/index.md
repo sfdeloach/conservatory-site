@@ -7,7 +7,6 @@ aliases:
   - "/dr-terry-yount/"
 studios:
   - "organ"
-  - "harpsichord"
 params:
   postNominal: "DMA"
 ---
