@@ -16,7 +16,7 @@ productionHost = "saintandrewsconservatory.org"
   cityStZip = "Sanford, Florida 32771"
   phoneHref = "+14073281139"
   phoneFormat = "(407) 328-1139"
-  email = "mconservatory@sachapel.com"
+  email = "schang@sachapel.com"
 
 [module]
   [module.hugoVersion]
