@@ -6,7 +6,7 @@ How the site is built, hosted, published, and recovered. Most of this guide is c
 
 - **Production domain:** `saintandrewsconservatory.org`.
 - **Current production site:** WordPress, served through Cloudflare. It stays live until the replacement is verified (roadmap Phase 6).
-- **DNS provider:** GoDaddy. The domain's nameservers are `ns75.domaincontrol.com` and `ns76.domaincontrol.com` (checked 2026-11-10), so the cutover's records are changed at GoDaddy. Cloudflare sits only in front of the old WordPress site's web traffic, not the domain's DNS, so nothing needs changing at Cloudflare.
+- **DNS provider:** GoDaddy. The domain's nameservers are `ns75.domaincontrol.com` and `ns76.domaincontrol.com` (checked 2026-11-10), so the cutover's records are changed at GoDaddy. The apex `A` record points to `160.153.0.175`, a GoDaddy address, not a Cloudflare one, so nothing needs changing at Cloudflare. See [Records before cutover](#records-before-cutover).
 - **Production build:** `make build`, which runs `hugo --minify` and writes the site to `public/`. It requires Hugo extended and Dart Sass (see [README.md](../README.md)).
 - **Approval:** changes to DNS, hosting settings, payment configuration, or secrets require explicit human approval.
 
@@ -212,3 +212,20 @@ Other checks done in Phase 1.3:
 ## DNS cutover
 
 _To be completed in Phase 6._ After cutover, run `make check-redirects BASE=https://saintandrewsconservatory.org/`, and confirm the live pages have no `noindex` tag (view the source of a few pages) and that `https://saintandrewsconservatory.org/robots.txt` names the sitemap, then submit the sitemap in Google Search Console if the church uses it. Record the current DNS records, including the non-web records that must be preserved (MX, SPF/DKIM/DMARC, and verification records), the planned changes, the redirect map (from [SITE-INVENTORY.md](SITE-INVENTORY.md)), the validation steps, and the rollback steps. When the old site is taken offline, discontinue its contact address, `mconservatory@sachapel.com`; the new site uses `schang@sachapel.com`.
+
+### Records before cutover
+
+Looked up with `dig` on 2026-11-10. This is the rollback reference for the web records. A GoDaddy zone-file export (**DNS → Manage zones → Export zone file**) is the complete copy, including records `dig` can't find (such as DKIM keys), and should be saved before any change.
+
+| Name     | Type  | Value                                                                          | At cutover                                         |
+| -------- | ----- | ------------------------------------------------------------------------------ | -------------------------------------------------- |
+| `@`      | `A`   | `160.153.0.175` (GoDaddy)                                                      | Replaced by GitHub Pages' four `A` records         |
+| `www`    | CNAME | `saintandrewsconservatory.org.`                                                | Pointed at the repository owner's `*.github.io`    |
+| `@`      | `MX`  | `0 smtp.secureserver.net.`, `10 mailstore1.secureserver.net.`                  | Unchanged                                          |
+| `@`      | `TXT` | `""`, `"ca3-62dc7c4ccfc04f95a47d23f713b1c48c"`, `"330qnts898mbodg2ii9ajb17ql"` | Unchanged (purpose unknown; treat as verification) |
+| `@`      | AAAA  | none                                                                           | Optionally add GitHub Pages' `AAAA` records        |
+| `@`      | CAA   | none                                                                           | None needed                                        |
+| `_dmarc` | `TXT` | none                                                                           | Unchanged                                          |
+
+- The domain has no SPF or DMARC record. That doesn't affect the cutover, and adding them is outside this project (it is the church's email setup), but without them anyone can send mail that claims to come from the domain.
+- If a CAA record is ever added, it must allow `letsencrypt.org`, which issues GitHub Pages' HTTPS certificates.

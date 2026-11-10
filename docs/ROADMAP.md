@@ -16,7 +16,7 @@ The production domain is `saintandrewsconservatory.org`. Do not change its DNS o
 | 3     | Content migration, typography, and Markdown rendering | Done        |
 | 4     | Registration and payment workflows                    | Done        |
 | 5     | Accessibility, quality assurance, and SEO             | Done        |
-| 6     | Launch readiness and domain cutover                   | Not started |
+| 6     | Launch readiness and domain cutover                   | In progress |
 | 7     | Ongoing maintenance and handoff                       | Not started |
 
 Status values: Not started, In progress, Done. Update this table when a phase changes state.
