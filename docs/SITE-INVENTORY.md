@@ -66,7 +66,7 @@ Each old URL is kept working by an `aliases` entry in the new page's front matte
 
 - **The handbook PDF:** Hugo writes this alias as a folder named `…handbook.pdf/` holding an `index.html`. A request for the PDF's address, which has no trailing slash, works because GitHub Pages redirects it to that folder, as it does for other folders. `make check-redirects` confirmed this on staging on 2026-11-02.
 - **Not redirected:** WordPress's own addresses, such as `/feed/`, `/wp-login.php`, and `/?page_id=…` links (a query string loads the homepage). Any other missing path gets the "Page not found" page.
-- **Re-check before cutover:** the old site couldn't be reached from the Phase 5.4 work environment, so this map is from the 2026-10-26 snapshot. Compare it with the old site's sitemap again in Phase 6.
+- **Re-checked on 2026-11-10** against the old site's sitemap (`/wp-sitemap-posts-page-1.xml`, 20 pages): 15 old paths are in the table above, and the other 5 (`/`, `/registration/`, `/schedule/`, `/faculty/`, `/contact/`) have the same path on the new site. Nothing is missing. If staff add a page to the old site before cutover, check the sitemap again.
 
 ## Files hosted on the old site
 
