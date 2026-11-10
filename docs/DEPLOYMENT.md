@@ -23,11 +23,11 @@ The site is hosted on **GitHub Pages** and deployed by GitHub Actions. The decis
 
 ### Accounts and ownership
 
-| Item                                              | Owner                   | Notes                                                                       |
-| ------------------------------------------------- | ----------------------- | --------------------------------------------------------------------------- |
-| Domain and DNS (GoDaddy)                          | The church              | A church staff member makes DNS changes.                                    |
-| Email for the domain                              | The church              | The MX records point to GoDaddy (`secureserver.net`). They must not change. |
-| GitHub repository (`sfdeloach/conservatory-site`) | Steven DeLoach, for now | To be transferred to a church-owned GitHub account (see below).             |
+| Item                                              | Owner          | Notes                                                                        |
+| ------------------------------------------------- | -------------- | ---------------------------------------------------------------------------- |
+| Domain and DNS (GoDaddy)                          | The church     | A church staff member makes DNS changes.                                     |
+| Email for the domain                              | The church     | The MX records point to GoDaddy (`secureserver.net`). They must not change.  |
+| GitHub repository (`sfdeloach/conservatory-site`) | Steven DeLoach | Stays under `sfdeloach` through the cutover (decided 2026-11-10; see below). |
 
 ### Plan limits
 
@@ -38,8 +38,8 @@ GitHub Pages allows a published site of up to 1 GB and has a soft limit of 100 G
 At cutover, the church's staff add these records at GoDaddy. Check them against [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) first, because the addresses could change.
 
 - `A` records for `saintandrewsconservatory.org`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
-- A `CNAME` record for `www` pointing to the GitHub Pages hostname of the account that owns the repository at the time.
-- A `TXT` record to verify the domain with GitHub. This prevents another GitHub user from claiming the domain for their own site.
+- A `CNAME` record for `www` pointing to `sfdeloach.github.io`, the GitHub Pages hostname of the account that owns the repository.
+- A `TXT` record named `_github-pages-challenge-sfdeloach` to verify the domain with GitHub. This prevents another GitHub user from claiming the domain for their own site.
 - Leave the existing MX and TXT records unchanged.
 - In **Settings → Pages**, enter the apex `saintandrewsconservatory.org` as the custom domain, not `www`. It must match `params.productionHost` in `hugo.toml`, or every page ships with `noindex`. The metadata check in the deploy job fails the run if the custom domain is `www.` while `productionHost` is the apex.
 
@@ -47,8 +47,10 @@ Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-s
 
 ### Moving the repository to the church's account
 
-- Create the church's GitHub account (or organization) before the Phase 6 cutover. That way, the domain is verified and the DNS records are set up only once, under the final owner.
-- After the transfer, enable Pages in the new repository, enter the custom domain again, and update the `www` CNAME if the Pages hostname changed.
+The repository stays under `sfdeloach` through the cutover (decided 2026-11-10). If it moves to a church-owned account later:
+
+- Verify the domain in the new account too (its own `_github-pages-challenge-<account>` `TXT` record) before the transfer.
+- After the transfer, enable Pages in the new repository, enter the custom domain again, and point the `www` CNAME at the new account's `<account>.github.io`.
 - GitHub redirects the old repository URL, but update local Git remotes and any documentation links anyway.
 
 ## Build and validation
@@ -211,7 +213,56 @@ Other checks done in Phase 1.3:
 
 ## DNS cutover
 
-_To be completed in Phase 6._ After cutover, run `make check-redirects BASE=https://saintandrewsconservatory.org/`, and confirm the live pages have no `noindex` tag (view the source of a few pages) and that `https://saintandrewsconservatory.org/robots.txt` names the sitemap, then submit the sitemap in Google Search Console if the church uses it. Record the current DNS records, including the non-web records that must be preserved (MX, SPF/DKIM/DMARC, and verification records), the planned changes, the redirect map (from [SITE-INVENTORY.md](SITE-INVENTORY.md)), the validation steps, and the rollback steps. When the old site is taken offline, discontinue its contact address, `mconservatory@sachapel.com`; the new site uses `schang@sachapel.com`.
+The runbook for moving `saintandrewsconservatory.org` from the old WordPress site to GitHub Pages. Church staff make the DNS changes at GoDaddy; the maintainer does the GitHub steps. Nothing here is done without explicit approval (roadmap Phase 6).
+
+Check the addresses below against [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) on the day, in case they have changed.
+
+### Before the day
+
+1. **Pick a quiet time.** Between the DNS change and GitHub issuing the HTTPS certificate (usually minutes, up to an hour), `https://saintandrewsconservatory.org` shows a certificate warning. Avoid the days around registration opening.
+2. **Save the zone file.** At GoDaddy: **DNS → Manage zones → the domain → Export zone file**. Keep it with the [records below](#records-before-cutover). This is the rollback copy.
+3. **Verify the domain with GitHub.** In `sfdeloach`'s account (not the repository): **Settings → Pages → Add a domain**, enter `saintandrewsconservatory.org`, add the `TXT` record GitHub shows (`_github-pages-challenge-sfdeloach`) at GoDaddy, and click **Verify**. It can stay in place for good.
+4. **Lower the TTL** on the apex `A` record and the `www` CNAME to the lowest GoDaddy allows (600 seconds), at least one old TTL before the cutover (`dig A saintandrewsconservatory.org` shows the current TTL in the second column). A rollback then takes effect within minutes.
+5. **Re-check the redirect map** against the old site's sitemap (`/wp-sitemap.xml`, or `/sitemap_index.xml` if a plugin writes it) and add an alias for any page missing from [SITE-INVENTORY.md](SITE-INVENTORY.md#redirect-map). Download anything in "Files hosted on the old site" that is still needed.
+6. **Check the site is ready:** the latest "Build and deploy" run on `main` is green, `make check-destinations` passes, and `make check-redirects BASE=https://sfdeloach.github.io/conservatory-site/` passes.
+7. **Leave the old hosting running.** Don't cancel the WordPress hosting until the new site is verified (below).
+
+### Cutover
+
+1. **At GoDaddy** (staff):
+   - Delete the apex `A` record `160.153.0.175`.
+   - Add four apex `A` records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
+   - Optionally add four apex `AAAA` records: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`.
+   - Change the `www` CNAME from `saintandrewsconservatory.org.` to `sfdeloach.github.io.`
+   - Leave the `MX` and every other `TXT` record alone.
+2. **In the repository** (maintainer): **Settings → Pages → Custom domain**, enter `saintandrewsconservatory.org` (the apex, not `www`; it must match `params.productionHost`) and save. GitHub checks the DNS and starts issuing the certificate. The staging address now redirects to the domain.
+3. **Rebuild for the domain:** **Actions → Build and deploy → Run workflow** on `main`. The deployed build still has the staging `baseURL` until this run finishes, so do it straight away. The run's metadata check fails if the build still has `noindex`.
+4. **Enforce HTTPS:** once **Settings → Pages** shows the certificate is ready, tick **Enforce HTTPS**.
+
+### Validation
+
+- `dig A saintandrewsconservatory.org +short` returns the four GitHub addresses, also from other resolvers (`dig @1.1.1.1 …`, `dig @8.8.8.8 …`).
+- `https://saintandrewsconservatory.org/` and `https://www.saintandrewsconservatory.org/` load the new site with a valid certificate, and `http://` and `www` redirect to `https://saintandrewsconservatory.org/`.
+- `curl -s https://saintandrewsconservatory.org/ | grep -o 'build-commit[^>]*'` shows the latest commit on `main`.
+- `make check-redirects BASE=https://saintandrewsconservatory.org/` passes.
+- A few pages' source has no `noindex` tag, and `https://saintandrewsconservatory.org/robots.txt` names the sitemap.
+- Click through the menu pages, a faculty bio, the handbook, and each open registration and payment button.
+- Send a test email to an address at the domain, if it has any, and confirm it arrives.
+- Then submit the sitemap in Google Search Console, if the church uses it.
+
+### Rollback
+
+Roll back if the site is broken on the domain and can't be fixed within about an hour, or if anything other than the website (such as email) is affected.
+
+1. At GoDaddy, restore the apex `A` record `160.153.0.175` (deleting the GitHub ones) and the `www` CNAME `saintandrewsconservatory.org.`, from the saved zone file. With the lowered TTL, most visitors see the old site within minutes.
+2. In **Settings → Pages**, remove the custom domain, and run the workflow on `main` again so staging is rebuilt for `https://sfdeloach.github.io/conservatory-site/`.
+3. Record what went wrong here before trying again.
+
+### After cutover
+
+- Raise the TTLs back to their old value (one hour, or what the zone file shows) after a few days without problems.
+- Retire the old WordPress hosting only after the validation above has passed. Discontinue its contact address, `mconservatory@sachapel.com`; the new site uses `schang@sachapel.com`.
+- Update this guide's examples that use the staging address (such as [Which commit is live?](#which-commit-is-live)) to the domain, and record the date and outcome in the roadmap.
 
 ### Records before cutover
 
