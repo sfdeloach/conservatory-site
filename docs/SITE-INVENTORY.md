@@ -2,7 +2,7 @@
 
 A snapshot of the current production site at `https://saintandrewsconservatory.org/`, taken on 2026-10-26. It records which pages, files, and external links this project must replace, migrate, or redirect.
 
-- **Platform:** WordPress, served through Cloudflare.
+- **Platform:** WordPress, served through Cloudflare. The domain's DNS is at GoDaddy, not Cloudflare (nameservers checked 2026-11-10; see [DEPLOYMENT.md](DEPLOYMENT.md#known-facts)).
 - **Source:** the WordPress sitemap (`/wp-sitemap-posts-page-1.xml`, 20 pages) plus each page's main and footer navigation.
 - **Uses:** content migration (roadmap Phase 3), registration and payment (Phase 4), and redirects (built in Phase 5.4, verified on the live domain in Phase 6).
 

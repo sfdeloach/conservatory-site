@@ -6,6 +6,7 @@ How the site is built, hosted, published, and recovered. Most of this guide is c
 
 - **Production domain:** `saintandrewsconservatory.org`.
 - **Current production site:** WordPress, served through Cloudflare. It stays live until the replacement is verified (roadmap Phase 6).
+- **DNS provider:** GoDaddy. The domain's nameservers are `ns75.domaincontrol.com` and `ns76.domaincontrol.com` (checked 2026-11-10), so the cutover's records are changed at GoDaddy. Cloudflare sits only in front of the old WordPress site's web traffic, not the domain's DNS, so nothing needs changing at Cloudflare.
 - **Production build:** `make build`, which runs `hugo --minify` and writes the site to `public/`. It requires Hugo extended and Dart Sass (see [README.md](../README.md)).
 - **Approval:** changes to DNS, hosting settings, payment configuration, or secrets require explicit human approval.
 
