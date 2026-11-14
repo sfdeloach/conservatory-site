@@ -541,6 +541,31 @@ This phase begins only after hosting, content, and validation are ready.
 - Discontinue the old contact address, `mconservatory@sachapel.com`, when the old site is taken offline.
 - Document the rollback procedure and recovery decision points.
 
+**Cutover done** (2026-11-14). Details, times, and the validation results are in the [Cutover log](DEPLOYMENT.md#cutover-log).
+
+- **Before the day:**
+  - The redirect map was re-checked against the old site's sitemap on 2026-11-10.
+  - The DNS records were recorded on 2026-11-10, and the full zone file was exported on 2026-11-14. A copy is in the church's Dropbox.
+  - The `www` TTL was lowered to 600 seconds.
+  - The domain was verified in `sfdeloach`'s GitHub account.
+  - The runbook and rollback procedure are in [DEPLOYMENT.md](DEPLOYMENT.md#dns-cutover).
+- **Cutover** (approved and carried out by the maintainer):
+  - At GoDaddy, the apex `A` record now points to GitHub Pages' four addresses, and `www` to `sfdeloach.github.io`. MX, TXT, and every other record are unchanged.
+  - The custom domain is set, and HTTPS is enforced with a Let's Encrypt certificate covering the apex and `www`.
+  - The runbook gained a step: run the workflow again after ticking **Enforce HTTPS**. Until then, GitHub reports the address as `http://`, so canonical links are built with `http://`.
+- **Validated on the live domain:**
+  - Every sitemap page returns 200 with no `noindex`, and `https://` canonical links.
+  - The `http://` and `www` addresses redirect to the apex over HTTPS.
+  - All 16 old URLs and the 404 page pass `make check-redirects`.
+  - The forms pass `make check-destinations`.
+- **Still to do before Phase 6 is done:**
+  - Click through the site by hand on a computer and a phone: the menu pages, a faculty bio, the handbook, and the Registration, Payment, and Donate buttons.
+  - Send a test email to an address at the domain, if it has any.
+  - Check the Apple touch icon on an iPhone (left over from 5.3).
+  - Submit the sitemap in Google Search Console, if the church uses it.
+  - Raise the TTLs back to 3600 after a few days without problems.
+  - Retire the old WordPress hosting, and discontinue `mconservatory@sachapel.com`. Then delete the old hosting's DNS records (listed in DEPLOYMENT.md).
+
 ### Acceptance criteria
 
 - The production site is reachable over HTTPS at the intended domain.
