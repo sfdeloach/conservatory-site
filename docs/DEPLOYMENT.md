@@ -5,8 +5,8 @@ How the site is built, hosted, published, and recovered. Most of this guide is c
 ## Known facts
 
 - **Production domain:** `saintandrewsconservatory.org`.
-- **Current production site:** WordPress, served through Cloudflare. It stays live until the replacement is verified (roadmap Phase 6).
-- **DNS provider:** GoDaddy. The domain's nameservers are `ns75.domaincontrol.com` and `ns76.domaincontrol.com` (checked 2026-11-10), so the cutover's records are changed at GoDaddy. The apex `A` record points to `160.153.0.175`, a GoDaddy address, not a Cloudflare one, so nothing needs changing at Cloudflare. See [Records before cutover](#records-before-cutover).
+- **Production site:** this Hugo site on GitHub Pages, live at `https://saintandrewsconservatory.org/` since the cutover on 2026-11-14 (see [Cutover log](#cutover-log)). The old WordPress site, hosted by GoDaddy at `160.153.0.175`, is no longer reached through the domain, but its hosting stays until it is retired (see [After cutover](#after-cutover)).
+- **DNS provider:** GoDaddy. The domain's nameservers are `ns75.domaincontrol.com` and `ns76.domaincontrol.com`, so DNS changes are made at GoDaddy. Nothing is managed at Cloudflare. See [Records before cutover](#records-before-cutover) for the old values.
 - **Production build:** `make build`, which runs `hugo --minify` and writes the site to `public/`. It requires Hugo extended and Dart Sass (see [README.md](../README.md)).
 - **Approval:** changes to DNS, hosting settings, payment configuration, or secrets require explicit human approval.
 
@@ -33,9 +33,9 @@ The site is hosted on **GitHub Pages** and deployed by GitHub Actions. The decis
 
 GitHub Pages allows a published site of up to 1 GB and has a soft limit of 100 GB of traffic a month. The built site is about 11 MB, so it is well within both.
 
-### DNS records (applied in Phase 6)
+### DNS records (applied 2026-11-14)
 
-At cutover, the church's staff add these records at GoDaddy. Check them against [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) first, because the addresses could change.
+These are the records the site needs at GoDaddy. They were applied at the cutover on 2026-11-14, without the optional `AAAA` records. If they ever need to be set again, check them against [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) first, because the addresses could change.
 
 - `A` records for `saintandrewsconservatory.org`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
 - A `CNAME` record for `www` pointing to `sfdeloach.github.io`, the GitHub Pages hostname of the account that owns the repository.
@@ -43,7 +43,7 @@ At cutover, the church's staff add these records at GoDaddy. Check them against 
 - Leave the existing MX and TXT records unchanged.
 - In **Settings → Pages**, enter the apex `saintandrewsconservatory.org` as the custom domain, not `www`. It must match `params.productionHost` in `hugo.toml`, or every page ships with `noindex`. The metadata check in the deploy job fails the run if the custom domain is `www.` while `productionHost` is the apex.
 
-Until cutover, the site is served at `https://sfdeloach.github.io/conservatory-site/`. That address has a subpath, so CI overrides `baseURL` for it (see [CI/CD](#cicd)).
+Before the cutover, the site was served at `https://sfdeloach.github.io/conservatory-site/`, which now redirects to the domain. That address has a subpath, so CI overrides `baseURL` with whatever address GitHub Pages reports (see [CI/CD](#cicd)). It would be used again after a [rollback](#rollback).
 
 ### Moving the repository to the church's account
 
@@ -80,7 +80,7 @@ The accessibility check serves `public/` on `127.0.0.1:8137` with python3 while 
 
 The old WordPress site's addresses are kept working with Hugo `aliases` in the new pages' front matter (the map is in [SITE-INVENTORY.md](SITE-INVENTORY.md#redirect-map)). GitHub Pages can't send server redirects, so Hugo writes a small page at each old path (`layouts/alias.html`) that redirects at once with a meta refresh. Search engines treat an instant refresh as a permanent redirect, but the old URL itself answers with status 200, not 301. `layouts/404.html` becomes `public/404.html`, which GitHub Pages serves, with status 404, for any path that doesn't exist.
 
-`make check-redirects BASE=<url>` runs `scripts/check-redirects.sh` against a deployed copy: the staging address now, the live domain at cutover. It takes the list of old paths from the local `public/` (run `make build` first), and fails when:
+`make check-redirects BASE=<url>` runs `scripts/check-redirects.sh` against a deployed copy, normally the live domain (`make check-redirects BASE=https://saintandrewsconservatory.org/`). It takes the list of old paths from the local `public/` (run `make build` first), and fails when:
 
 - an old path, with its trailing slash, doesn't return 200 with a refresh to a page under `<url>`;
 - the old path without its trailing slash doesn't reach the same page (GitHub Pages adds the slash with a redirect);
@@ -131,7 +131,7 @@ The workflow is `.github/workflows/deploy.yml`.
 - **Permissions:** the workflow defaults to `contents: read`. Only the `deploy` job gets `pages: write` and `id-token: write`, which deploy needs to sign in with GitHub's built-in OIDC token.
 - **Secrets:** none. Nothing needs to be stored in the repository's secrets.
 - **No overlapping deployments:** `deploy` uses `concurrency: pages` with `cancel-in-progress: false`. A second deployment waits for the first to finish, and one already running is never cancelled midway.
-- **Temporary address:** CI validates with the production `baseURL` from `hugo.toml`, then rebuilds with the URL GitHub Pages reports (`actions/configure-pages`), passed as `make build HUGO_ARGS="--baseURL …"`. Before the Phase 6 cutover, that URL is `https://sfdeloach.github.io/conservatory-site/`. Afterwards, it is the custom domain, and both builds are identical. The deploy job runs `scripts/check-meta.py` on this second build too, so the deployed site's `noindex` tag is checked: present on the temporary address, absent on the live domain.
+- **Deployed address:** CI validates with the production `baseURL` from `hugo.toml`, then rebuilds with the URL GitHub Pages reports (`actions/configure-pages`), passed as `make build HUGO_ARGS="--baseURL …"`. Since the cutover, that URL is `https://saintandrewsconservatory.org/`, and both builds are identical. GitHub reports it with `http://` while **Enforce HTTPS** is off, so turning that off would make the next build's canonical links `http://`. Before the cutover, it was `https://sfdeloach.github.io/conservatory-site/`. The deploy job runs `scripts/check-meta.py` on this second build too, so the deployed site's `noindex` tag is checked: absent on the live domain, present on any other address.
 - **Action updates:** Dependabot (`.github/dependabot.yml`) opens a pull request each month when a GitHub Action used by the workflow has a new version.
 
 ### One-time setup
@@ -155,7 +155,7 @@ Small text edits can also be made in GitHub's web editor and committed directly 
 Every page built by CI carries the commit it was built from:
 
 ```sh
-curl -s https://sfdeloach.github.io/conservatory-site/ | grep -o 'build-commit[^>]*'
+curl -s https://saintandrewsconservatory.org/ | grep -o 'build-commit[^>]*'
 ```
 
 In a browser, view the page source and search for `build-commit`. Compare the value with the latest commit on `main`. Local builds don't include this tag.
@@ -213,7 +213,7 @@ Other checks done in Phase 1.3:
 
 ## DNS cutover
 
-The runbook for moving `saintandrewsconservatory.org` from the old WordPress site to GitHub Pages. Church staff make the DNS changes at GoDaddy; the maintainer does the GitHub steps. Nothing here is done without explicit approval (roadmap Phase 6).
+The runbook for moving `saintandrewsconservatory.org` from the old WordPress site to GitHub Pages. It was followed on 2026-11-14 (see [Cutover log](#cutover-log)) and is kept for reference and for a repeat after a rollback. Church staff make the DNS changes at GoDaddy; the maintainer does the GitHub steps. Nothing here is done without explicit approval (roadmap Phase 6).
 
 Check the addresses below against [GitHub's custom domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) on the day, in case they have changed.
 
@@ -237,7 +237,8 @@ Check the addresses below against [GitHub's custom domain documentation](https:/
    - Leave the `MX` and every other `TXT` record alone.
 2. **In the repository** (maintainer): **Settings → Pages → Custom domain**, enter `saintandrewsconservatory.org` (the apex, not `www`; it must match `params.productionHost`) and save. GitHub checks the DNS and starts issuing the certificate. The staging address now redirects to the domain.
 3. **Rebuild for the domain:** **Actions → Build and deploy → Run workflow** on `main`. The deployed build still has the staging `baseURL` until this run finishes, so do it straight away. The run's metadata check fails if the build still has `noindex`.
-4. **Enforce HTTPS:** once **Settings → Pages** shows the certificate is ready, tick **Enforce HTTPS**.
+4. **Enforce HTTPS:** once **Settings → Pages** shows the certificate is ready, tick **Enforce HTTPS**. On 2026-11-14 the certificate was ready within about five minutes.
+5. **Rebuild again:** run the workflow on `main` once more. Until **Enforce HTTPS** is on, GitHub reports the site's address as `http://`, so the step 3 build has `http://` canonical links, `og:url`, sitemap, and `robots.txt`. This run makes them `https://`.
 
 ### Validation
 
@@ -262,11 +263,37 @@ Roll back if the site is broken on the domain and can't be fixed within about an
 
 - Raise the TTLs back to their old value (one hour, or what the zone file shows) after a few days without problems.
 - Retire the old WordPress hosting only after the validation above has passed. Discontinue its contact address, `mconservatory@sachapel.com`; the new site uses `schang@sachapel.com`.
-- Update this guide's examples that use the staging address (such as [Which commit is live?](#which-commit-is-live)) to the domain, and record the date and outcome in the roadmap.
+- Update this guide's examples that use the staging address (such as [Which commit is live?](#which-commit-is-live)) to the domain, and record the date and outcome in the roadmap. Done on 2026-11-14.
+- Leave the `_github-pages-challenge-sfdeloach` `TXT` record in place permanently.
+- The records the old WordPress hosting used (`ftp`, `test`, `www.test`, and the `_acme-challenge` and `_cf-custom-hostname` records) can be deleted once that hosting is retired. Keep them until then, for a rollback.
+
+### Cutover log
+
+Done on Saturday 2026-11-14 (times EST), by the maintainer, following the runbook above.
+
+| Time  | Step                                                                                                                                                                                                                                                 |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 13:10 | Zone file exported (see [Records before cutover](#records-before-cutover)). Readiness checks passed: staging at `de1fbda`, `make check-destinations`, and `make check-redirects` on staging.                                                         |
+| 13:21 | `www` CNAME TTL lowered from 3600 to 600 seconds (the apex `A` record was already 600). Confirmed on both GoDaddy nameservers, 1.1.1.1, and 8.8.8.8.                                                                                                 |
+| 13:28 | `_github-pages-challenge-sfdeloach` `TXT` record added and the domain verified in `sfdeloach`'s GitHub account.                                                                                                                                      |
+| 14:57 | At GoDaddy: the apex `A` record `160.153.0.175` replaced by GitHub's four addresses, and the `www` CNAME pointed at `sfdeloach.github.io`. No `AAAA` records. Confirmed on both nameservers and both public resolvers; every other record unchanged. |
+| 15:06 | Custom domain set in the repository and the workflow run. The domain served the new site, without `noindex`, and the Let's Encrypt certificate (apex and `www`) was already issued. Canonical links were `http://` (see Cutover step 5).             |
+| 15:12 | **Enforce HTTPS** ticked and the workflow run again. Validation passed (below).                                                                                                                                                                      |
+
+Validation at 15:12, against `https://saintandrewsconservatory.org/`:
+
+- `http://` and both `www` addresses redirect with a 301 to `https://saintandrewsconservatory.org/`, and the staging address redirects to the domain.
+- The live `build-commit` is `de1fbda`, the latest `main`.
+- All 28 pages in the sitemap return 200 with no `noindex`. The canonical link, `og:url`, sitemap, and `robots.txt` use `https://saintandrewsconservatory.org/`. The homepage's CSS, JavaScript, fonts, and images load.
+- `make check-redirects BASE=https://saintandrewsconservatory.org/` passed: all 16 old URLs and the 404 page.
+- `make check-destinations` passed, and the Registration and Payment buttons link to the URLs in `data/destinations.yaml`.
+- The MX records still point to GoDaddy (`secureserver.net`).
 
 ### Records before cutover
 
 Looked up with `dig` on 2026-11-10. This is the rollback reference for the web records. A GoDaddy zone-file export (**DNS → Manage zones → Export zone file**) is the complete copy, including records `dig` can't find (such as DKIM keys), and should be saved before any change.
+
+**Zone file export:** taken on 2026-11-14 at 18:10 UTC (13:10 EST), before any cutover change. A copy is in the church's Dropbox account, where authorized staff can reach it for a rollback. The maintainer also keeps a copy as `saintandrewsconservatory.org.txt` in the project root, listed in `.gitignore` so it is never committed (the repository is public).
 
 | Name     | Type  | Value                                                                          | At cutover                                         |
 | -------- | ----- | ------------------------------------------------------------------------------ | -------------------------------------------------- |
@@ -277,6 +304,22 @@ Looked up with `dig` on 2026-11-10. This is the rollback reference for the web r
 | `@`      | AAAA  | none                                                                           | Optionally add GitHub Pages' `AAAA` records        |
 | `@`      | CAA   | none                                                                           | None needed                                        |
 | `_dmarc` | `TXT` | none                                                                           | Unchanged                                          |
+
+The zone file export also lists records `dig` didn't find. All were left unchanged at cutover:
+
+| Name                      | Type  | Value                                                                    | Purpose                                                   |
+| ------------------------- | ----- | ------------------------------------------------------------------------ | --------------------------------------------------------- |
+| `ftp`                     | `A`   | `50.62.172.232`                                                          | The old hosting's FTP                                     |
+| `test`                    | `A`   | `72.167.243.77`                                                          | An old test site                                          |
+| `www.test`                | CNAME | `test.saintandrewsconservatory.org.`                                     | An old test site                                          |
+| `email`                   | CNAME | `email.secureserver.net.`                                                | GoDaddy webmail                                           |
+| `_domainconnect`          | CNAME | `_domainconnect.gd.domaincontrol.com.`                                   | GoDaddy setup                                             |
+| `_acme-challenge`         | CNAME | `saintandrewsconservatory.org.5b6e1b0351bd6062.dcv.cloudflare.com.`      | The old hosting's HTTPS certificates (through Cloudflare) |
+| `_acme-challenge.test`    | CNAME | `test.saintandrewsconservatory.org.5b6e1b0351bd6062.dcv.cloudflare.com.` | The old hosting's HTTPS certificates                      |
+| `_acme-challenge.www`     | `TXT` | `"1AW7AWfLhAY7TXlLjh1hg5LCU_loUopDM-fuC5qvBAc"`                          | The old hosting's HTTPS certificates                      |
+| `_cf-custom-hostname.www` | `TXT` | `"24f160d5-6741-44c8-bfc0-b309359d8ffd"`                                 | The old hosting's Cloudflare custom hostname              |
+
+There are no DKIM records. These records don't affect GitHub Pages, which proves control of the domain over HTTP, not through `_acme-challenge`.
 
 - The domain has no SPF or DMARC record. That doesn't affect the cutover, and adding them is outside this project (it is the church's email setup), but without them anyone can send mail that claims to come from the domain.
 - If a CAA record is ever added, it must allow `letsencrypt.org`, which issues GitHub Pages' HTTPS certificates.

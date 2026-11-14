@@ -94,7 +94,7 @@ Run `make check` before every commit. CI runs the same command on every push and
 
 ## Deployment
 
-Every push to `main` that passes `make check` is deployed to GitHub Pages by `.github/workflows/deploy.yml`. Pull requests are checked but never deployed. Templates must stay subpath-safe: use `RelPermalink` or `relURL` (without a leading slash) in templates, and relative `url()`s in Sass. Never hard-code root-absolute paths such as `/images/...`, because the site is served from `/conservatory-site/` until the Phase 6 cutover. The exceptions are the canonical link, Open Graph URLs, and `robots.txt`, which must be absolute (`Permalink`, `absURL`).
+Every push to `main` that passes `make check` is deployed to GitHub Pages by `.github/workflows/deploy.yml`. Pull requests are checked but never deployed. Templates must stay subpath-safe: use `RelPermalink` or `relURL` (without a leading slash) in templates, and relative `url()`s in Sass. Never hard-code root-absolute paths such as `/images/...`. The site has been live at `https://saintandrewsconservatory.org/` since the 2026-11-14 cutover, but after a rollback it would be served from `/conservatory-site/` again. The exceptions are the canonical link, Open Graph URLs, and `robots.txt`, which must be absolute (`Permalink`, `absURL`).
 
 ## Constraints
 
@@ -107,7 +107,7 @@ Every push to `main` that passes `make check` is deployed to GitHub Pages by `.g
 - External links are not checked automatically, except the six forms in `data/destinations.yaml`, which `make check-destinations` checks on demand.
 - The old site's contact form will not be replaced. Staff decided an email link and phone number are enough.
 - The handbook at `/handbook/` is linked only from the Registration page, not from the menus or the footer (staff decision).
-- Old URLs redirect with a meta refresh (Hugo `aliases`), because GitHub Pages can't send server redirects: the old URL answers 200, not 301. The handbook PDF's old URL depends on GitHub Pages adding a trailing slash (confirmed on staging; `make check-redirects` checks it on a deployed copy).
+- Old URLs redirect with a meta refresh (Hugo `aliases`), because GitHub Pages can't send server redirects: the old URL answers 200, not 301. The handbook PDF's old URL depends on GitHub Pages adding a trailing slash (confirmed on staging and on the live domain; `make check-redirects` checks it on a deployed copy).
 
 ## Documentation
 

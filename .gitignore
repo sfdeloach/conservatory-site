@@ -8,3 +8,6 @@ hugo_stats.json
 
 # Node used for prettier prettier-plugin-go-template
 /node_modules/
+
+# Zone file from GoDaddy
+saintandrewsconservatory.org.txt
