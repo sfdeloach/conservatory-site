@@ -8,7 +8,8 @@
 #     returns 404);
 #   - a Breeze page's title is "Form": Breeze returns 200 with that title
 #     for a form that doesn't exist;
-#   - the entry is open on the site but the Wufoo form is closed.
+#   - the entry is open on the site but the Wufoo form is closed, or has not
+#     opened yet.
 # It notes, without failing, a form that accepts entries while the site
 # shows it closed (normal while a new form is prepared), and an entry with
 # no url.
@@ -69,7 +70,7 @@ while IFS=$'\t' read -r name open url; do
   fi
 
   form=open
-  if printf '%s' "$body" | grep -qi 'no longer accepting submissions'; then
+  if printf '%s' "$body" | grep -qiE 'no longer accepting submissions|not accepting submissions just yet'; then
     form=closed
   fi
 

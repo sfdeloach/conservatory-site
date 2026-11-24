@@ -95,7 +95,7 @@ It is run on demand, not in CI, because it needs the deployed site.
 
 - a form can't be reached, or doesn't return 200 (a missing Wufoo form returns 404);
 - a Breeze page's title is "Form". Breeze returns 200 with that title for a form that doesn't exist, so a plain link checker such as lychee would pass a mistyped Breeze address;
-- an entry is open on the site, but its Wufoo form says it is no longer accepting submissions.
+- an entry is open on the site, but its Wufoo form says it is no longer accepting submissions, or not accepting them just yet.
 
 A form that accepts entries while the site shows it closed is only noted, because that is normal while staff prepare a new form. The command needs only `curl`. It is run on demand, as part of the registration checklist in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#checklist-for-each-registration-period), and not in CI, so an outage at Wufoo or Breeze never blocks a deploy.
 
